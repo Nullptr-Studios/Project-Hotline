@@ -78,5 +78,14 @@ public class MotionCurve : ScriptableObject
         
         _wasMoving = isMoving;
     }
+    /// <summary>
+    /// disable variables
+    /// </summary>
+    public void OnDisable()
+    {
+        _speedPercentage = 0f;
+        _time = 0f;
+        _wasMoving = false;
+    }
 }
 
