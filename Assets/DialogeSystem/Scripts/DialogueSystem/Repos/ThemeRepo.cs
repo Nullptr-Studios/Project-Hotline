@@ -40,21 +40,24 @@ namespace CC.DialogueSystem
             var names = new List<string>();
 
             if (sprites.ThemeSprites.Count == 0)
-                DialogueLogger.LogWarning($"Trying to register theme sprites for {sprites.Name} but the sprite list is empty");
+                DialogueLogger.LogWarning(
+                    $"Trying to register theme sprites for {sprites.Name} but the sprite list is empty");
 
             foreach (var spritePair in sprites.ThemeSprites)
             {
                 // Check name
                 if (string.IsNullOrEmpty(spritePair.Name) || string.IsNullOrWhiteSpace(spritePair.Name))
                 {
-                    DialogueLogger.LogError($"Error registering theme sprites for {sprites.Name}, one or more of the names is empty");
+                    DialogueLogger.LogError(
+                        $"Error registering theme sprites for {sprites.Name}, one or more of the names is empty");
                     return false;
                 }
 
                 // Check for duplicate names
                 if (names.Contains(spritePair.Name))
                 {
-                    DialogueLogger.LogError($"Error registering theme sprites for {sprites.Name}, there is already a sprite with the name {spritePair.Name}. Each sprite must have a unique name");
+                    DialogueLogger.LogError(
+                        $"Error registering theme sprites for {sprites.Name}, there is already a sprite with the name {spritePair.Name}. Each sprite must have a unique name");
                     return false;
                 }
 
@@ -63,7 +66,8 @@ namespace CC.DialogueSystem
                 // Check sprites
                 if (spritePair.Sprite == null)
                 {
-                    DialogueLogger.LogError($"Error registering theme sprites for {sprites.Name} with the sprite name {spritePair.Name}, but the sprite is empty");
+                    DialogueLogger.LogError(
+                        $"Error registering theme sprites for {sprites.Name} with the sprite name {spritePair.Name}, but the sprite is empty");
                     return false;
                 }
             }
@@ -92,7 +96,8 @@ namespace CC.DialogueSystem
 
             if (!_themeSprites.ContainsKey(themeName))
             {
-                DialogueLogger.LogError($"Trying to retrieve sprite {themeName} for the theme {themeName}, but it is not registered in the repo.");
+                DialogueLogger.LogError(
+                    $"Trying to retrieve sprite {themeName} for the theme {themeName}, but it is not registered in the repo.");
                 return null;
             }
 

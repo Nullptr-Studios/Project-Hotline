@@ -45,7 +45,7 @@ namespace CC.DialogueSystem
             REGISTER_LONG,
             REGISTER_FLOAT,
             REGISTER_BOOL,
-            REGISTER_STRING,
+            REGISTER_STRING
         }
 
         private List<Command> _modifications;
@@ -104,13 +104,15 @@ namespace CC.DialogueSystem
                     {
                         // Command
                         if (isCommandTag(tempType))
+                        {
                             registerCommand(tempType, commandStarted);
+                        }
                         // Variable Retrieval
                         else if (isRetreivalMod(tempType))
                         {
                             // Replace text with retreived variable
                             Sentence += getVariableFromRepo(tempType, commandText);
-                            commandCharsAdded -= (commandText.Length - 2);
+                            commandCharsAdded -= commandText.Length - 2;
                         }
                         // All other complex tags e.g. <command=value>content</command>
                         else if (isComplexTag(tempType))
@@ -132,20 +134,24 @@ namespace CC.DialogueSystem
                             {
                                 parsingComplexTag = false;
                                 if (isRegistrationTag(tempType))
-                                    VariableRepo.Instance.Register(complexTagValue, complexTagContent, getRegistrationTypeCode(tempType));
+                                    VariableRepo.Instance.Register(complexTagValue, complexTagContent,
+                                        getRegistrationTypeCode(tempType));
                                 else
-                                    registerComplexModification(tempType, complexTagValue, complexTagContent, commandStarted);
+                                    registerComplexModification(tempType, complexTagValue, complexTagContent,
+                                        commandStarted);
                             }
                         }
                         // Must be a simple tag
                         else
+                        {
                             registerSimpleModification(tempType, commandText, commandStarted);
+                        }
                     }
                     // Reset as if this didn't happen
                     else
                     {
                         Sentence += $"<{commandText}>";
-                        commandCharsAdded -= (commandText.Length - 2);
+                        commandCharsAdded -= commandText.Length - 2;
                     }
 
                     commandText = string.Empty;
@@ -154,7 +160,9 @@ namespace CC.DialogueSystem
 
                 // Add letter to the stripped sentence if we're not parsing
                 if (!parsingCommand && !parsingComplexTag)
+                {
                     Sentence += sentence[i];
+                }
                 // Add to the letter to the correct string
                 else
                 {
@@ -168,7 +176,10 @@ namespace CC.DialogueSystem
         }
 
         // Parse and register a command
-        private void registerCommand(Modifications mod, int startingIndex) => _modifications.Add(new Command { Index = startingIndex, ModType = mod });
+        private void registerCommand(Modifications mod, int startingIndex)
+        {
+            _modifications.Add(new Command { Index = startingIndex, ModType = mod });
+        }
 
         // Parses and registers a simple modification 
         private void registerSimpleModification(Modifications mod, string command, int startingIndex)
@@ -180,7 +191,8 @@ namespace CC.DialogueSystem
 
             var modValue = parseModValue(mod, commandSplits[1]);
             if (modValue != null)
-                _modifications.Add(new SimpleModification { Index = startingIndex, ModType = mod, ModificationValue = modValue });
+                _modifications.Add(new SimpleModification
+                    { Index = startingIndex, ModType = mod, ModificationValue = modValue });
         }
 
         // Registers a complex modification
@@ -195,7 +207,11 @@ namespace CC.DialogueSystem
 
             var modValue = parseModValue(modType, value);
             if (modValue != null)
-                _modifications.Add(new ComplexModification { Index = startingIndex, ModType = modType, ModificationValue = modValue, ModificationContent = content });
+                _modifications.Add(new ComplexModification
+                {
+                    Index = startingIndex, ModType = modType, ModificationValue = modValue,
+                    ModificationContent = content
+                });
         }
 
         // Get the variable from the repo
@@ -299,7 +315,7 @@ namespace CC.DialogueSystem
                 return Modifications.CHANGE_THEME;
             else if (command.Contains("bgconversation"))
                 return Modifications.BG_CONVERSATION;
-                
+
             return Modifications.NOT_CUSTOM;
         }
 
@@ -312,45 +328,45 @@ namespace CC.DialogueSystem
         // Returns whether the mod is a command
         private bool isCommandTag(Modifications mod)
         {
-            return (mod == Modifications.HIDE_SPRITE ||
-                mod == Modifications.CLOSE_BG_CONVERSATIONS);
+            return mod == Modifications.HIDE_SPRITE ||
+                   mod == Modifications.CLOSE_BG_CONVERSATIONS;
         }
 
         // Returns whether the mod is a variable retrieval tag
         private bool isRetreivalMod(Modifications mod)
         {
-            return (mod == Modifications.RETRIEVE_VARIABLE_SHORT ||
-                mod == Modifications.RETRIEVE_VARIABLE_INT ||
-                mod == Modifications.RETRIEVE_VARIABLE_LONG ||
-                mod == Modifications.RETRIEVE_VARIABLE_FLOAT ||
-                mod == Modifications.RETRIEVE_VARIABLE_BOOL ||
-                mod == Modifications.RETRIEVE_VARIABLE_STRING);
+            return mod == Modifications.RETRIEVE_VARIABLE_SHORT ||
+                   mod == Modifications.RETRIEVE_VARIABLE_INT ||
+                   mod == Modifications.RETRIEVE_VARIABLE_LONG ||
+                   mod == Modifications.RETRIEVE_VARIABLE_FLOAT ||
+                   mod == Modifications.RETRIEVE_VARIABLE_BOOL ||
+                   mod == Modifications.RETRIEVE_VARIABLE_STRING;
         }
 
         // Returns whether this custom tag has a <command=value>content</command> pattern
         private bool isComplexTag(Modifications mod)
         {
-            return (mod == Modifications.SEND_MESSAGE ||
-                mod == Modifications.CHANGE_SPRITE ||
-                mod == Modifications.ACTION_WITH_MESSAGE ||
-                mod == Modifications.ACTION_WITH_TARGET ||
-                mod == Modifications.REGISTER_SHORT ||
-                mod == Modifications.REGISTER_INT ||
-                mod == Modifications.REGISTER_LONG ||
-                mod == Modifications.REGISTER_FLOAT ||
-                mod == Modifications.REGISTER_BOOL ||
-                mod == Modifications.REGISTER_STRING);
+            return mod == Modifications.SEND_MESSAGE ||
+                   mod == Modifications.CHANGE_SPRITE ||
+                   mod == Modifications.ACTION_WITH_MESSAGE ||
+                   mod == Modifications.ACTION_WITH_TARGET ||
+                   mod == Modifications.REGISTER_SHORT ||
+                   mod == Modifications.REGISTER_INT ||
+                   mod == Modifications.REGISTER_LONG ||
+                   mod == Modifications.REGISTER_FLOAT ||
+                   mod == Modifications.REGISTER_BOOL ||
+                   mod == Modifications.REGISTER_STRING;
         }
 
         // Returns whether modification is a variable registration command
         private bool isRegistrationTag(Modifications mod)
         {
-            return (mod == Modifications.REGISTER_SHORT ||
-                mod == Modifications.REGISTER_INT ||
-                mod == Modifications.REGISTER_LONG ||
-                mod == Modifications.REGISTER_FLOAT ||
-                mod == Modifications.REGISTER_BOOL ||
-                mod == Modifications.REGISTER_STRING);
+            return mod == Modifications.REGISTER_SHORT ||
+                   mod == Modifications.REGISTER_INT ||
+                   mod == Modifications.REGISTER_LONG ||
+                   mod == Modifications.REGISTER_FLOAT ||
+                   mod == Modifications.REGISTER_BOOL ||
+                   mod == Modifications.REGISTER_STRING;
         }
 
         // Return the modification's value e.g. <speed=0.1> return 0.1. Not the tags content
@@ -368,7 +384,9 @@ namespace CC.DialogueSystem
                 modType == Modifications.LOG_ERROR ||
                 modType == Modifications.CHANGE_THEME ||
                 modType == Modifications.BG_CONVERSATION)
+            {
                 return commandText;
+            }
 
             // Parse float
             else if (modType == Modifications.SPEED || modType == Modifications.WAIT)
@@ -441,8 +459,9 @@ namespace CC.DialogueSystem
             if (ModificationValue is T)
                 return (T)ModificationValue;
 
-            DialogueLogger.LogError($"Trying to cast variable of type {ModificationValue.GetType()} to type {typeof(T)}. Returning default");
-            return default(T);
+            DialogueLogger.LogError(
+                $"Trying to cast variable of type {ModificationValue.GetType()} to type {typeof(T)}. Returning default");
+            return default;
         }
     }
 
@@ -457,8 +476,9 @@ namespace CC.DialogueSystem
             if (ModificationContent is T)
                 return (T)ModificationContent;
 
-            DialogueLogger.LogError($"Trying to cast variable of type {ModificationContent.GetType()} to type {typeof(T)}. Returning default");
-            return default(T);
+            DialogueLogger.LogError(
+                $"Trying to cast variable of type {ModificationContent.GetType()} to type {typeof(T)}. Returning default");
+            return default;
         }
     }
 }

@@ -26,7 +26,9 @@ namespace CC.DialogueSystem
                 performAction(action);
             }
             else
+            {
                 DialogueLogger.LogError("Cannot find the selectedAction for the option selected. Skipping action");
+            }
         }
 
         // Find the action fill in the target then pass it on for validation and execution
@@ -40,7 +42,9 @@ namespace CC.DialogueSystem
                 performAction(action);
             }
             else
+            {
                 DialogueLogger.LogError("Cannot find the selectedAction for the option selected. Skipping action");
+            }
         }
 
         // Validate then execute
@@ -51,20 +55,30 @@ namespace CC.DialogueSystem
 
             switch (action.ActionType)
             {
-                case DialogueAction.Types.LOG: DialogueLogger.Log(action.Message); break;
-                case DialogueAction.Types.LOG_WARNING: DialogueLogger.LogWarning(action.Message); break;
-                case DialogueAction.Types.LOG_ERROR: DialogueLogger.LogError(action.Message); break;
+                case DialogueAction.Types.LOG:
+                    DialogueLogger.Log(action.Message);
+                    break;
+                case DialogueAction.Types.LOG_WARNING:
+                    DialogueLogger.LogWarning(action.Message);
+                    break;
+                case DialogueAction.Types.LOG_ERROR:
+                    DialogueLogger.LogError(action.Message);
+                    break;
 
-                case DialogueAction.Types.CLOSE_CONVERSATION: DialogueController.Instance?.StopCurrentConversation(); break;
+                case DialogueAction.Types.CLOSE_CONVERSATION:
+                    DialogueController.Instance?.StopCurrentConversation();
+                    break;
 
                 case DialogueAction.Types.SEND_MESSAGE:
                     var targetObject = GameObject.Find(action.Target);
 
                     if (targetObject == null)
                     {
-                        DialogueLogger.LogError($"Trying to execute a send message action, but GameObject {action.Target} was not found. Skipping action");
+                        DialogueLogger.LogError(
+                            $"Trying to execute a send message action, but GameObject {action.Target} was not found. Skipping action");
                         return;
                     }
+
                     targetObject.SendMessage(action.Message, SendMessageOptions.DontRequireReceiver);
                     break;
 
@@ -81,7 +95,8 @@ namespace CC.DialogueSystem
                     break;
 
                 default:
-                    DialogueLogger.LogError($"Action with the name {action.Name} has na unrecognised action type {action.ActionType}. The action type loaded from the conversation JSON is {action.Type}. Skipping action");
+                    DialogueLogger.LogError(
+                        $"Action with the name {action.Name} has na unrecognised action type {action.ActionType}. The action type loaded from the conversation JSON is {action.Type}. Skipping action");
                     break;
             }
         }
@@ -96,43 +111,53 @@ namespace CC.DialogueSystem
                 case DialogueAction.Types.LOG_WARNING:
                 case DialogueAction.Types.LOG_ERROR:
                     // All we need's a message
-                    if(string.IsNullOrEmpty(action.Message) || string.IsNullOrWhiteSpace(action.Message))
+                    if (string.IsNullOrEmpty(action.Message) || string.IsNullOrWhiteSpace(action.Message))
                     {
-                        DialogueLogger.LogError($"An action with the name {action.Name} is trying to log with an empty message value");
+                        DialogueLogger.LogError(
+                            $"An action with the name {action.Name} is trying to log with an empty message value");
                         return false;
                     }
+
                     break;
 
                 case DialogueAction.Types.SEND_MESSAGE:
                     // We need a target and a message
                     if (string.IsNullOrEmpty(action.Message) || string.IsNullOrWhiteSpace(action.Message))
                     {
-                        DialogueLogger.LogError($"An action with the name {action.Name} is trying to send a message with an empty message value");
+                        DialogueLogger.LogError(
+                            $"An action with the name {action.Name} is trying to send a message with an empty message value");
                         return false;
                     }
+
                     if (string.IsNullOrEmpty(action.Target) || string.IsNullOrWhiteSpace(action.Target))
                     {
-                        DialogueLogger.LogError($"An action with the name {action.Name} is trying to send a message with an empty target value");
+                        DialogueLogger.LogError(
+                            $"An action with the name {action.Name} is trying to send a message with an empty target value");
                         return false;
                     }
+
                     break;
 
                 case DialogueAction.Types.CHANGE_THEME:
                     // All we need's a message
                     if (string.IsNullOrEmpty(action.Message) || string.IsNullOrWhiteSpace(action.Message))
                     {
-                        DialogueLogger.LogError($"An action with the name {action.Name} is trying to change the theme with an empty message value");
+                        DialogueLogger.LogError(
+                            $"An action with the name {action.Name} is trying to change the theme with an empty message value");
                         return false;
                     }
+
                     break;
 
                 case DialogueAction.Types.START_BG_CONVERSATION:
                     // Just need message, the name of the conversation to start
-                    if(string.IsNullOrEmpty(action.Message) || string.IsNullOrWhiteSpace(action.Message))
+                    if (string.IsNullOrEmpty(action.Message) || string.IsNullOrWhiteSpace(action.Message))
                     {
-                        DialogueLogger.LogError($"An action with the name {action.Name} is trying to start a background conversation with an empty message value");
+                        DialogueLogger.LogError(
+                            $"An action with the name {action.Name} is trying to start a background conversation with an empty message value");
                         return false;
                     }
+
                     break;
             }
 
@@ -142,7 +167,10 @@ namespace CC.DialogueSystem
         #region Helpers
 
         // Return the action if found
-        private static DialogueAction getAction(Conversation conversation, string actionName) => conversation.Actions.Find(a => a.Name == actionName);
+        private static DialogueAction getAction(Conversation conversation, string actionName)
+        {
+            return conversation.Actions.Find(a => a.Name == actionName);
+        }
 
         #endregion
     }

@@ -16,7 +16,8 @@ namespace CC.DialogueSystem
             var tempoConvo = ConversationRepo.Instance?.RetrieveConversation(convoName);
             if (tempoConvo == null)
             {
-                DialogueLogger.LogError($"Tried to start conversation {convoName} but it doesn't exist is the ConversationRepo");
+                DialogueLogger.LogError(
+                    $"Tried to start conversation {convoName} but it doesn't exist is the ConversationRepo");
                 return null;
             }
 

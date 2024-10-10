@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CC.DialogueSystem
 {
-    // Repo to store all of the dialogue variable. Handles the registration/retrieval
+    // Repo to store all the dialogue variable. Handles the registration/retrieval
     public class VariableRepo
     {
         // Events
@@ -80,7 +80,8 @@ namespace CC.DialogueSystem
             }
             catch (Exception e)
             {
-                DialogueLogger.LogError($"Error registering variable {variable} to the type {variableType}. Error message: {e.Message}");
+                DialogueLogger.LogError(
+                    $"Error registering variable {variable} to the type {variableType}. Error message: {e.Message}");
             }
         }
 
@@ -90,11 +91,14 @@ namespace CC.DialogueSystem
             // I don't like returning a default like this, but it's better than an exception
             if (!_variables.ContainsKey(name))
             {
-                DialogueLogger.LogWarning($"Trying to retrieve the variable {name} but it hasn't been registered. Returning default");
-                return default(T);
+                DialogueLogger.LogWarning(
+                    $"Trying to retrieve the variable {name} but it hasn't been registered. Returning default");
+                return default;
             }
             else
+            {
                 return _variables[name].GetValue<T>();
+            }
         }
 
         // Get the variable if it exists and we don't care about the type
@@ -106,7 +110,9 @@ namespace CC.DialogueSystem
                 return null;
             }
             else
+            {
                 return _variables[name].Value;
+            }
         }
 
         // Remove the variable if it exists
@@ -139,8 +145,7 @@ namespace CC.DialogueSystem
                 return (T)Value;
 
             // I don't like returning a default like this, but it's better than an exception
-            return default(T);
+            return default;
         }
-
     }
 }

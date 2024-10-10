@@ -6,10 +6,8 @@ namespace CC.DialogueSystem
 {
     public class CharacterSpriteLoader : MonoBehaviour
     {
-        [SerializeField]
-        private DialogueSprites_SO _spritesObject;
-        [SerializeField]
-        private bool _registerOnStart;
+        [SerializeField] private DialogueSprites_SO _spritesObject;
+        [SerializeField] private bool _registerOnStart;
 
         #region MonoBehaviour
 

@@ -50,7 +50,8 @@ namespace CC.DialogueSystem
             // Check if it's a background conversation
             if (tempConvo.ConversationType == Conversation.Types.BACKGROUND)
             {
-                DialogueLogger.Log($"Trying to start background conversation {convoName} as a default conversation, redirecting to BackgroundConversationController.");
+                DialogueLogger.Log(
+                    $"Trying to start background conversation {convoName} as a default conversation, redirecting to BackgroundConversationController.");
                 BackgroundDialogueController.Instance?.StartConversation(tempConvo);
                 return;
             }
@@ -69,7 +70,8 @@ namespace CC.DialogueSystem
 
             if (_uiController == null)
             {
-                DialogueLogger.LogError("Trying to start a conversation, but there's not DialogueUIController assigned");
+                DialogueLogger.LogError(
+                    "Trying to start a conversation, but there's not DialogueUIController assigned");
                 return;
             }
 
@@ -78,7 +80,6 @@ namespace CC.DialogueSystem
             _currentDialogue = null;
             _currentSentence = 0;
             foreach (var diag in conversation.Dialogues)
-            {
                 if ((_currentDialogue == null || diag.Id > _currentDialogue.Id) && diag.CanBeUsedAsStartingPoint)
                 {
                     if (diag.StartConditions.Count > 0)
@@ -87,9 +88,10 @@ namespace CC.DialogueSystem
                             _currentDialogue = diag;
                     }
                     else
+                    {
                         _currentDialogue = diag;
+                    }
                 }
-            }
 
             if (_currentDialogue == null)
             {
@@ -105,9 +107,12 @@ namespace CC.DialogueSystem
                 ChangeTheme(_currentDialogue.Theme);
 
             _uiController.ShowSentence(_currentDialogue.SpeakersName,
-                    parseSentenceForCustomTags(_currentDialogue.Sentences[_currentSentence]),
-                    SpriteRepo.Instance.RetrieveSprite(_currentDialogue.CharacterSpritesName, string.IsNullOrEmpty(_currentDialogue.StartingSprite) ? "Default" : _currentDialogue.StartingSprite),
-                    _currentDialogue.AutoProceed);
+                parseSentenceForCustomTags(_currentDialogue.Sentences[_currentSentence]),
+                SpriteRepo.Instance.RetrieveSprite(_currentDialogue.CharacterSpritesName,
+                    string.IsNullOrEmpty(_currentDialogue.StartingSprite)
+                        ? "Default"
+                        : _currentDialogue.StartingSprite),
+                _currentDialogue.AutoProceed);
             ConversationStarted?.Invoke();
         }
 
@@ -121,7 +126,9 @@ namespace CC.DialogueSystem
             {
                 // Check if there's options to display
                 if (_currentDialogue.Options.Count != 0)
+                {
                     _uiController.ShowOptions(_currentDialogue.Options);
+                }
                 // Check if we need to go to another dialogue
                 else if (_currentDialogue.NextId != -1)
                 {
@@ -151,7 +158,12 @@ namespace CC.DialogueSystem
 
                 _uiController.ShowSentence(_currentDialogue.SpeakersName,
                     parseSentenceForCustomTags(_currentDialogue.Sentences[_currentSentence]),
-                    (!sameSpeaker) ? SpriteRepo.Instance.RetrieveSprite(_currentDialogue.CharacterSpritesName, string.IsNullOrEmpty(_currentDialogue.StartingSprite) ? "Default" : _currentDialogue.StartingSprite) : null, //null, // After the conversation has started the sprite should be changed using the changeSprite tag
+                    !sameSpeaker
+                        ? SpriteRepo.Instance.RetrieveSprite(_currentDialogue.CharacterSpritesName,
+                            string.IsNullOrEmpty(_currentDialogue.StartingSprite)
+                                ? "Default"
+                                : _currentDialogue.StartingSprite)
+                        : null, //null, // After the conversation has started the sprite should be changed using the changeSprite tag
                     sameSpeaker,
                     _currentDialogue.AutoProceed);
             }
@@ -169,17 +181,34 @@ namespace CC.DialogueSystem
         }
 
         // Called from the UIController, used by the action custom tag
-        public void PerformAction(string actionName) => ActionController.PerformAction(_currentConversation, actionName);
-        public void PerformActionWithMessage(string actionName, string message) => ActionController.PerformActionWithMessage(_currentConversation, actionName, message);
-        public void PerformActionWithTarget(string actionName, string target) => ActionController.PerformActionWithTarget(_currentConversation, actionName, target);
+        public void PerformAction(string actionName)
+        {
+            ActionController.PerformAction(_currentConversation, actionName);
+        }
+
+        public void PerformActionWithMessage(string actionName, string message)
+        {
+            ActionController.PerformActionWithMessage(_currentConversation, actionName, message);
+        }
+
+        public void PerformActionWithTarget(string actionName, string target)
+        {
+            ActionController.PerformActionWithTarget(_currentConversation, actionName, target);
+        }
 
         #region Helpers
 
         // Do we need to change theme?
-        private bool needToChangeTheme() => string.IsNullOrEmpty(_currentDialogue.Theme) ? false : _currentTheme != _currentDialogue.Theme;
+        private bool needToChangeTheme()
+        {
+            return string.IsNullOrEmpty(_currentDialogue.Theme) ? false : _currentTheme != _currentDialogue.Theme;
+        }
 
         // Invoke the action when the theme's changed
-        public void ChangeTheme(string name) => ThemeChanged?.Invoke(name);
+        public void ChangeTheme(string name)
+        {
+            ThemeChanged?.Invoke(name);
+        }
 
         // Navigates to a dialogue inside the current conversation
         private void goToDialogue(int index)
@@ -188,7 +217,8 @@ namespace CC.DialogueSystem
 
             if (nextDialogue == null)
             {
-                DialogueLogger.LogError($"Trying to navigate to a dialogue with the Id {index}, but there's isn't one present in the current conversation");
+                DialogueLogger.LogError(
+                    $"Trying to navigate to a dialogue with the Id {index}, but there's isn't one present in the current conversation");
                 return;
             }
 
@@ -207,7 +237,10 @@ namespace CC.DialogueSystem
         }
 
         // Parse sentence and return TextModifications object
-        private TextModifications parseSentenceForCustomTags(string sentence) => new TextModifications(sentence);
+        private TextModifications parseSentenceForCustomTags(string sentence)
+        {
+            return new TextModifications(sentence);
+        }
 
         #endregion
     }

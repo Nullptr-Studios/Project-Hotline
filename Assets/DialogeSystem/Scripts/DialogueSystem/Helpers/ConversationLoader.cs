@@ -6,12 +6,9 @@ namespace CC.DialogueSystem
 {
     public class ConversationLoader : MonoBehaviour
     {
-        [SerializeField]
-        private TextAsset _file;
-        [SerializeField]
-        private string _name;
-        [SerializeField]
-        private bool _registerOnStart;
+        [SerializeField] private TextAsset _file;
+        [SerializeField] private string _name;
+        [SerializeField] private bool _registerOnStart;
 
         #region MonoBehaviour
 
@@ -24,6 +21,9 @@ namespace CC.DialogueSystem
 
         #endregion
 
-        public void RegisterConversation() => ConversationRepo.Instance.RegisterConversation(_name, _file);
+        public void RegisterConversation()
+        {
+            ConversationRepo.Instance.RegisterConversation(_name, _file);
+        }
     }
 }

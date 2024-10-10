@@ -11,12 +11,10 @@ namespace CC.DialogueSystem
             BACKGROUND
         }
 
-        [JsonIgnore]
-        public Types ConversationType;
+        [JsonIgnore] public Types ConversationType;
         public string Type; // Type from JSON
-        [JsonProperty("conversation")]
-        public List<Dialogue> Dialogues = new List<Dialogue>();
-        public List<DialogueAction> Actions = new List<DialogueAction>();
+        [JsonProperty("conversation")] public List<Dialogue> Dialogues = new();
+        public List<DialogueAction> Actions = new();
 
         // Setup anything we need to do here before validating
         public void PreValidation()
@@ -24,11 +22,13 @@ namespace CC.DialogueSystem
             // Set the conversation type
             switch (Type?.ToLower())
             {
-                case "background": ConversationType = Types.BACKGROUND; break;
+                case "background":
+                    ConversationType = Types.BACKGROUND;
+                    break;
             }
 
             // Set the defaults for each type. Only using an extra switch in case an added conversation in the future has a lot of settings to change
-            switch(ConversationType)
+            switch (ConversationType)
             {
                 case Types.BACKGROUND:
                     // Stop validation warning
@@ -60,12 +60,11 @@ namespace CC.DialogueSystem
         public bool CanBeUsedAsStartingPoint = true;
         public string AnchorObject; // The optional path to the object that's talking in the background.
 
-        public List<Condition> StartConditions = new List<Condition>();
-        public List<string> Sentences = new List<string>();
-        public List<Option> Options = new List<Option>();
-        [JsonProperty("OnFinishActions")]
-        public List<string> OnFinishedActionNames = new List<string>();
-             
+        public List<Condition> StartConditions = new();
+        public List<string> Sentences = new();
+        public List<Option> Options = new();
+        [JsonProperty("OnFinishActions")] public List<string> OnFinishedActionNames = new();
+
         // Let the conditions know they're ok to precast anything that needs it
         public void FinishedParsing()
         {
@@ -77,10 +76,8 @@ namespace CC.DialogueSystem
         public bool EvaluateStartingConditions()
         {
             foreach (var con in StartConditions)
-            {
                 if (!con.Evaluate())
                     return false;
-            }
 
             return true;
         }
@@ -91,8 +88,7 @@ namespace CC.DialogueSystem
         public int NextId = -1;
         public string Text;
 
-        [JsonProperty("selectedActions")]
-        public List<string> SelectedActionNames = new List<string>();
+        [JsonProperty("selectedActions")] public List<string> SelectedActionNames = new();
     }
 
     #endregion
@@ -120,8 +116,7 @@ namespace CC.DialogueSystem
         public string Message;
         public string Target;
 
-        [JsonIgnore]
-        public Types ActionType;
+        [JsonIgnore] public Types ActionType;
 
         // Parse type. Done this was instead of using JSONConverter to spit out an error that's a bit more helpful
         public bool GetActionType()
@@ -129,36 +124,52 @@ namespace CC.DialogueSystem
             // Figure type
             switch (Type.ToLower())
             {
-                case "log": ActionType = Types.LOG; break;
+                case "log":
+                    ActionType = Types.LOG;
+                    break;
 
                 case "log_warning":
                 case "log warning":
-                case "logwarning": ActionType = Types.LOG_WARNING; break;
+                case "logwarning":
+                    ActionType = Types.LOG_WARNING;
+                    break;
 
                 case "log_error":
                 case "log error":
-                case "logerror": ActionType = Types.LOG_ERROR; break;
+                case "logerror":
+                    ActionType = Types.LOG_ERROR;
+                    break;
 
 
                 case "close_conversation":
                 case "close conversation":
-                case "closeconversation": ActionType = Types.CLOSE_CONVERSATION; break;
+                case "closeconversation":
+                    ActionType = Types.CLOSE_CONVERSATION;
+                    break;
 
                 case "send_message":
                 case "send message":
-                case "sendmessage": ActionType = Types.SEND_MESSAGE; break;
+                case "sendmessage":
+                    ActionType = Types.SEND_MESSAGE;
+                    break;
 
                 case "change_theme":
                 case "change theme":
-                case "changetheme": ActionType = Types.CHANGE_THEME; break;
+                case "changetheme":
+                    ActionType = Types.CHANGE_THEME;
+                    break;
 
                 case "close_bg_conversations":
                 case "close bg conversations":
-                case "closebgconversations": ActionType = Types.CLOSE_BG_CONVERSATIONS; break;
+                case "closebgconversations":
+                    ActionType = Types.CLOSE_BG_CONVERSATIONS;
+                    break;
 
                 case "start_bg_conversation":
                 case "start bg conversation":
-                case "startbgconversation": ActionType = Types.START_BG_CONVERSATION; break;
+                case "startbgconversation":
+                    ActionType = Types.START_BG_CONVERSATION;
+                    break;
 
                 default:
                     DialogueLogger.LogError($"Unsupported action type {Type} found in action with the name {Name}.");
@@ -175,7 +186,7 @@ namespace CC.DialogueSystem
 
     public class Condition
     {
-        public List<Variable> Variables = new List<Variable>();
+        public List<Variable> Variables = new();
         public string Comparison;
 
         private IComparison _comparer;
@@ -200,13 +211,27 @@ namespace CC.DialogueSystem
         {
             switch (Comparison)
             {
-                case ">": _comparer = new GreaterThan(); break;
-                case "<": _comparer = new LessThan(); break;
-                case ">=": _comparer = new GreateOrEqualTo(); break;
-                case "<=": _comparer = new LessToEqualTo(); break;
-                case "==": _comparer = new EqualTo(); break;
-                case "!=": _comparer = new NotEqualTo(); break;
-                default: DialogueLogger.LogError($"Unsupported comparison operator {Comparison} used"); break;
+                case ">":
+                    _comparer = new GreaterThan();
+                    break;
+                case "<":
+                    _comparer = new LessThan();
+                    break;
+                case ">=":
+                    _comparer = new GreateOrEqualTo();
+                    break;
+                case "<=":
+                    _comparer = new LessToEqualTo();
+                    break;
+                case "==":
+                    _comparer = new EqualTo();
+                    break;
+                case "!=":
+                    _comparer = new NotEqualTo();
+                    break;
+                default:
+                    DialogueLogger.LogError($"Unsupported comparison operator {Comparison} used");
+                    break;
             }
         }
 
@@ -273,7 +298,6 @@ namespace CC.DialogueSystem
         public void Cast()
         {
             if (!FromRepo)
-            {
                 switch (Type.ToLower())
                 {
                     case "short":
@@ -288,17 +312,23 @@ namespace CC.DialogueSystem
                     case "float":
                         _castValue = float.Parse(Value);
                         break;
-                    case "bool": _castValue = bool.Parse(Value); break;
-                    case "string": _castValue = Value; break;
-                    default: DialogueLogger.LogError($"Unsupported type {Type} using in variable"); break;
+                    case "bool":
+                        _castValue = bool.Parse(Value);
+                        break;
+                    case "string":
+                        _castValue = Value;
+                        break;
+                    default:
+                        DialogueLogger.LogError($"Unsupported type {Type} using in variable");
+                        break;
                 }
-            }
         }
     }
 
     #endregion
 
     // TODO: Refactor?
+
     #region Condition Comparison Implementations
 
     public interface IComparison
@@ -309,37 +339,55 @@ namespace CC.DialogueSystem
     // >
     public class GreaterThan : IComparison
     {
-        public bool Execute(dynamic var1, dynamic var2) => var1 > var2;
+        public bool Execute(dynamic var1, dynamic var2)
+        {
+            return var1 > var2;
+        }
     }
 
     // <
     public class LessThan : IComparison
     {
-        public bool Execute(dynamic var1, dynamic var2) => var1 < var2;
+        public bool Execute(dynamic var1, dynamic var2)
+        {
+            return var1 < var2;
+        }
     }
 
     // >=
     public class GreateOrEqualTo : IComparison
     {
-        public bool Execute(dynamic var1, dynamic var2) => var1 >= var2;
+        public bool Execute(dynamic var1, dynamic var2)
+        {
+            return var1 >= var2;
+        }
     }
 
     // <=
     public class LessToEqualTo : IComparison
     {
-        public bool Execute(dynamic var1, dynamic var2) => var1 <= var2;
+        public bool Execute(dynamic var1, dynamic var2)
+        {
+            return var1 <= var2;
+        }
     }
 
     // ==
     public class EqualTo : IComparison
     {
-        public bool Execute(dynamic var1, dynamic var2) => var1 == var2;
+        public bool Execute(dynamic var1, dynamic var2)
+        {
+            return var1 == var2;
+        }
     }
 
     // != 
     public class NotEqualTo : IComparison
     {
-        public bool Execute(dynamic var1, dynamic var2) => var1 != var2;
+        public bool Execute(dynamic var1, dynamic var2)
+        {
+            return var1 != var2;
+        }
     }
 
     #endregion

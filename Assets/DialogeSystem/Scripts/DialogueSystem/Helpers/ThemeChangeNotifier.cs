@@ -8,8 +8,7 @@ namespace CC.DialogueSystem
     // Get notified of a theme change and search the repo for the right sprite
     public class ThemeChangeNotifier : MonoBehaviour
     {
-        [SerializeField]
-        protected string _elementsName;
+        [SerializeField] protected string _elementsName;
 
         // Could subclass, but then it's not as easy to just throw one script onto an object
         protected Image _thisImage;
@@ -24,15 +23,17 @@ namespace CC.DialogueSystem
             _thisSprite = GetComponent<SpriteRenderer>();
 
             // Check we've got a name before registering for the action
-            if(string.IsNullOrEmpty(_elementsName))
+            if (string.IsNullOrEmpty(_elementsName))
             {
-                DialogueLogger.LogError($"GameObject with the name {gameObject.name} needs an Elements Name value to be able to change theme");
+                DialogueLogger.LogError(
+                    $"GameObject with the name {gameObject.name} needs an Elements Name value to be able to change theme");
                 return;
             }
-                
-            if(_thisImage == null && _thisSprite)
+
+            if (_thisImage == null && _thisSprite)
             {
-                DialogueLogger.LogError($"GameObject with the name {gameObject.name} needs an Image or Sprite Renderer component to be able to change theme");
+                DialogueLogger.LogError(
+                    $"GameObject with the name {gameObject.name} needs an Image or Sprite Renderer component to be able to change theme");
                 return;
             }
 
@@ -46,14 +47,15 @@ namespace CC.DialogueSystem
         {
             var tempSprite = getSprite(name, _elementsName);
 
-            if(tempSprite == null)
+            if (tempSprite == null)
             {
-                DialogueLogger.LogError($"GameObject with the name {gameObject.name} can't change sprite with theme, {name} doesn't contain a sprite for {_elementsName}. Skipping");
+                DialogueLogger.LogError(
+                    $"GameObject with the name {gameObject.name} can't change sprite with theme, {name} doesn't contain a sprite for {_elementsName}. Skipping");
                 return;
             }
 
             // If we're just an image
-            if(_thisImage != null)
+            if (_thisImage != null)
                 _thisImage.sprite = tempSprite;
 
             // If we're a sprite renderer
@@ -62,6 +64,9 @@ namespace CC.DialogueSystem
         }
 
         // Get the sprite from the repo
-        protected virtual Sprite getSprite(string name, string spritename) => ThemeRepo.Instance.RetrieveSprite(name, spritename);
+        protected virtual Sprite getSprite(string name, string spritename)
+        {
+            return ThemeRepo.Instance.RetrieveSprite(name, spritename);
+        }
     }
 }

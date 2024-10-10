@@ -8,8 +8,7 @@ namespace CC.DialogueSystem
     // Parses and stores all the conversations for this scene. 
     public class ConversationRepo : MonoBehaviour
     {
-        [SerializeField]
-        private List<TextAsset> _conversationsToLoad;
+        [SerializeField] private List<TextAsset> _conversationsToLoad;
 
         private Dictionary<string, Conversation> _conversations;
         private IDeserializer _deserializer;
@@ -102,6 +101,7 @@ namespace CC.DialogueSystem
                     DialogueLogger.LogError($"An action in file {fileName} does not have a unique name");
                     return false;
                 }
+
                 actionNames.Add(action.Name);
 
                 // Check action type and add name to the list
@@ -132,32 +132,30 @@ namespace CC.DialogueSystem
 
                 // Check sentence for empty
                 foreach (var sentence in diag.Sentences)
-                {
                     if (string.IsNullOrEmpty(sentence))
                     {
                         DialogueLogger.LogError($"Empty sentence in file {fileName}");
                         return false;
                     }
-                }
 
                 // Check CharacterSpriteNames and StartingSprites
                 // Check the there's a CharacterSpriteName if we've sepecified a StartingSprite
                 if (!string.IsNullOrEmpty(diag.StartingSprite) && string.IsNullOrEmpty(diag.CharacterSpritesName))
                 {
-                    DialogueLogger.LogError($"Dialogue in file {fileName} has a startingSprite but no characterSpritesName is specified");
+                    DialogueLogger.LogError(
+                        $"Dialogue in file {fileName} has a startingSprite but no characterSpritesName is specified");
                     return false;
                 }
 
                 // Check the OnFinishedActionNames
                 // Loop through all of the action and make sure they exist
                 foreach (var action in diag.OnFinishedActionNames)
-                {
                     if (!actionNames.Contains(action))
                     {
-                        DialogueLogger.LogError($"An dialogues OnFinishActions in file {fileName} attemps to call an action with the name {action} that doesn't exist.");
+                        DialogueLogger.LogError(
+                            $"An dialogues OnFinishActions in file {fileName} attemps to call an action with the name {action} that doesn't exist.");
                         return false;
                     }
-                }
 
                 dialogueIds.Add(diag.Id);
             }
@@ -168,13 +166,12 @@ namespace CC.DialogueSystem
             {
                 // Check for dialogue next Ids values
                 if (diag.NextId != -1)
-                {
                     if (!dialogueIds.Contains(diag.NextId))
                     {
-                        DialogueLogger.LogError($"Dialoge in file {fileName} references a dialogue by id {diag.NextId} that doesn't exist");
+                        DialogueLogger.LogError(
+                            $"Dialoge in file {fileName} references a dialogue by id {diag.NextId} that doesn't exist");
                         return false;
                     }
-                }
 
                 // Check option texts and nextIds
                 foreach (var option in diag.Options)
@@ -182,13 +179,12 @@ namespace CC.DialogueSystem
                     // Check if any of the option has an action
                     // loop through all of the action and make sure they exist
                     foreach (var action in option.SelectedActionNames)
-                    {
                         if (!actionNames.Contains(action))
                         {
-                            DialogueLogger.LogError($"An option's selectedAction in file {fileName} attemps to call an action with the name {action} that doesn't exist.");
+                            DialogueLogger.LogError(
+                                $"An option's selectedAction in file {fileName} attemps to call an action with the name {action} that doesn't exist.");
                             return false;
                         }
-                    }
 
                     // Check text
                     if (string.IsNullOrEmpty(option.Text))
@@ -198,9 +194,11 @@ namespace CC.DialogueSystem
                     }
 
                     // Check the next dialogue exists if there's no action
-                    if (option.SelectedActionNames.Count == 0 && (!dialogueIds.Contains(option.NextId) || option.NextId == -1))
+                    if (option.SelectedActionNames.Count == 0 &&
+                        (!dialogueIds.Contains(option.NextId) || option.NextId == -1))
                     {
-                        DialogueLogger.LogError($"An option in file {fileName} has a nextId {option.NextId} that doesn't exist. If an option hasn't got an action, it needs a nextId");
+                        DialogueLogger.LogError(
+                            $"An option in file {fileName} has a nextId {option.NextId} that doesn't exist. If an option hasn't got an action, it needs a nextId");
                         return false;
                     }
                 }
@@ -211,7 +209,8 @@ namespace CC.DialogueSystem
                     // Can only test 2 varaibles against each other. When a conversation is picked all conditions must evaluate to true, so if more tests are needed just stack conditions
                     if (con.Variables.Count != 2)
                     {
-                        DialogueLogger.LogError($"A condition in file {fileName} does not contains {con.Variables.Count} variables, must have 2");
+                        DialogueLogger.LogError(
+                            $"A condition in file {fileName} does not contains {con.Variables.Count} variables, must have 2");
                         return false;
                     }
 
@@ -223,14 +222,16 @@ namespace CC.DialogueSystem
                         {
                             if (!variable.FromRepo)
                             {
-                                DialogueLogger.LogError($"A condition variable in file {fileName} has a conditional varialbe without a value. One is required if not retrieving from the variable repo");
+                                DialogueLogger.LogError(
+                                    $"A condition variable in file {fileName} has a conditional varialbe without a value. One is required if not retrieving from the variable repo");
                                 return false;
                             }
                         }
                         else
                         {
                             if (variable.FromRepo)
-                                DialogueLogger.LogWarning($"A condition variable in file {fileName} has a value it will be ignored as the variable is marked to be retrieved from the variable repo");
+                                DialogueLogger.LogWarning(
+                                    $"A condition variable in file {fileName} has a value it will be ignored as the variable is marked to be retrieved from the variable repo");
                         }
 
                         // A type is required if we're not retrieving from the repo
@@ -238,14 +239,16 @@ namespace CC.DialogueSystem
                         {
                             if (!variable.FromRepo)
                             {
-                                DialogueLogger.LogError($"A condition in file {fileName} has a conditional variable without a type. One is required if not retrieving from the variable repo");
+                                DialogueLogger.LogError(
+                                    $"A condition in file {fileName} has a conditional variable without a type. One is required if not retrieving from the variable repo");
                                 return false;
                             }
                         }
                         else
                         {
                             if (variable.FromRepo)
-                                DialogueLogger.LogWarning($"A condition variable in file {fileName} has a type but will be ignored as the variable is marked to be retrieved from the variable repo");
+                                DialogueLogger.LogWarning(
+                                    $"A condition variable in file {fileName} has a type but will be ignored as the variable is marked to be retrieved from the variable repo");
                         }
 
                         // Check there's a name if we're retrieving from the repo
@@ -253,14 +256,16 @@ namespace CC.DialogueSystem
                         {
                             if (variable.FromRepo)
                             {
-                                DialogueLogger.LogError($"A condition variable in the file {fileName} does not have a name value, one is required for retrieval from the varialbe repo");
+                                DialogueLogger.LogError(
+                                    $"A condition variable in the file {fileName} does not have a name value, one is required for retrieval from the varialbe repo");
                                 return false;
                             }
                         }
                         else
                         {
                             if (!variable.FromRepo)
-                                DialogueLogger.LogWarning($"A condition variable in the file {fileName} has name value but will be ignored as the variable is not marked to be retrieved from the variable repo");
+                                DialogueLogger.LogWarning(
+                                    $"A condition variable in the file {fileName} has name value but will be ignored as the variable is not marked to be retrieved from the variable repo");
                         }
                     }
 
@@ -269,40 +274,41 @@ namespace CC.DialogueSystem
                     var var2LowerType = con.Variables[1].Type?.ToLower();
 
                     // Check the comparison operator if either of the types is a string or bool
-                    if (var1LowerType == "string" || var1LowerType == "bool" || var2LowerType == "string" || var2LowerType == "bool")
-                    {
+                    if (var1LowerType == "string" || var1LowerType == "bool" || var2LowerType == "string" ||
+                        var2LowerType == "bool")
                         if (con.Comparison != "==" && con.Comparison != "!=")
                         {
-                            DialogueLogger.LogError($"String and booleans can only use the == and != equality operators. Condition in file {fileName} is trying to use {con.Comparison}");
+                            DialogueLogger.LogError(
+                                $"String and booleans can only use the == and != equality operators. Condition in file {fileName} is trying to use {con.Comparison}");
                             return false;
                         }
-                    }
 
                     // String and bool are only tested against each other. This isn't quite true, normally, but it's a lot more readable to only allow string and bools to be compared against each other
                     if (!con.Variables[0].FromRepo && (var1LowerType == "bool" || var1LowerType == "string") &&
                         !con.Variables[1].FromRepo && (var2LowerType == "bool" || var2LowerType == "string"))
-                    {
                         // Check they're compatible
                         if (var1LowerType != var2LowerType)
                         {
-                            DialogueLogger.LogError($"Conversation file {fileName} has a condition with an unsupported variable comparison. Strings or booleans can only be tested against each other");
+                            DialogueLogger.LogError(
+                                $"Conversation file {fileName} has a condition with an unsupported variable comparison. Strings or booleans can only be tested against each other");
                             return false;
                         }
-                    }
                 }
 
                 // Warn if autoProceed is false and the conversation type is background, we'll autoproceed anyway
                 if (tempConversation.ConversationType == Conversation.Types.BACKGROUND)
-                {
                     if (!diag.AutoProceed)
-                        DialogueLogger.LogWarning($"Dialogue in the file {fileName} is of type background and autoProceed is false. Background conversations always autoproceed");
-                }
+                        DialogueLogger.LogWarning(
+                            $"Dialogue in the file {fileName} is of type background and autoProceed is false. Background conversations always autoproceed");
             }
 
             return true;
         }
 
         // Resolve a registered conversation
-        public Conversation RetrieveConversation(string convoName) => _conversations.ContainsKey(convoName) ? _conversations[convoName] : null;
+        public Conversation RetrieveConversation(string convoName)
+        {
+            return _conversations.ContainsKey(convoName) ? _conversations[convoName] : null;
+        }
     }
 }

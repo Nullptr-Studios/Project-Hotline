@@ -11,8 +11,7 @@ namespace CC.DialogueSystem
         // Actions
         public event Action CloseConversation;
 
-        [SerializeField]
-        private BaseBackgroundDialogueUIController _uiControllerPrefab;
+        [SerializeField] private BaseBackgroundDialogueUIController _uiControllerPrefab;
 
         public static BackgroundDialogueController Instance { get; private set; }
 
@@ -38,7 +37,8 @@ namespace CC.DialogueSystem
             // Check if it's a normal conversation and redirect
             if (tempConvo.ConversationType == Conversation.Types.DEFAULT)
             {
-                DialogueLogger.Log($"Trying to start conversation {convoName} as a background conversation, redirecting to the default DialogueController");
+                DialogueLogger.Log(
+                    $"Trying to start conversation {convoName} as a background conversation, redirecting to the default DialogueController");
                 DialogueController.Instance?.StartConversation(tempConvo);
                 return;
             }
@@ -51,15 +51,17 @@ namespace CC.DialogueSystem
         {
             if (_uiControllerPrefab == null)
             {
-                DialogueLogger.LogError("Trying to start a background conversation, but there's not BaseBackgroundDialogueUIController assigned");
+                DialogueLogger.LogError(
+                    "Trying to start a background conversation, but there's not BaseBackgroundDialogueUIController assigned");
                 return;
             }
 
             var tempObject = Instantiate(_uiControllerPrefab).GetComponent<BaseBackgroundDialogueUIController>();
-            
-            if(tempObject == null)
+
+            if (tempObject == null)
             {
-                DialogueLogger.LogError($"Background conversation spawned does't have a component of type BaseBackgroundDialogueUIController");
+                DialogueLogger.LogError(
+                    $"Background conversation spawned does't have a component of type BaseBackgroundDialogueUIController");
                 return;
             }
 
@@ -67,6 +69,9 @@ namespace CC.DialogueSystem
         }
 
         // Close all background conversations
-        public void CloseConversations() => CloseConversation?.Invoke();
+        public void CloseConversations()
+        {
+            CloseConversation?.Invoke();
+        }
     }
 }
