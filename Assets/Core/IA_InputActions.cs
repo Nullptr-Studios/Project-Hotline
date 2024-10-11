@@ -149,7 +149,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""id"": ""040181c7-3b1f-43b3-9561-ca2c48458c92"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone(min=0.4)"",
                     ""groups"": """",
                     ""action"": ""Aim"",
                     ""isComposite"": false,

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4029661644337495018}
   - component: {fileID: 2322629527365507291}
   - component: {fileID: 9219392232182884951}
-  - component: {fileID: 3234238828761699900}
   m_Layer: 0
   m_Name: PA_Player
   m_TagString: Untagged
@@ -34,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2398245412808944660
 SpriteRenderer:
@@ -167,17 +166,7 @@ MonoBehaviour:
     curve: {fileID: 11400000, guid: ddaf781850e4fb24595be3ea1743716c, type: 2}
     speedMax: 5
   inputSmoothTime: 0.2
+  aimSmoothTime: 8
+  pivotRotation: 1
   debugSpeed: 0
---- !u!114 &3234238828761699900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3136868407235776783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc0f21836e2e6d4e9ce258b84927e98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Camera: {fileID: 0}
+  debugInput: 0

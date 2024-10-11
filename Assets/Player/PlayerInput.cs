@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -18,7 +20,12 @@ public class PlayerInput : MonoBehaviour
     
     [Header("Player Aim")]
     [SerializeField] private float aimSmoothTime = 0.2f;
-    private Vector2 _mousePos;
+    [Tooltip("This makes the player rotate from its center rather than from its collider")]
+    [SerializeField] private bool pivotRotation;
+    private bool _usingMouse;
+    private Vector2 _rawAimPosition;
+    private Vector3 _currentDir;
+    private Vector3 _dir;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -34,6 +41,7 @@ public class PlayerInput : MonoBehaviour
     }
 
     // NOTE: All Actions MUST be enabled AND disabled or code will explode (not joking) -x
+    // Please enable them individually to avoid errors
     private void OnEnable()
     {
         _input.Gameplay.Debug.performed += OnDebug;
@@ -44,6 +52,7 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Movement.Enable();
 
         _input.Gameplay.Aim.performed += OnAim;
+        // _input.Gameplay.Aim.canceled += OnAim;
         _input.Gameplay.Aim.Enable();
     }
     
@@ -83,10 +92,9 @@ public class PlayerInput : MonoBehaviour
         _rb.velocity = moveVelocity;
         
         // Aim stuff
-        //Updates the vector of the direction the player is facing
-        Vector2 playerDirection = _mousePos - (Vector2)transform.position;
-        //Calculates the angle needed for that movement and turns the player into the new direction
-        float angle = Mathf.Atan2 (playerDirection.y, playerDirection.x) * Mathf.Rad2Deg;
+        _dir = GetAimWorldPosition();
+        _currentDir = Vector3.Slerp(_currentDir, _dir, aimSmoothTime * Time.deltaTime);
+        float angle = Mathf.Atan2(_currentDir.y, _currentDir.x) * Mathf.Rad2Deg;
         _rb.MoveRotation(angle);
 
 #if UNITY_EDITOR
@@ -102,12 +110,32 @@ public class PlayerInput : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets mouse position in world coordinates
+    /// Gets raw mouse and controller data
     /// </summary>
     /// <param name="context">Input Context</param>
     private void OnAim(InputAction.CallbackContext context)
     {
-        _mousePos = _camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
+        // TODO: Find a better way to do this
+        _usingMouse = context.control.layout != "Stick";
+        
+        _rawAimPosition = context.ReadValue<Vector2>();
+    }
+
+    /// <summary>
+    /// Transform raw input data to a point in world coordinates and returns a vector from the player to said point
+    /// </summary>
+    /// <returns>Vector from player to position</returns>
+    private Vector2 GetAimWorldPosition()
+    {
+        if (_usingMouse)
+        {
+            Vector2 aimPosition = _camera.ScreenToWorldPoint(_rawAimPosition);
+            //Updates the vector of the direction the player is facing
+            return (aimPosition - (Vector2)transform.position).normalized;
+        }
+        
+        Vector2 controllerPosition = _rawAimPosition + (Vector2)transform.position;
+        return (controllerPosition - (Vector2)transform.position).normalized;
     }
 
     /// <summary>
