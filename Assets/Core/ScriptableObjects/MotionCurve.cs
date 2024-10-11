@@ -59,7 +59,6 @@ public class MotionCurve : ScriptableObject
     /// Acceleration and deceleration logic based on if the GameObject is moving or not.
     /// </summary>
     /// <param name="isMoving">Specify if the player is inputting something on the controller</param>
-    /// <param name="isMoving">Specify if the character velocity is not 0</param>
     public void Update(bool isMoving)
     {
         var currentCurve = isMoving ? curve.accelerationCurve : curve.decelerationCurve;

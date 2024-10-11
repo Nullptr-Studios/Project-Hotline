@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     private PlayerIA _input;
-    private Rigidbody2D _rigidbody;
+    private Rigidbody2D _rb;
+    private Camera _camera;
     
     [Header("Player Movement")]
     [SerializeField] private float currentSpeed;
@@ -14,6 +15,10 @@ public class PlayerInput : MonoBehaviour
     private Vector2 _directionTarget;
     private Vector2 _directionSmooth;
     private Vector2 _velocity;
+    
+    [Header("Player Aim")]
+    [SerializeField] private float aimSmoothTime = 0.2f;
+    private Vector2 _mousePos;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -24,7 +29,8 @@ public class PlayerInput : MonoBehaviour
     private void Awake()
     {
         _input = new PlayerIA();
-        _rigidbody = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
+        _camera = Camera.main;
     }
 
     // NOTE: All Actions MUST be enabled AND disabled or code will explode (not joking) -x
@@ -36,6 +42,9 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Movement.performed += OnMove;
         _input.Gameplay.Movement.canceled += OnMove;
         _input.Gameplay.Movement.Enable();
+
+        _input.Gameplay.Aim.performed += OnAim;
+        _input.Gameplay.Aim.Enable();
     }
     
     private void OnDisable()
@@ -45,20 +54,20 @@ public class PlayerInput : MonoBehaviour
 
         _input.Gameplay.Debug.Disable();   
         _input.Gameplay.Movement.Disable();
+        _input.Gameplay.Aim.Disable();
     }
     
-    void Update()
+    private void Update()
     {
         // Movement stuff
-        // _isInput = _inputDir != Vector2.zero;
-        bool isMovingx = _inputDir.x != 0;
-        bool isMovingy = _inputDir.y != 0;
-        if (isMovingx)
+        bool movingX = _inputDir.x != 0;
+        bool movingY = _inputDir.y != 0;
+        if (movingX)
             _directionTarget.x = _inputDir.x;
         else 
             _directionTarget.x = 0;
 
-        if (isMovingy)
+        if (movingY)
             _directionTarget.y = _inputDir.y;
         else
             _directionTarget.y = 0;
@@ -66,12 +75,19 @@ public class PlayerInput : MonoBehaviour
         _directionSmooth = 
             Vector2.SmoothDamp(_directionSmooth, _directionTarget, ref _velocity, inputSmoothTime);
         
-        movementController.Update(isMovingx || isMovingy);
+        movementController.Update(movingX || movingY);
         
         Vector2 moveDirection = Vector2.right * _directionSmooth.x + Vector2.up * _directionSmooth.y;
         Vector2 moveVelocity = moveDirection * movementController.Speed;
         
-        _rigidbody.velocity = moveVelocity;
+        _rb.velocity = moveVelocity;
+        
+        // Aim stuff
+        //Updates the vector of the direction the player is facing
+        Vector2 playerDirection = _mousePos - (Vector2)transform.position;
+        //Calculates the angle needed for that movement and turns the player into the new direction
+        float angle = Mathf.Atan2 (playerDirection.y, playerDirection.x) * Mathf.Rad2Deg;
+        _rb.MoveRotation(angle);
 
 #if UNITY_EDITOR
         if (debugSpeed)
@@ -83,6 +99,15 @@ public class PlayerInput : MonoBehaviour
         if (debugInput) Debug.Log(_inputDir);
 #endif
 
+    }
+
+    /// <summary>
+    /// Gets mouse position in world coordinates
+    /// </summary>
+    /// <param name="context">Input Context</param>
+    private void OnAim(InputAction.CallbackContext context)
+    {
+        _mousePos = _camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
     }
 
     /// <summary>
