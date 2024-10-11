@@ -18,6 +18,7 @@ public class PlayerInput : MonoBehaviour
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool debugSpeed;
+    [SerializeField] private bool debugInput;
 #endif
 
     private void Awake()
@@ -54,9 +55,13 @@ public class PlayerInput : MonoBehaviour
         bool isMovingy = _inputDir.y != 0;
         if (isMovingx)
             _directionTarget.x = _inputDir.x;
+        else 
+            _directionTarget.x = 0;
 
         if (isMovingy)
             _directionTarget.y = _inputDir.y;
+        else
+            _directionTarget.y = 0;
 
         _directionSmooth = 
             Vector2.SmoothDamp(_directionSmooth, _directionTarget, ref _velocity, inputSmoothTime);
@@ -74,6 +79,8 @@ public class PlayerInput : MonoBehaviour
             currentSpeed = moveVelocity.magnitude;
             Debug.Log(currentSpeed);
         }
+        
+        if (debugInput) Debug.Log(_inputDir);
 #endif
 
     }
