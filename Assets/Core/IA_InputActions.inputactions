@@ -1,5 +1,5 @@
 {
-    "name": "InputActions",
+    "name": "IA_InputActions",
     "maps": [
         {
             "name": "Gameplay",
@@ -18,6 +18,15 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "c75b7bc5-b7d1-4412-bb6d-b1717b3730c9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Aim",
+                    "type": "Value",
+                    "id": "1a65be8c-b5da-4cb5-9434-87ae2c58279c",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -112,6 +121,28 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "040181c7-3b1f-43b3-9561-ca2c48458c92",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "006a4374-d614-4313-bd02-83316a904002",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
