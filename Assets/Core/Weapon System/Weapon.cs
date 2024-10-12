@@ -8,7 +8,7 @@ public enum EWeaponType
 {
     Fire,
     Melee,
-    Deafault
+    Default
 }
 
 /// <summary>
@@ -36,7 +36,7 @@ public interface IWeapon
 public class Weapon : MonoBehaviour, IWeapon
 {
     [Header("Base")] 
-    public EWeaponType weaponType = EWeaponType.Deafault;
+    public EWeaponType weaponType = EWeaponType.Default;
     
     public float throwForce = 15;
     
@@ -62,7 +62,7 @@ public class Weapon : MonoBehaviour, IWeapon
         return weaponType;
     }
 
-    private void Start()
+    public virtual void Start()
     {
         AddRb();
     }

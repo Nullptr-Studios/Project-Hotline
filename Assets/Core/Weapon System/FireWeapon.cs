@@ -13,9 +13,10 @@ public class FireWeapon : Weapon
     }
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        
+        //Implement Base class functionality
+        base.Start();
     }
 
     // Update is called once per frame
