@@ -53,6 +53,15 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""c9ea211a-f875-4da3-bf9a-ddfab717861e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -154,6 +163,28 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""action"": ""ThrowOrGet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""368c8ebd-eef2-46e0-9775-3e02708b6a8a"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone(min=0.4)"",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d85a44d5-67d6-4b1d-80f9-0e53fcd9f507"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -165,6 +196,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         m_Gameplay_Debug = m_Gameplay.FindAction("Debug", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_ThrowOrGet = m_Gameplay.FindAction("ThrowOrGet", throwIfNotFound: true);
+        m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +261,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Debug;
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_ThrowOrGet;
+    private readonly InputAction m_Gameplay_Aim;
     public struct GameplayActions
     {
         private @PlayerIA m_Wrapper;
@@ -236,6 +269,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         public InputAction @Debug => m_Wrapper.m_Gameplay_Debug;
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @ThrowOrGet => m_Wrapper.m_Gameplay_ThrowOrGet;
+        public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -254,6 +288,9 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @ThrowOrGet.started += instance.OnThrowOrGet;
             @ThrowOrGet.performed += instance.OnThrowOrGet;
             @ThrowOrGet.canceled += instance.OnThrowOrGet;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -267,6 +304,9 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @ThrowOrGet.started -= instance.OnThrowOrGet;
             @ThrowOrGet.performed -= instance.OnThrowOrGet;
             @ThrowOrGet.canceled -= instance.OnThrowOrGet;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -289,5 +329,6 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         void OnDebug(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnThrowOrGet(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
 }
