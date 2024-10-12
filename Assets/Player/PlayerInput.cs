@@ -8,7 +8,7 @@ public class PlayerInput : MonoBehaviour
     private PlayerIA _input;
     private Rigidbody2D _rb;
     private Camera _camera;
-    
+
     [Header("Player Movement")]
     [SerializeField] private float currentSpeed;
     [SerializeField] private MotionController movementController;
@@ -17,7 +17,7 @@ public class PlayerInput : MonoBehaviour
     private Vector2 _directionTarget;
     private Vector2 _directionSmooth;
     private Vector2 _velocity;
-    
+
     [Header("Player Aim")]
     [SerializeField] private float aimSmoothTime = 0.2f;
     [Tooltip("This makes the player rotate from its center rather than from its collider")]
@@ -46,7 +46,7 @@ public class PlayerInput : MonoBehaviour
     {
         _input.Gameplay.Debug.performed += OnDebug;
         _input.Gameplay.Debug.Enable();
-        
+
         _input.Gameplay.Movement.performed += OnMove;
         _input.Gameplay.Movement.canceled += OnMove;
         _input.Gameplay.Movement.Enable();
@@ -55,17 +55,17 @@ public class PlayerInput : MonoBehaviour
         // _input.Gameplay.Aim.canceled += OnAim;
         _input.Gameplay.Aim.Enable();
     }
-    
+
     private void OnDisable()
     {
         //Reset Movement curves variables
         movementController.OnDisable();
 
-        _input.Gameplay.Debug.Disable();   
+        _input.Gameplay.Debug.Disable();
         _input.Gameplay.Movement.Disable();
         _input.Gameplay.Aim.Disable();
     }
-    
+
     private void Update()
     {
         // Movement stuff
@@ -73,7 +73,7 @@ public class PlayerInput : MonoBehaviour
         bool movingY = _inputDir.y != 0;
         if (movingX)
             _directionTarget.x = _inputDir.x;
-        else 
+        else
             _directionTarget.x = 0;
 
         if (movingY)
@@ -81,16 +81,16 @@ public class PlayerInput : MonoBehaviour
         else
             _directionTarget.y = 0;
 
-        _directionSmooth = 
+        _directionSmooth =
             Vector2.SmoothDamp(_directionSmooth, _directionTarget, ref _velocity, inputSmoothTime);
-        
+
         movementController.Update(movingX || movingY);
-        
+
         Vector2 moveDirection = Vector2.right * _directionSmooth.x + Vector2.up * _directionSmooth.y;
         Vector2 moveVelocity = moveDirection * movementController.Speed;
-        
+
         _rb.velocity = moveVelocity;
-        
+
         // Aim stuff
         _dir = GetAimWorldPosition();
         _currentDir = Vector3.Slerp(_currentDir, _dir, aimSmoothTime * Time.deltaTime);
@@ -98,13 +98,7 @@ public class PlayerInput : MonoBehaviour
         _rb.MoveRotation(angle);
 
 #if UNITY_EDITOR
-        if (debugSpeed)
-        {
-            currentSpeed = moveVelocity.magnitude;
-            Debug.Log(currentSpeed);
-        }
         
-        if (debugInput) Debug.Log(_inputDir);
 #endif
 
     }
@@ -117,7 +111,7 @@ public class PlayerInput : MonoBehaviour
     {
         // TODO: Find a better way to do this
         _usingMouse = context.control.layout != "Stick";
-        
+
         _rawAimPosition = context.ReadValue<Vector2>();
     }
 
@@ -133,7 +127,7 @@ public class PlayerInput : MonoBehaviour
             //Updates the vector of the direction the player is facing
             return (aimPosition - (Vector2)transform.position).normalized;
         }
-        
+
         Vector2 controllerPosition = _rawAimPosition + (Vector2)transform.position;
         return (controllerPosition - (Vector2)transform.position).normalized;
     }
@@ -146,17 +140,19 @@ public class PlayerInput : MonoBehaviour
     {
         _inputDir = context.ReadValue<Vector2>();
     }
-    
+
     /// <summary>
     /// Logic for the Debug Button
     /// </summary>
     /// <param name="context">Input Context</param>
     private void OnDebug(InputAction.CallbackContext context)
     {
-        
+
 #if UNITY_EDITOR
         Debug.Log("Debug Pressed " + context.duration);
+        this.BroadcastMessage("Attack");
 #endif
-        
+
     }
 }
+
