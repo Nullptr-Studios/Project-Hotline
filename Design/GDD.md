@@ -17,9 +17,13 @@ The players will have control over a character throughout the game, providing th
 
 ### Enemies
 
-- Idle path
-- Detect player
-- Go to player
+The main obstacles on the game will be enemies. By default, all of them will be equipped with a weapon chosen during scene design. These enemies will work based on a state system that will dictate their behabiour:
+
+- **Idle State**: This is the default state for an enemy and is triggered by default. There are two types of idle states: the static, which means the enemy is fixed in place and will not move until it changes a state; and the path, which means the enemy is folowing a route on loop until something forces them to change state.
+- **Chase State**: In this state, the enemy moves towards the player. This state is entered by detecting the player character, which can be done in two ways. The first one would be detecting player through vision, entering in a predetermined field of view. The second one would be detecting the player through noise, by calculating the distance from which the player has shot a fire weapon and determiningh if that distance falls within an specific range. This will be managed by a custom Global Message System that will call an event when any weapon is shot, avoiding calling the reference every time on the awake. Once the chase state is entered, the enemy will go to the player using Unity's 2D Pathfinding System until it reaches the target destination. If the enemy is using a melee weapon, it will move to the player's position and then go to the Attack State. If the enemy is using a fire weapon, it will go to safe distance and then go to the Attack State.
+- **Attack State**: In this state, the enemy will execute the attack function associated with the weapon they are holding. If they are unable to attack, they will return to the Chase State.
+- **Stun State**: If the enemy has been hit by a melee attack, they will enter the stun state for a fixed amount of time. During that time, the enemy won't be able to move or attack the player. If struck again by a melee weapon, finisher, or fire weapon, the enemy will be killed.
+- **Dead State**: Enemy turns into a corpse; cannot move or shoot; cannot change state.
 
 ### Game Loop
 
@@ -46,13 +50,17 @@ Both enemies and the player will be able to use any of the given weapon, but som
 
 Score is calculated during the shooter part of the game which each scene having a unique value (score is not transfered from one scene to the next). Actions like eliminations or completing the level's objective will increase the score, while combos (achieved by killing multiple enemies within a short time frame) will provide additional ones. On the other hand, being killed, reloading too many times or taking too much time to finish the level will substract score. Score will not be visible during gameplay but will be detailed on the Score page at the end of the level. The highest achived score will be saved on the game's save, allowing the player to try to beat their previous score.
 
+### Saving System
+
+Upon finishing a scene, the Score and Statistics for that scene will be saved using a custom serializer. Players can replay scenes at any time or see detailed performance stats via the game menu. The menu will show both the highest and lowest achieved score on each scene.
+
 ## Level Design
 
-The scenes are the main part of the game and they are where the players will spend the mayority of their time in. Each of the nine scenes in the game will be a custom-crafted house in which the player has two objectives: go to the "key room", where they can fulfill the task they've been assigned to, and exit the building alive. This two conditions MUST be made in order for the player to finish the scene and go to the score screen. 
+The scenes are the main part of the game and they are where the players will spend the mayority of their time in. Each of the nine scenes is set in a custom-designed house in which the player has two objectives: reaching the "key room", where they can fulfill the task they've been assigned to, and exiting the building alive. Both conditions MUST be met by the player in order to finish the scene and proceed to the score screen. 
 
-All the scenes will consist of a house with a various number of rooms and corridors. Inside, players will find a variety of objects like TVs, Tables, Chairs, Sofas... that will limit their movement in the rooms. Alongside all this static objects, there will also be two interactable objects: windows and doors. Windows allows the player and the enemies to see through them and will be broken when shooting. Gameplay-wise this means that they will stop the first bullet and then dissapear, allowing fire cross them. Doors will consist of a rigidbody with a joint fixture component that prevent vision and fire. They cannot be broken, however, using Unity physics, they can be rotated pivoting one of their sides when the player pushes them. Doors will open both ways. Bullets will apply a force when colliding with the door, allowing the player to open them by shooting. Enemies will not be programmed to shoot doors to open them. Along the obstacles, the scenes will be populated with enemies. More information on this is included on the _Enemies_ section. Killing all the enemies won't be needed in order to finish the level, allowing the player to just run away from the action if they wish. It is an intended mechanic. However, it will be very difficult or, depending on the scene, even imposible to end a scene without being detected so the game is not intended to be played pacefully or stealthy.
+All the scenes will consist of a house with a various number of rooms and corridors. Inside, players will find a variety of objects like TVs, Tables, Chairs, Sofas... that will limit their movement in the rooms. In addition to the static objects, there will be two types of interactable objects: windows and doors. Windows allows the player and the enemies to see through them and will be broken when shooting. Gameplay-wise, this means that they will block the first bullet but then dissapear, allowing subsequent fire to pass through them. Doors will consist of a rigidbody with a joint fixture component that prevent vision and fire. They cannot be broken; however, using Unity physics, they can be rotated pivoting one of their sides when the player pushes them. Doors will open both ways. Bullets will apply a force when colliding with the door, allowing the player to open them by shooting. Enemies will not be programmed to shoot doors to open them. Along the obstacles, the scenes will be populated with enemies. More information on this is included on the _Enemies_ section. Killing all the enemies won't be needed in order to finish the level, allowing the player to just run away from the action if they wish. It is an intended mechanic. However, it will be very difficult or, in some scenes the scene, even imposible complete a scene without being detected. As a result, the game is not intended to be played in a peaceful or stealthy manner.
 
-## Art
+## Artistic Direction
 
 Project-Hotline's art features a strong pixel art style made by downscaling the vector file of the top-down shooter asset pack provided on class. Some sprites may need to be modified in order to account for things like different weapon types. 2D lighting will be used in the scenes to provide the dark ambience the game will have, making the player feel uneasy as they play the game. As stated as the beginig, all the game design and artistic direction of the game should make the player become addicting to the act of defeating enemies while also reflecting on the morality of killing. In addition to this, a custom post-processing effect mimicking a CRT display will be made using hlsl.
 
@@ -62,8 +70,7 @@ The game's UI will mimick the style of the old operating system MS-DOS. This pro
 
 ## Inspirations
 
-- Hotline Miami
-- Katana Zero
-- Silent Hill
-- Signalis
-- Doki Doki Literature Club
+- Hotline Miami: Main gameplay loop
+- Katana Zero: Narrative, art style
+- Silent Hill: Ambience, storytelling
+- Signalis: Ambience, sounds, storytelling
