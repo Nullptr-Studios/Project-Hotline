@@ -44,6 +44,15 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ThrowOrGet"",
+                    ""type"": ""Button"",
+                    ""id"": ""10faa8df-41c4-48c7-be96-6501b1449977"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,6 +143,17 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b117f2dc-eac6-4f77-a8de-e81e84a43b05"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowOrGet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -144,6 +164,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Debug = m_Gameplay.FindAction("Debug", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
+        m_Gameplay_ThrowOrGet = m_Gameplay.FindAction("ThrowOrGet", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,12 +228,14 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Debug;
     private readonly InputAction m_Gameplay_Movement;
+    private readonly InputAction m_Gameplay_ThrowOrGet;
     public struct GameplayActions
     {
         private @PlayerIA m_Wrapper;
         public GameplayActions(@PlayerIA wrapper) { m_Wrapper = wrapper; }
         public InputAction @Debug => m_Wrapper.m_Gameplay_Debug;
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
+        public InputAction @ThrowOrGet => m_Wrapper.m_Gameplay_ThrowOrGet;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -228,6 +251,9 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @ThrowOrGet.started += instance.OnThrowOrGet;
+            @ThrowOrGet.performed += instance.OnThrowOrGet;
+            @ThrowOrGet.canceled += instance.OnThrowOrGet;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -238,6 +264,9 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @ThrowOrGet.started -= instance.OnThrowOrGet;
+            @ThrowOrGet.performed -= instance.OnThrowOrGet;
+            @ThrowOrGet.canceled -= instance.OnThrowOrGet;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -259,5 +288,6 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
     {
         void OnDebug(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnThrowOrGet(InputAction.CallbackContext context);
     }
 }
