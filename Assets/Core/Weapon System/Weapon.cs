@@ -30,7 +30,7 @@ public interface IWeapon
 
     public void Throw(Vector2 forwardVector);
 
-    public void Use();
+    public void Use(bool pressed);
 }
 
 /// <summary>
@@ -50,6 +50,11 @@ public class Weapon : MonoBehaviour, IWeapon
 
     private bool _held;
     private Rigidbody2D _rb;
+    
+    public virtual int UsesLeft()
+    {
+        return -1;
+    }
 
 
     /// <returns>Returns this weapon type</returns>
@@ -122,7 +127,7 @@ public class Weapon : MonoBehaviour, IWeapon
     /// <summary>
     /// Use Virtual Void
     /// </summary>
-    public virtual void Use()
+    public virtual void Use(bool pressed)
     {
         
     }

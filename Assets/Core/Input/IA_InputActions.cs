@@ -62,6 +62,24 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""72e37d69-2cc6-4c43-a13c-d29e5be3cc67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchWeapons"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d412aae-db09-4a07-80e1-99ef0dce76c3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -185,6 +203,39 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e6d3ad9-34fc-4d6e-a68b-30490723179e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""143a5cf3-1de7-433c-9d5f-252c6b56eb48"",
+                    ""path"": ""<Mouse>/backButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de1d9d39-f6d7-4f61-82d7-3e63cf251a2a"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -197,6 +248,8 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_ThrowOrGet = m_Gameplay.FindAction("ThrowOrGet", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
+        m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
+        m_Gameplay_SwitchWeapons = m_Gameplay.FindAction("SwitchWeapons", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,6 +315,8 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_ThrowOrGet;
     private readonly InputAction m_Gameplay_Aim;
+    private readonly InputAction m_Gameplay_Fire;
+    private readonly InputAction m_Gameplay_SwitchWeapons;
     public struct GameplayActions
     {
         private @PlayerIA m_Wrapper;
@@ -270,6 +325,8 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @ThrowOrGet => m_Wrapper.m_Gameplay_ThrowOrGet;
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
+        public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
+        public InputAction @SwitchWeapons => m_Wrapper.m_Gameplay_SwitchWeapons;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -291,6 +348,12 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
+            @SwitchWeapons.started += instance.OnSwitchWeapons;
+            @SwitchWeapons.performed += instance.OnSwitchWeapons;
+            @SwitchWeapons.canceled += instance.OnSwitchWeapons;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -307,6 +370,12 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
+            @SwitchWeapons.started -= instance.OnSwitchWeapons;
+            @SwitchWeapons.performed -= instance.OnSwitchWeapons;
+            @SwitchWeapons.canceled -= instance.OnSwitchWeapons;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -330,5 +399,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnThrowOrGet(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
+        void OnSwitchWeapons(InputAction.CallbackContext context);
     }
 }

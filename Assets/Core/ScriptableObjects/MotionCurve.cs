@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "MC_UnnamedCurve", menuName = "Create MotionCurve")]
+[CreateAssetMenu(fileName = "MC_UnnamedCurve", menuName = "ProjectHotline/Create MotionCurve")]
 public class MotionCurve : ScriptableObject
 {
     // Animation curve variables

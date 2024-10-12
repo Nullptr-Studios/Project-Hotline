@@ -270,6 +270,8 @@ MonoBehaviour:
   throwForce: 15
   rotationForce: 1000
   gfxCollider2D: {fileID: 246901038}
+  fireWeaponData: {fileID: 11400000, guid: 91cb8a31c9b4cca419db8c187ee2224c, type: 2}
+  currentAmmo: 0
 --- !u!1001 &282787524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -326,6 +328,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8330505946157900613, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
+      propertyPath: _heldWeaponGameObject.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -364,7 +370,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.019001007, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
