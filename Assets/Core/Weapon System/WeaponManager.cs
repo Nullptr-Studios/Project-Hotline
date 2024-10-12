@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,9 +43,14 @@ public class WeaponManager : MonoBehaviour
         _playerInput.Gameplay.ThrowOrGet.Enable();
     }
 
+    private void OnDisable()
+    {
+        _playerInput.Gameplay.ThrowOrGet.Disable();
+    }
+
     private void ThrowOrGetOnPerformed(InputAction.CallbackContext context)
     {
-        _wantsToThrowOrGet = context.ReadValue<float>() > 0.5f;
+        _wantsToThrowOrGet = context.ReadValueAsButton();
     }
 
     // Update is called once per frame
