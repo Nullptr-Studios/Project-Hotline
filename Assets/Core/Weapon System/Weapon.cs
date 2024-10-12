@@ -47,7 +47,6 @@ public class Weapon : MonoBehaviour, IWeapon
 
     public Collider2D gfxCollider2D;
 
-
     private bool _held;
     private Rigidbody2D _rb;
     
@@ -55,7 +54,6 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         return -1;
     }
-
 
     /// <returns>Returns this weapon type</returns>
     public virtual EWeaponType GetWeaponType()

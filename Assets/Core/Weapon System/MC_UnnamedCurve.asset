@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2dc849725cf364db3f3fc598297fa1, type: 3}
   m_Name: MC_UnnamedCurve
   m_EditorClassIdentifier: 
+  fireType: 1
+  fireCastsAmount: 5
+  penetrationAmount: 1
+  automatic: 1
+  useCurve: 1
   fireRateCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -25,8 +30,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
+      time: 5
+      value: 0.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -36,8 +41,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timeToReachMaxFireRate: 1
-  maxFireRate: 0
+  timeToReachFinalFireRate: 5
+  initialFireRate: 1
+  finalFireRate: 0.1
   maxAmmo: 0
   reloadTime: 1
   bulletDispersionCurve:
@@ -45,7 +51,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -54,7 +60,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 50
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -65,4 +71,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timeToReachMaxDispersion: 1
-  maxDispersion: 0
+  minDispersionAngle: 5
+  maxDispersionAngle: 50
