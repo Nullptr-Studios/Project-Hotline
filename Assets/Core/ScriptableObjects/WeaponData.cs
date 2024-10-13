@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public enum FireType
 {
@@ -11,20 +6,17 @@ public enum FireType
     Multiple
 }
 
-[CreateAssetMenu(fileName = "WD_UnnamedFireWeaponData", menuName = "ProjectHotline/Create FireWeaponData")]
+[CreateAssetMenu(fileName = "WD_UnnamedWeapon", menuName = "ProjectHotline/Create FireWeaponData")]
 public class FireWeaponData : ScriptableObject
 {
     [Header("Fire Type")] 
     public FireType fireType = FireType.Simple;
-
     public int fireCastsAmount = 1;
-
     public int penetrationAmount = 1;
-
 
     [Header("Fire Rate")] 
     public bool automatic = true;
-    public bool useFireRateCurve = false;
+    public bool useFireRateCurve;
 
     public AnimationCurve 
         fireRateCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1,1));
@@ -41,8 +33,8 @@ public class FireWeaponData : ScriptableObject
 
     [Header("Bullet Dispersion")] 
     public bool useDispersion = true;
-    //If use dispersion curve is false, it wil default to the maximum amount of dispersion
-    public bool useDispersionCurve = false;
+    public bool useDispersionCurve; 
+    [Tooltip("If useDispersionCurve is false, it wil default to the maximum amount of dispersion")]
     
     public AnimationCurve 
         bulletDispersionCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1,1));
