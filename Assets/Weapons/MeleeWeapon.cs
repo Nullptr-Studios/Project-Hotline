@@ -63,10 +63,17 @@ public class MeleeWeapon : Weapon
         int hitNumber = Physics2D.CapsuleCast(transform.position, new Vector2(0.5f, 0.5f),
             CapsuleDirection2D.Horizontal,0,transform.right, cf2D, hitArr,meleeWeaponData.range);
         
-        Debug.Log(hitNumber);
+#if UNITY_EDITOR
+        if(log)
+            Debug.Log("Amount of hits:" + hitNumber);
+#endif
 
-        foreach (var VARIABLE in hitArr)
+        for (int i = 0; i < hitNumber; i++)
         {
+            if (hitArr[i].transform.TryGetComponent(out IDamageable damageableInterface)) 
+            {
+                damageableInterface.DoDamage(meleeWeaponData.damage);
+            }
             
         }
     }
