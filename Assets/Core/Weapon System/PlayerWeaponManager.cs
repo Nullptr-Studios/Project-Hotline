@@ -24,7 +24,6 @@ public class PlayerWeaponManager : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool log = false;
     [SerializeField] private bool drawGyzmos = false;
-    [SerializeField] private float gyzmosDuration = 0.5f;
 #endif
     
     private bool _isWeaponHeld;

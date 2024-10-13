@@ -26,6 +26,7 @@ public class FireWeaponData : ScriptableObject
     public bool automatic = true;
     public bool useFireRateCurve = false;
 
+    public bool overrideFireRateCurve = false;
     public AnimationCurve 
         fireRateCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1,1));
     
@@ -43,7 +44,8 @@ public class FireWeaponData : ScriptableObject
     public bool useDispersion = true;
     //If use dispersion curve is false, it wil default to the maximum amount of dispersion
     public bool useDispersionCurve = false;
-    
+
+    public bool overrideBulletDispersionCurve = false;
     public AnimationCurve 
         bulletDispersionCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1,1));
 
@@ -56,10 +58,15 @@ public class FireWeaponData : ScriptableObject
     /// </summary>
     public void OnValidate()
     {
-        fireRateCurve = new AnimationCurve(new Keyframe(0, initialFireRate),
-            new Keyframe(timeToReachFinalFireRate, finalFireRate));
+        if(!overrideFireRateCurve){
+            fireRateCurve = new AnimationCurve(new Keyframe(0, initialFireRate),
+                new Keyframe(timeToReachFinalFireRate, finalFireRate));
+        }
 
-        bulletDispersionCurve = new AnimationCurve(new Keyframe(0, minDispersionAngle),
-            new Keyframe(timeToReachMaxDispersion, maxDispersionAngle));
+        if (!overrideBulletDispersionCurve)
+        {
+            bulletDispersionCurve = new AnimationCurve(new Keyframe(0, minDispersionAngle),
+                new Keyframe(timeToReachMaxDispersion, maxDispersionAngle));
+        }
     }
 }

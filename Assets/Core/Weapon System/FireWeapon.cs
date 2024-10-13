@@ -308,8 +308,16 @@ public class FireWeapon : Weapon
                 }
                 else
                 {
-                    FireImplementation();
-                    _wantsToFire = false;
+                    if (_canFire)
+                    {
+                        _currentDispersion = fireWeaponData.maxDispersionAngle;
+
+                        Invoke("UpdateCanFire", fireWeaponData.finalFireRate);
+                        FireImplementation();
+                        
+                        _canFire = false;
+                        _wantsToFire = false;
+                    }
                 }
             }
             else

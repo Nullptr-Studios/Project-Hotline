@@ -15,8 +15,9 @@ MonoBehaviour:
   fireType: 0
   fireCastsAmount: 5
   penetrationAmount: 1
-  automatic: 1
-  useFireRateCurve: 1
+  automatic: 0
+  useFireRateCurve: 0
+  overrideFireRateCurve: 0
   fireRateCurve:
     serializedVersion: 2
     m_Curve:
@@ -31,7 +32,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 5
-      value: 0.1
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -43,11 +44,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   timeToReachFinalFireRate: 5
   initialFireRate: 1
-  finalFireRate: 0.1
+  finalFireRate: 1
   maxAmmo: 30
   reloadTime: 1
-  useDispersion: 1
+  useDispersion: 0
   useDispersionCurve: 1
+  overrideBulletDispersionCurve: 0
   bulletDispersionCurve:
     serializedVersion: 2
     m_Curve:
