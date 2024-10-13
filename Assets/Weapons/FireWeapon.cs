@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class FireWeapon : Weapon
 {
@@ -11,30 +9,30 @@ public class FireWeapon : Weapon
 
     //Gun muzzle wil be used for FX
     public Transform gunMuzzle;
-    //The transform where the ray casts will be emited
+    //The transform where the ray casts will be emitted
     public Transform dispersionTransform;
 
-    private int _currentAmmo = 0;
-    private bool _isReloading = false;
+    private int _currentAmmo;
+    private bool _isReloading;
 
     //Fire rate global variables
-    private float _fireRateTimer = 0.0f;
-    private float _fireRateCurveTimer = 0.0f;
+    private float _fireRateTimer;
+    private float _fireRateCurveTimer;
 
     //@TODO: Fix initial spamming
-    private bool _wantsToFire = false;
+    private bool _wantsToFire;
     private bool _canFire = true;
 
     //Dispersion global variables
-    private float _currentDispersion = 0.0f;
-    private float _dispersionCurveTimer = 0.0f;
+    private float _currentDispersion;
+    private float _dispersionCurveTimer;
 
     
 #if UNITY_EDITOR
     [Header("Debug")]
-    [SerializeField] private bool log = false;
-    [SerializeField] private bool drawGyzmos = false;
-    [SerializeField] private float gyzmosDuration = .5f;
+    [SerializeField] private bool log;
+    [SerializeField] private bool drawGizmos;
+    [SerializeField] private float gizmosDuration = .5f;
 #endif
     
     public override int UsesLeft()
@@ -97,7 +95,7 @@ public class FireWeapon : Weapon
     {
         //Raycast2D list
         List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
-        int ammountHits = Physics2D.Raycast(fireDir.position, fireDir.right, new ContactFilter2D(), rayHitList);
+        int amountHits = Physics2D.Raycast(fireDir.position, fireDir.right, new ContactFilter2D(), rayHitList);
         
         //Initial Position
         Vector2 lastHitPos = fireDir.position;
@@ -109,18 +107,18 @@ public class FireWeapon : Weapon
         {
             int layer = hit2D.transform.gameObject.layer;
             
-            //Gyzmos shit
+            //Gizmos shit
 #if UNITY_EDITOR
-            if (drawGyzmos)
+            if (drawGizmos)
             {
                 float segmentDistance = Vector3.Distance(lastHitPos, hit2D.point);
-                Debug.DrawRay(lastHitPos, fireDir.right * segmentDistance, GetRayColorDebug(hit2D.transform.gameObject.layer), gyzmosDuration);
+                Debug.DrawRay(lastHitPos, fireDir.right * segmentDistance, GetRayColorDebug(hit2D.transform.gameObject.layer), gizmosDuration);
                 
                 lastHitPos = hit2D.point;
             }
 #endif
-            IDamageable damageableInterface;
-            hit2D.transform.TryGetComponent(out damageableInterface);
+            
+            hit2D.transform.TryGetComponent(out IDamageable damageableInterface);
 
             if (damageableInterface != null)
             {
@@ -146,13 +144,11 @@ public class FireWeapon : Weapon
                 {
                     break;
                 }
-                else
-                {
-                    penetrationEnemies++;
-                    continue;
-                }
-                    
-                
+
+                penetrationEnemies++;
+                continue;
+
+
             }
             
             //We treat default objects as walls
@@ -188,7 +184,7 @@ public class FireWeapon : Weapon
     {
         if (fireWeaponData.useDispersion)
         {
-            float randAngle = UnityEngine.Random.Range(-_currentDispersion,
+            float randAngle = Random.Range(-_currentDispersion,
                 _currentDispersion);
 
             dispersionTransform.localEulerAngles = new Vector3(0, 0, randAngle);
@@ -302,7 +298,7 @@ public class FireWeapon : Weapon
 
                         if (!fireWeaponData.useFireRateCurve)
                         {
-                            Invoke("UpdateCanFire", fireWeaponData.finalFireRate);
+                            Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
                         }
                     }
                 }
@@ -312,7 +308,7 @@ public class FireWeapon : Weapon
                     {
                         _currentDispersion = fireWeaponData.maxDispersionAngle;
 
-                        Invoke("UpdateCanFire", fireWeaponData.finalFireRate);
+                        Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
                         FireImplementation();
                         
                         _canFire = false;
@@ -330,7 +326,7 @@ public class FireWeapon : Weapon
                         Debug.Log("Reloading");
 #endif
                     _isReloading = true;
-                    Invoke("FinishReloading", fireWeaponData.reloadTime);
+                    Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
                 }
             }
         }

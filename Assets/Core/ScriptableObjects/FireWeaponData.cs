@@ -34,7 +34,7 @@ public class FireWeaponData : ScriptableObject
 
     [Header("Bullet Dispersion")] 
     public bool useDispersion = true;
-    //If use dispersion curve is false, it wil default to the maximum amount of dispersion
+    //If useDispersionCurve is false, it wil default to the maximum amount of dispersion
     public bool useDispersionCurve;
     [Tooltip("If useDispersionCurve is false, it wil default to the maximum amount of dispersion")]
 

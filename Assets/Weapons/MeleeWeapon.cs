@@ -1,31 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class MeleeWeapon : Weapon
 {
 
     public MeleeWeaponData meleeWeaponData;
-
-    private bool _wantsToAttack = false;
-
+    private bool _wantsToAttack;
     private bool _canAttack = true;
+    private Transform _player;
     
 #if UNITY_EDITOR
     [Header("Debug")]
-    [SerializeField] private bool log = false;
-    [SerializeField] private bool drawGyzmos = false;
+    [SerializeField] private bool log;
+    [SerializeField] private bool drawGizmos;
 #endif
     
     public override void Start()
     {
         base.Start();
         
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        
 #if UNITY_EDITOR
         if (!meleeWeaponData)
         {
             if(log)
-                Debug.LogError("MeleeWeapon Error: " + gameObject.name + "does not have MeleeWeaponData assigned!!!!!!!!");
+                Debug.LogError("MeleeWeapon Error: " + gameObject.name + "does not have MeleeWeaponData assigned");
         }
 #endif
         
@@ -44,28 +44,26 @@ public class MeleeWeapon : Weapon
     // Update is called once per frame
     void Update()
     {
-        if (_wantsToAttack)
-        {
-            if (_canAttack)
-            {
-                _canAttack = false;
-                Invoke("UpdateCanAttack", meleeWeaponData.cooldownTime);
-                Attack();
-            }
-        }
+        if (!_wantsToAttack) return;
+        if (!_canAttack) return;
+        
+        _canAttack = false;
+        Invoke(nameof(UpdateCanAttack), meleeWeaponData.cooldownTime);
+        Attack();
     }
 
     private void Attack()
     {
-        RaycastHit2D[] hitArr = new RaycastHit2D[32];
-        ContactFilter2D cf2D = new ContactFilter2D();
+        var hitArr = new RaycastHit2D[32];
+        var cf2D = new ContactFilter2D();
         
-        int hitNumber = Physics2D.CapsuleCast(transform.position, new Vector2(0.5f, 0.5f),
-            CapsuleDirection2D.Horizontal,0,transform.right, cf2D, hitArr,meleeWeaponData.range);
+        int hitNumber = Physics2D.CapsuleCast(transform.position, 
+            new Vector2(meleeWeaponData.range, meleeWeaponData.range),
+            CapsuleDirection2D.Horizontal,0,transform.right, cf2D, hitArr,0.1f);
         
 #if UNITY_EDITOR
-        if(log)
-            Debug.Log("Amount of hits:" + hitNumber);
+        if(log) Debug.Log("Amount of hits:" + hitNumber);
+        if(log) Debug.Log(_player.eulerAngles.z);
 #endif
 
         for (int i = 0; i < hitNumber; i++)
@@ -77,5 +75,14 @@ public class MeleeWeapon : Weapon
             
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        if (drawGizmos) Gizmos.DrawWireCube(transform.position, 
+            new Vector3(meleeWeaponData.range, meleeWeaponData.range, meleeWeaponData.range));
+    }
+#endif    
     
 }

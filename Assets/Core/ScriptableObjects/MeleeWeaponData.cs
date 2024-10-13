@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WD_UnnamedMelee", menuName = "ProjectHotline/Create MeleeWeaponData")]
+[CreateAssetMenu(fileName = "MD_UnnamedMelee", menuName = "ProjectHotline/Create MeleeWeaponData")]
 public class MeleeWeaponData : ScriptableObject
 {
     public float range = .5f;
@@ -10,5 +8,4 @@ public class MeleeWeaponData : ScriptableObject
     public float damage = .5f;
 
     public float cooldownTime = .25f;
-
 }

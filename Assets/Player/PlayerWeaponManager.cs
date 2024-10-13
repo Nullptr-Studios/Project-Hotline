@@ -20,7 +20,7 @@ public class PlayerWeaponManager : MonoBehaviour
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool log;
-    [SerializeField] private bool drawGyzmos;
+    [SerializeField] private bool drawGizmos;
 #endif
     
     private bool _isWeaponHeld;
@@ -29,7 +29,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private PlayerIA _playerInput;
     
     private IWeapon _heldWeaponInterface;
-    private List<GameObject> _heldWeaponGameObject = new List<GameObject>();
+    private readonly List<GameObject> _heldWeaponGameObject = new List<GameObject>();
 
     private int _currentIndex;
 
@@ -132,72 +132,70 @@ public class PlayerWeaponManager : MonoBehaviour
         if (_isWeaponHeld)
         {
             //throw
-            if (_wantsToThrowOrGet)
-            {
-                _heldWeaponInterface.Throw(transform.right);
-                _heldWeaponInterface = null;
-                _heldWeaponGameObject[_currentIndex] = null;
+            if (!_wantsToThrowOrGet) return;
+            
+            _heldWeaponInterface.Throw(transform.right);
+            _heldWeaponInterface = null;
+            _heldWeaponGameObject[_currentIndex] = null;
                 
-                _isWeaponHeld = false;
+            _isWeaponHeld = false;
                 
-                //reset input variable
-                _wantsToThrowOrGet = false;
-            }
+            //reset input variable
+            _wantsToThrowOrGet = false;
         }
         else
         {
             //get
-            if (_wantsToThrowOrGet)
+            if (!_wantsToThrowOrGet) return;
+            
+            ContactFilter2D cf2D = new ContactFilter2D();
+            RaycastHit2D[] hitArr = new RaycastHit2D[32];
+
+            cf2D.SetLayerMask(weaponLm);
+            cf2D.useLayerMask = true;
+                
+            int hitNumber = Physics2D.CapsuleCast(transform.position, new Vector2(pickupRange, pickupRange),
+                CapsuleDirection2D.Horizontal,0,new Vector2(0,0),cf2D, hitArr);
+                
+            if(hitNumber >= 1)
             {
-                ContactFilter2D cf2D = new ContactFilter2D();
-                RaycastHit2D[] hitArr = new RaycastHit2D[32];
-
-                cf2D.SetLayerMask(weaponLm);
-                cf2D.useLayerMask = true;
-                
-                int hitNumber = Physics2D.CapsuleCast(transform.position, new Vector2(pickupRange, pickupRange),
-                    CapsuleDirection2D.Horizontal,0,new Vector2(0,0),cf2D, hitArr);
-                
-                if(hitNumber >= 1)
+                int index = DecideWeapon(hitArr, hitNumber);
+                if (index != -1)
                 {
-                    int index = DecideWeapon(hitArr, hitNumber);
-                    if (index != -1)
+                    if (hitArr[index].transform.TryGetComponent(out _heldWeaponInterface))
                     {
-                        if (hitArr[index].transform.TryGetComponent(out _heldWeaponInterface))
+                        if (CanEquipMoreWeapons())
                         {
-                            if (CanEquipMoreWeapons())
+                            if (!IsCurrentIndexAlreadyEquipped())
                             {
-                                if (!IsCurrentIndexAlreadyEquipped())
-                                {
-                                    _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
+                                _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
 
-                                    _heldWeaponInterface.Pickup(weaponHolder);
-                                    _isWeaponHeld = true;
-                                }
-                                //This won't ever happen as if you have a weapon already equipped it will throw it, but just in case
-                                else
-                                {
-                                    //Quality of life improvement
-                                    SwitchWeapon();
-                                    
-                                    _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
-
-                                    _heldWeaponInterface.Pickup(weaponHolder);
-                                    _isWeaponHeld = true;
-                                }
+                                _heldWeaponInterface.Pickup(weaponHolder);
+                                _isWeaponHeld = true;
                             }
+                            //This won't ever happen as if you have a weapon already equipped it will throw it, but just in case
                             else
                             {
-                                //Debug.Log("Max Equipped");
+                                //Quality of life improvement
+                                SwitchWeapon();
+                                    
+                                _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
+
+                                _heldWeaponInterface.Pickup(weaponHolder);
+                                _isWeaponHeld = true;
                             }
                         }
-
+                        // else
+                        // {
+                        //     //Debug.Log("Max Equipped");
+                        // }
                     }
+
                 }
-                
-                //reset input variable
-                _wantsToThrowOrGet = false;
             }
+                
+            //reset input variable
+            _wantsToThrowOrGet = false;
         }
 
     }
@@ -267,8 +265,9 @@ public class PlayerWeaponManager : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        if(drawGyzmos)
+        if(drawGizmos)
             Gizmos.DrawWireSphere(transform.position, pickupRange/2);
     }
 #endif
+    
 }
