@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum FireType
 {
@@ -23,7 +24,7 @@ public class FireWeaponData : ScriptableObject
 
     [Header("Fire Rate")] 
     public bool automatic = true;
-    public bool useCurve = false;
+    public bool useFireRateCurve = false;
 
     public AnimationCurve 
         fireRateCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1,1));
@@ -31,16 +32,18 @@ public class FireWeaponData : ScriptableObject
     public float timeToReachFinalFireRate = 1.0f;
     public float initialFireRate = 0.5f;
     public float finalFireRate = 0.1f;
-    
-    
 
     [Header("Ammo")]
-    public int maxAmmo;
+    public int maxAmmo = 30;
 
     [Header("Reload")] 
     public float reloadTime = 1.0f;
+
+    [Header("Bullet Dispersion")] 
+    public bool useDispersion = true;
+    //If use dispersion curve is false, it wil default to the maximum amount of dispersion
+    public bool useDispersionCurve = false;
     
-    [Header("Bullet Dispersion")]
     public AnimationCurve 
         bulletDispersionCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1,1));
 
@@ -48,6 +51,9 @@ public class FireWeaponData : ScriptableObject
     public float minDispersionAngle = 5;
     public float maxDispersionAngle = 25;
 
+    /// <summary>
+    /// Generate Curves
+    /// </summary>
     public void OnValidate()
     {
         fireRateCurve = new AnimationCurve(new Keyframe(0, initialFireRate),

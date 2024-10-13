@@ -119,6 +119,9 @@ public class Weapon : MonoBehaviour, IWeapon
         gfxCollider2D.enabled = true;
         
         _held = false;
+        
+        //reset Use
+        Use(false);
     }
 
 
