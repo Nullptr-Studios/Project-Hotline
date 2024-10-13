@@ -1285,8 +1285,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1435309155}
   - component: {fileID: 1435309154}
-  - component: {fileID: 1435309153}
   - component: {fileID: 1435309152}
+  - component: {fileID: 1435309156}
   m_Layer: 3
   m_Name: Gun (2)
   m_TagString: Untagged
@@ -1339,22 +1339,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1435309153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1435309151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cc378fe3b3852b4a9202ed23a7d573f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponType: 2
-  throwForce: 15
-  rotationForce: 1000
-  gfxCollider2D: {fileID: 1435309152}
 --- !u!212 &1435309154
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1422,6 +1406,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1435309156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435309151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36bb1a8c834837c418257c5ff87e6ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 1
+  throwForce: 15
+  rotationForce: 1000
+  gfxCollider2D: {fileID: 1435309152}
+  meleeWeaponData: {fileID: 11400000, guid: 7e64bfaf7410c0849b6217cbf3b32a04, type: 2}
+  log: 0
+  drawGyzmos: 0
 --- !u!1 &1436478041
 GameObject:
   m_ObjectHideFlags: 0
