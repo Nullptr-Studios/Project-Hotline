@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f2dc849725cf364db3f3fc598297fa1, type: 3}
-  m_Name: MC_UnnamedCurve
+  m_Name: WD_Pistol
   m_EditorClassIdentifier: 
   fireType: 0
-  fireCastsAmount: 5
-  penetrationAmount: 1
-  automatic: 1
-  useFireRateCurve: 1
+  fireCastsAmount: 1
+  penetrationAmount: 0
+  automatic: 0
+  useFireRateCurve: 0
   fireRateCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 5
+      time: 1
       value: 0.1
       inSlope: 0
       outSlope: 0
@@ -41,13 +41,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timeToReachFinalFireRate: 5
-  initialFireRate: 1
+  timeToReachFinalFireRate: 1
+  initialFireRate: 0.5
   finalFireRate: 0.1
-  maxAmmo: 30
-  reloadTime: 1
-  useDispersion: 1
-  useDispersionCurve: 1
+  maxAmmo: 8
+  reloadTime: 4
+  useDispersion: 0
+  useDispersionCurve: 0
   bulletDispersionCurve:
     serializedVersion: 2
     m_Curve:
@@ -61,8 +61,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 5
-      value: 100
+      time: 1
+      value: 25
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -72,6 +72,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timeToReachMaxDispersion: 5
+  timeToReachMaxDispersion: 1
   minDispersionAngle: 5
-  maxDispersionAngle: 100
+  maxDispersionAngle: 25
