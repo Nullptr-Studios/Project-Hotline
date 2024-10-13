@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FireWeapon : Weapon
 {
@@ -9,36 +11,37 @@ public class FireWeapon : Weapon
 
     //Gun muzzle wil be used for FX
     public Transform gunMuzzle;
-    //The transform where the ray casts will be emitted
+    //The transform where the ray casts will be emited
     public Transform dispersionTransform;
 
-    private int _currentAmmo;
-    private bool _isReloading;
+    private int _currentAmmo = 0;
+    private bool _isReloading = false;
 
     //Fire rate global variables
-    private float _fireRateTimer;
-    private float _fireRateCurveTimer;
+    private float _fireRateTimer = 0.0f;
+    private float _fireRateCurveTimer = 0.0f;
 
     //@TODO: Fix initial spamming
-    private bool _wantsToFire;
+    private bool _wantsToFire = false;
     private bool _canFire = true;
 
     //Dispersion global variables
-    private float _currentDispersion;
-    private float _dispersionCurveTimer;
+    private float _currentDispersion = 0.0f;
+    private float _dispersionCurveTimer = 0.0f;
+
     
 #if UNITY_EDITOR
     [Header("Debug")]
-    [SerializeField] private bool log;
-    [SerializeField] private bool drawGizmos;
-    [SerializeField] private float gizmosDuration = .5f;
+    [SerializeField] private bool log = false;
+    [SerializeField] private bool drawGyzmos = false;
+    [SerializeField] private float gyzmosDuration = .5f;
 #endif
     
     public override int UsesLeft()
     {
         return _currentAmmo;
     }
-
+    
     /// <summary>
     /// Use Functionality
     /// </summary>
@@ -75,29 +78,26 @@ public class FireWeapon : Weapon
         }
         else
         {
-            
 #if UNITY_EDITOR
             if(log)
-                Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have fireWeaponData assigned");
+                Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have fireWeaponData assigned!!!!!!!!");
 #endif
-            
         }
         
 #if UNITY_EDITOR
         if (!gunMuzzle)
         {
             if(log)
-                Debug.LogWarning("FireWeapon Error: " + gameObject.name + "does not have gunMuzzle assigned");
+                Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have gunMuzzle assigned!!!!!!!!");
         }
 #endif        
-        
     }
 
     private void Fire(Transform fireDir)
     {
         //Raycast2D list
         List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
-        int amountHits = Physics2D.Raycast(fireDir.position, fireDir.right, new ContactFilter2D(), rayHitList);
+        int ammountHits = Physics2D.Raycast(fireDir.position, fireDir.right, new ContactFilter2D(), rayHitList);
         
         //Initial Position
         Vector2 lastHitPos = fireDir.position;
@@ -109,17 +109,23 @@ public class FireWeapon : Weapon
         {
             int layer = hit2D.transform.gameObject.layer;
             
-            //Gizmos shit
+            //Gyzmos shit
 #if UNITY_EDITOR
-            if (drawGizmos)
+            if (drawGyzmos)
             {
                 float segmentDistance = Vector3.Distance(lastHitPos, hit2D.point);
-                Debug.DrawRay(lastHitPos, fireDir.right * segmentDistance, GetRayColorDebug(hit2D.transform.gameObject.layer), gizmosDuration);
+                Debug.DrawRay(lastHitPos, fireDir.right * segmentDistance, GetRayColorDebug(hit2D.transform.gameObject.layer), gyzmosDuration);
                 
                 lastHitPos = hit2D.point;
             }
 #endif
-            //@TODO: Add Do damage interface
+            IDamageable damageableInterface;
+            hit2D.transform.TryGetComponent(out damageableInterface);
+
+            if (damageableInterface != null)
+            {
+                damageableInterface.DoDamage(1);
+            }
 
             if (layer == 6) //wall
             {  
@@ -140,9 +146,13 @@ public class FireWeapon : Weapon
                 {
                     break;
                 }
-
-                penetrationEnemies++;
-                continue;
+                else
+                {
+                    penetrationEnemies++;
+                    continue;
+                }
+                    
+                
             }
             
             //We treat default objects as walls
@@ -154,18 +164,20 @@ public class FireWeapon : Weapon
     
 #if UNITY_EDITOR
     // Function to determine ray color based on layer
-    private static Color GetRayColorDebug(int layer)
+    Color GetRayColorDebug(int layer)
     {
-        return layer switch
+        switch (layer)
         {
-            6 => Color.red // Wall
-            ,
-            7 or 8 => Color.yellow // Wall-bang things
-            ,
-            9 => Color.green // Enemies
-            ,
-            _ => Color.white
-        };
+            case 6: return Color.red; // Wall
+            
+            case 7:
+            case 8: return Color.yellow; // Wall-bang things
+            
+            case 9: 
+                return Color.green; // Enemies
+            
+            default: return Color.white; // Default color
+        }
     }
 #endif
 
@@ -176,7 +188,7 @@ public class FireWeapon : Weapon
     {
         if (fireWeaponData.useDispersion)
         {
-            float randAngle = Random.Range(-_currentDispersion,
+            float randAngle = UnityEngine.Random.Range(-_currentDispersion,
                 _currentDispersion);
 
             dispersionTransform.localEulerAngles = new Vector3(0, 0, randAngle);
@@ -242,77 +254,84 @@ public class FireWeapon : Weapon
     /// <summary>
     /// Automatic, fire rate curve and dispersion curve logic
     /// </summary>
-    private void Update()
+    void Update()
     {
-        if (!_wantsToFire) return;
-        
-        if(_currentAmmo > 0){
-            if (fireWeaponData.automatic)
-            {
-
-
-                //Fire rate
-                if (fireWeaponData.useFireRateCurve)
+        if (_wantsToFire)
+        {
+            if(_currentAmmo > 0){
+                if (fireWeaponData.automatic)
                 {
-                    float currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
 
-                    //Debug.Log(currentTimeToFire);
-                    if (_fireRateTimer >= currentTimeToFire)
+                    //Fire rate
+                    if (fireWeaponData.useFireRateCurve)
                     {
-                        _fireRateTimer = 0;
-                        UpdateCanFire();
+                        float currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
+
+                        //Debug.Log(currentTimeToFire);
+                        if (_fireRateTimer >= currentTimeToFire)
+                        {
+                            _fireRateTimer = 0;
+                            UpdateCanFire();
+                        }
+
+                        _fireRateTimer += Time.deltaTime;
+
+                        if (_fireRateCurveTimer < fireWeaponData.fireRateCurve.GetDuration())
+                            _fireRateCurveTimer += Time.deltaTime;
                     }
 
-                    _fireRateTimer += Time.deltaTime;
+                    //Dispersion
+                    if (fireWeaponData.useDispersionCurve)
+                    {
+                        _currentDispersion = fireWeaponData.bulletDispersionCurve.Evaluate(_dispersionCurveTimer);
 
-                    if (_fireRateCurveTimer < fireWeaponData.fireRateCurve.GetDuration())
-                        _fireRateCurveTimer += Time.deltaTime;
-                }
+                        if (_dispersionCurveTimer < fireWeaponData.bulletDispersionCurve.GetDuration())
+                            _dispersionCurveTimer += Time.deltaTime;
 
-                //Dispersion
-                if (fireWeaponData.useDispersionCurve)
-                {
-                    _currentDispersion = fireWeaponData.bulletDispersionCurve.Evaluate(_dispersionCurveTimer);
+                    }
+                    else
+                    {
+                        _currentDispersion = fireWeaponData.maxDispersionAngle;
+                    }
 
-                    if (_dispersionCurveTimer < fireWeaponData.bulletDispersionCurve.GetDuration())
-                        _dispersionCurveTimer += Time.deltaTime;
+                    //Main fire logic
+                    if (_canFire)
+                    {
+                        _canFire = false;
+                        FireImplementation();
 
+                        if (!fireWeaponData.useFireRateCurve)
+                        {
+                            Invoke("UpdateCanFire", fireWeaponData.finalFireRate);
+                        }
+                    }
                 }
                 else
                 {
-                    _currentDispersion = fireWeaponData.maxDispersionAngle;
-                }
+                    if (_canFire)
+                    {
+                        _currentDispersion = fireWeaponData.maxDispersionAngle;
 
-                //Main fire logic
-                if (!_canFire) return;
-                
-                _canFire = false;
-                FireImplementation();
-
-                if (!fireWeaponData.useFireRateCurve)
-                {
-                    Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
+                        Invoke("UpdateCanFire", fireWeaponData.finalFireRate);
+                        FireImplementation();
+                        
+                        _canFire = false;
+                        _wantsToFire = false;
+                    }
                 }
             }
             else
             {
-                FireImplementation();
-                _wantsToFire = false;
-            }
-        }
-        else
-        {
-            //Do automatic reload
-            if (!_isReloading)
-            {
-                
+                //Do automatic reload
+                if (!_isReloading)
+                {
 #if UNITY_EDITOR
-                if(log)
-                    Debug.Log("Reloading");
+                    if(log)
+                        Debug.Log("Reloading");
 #endif
-                
-                _isReloading = true;
-                Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
+                    _isReloading = true;
+                    Invoke("FinishReloading", fireWeaponData.reloadTime);
+                }
             }
         }
     }

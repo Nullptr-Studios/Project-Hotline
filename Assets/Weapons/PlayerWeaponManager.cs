@@ -20,6 +20,7 @@ public class PlayerWeaponManager : MonoBehaviour
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool log;
+    [SerializeField] private bool drawGyzmos;
 #endif
     
     private bool _isWeaponHeld;
@@ -236,15 +237,22 @@ public class PlayerWeaponManager : MonoBehaviour
         {
             float smallestDistance = float.MaxValue;
             int smallestIndex = 0;
+
+            int i = 0;
             
-            //check for the closest gun
-            for (int i = 0; i > hitArr.Length - 1; i++)
+            //check for the closest gun from the w
+            foreach (var h in hitArr)
             {
-                float currentDist = Vector2.Distance(hitArr[i].transform.position, weaponHolder.position);
+                //null check
+                if(!h)
+                    continue;
+                
+                float currentDist = Vector2.Distance(h.transform.position, weaponHolder.position);
                 if (currentDist < smallestDistance)
                 {
                     smallestDistance = currentDist;
                     smallestIndex = i;
+                    i++;
                 }
             }
 
@@ -255,4 +263,12 @@ public class PlayerWeaponManager : MonoBehaviour
             return 0;
         }
     }
+    
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if(drawGyzmos)
+            Gizmos.DrawWireSphere(transform.position, pickupRange/2);
+    }
+#endif
 }
