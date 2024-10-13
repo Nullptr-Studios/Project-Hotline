@@ -17,6 +17,7 @@ MonoBehaviour:
   penetrationAmount: 2
   automatic: 0
   useFireRateCurve: 0
+  overrideFireRateCurve: 0
   fireRateCurve:
     serializedVersion: 2
     m_Curve:
@@ -45,9 +46,10 @@ MonoBehaviour:
   initialFireRate: 1
   finalFireRate: 1
   maxAmmo: 2
-  reloadTime: 1
+  reloadTime: 2
   useDispersion: 1
   useDispersionCurve: 0
+  overrideBulletDispersionCurve: 0
   bulletDispersionCurve:
     serializedVersion: 2
     m_Curve:
