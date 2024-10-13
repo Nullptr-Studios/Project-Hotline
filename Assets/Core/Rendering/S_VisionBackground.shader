@@ -94,7 +94,7 @@
                 return o;
             }
 
-            #include "Include/ShapeLightVisionBackground.hlsl"
+            #include "SI_ShapeLightVisionBackground.hlsl"
 
             half4 CombinedShapeLightFragment(Varyings i) : SV_Target
             {

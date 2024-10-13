@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 /// <summary>
 /// This class acts as the manager for equipped weapons, including input
@@ -22,7 +19,7 @@ public class PlayerWeaponManager : MonoBehaviour
 
 #if UNITY_EDITOR
     [Header("Debug")]
-    [SerializeField] private bool log = false;
+    [SerializeField] private bool log;
 #endif
     
     private bool _isWeaponHeld;
@@ -33,7 +30,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private IWeapon _heldWeaponInterface;
     private List<GameObject> _heldWeaponGameObject = new List<GameObject>();
 
-    private int _currentIndex = 0;
+    private int _currentIndex;
 
     private bool _wantsToFire;
     
