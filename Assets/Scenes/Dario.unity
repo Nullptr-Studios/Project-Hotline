@@ -464,11 +464,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8330505946157900613, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
-      propertyPath: maxWeaponsEquipped
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8330505946157900613, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
-      propertyPath: _heldWeaponGameObject.Array.size
+      propertyPath: drawGyzmos
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -651,6 +647,7 @@ GameObject:
   - component: {fileID: 657745196}
   - component: {fileID: 657745195}
   - component: {fileID: 657745194}
+  - component: {fileID: 657745197}
   m_Layer: 7
   m_Name: Square (1)
   m_TagString: Untagged
@@ -770,6 +767,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &657745197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657745193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a518c3b5010b2b64488f87bedf85448e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
 --- !u!4 &664238392 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7844238277263270493, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}

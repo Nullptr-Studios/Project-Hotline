@@ -119,7 +119,13 @@ public class FireWeapon : Weapon
                 lastHitPos = hit2D.point;
             }
 #endif
-            //@TODO: Add Do damage interface
+            IDamageable damageableInterface;
+            hit2D.transform.TryGetComponent(out damageableInterface);
+
+            if (damageableInterface != null)
+            {
+                damageableInterface.DoDamage(1);
+            }
 
             if (layer == 6) //wall
             {  
@@ -255,7 +261,6 @@ public class FireWeapon : Weapon
             if(_currentAmmo > 0){
                 if (fireWeaponData.automatic)
                 {
-
 
                     //Fire rate
                     if (fireWeaponData.useFireRateCurve)
