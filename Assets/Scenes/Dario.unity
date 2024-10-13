@@ -405,8 +405,8 @@ MonoBehaviour:
   gunMuzzle: {fileID: 1436478042}
   dispersionTransform: {fileID: 1248447856}
   log: 1
-  drawGyzmos: 1
-  gyzmosDuration: 0.5
+  drawGizmos: 0
+  gizmosDuration: 0.5
 --- !u!1001 &282787524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -417,6 +417,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3136868407235776783, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3136868407235776783, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7844238277263270493, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
@@ -1424,7 +1428,7 @@ MonoBehaviour:
   gfxCollider2D: {fileID: 1435309152}
   meleeWeaponData: {fileID: 11400000, guid: 7e64bfaf7410c0849b6217cbf3b32a04, type: 2}
   log: 0
-  drawGyzmos: 0
+  drawGizmos: 0
 --- !u!1 &1436478041
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,6 +33,7 @@ public class Damageable : MonoBehaviour, IDamageable
 
     public virtual void OnDead()
     {
+        //Default Action
         Destroy(gameObject);
     }
 

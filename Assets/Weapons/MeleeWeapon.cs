@@ -7,7 +7,7 @@ public class MeleeWeapon : Weapon
     public MeleeWeaponData meleeWeaponData;
     private bool _wantsToAttack;
     private bool _canAttack = true;
-    private Transform _player;
+    //private Transform _player;
     
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -19,9 +19,9 @@ public class MeleeWeapon : Weapon
     {
         base.Start();
         
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
-        
 #if UNITY_EDITOR
+        //_player = GameObject.FindGameObjectWithTag("Player").transform;
+
         if (!meleeWeaponData)
         {
             if(log)
@@ -62,14 +62,18 @@ public class MeleeWeapon : Weapon
             CapsuleDirection2D.Horizontal,0,transform.right, cf2D, hitArr,0.1f);
         
 #if UNITY_EDITOR
-        if(log) Debug.Log("Amount of hits:" + hitNumber);
-        if(log) Debug.Log(_player.eulerAngles.z);
+        if (log)
+        {
+            Debug.Log("Amount of hits:" + hitNumber);
+            //Debug.Log(_player.eulerAngles.z);
+        }
 #endif
 
         for (int i = 0; i < hitNumber; i++)
         {
             if (hitArr[i].transform.TryGetComponent(out IDamageable damageableInterface)) 
             {
+                //Try to do Damage
                 damageableInterface.DoDamage(meleeWeaponData.damage);
             }
             
@@ -80,7 +84,8 @@ public class MeleeWeapon : Weapon
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        if (drawGizmos) Gizmos.DrawWireCube(transform.position, 
+        if (drawGizmos) 
+            Gizmos.DrawWireCube(transform.position, 
             new Vector3(meleeWeaponData.range, meleeWeaponData.range, meleeWeaponData.range));
     }
 #endif    
