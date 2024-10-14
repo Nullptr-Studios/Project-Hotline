@@ -81,5 +81,6 @@ Blake wakes up without remembering anything. A phone buzzes in the sink, casting
 
 - Hotline Miami: Main gameplay loop
 - Katana Zero: Narrative, art style
+- Postal: Narrative
 - Silent Hill: Ambience, storytelling
 - Signalis: Ambience, sounds, storytelling
