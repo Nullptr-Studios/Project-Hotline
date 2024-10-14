@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    public void DoDamage(float amount);
+    public void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint);
 
     public float GetCurrentHealth();
 }
@@ -20,7 +20,7 @@ public class Damageable : MonoBehaviour, IDamageable
         _currentHealth = maxHealth;
     }
 
-    public virtual void DoDamage(float amount)
+    public virtual void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint)
     {
         _currentHealth -= amount;
 

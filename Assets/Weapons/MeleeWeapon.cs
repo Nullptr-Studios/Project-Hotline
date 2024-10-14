@@ -74,7 +74,7 @@ public class MeleeWeapon : Weapon
             if (hitArr[i].transform.TryGetComponent(out IDamageable damageableInterface)) 
             {
                 //Try to do Damage
-                damageableInterface.DoDamage(meleeWeaponData.damage);
+                damageableInterface.DoDamage(meleeWeaponData.damage, transform.right, hitArr[i].point);
             }
             
         }

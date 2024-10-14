@@ -122,7 +122,7 @@ public class FireWeapon : Weapon
 
             if (damageableInterface != null)
             {
-                damageableInterface.DoDamage(1);
+                damageableInterface.DoDamage(1, fireDir.right, hit2D.point);
             }
 
             if (layer == 6) //wall
