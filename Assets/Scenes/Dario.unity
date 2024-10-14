@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 246901040}
   - component: {fileID: 246901038}
   - component: {fileID: 246901042}
+  - component: {fileID: 246901043}
   m_Layer: 3
   m_Name: Gun (3)
   m_TagString: Untagged
@@ -422,6 +423,37 @@ MonoBehaviour:
   log: 1
   drawGizmos: 0
   gizmosDuration: 0.5
+--- !u!114 &246901043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246901037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -274097151
+      Data2: 1165572013
+      Data3: 1395997369
+      Data4: -2022657501
+    Path: event:/dubmood_-_last_step
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &282787524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -799,25 +831,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
---- !u!1 &658755482 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7540706935054038958, guid: 1865f00ee79c6044fa090476fe79a5d3, type: 3}
-  m_PrefabInstance: {fileID: 961749787}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &658755489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658755482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 0}
 --- !u!43 &663644492
 Mesh:
   m_ObjectHideFlags: 0
@@ -1136,26 +1149,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: State-Driven MainCamera
       objectReference: {fileID: 0}
-    - target: {fileID: 8862749345227503523, guid: 1865f00ee79c6044fa090476fe79a5d3, type: 3}
-      propertyPath: orthographic size
-      value: 5.625
-      objectReference: {fileID: 0}
-    - target: {fileID: 8862749345227503523, guid: 1865f00ee79c6044fa090476fe79a5d3, type: 3}
-      propertyPath: m_NormalizedViewPortRect.width
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8862749345227503523, guid: 1865f00ee79c6044fa090476fe79a5d3, type: 3}
-      propertyPath: m_NormalizedViewPortRect.height
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7540706935054038958, guid: 1865f00ee79c6044fa090476fe79a5d3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 658755489}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1865f00ee79c6044fa090476fe79a5d3, type: 3}
 --- !u!1 &1248447855
 GameObject:
