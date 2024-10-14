@@ -16,6 +16,7 @@ public class PsychosisBar : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
+        //if the time is bigger than cooldown, it decreases the bar value and restarts the cooldown
         if (_timer >= coolDownTime)
         {
             currentValue -= 1f;
@@ -24,7 +25,9 @@ public class PsychosisBar : MonoBehaviour
             _timer = 0f;
         }
     }
-
+    /// <summary>
+    /// On a kill, it increases the bar value
+    /// </summary>
     public void OnKill()
     {
         currentValue += 1f;
