@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CC.DialogueSystem
 {
-    [CreateAssetMenu(fileName = "Theme", menuName = "DialogueSystem/Theme", order = 1)]
+    [CreateAssetMenu(fileName = "TS_UnnamedTheme", menuName = "DialogueSystem/Theme", order = 1)]
     public class Theme_SO : ScriptableObject
     {
         public string Name;
