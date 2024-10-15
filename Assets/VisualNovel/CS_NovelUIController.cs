@@ -3,6 +3,7 @@ using CC.DialogueSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class NovelUIController : BaseDialogueUIController
 {
@@ -13,7 +14,7 @@ public class NovelUIController : BaseDialogueUIController
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private NovelUICharacter speaker;
     [SerializeField] private NovelUISprite sprite;
-    // TODO: Next Icon
+    [SerializeField] private Image continueButton;
     // TODO: Response System
     private Canvas _canvas;
     private PlayerIA _input;
@@ -34,6 +35,7 @@ public class NovelUIController : BaseDialogueUIController
         //_canvas.enabled = false;
         
         _textSpeed = defaultTextSpeed;
+        continueButton.enabled = false;
     }
     
 
@@ -41,6 +43,7 @@ public class NovelUIController : BaseDialogueUIController
         bool sameSpeakerAsLastDialogue = true, bool autoProceed = false)
     {
         _isAnimatingText = true;
+        continueButton.enabled = false;
         Show();
         
         text.text = _currentTextMod?.Sentence;
@@ -61,6 +64,7 @@ public class NovelUIController : BaseDialogueUIController
         }
         
         _isAnimatingText = false;
+        continueButton.enabled = true;
     }
     
     /// <summary>
