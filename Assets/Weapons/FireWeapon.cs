@@ -101,7 +101,7 @@ public class FireWeapon : Weapon
         Vector2 lastHitPos = fireDir.position;
 
         //Amount of penetrated enemies
-        int penetrationEnemies = 0;
+        int currentPenetration = 0;
         
         foreach (var hit2D in rayHitList)
         {
@@ -134,18 +134,26 @@ public class FireWeapon : Weapon
             if (layer == 7 || layer == 8)   //wall-bang
             {
                 //if bullets can penetrate continue loop
+
+                //Calculate penetration
+                if (currentPenetration == fireWeaponData.penetrationAmount)
+                {
+                    break;
+                }
+
+                currentPenetration++;
                 continue;
             }
 
             if (layer == 9) //enemies
             {
                 //Calculate penetration
-                if (penetrationEnemies == fireWeaponData.penetrationAmount)
+                if (currentPenetration == fireWeaponData.penetrationAmount)
                 {
                     break;
                 }
 
-                penetrationEnemies++;
+                currentPenetration++;
                 continue;
 
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BloodManager : MonoBehaviour
 {
@@ -25,22 +26,10 @@ public class BloodManager : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
-    float DoMedia(List<float> list)
-    {
-        float sum = 0;
-        foreach (var f in list)
-        {
-            sum += f;
-        }
-
-        return sum / list.Count;
-    }
     
     // Start is called before the first frame update
     void Start()
     {
-
         currentMaxTravelDistance = bloodTravelDistance;
         
         Invoke("Remove", destroyTime);
@@ -55,8 +44,6 @@ public class BloodManager : MonoBehaviour
             
             List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
             int amountHits = Physics2D.Raycast(splatterTransform.position, splatterTransform.right, new ContactFilter2D(), rayHitList, bloodTravelDistance);
-
-            List<float> distances = new List<float>();
             
             //this foreach will ignore the player and enemy layer
             foreach (var hit in rayHitList)
@@ -69,15 +56,10 @@ public class BloodManager : MonoBehaviour
                 GameObject wallB =  Instantiate(wallBloodGM, hit.point, new Quaternion());
 
                 wallB.transform.eulerAngles = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));
-                
-                distances.Add(hit.distance);
+
+                //avoid further progression in loop
+                break;
             }
-
-            float distancesAverage = DoMedia(distances);
-
-            //this is done so floor particles won't spawn in other rooms
-            if (distancesAverage < bloodTravelDistance)
-                currentMaxTravelDistance = distancesAverage;
 
         }
         
@@ -88,6 +70,22 @@ public class BloodManager : MonoBehaviour
                 splatterAngle);
 
             splatterTransform.localEulerAngles = new Vector3(0, 0, randAngle);
+
+            List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
+            int amountHits = Physics2D.Raycast(splatterTransform.position, splatterTransform.right, new ContactFilter2D(), rayHitList, bloodTravelDistance);
+
+            //this foreach will ignore the player and enemy layer
+            foreach (var hit in rayHitList)
+            {
+                int layer = hit.transform.gameObject.layer;
+
+                if (layer == 9 || layer == 10)
+                    continue;
+
+                currentMaxTravelDistance = hit.distance;
+                break;
+            }
+
 
             Vector3 randLocInRange = splatterTransform.right * UnityEngine.Random.Range(currentMaxTravelDistance * .15f, currentMaxTravelDistance);
             
