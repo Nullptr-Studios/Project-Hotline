@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using CC.DialogueSystem;
 using TMPro;
 using UnityEngine;
@@ -9,13 +10,14 @@ public class NovelUIController : BaseDialogueUIController
 {
     [SerializeField] [Range(0.02f, 0.07f)] private float defaultTextSpeed = 0.04f;
     [SerializeField] [Range(0.001f, 0.02f)] private float fastTextSpeed = 0.01f;
+    [SerializeField] private GameObject optionsPrefab;
     
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private NovelUICharacter speaker;
     [SerializeField] private NovelUISprite sprite;
     [SerializeField] private Image continueButton;
-    // TODO: Response System
+    private NovelOptionsController _optionsController;
     private Canvas _canvas;
     private PlayerIA _input;
     
@@ -96,6 +98,25 @@ public class NovelUIController : BaseDialogueUIController
             _textSpeed = defaultTextSpeed;
         }
     }
+    
+    public override void ShowOptions(List<Option> options)
+    {
+        var optionsObject = Instantiate(optionsPrefab, _canvas.transform);
+        _optionsController = optionsObject.GetComponent<NovelOptionsController>();
+        DisableInput();
+        
+        StartCoroutine(_optionsController.ShowOptions(options));
+    }
+    
+    /// <summary>
+    /// Logic for clicked option button
+    /// </summary>
+    /// <param name="index">Button index</param>
+    public override void OptionButtonClicked(int index)
+    {
+        DialogueController.Instance.OptionSelected(index);
+        OnEnable();
+    }
 
     private void Show()
     {
@@ -111,15 +132,26 @@ public class NovelUIController : BaseDialogueUIController
     private void OnEnable()
     {
         _input = new PlayerIA();
+        EnableInput();
+    }
+
+    private void OnDisable()
+    {
+        DisableInput();
+    }
+
+    private void EnableInput()
+    {
         _input.Gameplay.Interact.Enable();
         _input.Gameplay.Interact.performed += Interact;
         _input.Gameplay.Interact.canceled += Interact;
     }
 
-    private void OnDisable()
+    private void DisableInput()
     {
         _input.Gameplay.Interact.Disable();
     }
+
     #endregion
     
 }

@@ -119,27 +119,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: T_SpeakerBorder
-    originalName: 
-    pivot: {x: 2.6333334, y: -3.3333335}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 404
-      y: 4
-      width: 60
-      height: 18
-    spriteID: a367ce4872eb05b4680ba35fbeefc6fe
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 404, y: 4}
-  - name: T_MainBackground
+  - name: T_MainBackgroundRed
     originalName: 
     pivot: {x: 0.5, y: 0}
     alignment: 9
@@ -150,7 +130,7 @@ ScriptedImporter:
       y: 4
       width: 320
       height: 64
-    spriteID: 7401c3264972b2a459b5eb3ddf6a60d3
+    spriteID: 4d8a8ce4f2c9e6045abfe36b5f4e6c5b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -159,7 +139,27 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: T_SpeakerBackground
+  - name: T_MainBackground
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 76
+      width: 320
+      height: 64
+    spriteID: fbf4fd9d2d7874d44a54761a0649e070
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 76}
+  - name: T_SpeakerBackgroundRed
     originalName: 
     pivot: {x: 2.5, y: -3}
     alignment: 9
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 4
       width: 64
       height: 20
-    spriteID: c2e3d12849d3ca24cb0984e970977b13
+    spriteID: 01ad7773f2af5574e9469b439517b6d5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -179,6 +179,26 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 332, y: 4}
+  - name: T_SpeakerBackground
+    originalName: 
+    pivot: {x: 2.5, y: -3}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 404
+      y: 4
+      width: 64
+      height: 20
+    spriteID: 60d4f68bd59362147b59b871c423cd39
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 404, y: 4}
   - name: T_MainBorder
     originalName: 
     pivot: {x: 0.5, y: -0.033333335}
@@ -187,10 +207,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 76
+      y: 148
       width: 316
       height: 60
-    spriteID: eb09ff09da4543a4b9200c49176c709a
+    spriteID: 52c103fe12a2d54418bc2348caced365
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -198,28 +218,48 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 76}
+    uvTransform: {x: 4, y: 148}
+  - name: T_SpeakerBorder
+    originalName: 
+    pivot: {x: 2.6333334, y: -3.3333335}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 332
+      y: 32
+      width: 60
+      height: 18
+    spriteID: 1c8aa47954f835341aa91b2dedf01657
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 332, y: 32}
   spriteSheetImportData: []
   asepriteLayers:
-  - layerIndex: 3
-    guid: 249440149
-    name: T_SpeakerBorder
+  - layerIndex: 0
+    guid: -914038355
+    name: T_MainBackgroundRed
     layerFlags: 3
     layerType: 0
     blendMode: 0
     cells:
-    - name: T_SpeakerBorder
+    - name: T_MainBackgroundRed
       frameIndex: 0
       cellRect:
-        x: 2
-        y: 60
-        width: 60
-        height: 18
-      spriteId: a367ce4872eb05b4680ba35fbeefc6fe
+        x: 0
+        y: 0
+        width: 320
+        height: 64
+      spriteId: 4d8a8ce4f2c9e6045abfe36b5f4e6c5b
     linkedCells: []
     parentIndex: -1
-  - layerIndex: 0
-    guid: -1406852090
+  - layerIndex: 1
+    guid: -1406852089
     name: T_MainBackground
     layerFlags: 3
     layerType: 0
@@ -232,11 +272,28 @@ ScriptedImporter:
         y: 0
         width: 320
         height: 64
-      spriteId: 7401c3264972b2a459b5eb3ddf6a60d3
+      spriteId: fbf4fd9d2d7874d44a54761a0649e070
     linkedCells: []
     parentIndex: -1
-  - layerIndex: 1
-    guid: -297189803
+  - layerIndex: 2
+    guid: 830441867
+    name: T_SpeakerBackgroundRed
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: T_SpeakerBackgroundRed
+      frameIndex: 0
+      cellRect:
+        x: 0
+        y: 60
+        width: 64
+        height: 20
+      spriteId: 01ad7773f2af5574e9469b439517b6d5
+    linkedCells: []
+    parentIndex: -1
+  - layerIndex: 3
+    guid: -297189801
     name: T_SpeakerBackground
     layerFlags: 3
     layerType: 0
@@ -249,11 +306,11 @@ ScriptedImporter:
         y: 60
         width: 64
         height: 20
-      spriteId: c2e3d12849d3ca24cb0984e970977b13
+      spriteId: 60d4f68bd59362147b59b871c423cd39
     linkedCells: []
     parentIndex: -1
-  - layerIndex: 2
-    guid: -295274162
+  - layerIndex: 4
+    guid: -295274168
     name: T_MainBorder
     layerFlags: 19
     layerType: 0
@@ -266,7 +323,24 @@ ScriptedImporter:
         y: 2
         width: 316
         height: 60
-      spriteId: eb09ff09da4543a4b9200c49176c709a
+      spriteId: 52c103fe12a2d54418bc2348caced365
+    linkedCells: []
+    parentIndex: -1
+  - layerIndex: 5
+    guid: 249440147
+    name: T_SpeakerBorder
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: T_SpeakerBorder
+      frameIndex: 0
+      cellRect:
+        x: 2
+        y: 60
+        width: 60
+        height: 18
+      spriteId: 1c8aa47954f835341aa91b2dedf01657
     linkedCells: []
     parentIndex: -1
   platformSettings:

@@ -8,10 +8,4 @@ public class CS_NovelStartTest : MonoBehaviour
     {
         DialogueController.Instance.StartConversation("VNC_TestConversation");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +9,7 @@ public class UIButton : MonoBehaviour
 {
     public Color textColor = Color.blue;
     [NonSerialized] public int ID;
+    [SerializeField] private int maxLabelLength = 12;
 
     private bool _disableMouse;
 
@@ -34,6 +37,17 @@ public class UIButton : MonoBehaviour
     }
 
     public virtual void Perform() { }
+
+    /// <summary>
+    /// Set button label to given text
+    /// </summary>
+    /// <param name="value">Text</param>
+    public IEnumerator SetText(string value)
+    {
+        text.text = value;
+        if (text.text.Length > maxLabelLength) Debug.LogWarning($"[UIButton] {name}: Text is too long");
+        yield return null;
+    }
 
     /// <summary>
     /// UI changes that indicate the response has focus

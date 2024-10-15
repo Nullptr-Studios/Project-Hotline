@@ -1,15 +1,14 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class UIButtonController : MonoBehaviour
 {
-    [SerializeField] protected List<UIButton> buttons;
-
     protected int CurrentFocus;
     protected int MaxIndex;
+    protected List<UIButton> Buttons;
     private bool _selectPerformed = true;
-
     
     private PlayerIA _input;
 
@@ -18,33 +17,30 @@ public class UIButtonController : MonoBehaviour
         _input = new PlayerIA();
         _selectPerformed = false;
 
-        for (var i = 0; i < buttons.Count; i++)
+        Buttons = GetComponentsInChildren<UIButton>().ToList();
+
+        for (var i = 0; i < Buttons.Count; i++)
         {
-            buttons[i].ID = i;
+            Buttons[i].ID = i;
         }
         
-        MaxIndex = buttons.Count;
+        MaxIndex = Buttons.Count;
+        CurrentFocus = -1;
     }
 
     protected virtual void PerformAction(InputAction.CallbackContext context)
     {
-        buttons[CurrentFocus].Perform();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        SetFocus();
+        Buttons[CurrentFocus].Perform();
     }
 
     private void SetFocus()
     {
-        for (var i = 0; i < buttons.Count; i++)
+        for (var i = 0; i < MaxIndex; i++)
         {
             if (i == CurrentFocus)
-                buttons[i].SetFocus();
+                Buttons[i].SetFocus();
             else
-                buttons[i].RemoveFocus();
+                Buttons[i].RemoveFocus();
         }
     }
 

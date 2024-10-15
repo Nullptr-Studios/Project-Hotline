@@ -7,6 +7,7 @@
 			"speakersName": "God",
 			"characterSpritesName": "God",
 			"startingSprite": "Default",
+			"theme": "VNT_Default",
 			"sentences":
             [
 				"Hello mortal. Welcome to what could be the best game of all time."
@@ -73,6 +74,71 @@
 			"sentences":
 			[
 				"This isn't a Platinum game, Blake, you aren't supposed to fight god."
+			],
+			"options": 
+			[
+				{
+					"nextId": 7,
+					"text": "Don't worry"
+				},
+				{
+					"nextId": 9,
+					"text": "Goodbye"
+				},
+				{
+					"nextId": 10,
+					"text": "FUCK YOU"
+				}
+			]
+		},
+		
+		{
+			"id": 7,
+			"speakersName": "Blake",
+			"characterSpritesName": "Blake",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"nextId": 8,
+			"sentences":
+			[
+				"Don't worry about it, bro, we'll do it in the sequel (pls dario make a sequel of this game)"
+			]
+		},
+
+		{
+			"id": 8,
+			"speakersName": "God",
+			"characterSpritesName": "God",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"sentences":
+			[
+				"See you in a real scene, Blake. It will be sooner than what you think."
+			]
+		},
+
+		{
+			"id": 9,
+			"speakersName": "Blake",
+			"characterSpritesName": "Blake",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"nextId": 8,
+			"sentences":
+			[
+				"Well, it's a bit late, see you soon God."
+			]
+		},
+
+		{
+			"id": 10,
+			"speakersName": "Blake",
+			"characterSpritesName": "Blake",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"sentences":
+			[
+				"<speed=3><changeTheme=VNT_Red>FUCK YOU GOD DOESN'T EXIST ANYWAYS"
 			]
 		}
 	]
