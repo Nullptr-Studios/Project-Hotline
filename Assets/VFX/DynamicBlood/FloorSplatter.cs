@@ -7,8 +7,8 @@ using UnityEngine;
 public class FloorSplatter : MonoBehaviour
 {
 
-    public float lerpMagnitudeMax = .25f;
-    public float lerpMagnitudeMin = .1f;
+    public float lerpMagnitudeMax = 2;
+    public float lerpMagnitudeMin = 4;
 
     private float finalLerpMagnitude;
     private float _timer = 0.0f;

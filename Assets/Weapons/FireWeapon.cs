@@ -1,5 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
+using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 public class FireWeapon : Weapon
 {
@@ -26,7 +30,6 @@ public class FireWeapon : Weapon
     //Dispersion global variables
     private float _currentDispersion;
     private float _dispersionCurveTimer;
-
     
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -39,7 +42,7 @@ public class FireWeapon : Weapon
     {
         return _currentAmmo;
     }
-    
+
     /// <summary>
     /// Use Functionality
     /// </summary>
@@ -89,6 +92,7 @@ public class FireWeapon : Weapon
                 Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have gunMuzzle assigned!!!!!!!!");
         }
 #endif        
+        
     }
 
     private void Fire(Transform fireDir)
@@ -96,6 +100,13 @@ public class FireWeapon : Weapon
         //Raycast2D list
         List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
         int amountHits = Physics2D.Raycast(fireDir.position, fireDir.right, new ContactFilter2D(), rayHitList);
+
+        if (amountHits == 0)
+        {
+            //Do trail even if we aren't hitting anything
+            StartCoroutine(PlayTrail(fireDir.position, fireDir.position + fireDir.right * ResourceManager.GetBulletTrailConfig().MissDistance, new RaycastHit2D()));
+            return;
+        }
         
         //Initial Position
         Vector2 lastHitPos = fireDir.position;
@@ -118,16 +129,15 @@ public class FireWeapon : Weapon
             }
 #endif
             
-            hit2D.transform.TryGetComponent(out IDamageable damageableInterface);
-
-            if (damageableInterface != null)
-            {
+            if (hit2D.transform.TryGetComponent(out IDamageable damageableInterface))
                 damageableInterface.DoDamage(1, fireDir.right, hit2D.point);
-            }
 
             if (layer == 6) //wall
             {  
                 //If it's a wall we want to return, no more looping
+                
+                //Do trail
+                StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
                 break;
             }
 
@@ -138,6 +148,8 @@ public class FireWeapon : Weapon
                 //Calculate penetration
                 if (currentPenetration == fireWeaponData.penetrationAmount)
                 {
+                    //Do trail
+                    StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
                     break;
                 }
 
@@ -150,6 +162,8 @@ public class FireWeapon : Weapon
                 //Calculate penetration
                 if (currentPenetration == fireWeaponData.penetrationAmount)
                 {
+                    //Do trail
+                    StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
                     break;
                 }
 
@@ -158,6 +172,9 @@ public class FireWeapon : Weapon
 
 
             }
+            
+            //Do trail
+            StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
             
             //We treat default objects as walls
             break;
@@ -253,6 +270,45 @@ public class FireWeapon : Weapon
 
         _dispersionCurveTimer = 0;
     }
+    
+    //Trail
+    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit2D Hit)
+    {
+        TrailRenderer instance = ResourceManager.GetBulletTrailPool().Get();
+        instance.gameObject.SetActive(true);
+        instance.transform.position = StartPoint;
+        yield return null; // avoid position carry-over from last frame if reused
+
+        instance.emitting = true;
+
+        float distance = Vector3.Distance(StartPoint, EndPoint);
+        float remainingDistance = distance;
+        while (remainingDistance > 0)
+        {
+            instance.transform.position = Vector3.Lerp(
+                StartPoint,
+                EndPoint,
+                Mathf.Clamp01(1 - (remainingDistance / distance))
+            );
+            remainingDistance -= ResourceManager.GetBulletTrailConfig().SimulationSpeed * Time.deltaTime;
+
+            yield return null;
+        }
+
+        instance.transform.position = EndPoint;
+
+        if (Hit.collider != null)
+        {
+            //@TODO: Do impact
+        }
+
+        yield return new WaitForSeconds(ResourceManager.GetBulletTrailConfig().Duration);
+        yield return null;
+        instance.emitting = false;
+        instance.gameObject.SetActive(false);
+        ResourceManager.GetBulletTrailPool().Release(instance);
+    }
+
 
     //@TODO: Fix initial spamming
     /// <summary>

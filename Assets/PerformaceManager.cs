@@ -50,7 +50,7 @@ public class PerformanceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("CheckBlood", 10, 10);
+        InvokeRepeating("CheckBlood", 5, 5);
         InvokeRepeating("CheckFPS", 5, 5);
     }
     

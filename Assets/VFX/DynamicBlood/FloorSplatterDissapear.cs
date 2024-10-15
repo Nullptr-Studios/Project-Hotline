@@ -15,6 +15,7 @@ public class FloorSplatterDisapear : MonoBehaviour
     private void Start()
     {
         finalLerpMagnitude = UnityEngine.Random.Range(lerpMagnitudeMin, lerpMagnitudeMax);
+        transform.localScale = new Vector3(.95f, .95f, 1);
     }
 
     void Update()
@@ -26,7 +27,9 @@ public class FloorSplatterDisapear : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            Destroy(this);
+            ResourceManager.GetBloodPool().Release(gameObject);
         }
     }
 }

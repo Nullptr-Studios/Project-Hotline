@@ -1,15 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class BloodManager : MonoBehaviour
 {
     [Header("Main Settings")] 
     public Transform splatterTransform;
-
-    public GameObject wallBloodGM;
-    public GameObject floorBloodGM;
     
     public float splatterAngle = 20;
 
@@ -53,10 +48,21 @@ public class BloodManager : MonoBehaviour
                 if (layer == 9 || layer == 10)
                     continue;
 
-                GameObject wallB =  Instantiate(wallBloodGM, hit.point, new Quaternion());
+                GameObject wallB = ResourceManager.GetBloodPool().Get();
 
+                wallB.SetActive(true);
+                
+                wallB.transform.position = hit.point;
                 wallB.transform.eulerAngles = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));
+                
+                //sprite shit
+                SpriteRenderer sprW = wallB.GetComponent<SpriteRenderer>();
+                sprW.sortingOrder = 0;
+                sprW.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
 
+                //Script
+                wallB.AddComponent<FloorSplatter>();
+                
                 //avoid further progression in loop
                 break;
             }
@@ -89,9 +95,20 @@ public class BloodManager : MonoBehaviour
 
             Vector3 randLocInRange = splatterTransform.right * UnityEngine.Random.Range(currentMaxTravelDistance * .15f, currentMaxTravelDistance);
             
-            GameObject floorB =  Instantiate(floorBloodGM, splatterTransform.position + randLocInRange, new Quaternion());
+            GameObject floorB = ResourceManager.GetBloodPool().Get();
 
+            floorB.SetActive(true);
+                
+            floorB.transform.position = randLocInRange + splatterTransform.position;
             floorB.transform.eulerAngles = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));
+                
+            //sprite shit
+            SpriteRenderer sprW = floorB.GetComponent<SpriteRenderer>();
+            sprW.sortingOrder = -1;
+            sprW.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+
+            //Script
+            floorB.AddComponent<FloorSplatter>();
             
         }
         
