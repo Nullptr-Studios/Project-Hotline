@@ -547,6 +547,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6326617117770183331, guid: d5d3ec25d759ac54386d5167cb891d54, type: 3}
+      propertyPath: _themesToLoad.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326617117770183331, guid: d5d3ec25d759ac54386d5167cb891d54, type: 3}
+      propertyPath: _themesToLoad.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 55181c37555c2a647a1d6eba9fda089d, type: 2}
+    - target: {fileID: 6326617117770183331, guid: d5d3ec25d759ac54386d5167cb891d54, type: 3}
+      propertyPath: _themesToLoad.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b37d7c9b6f233b4ba47106a184f97ef, type: 2}
     - target: {fileID: 7315606409066716725, guid: d5d3ec25d759ac54386d5167cb891d54, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -653,8 +665,16 @@ PrefabInstance:
       objectReference: {fileID: 256411295}
     - target: {fileID: 2635371401240133840, guid: 3bf6f40092214b74bbabbaf1908cbf5e, type: 3}
       propertyPath: _themesToLoad.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2635371401240133840, guid: 3bf6f40092214b74bbabbaf1908cbf5e, type: 3}
+      propertyPath: _themesToLoad.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 55181c37555c2a647a1d6eba9fda089d, type: 2}
+    - target: {fileID: 2635371401240133840, guid: 3bf6f40092214b74bbabbaf1908cbf5e, type: 3}
+      propertyPath: _themesToLoad.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b37d7c9b6f233b4ba47106a184f97ef, type: 2}
     - target: {fileID: 4097496438667202695, guid: 3bf6f40092214b74bbabbaf1908cbf5e, type: 3}
       propertyPath: m_RootOrder
       value: 2
