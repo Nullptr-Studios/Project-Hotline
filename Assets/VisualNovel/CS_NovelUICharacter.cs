@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CS_NovelUICharacter : MonoBehaviour
+public class NovelUICharacter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI label;
     [SerializeField] private Image background;

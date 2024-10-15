@@ -11,8 +11,8 @@ public class NovelUIController : BaseDialogueUIController
     
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private CS_NovelUICharacter speaker;
-    // TODO: Character Sprite
+    [SerializeField] private NovelUICharacter speaker;
+    [SerializeField] private NovelUISprite sprite;
     // TODO: Next Icon
     // TODO: Response System
     private Canvas _canvas;
@@ -45,7 +45,12 @@ public class NovelUIController : BaseDialogueUIController
         
         text.text = _currentTextMod?.Sentence;
         text.maxVisibleCharacters = 0;
-        speaker.SetName(speakerName);
+        
+        if (!sameSpeakerAsLastDialogue)
+        {
+            speaker.SetName(speakerName);
+            sprite.SetSprite(characterSprite, speakerName);
+        }
         
         for (var i = 0; i < _currentTextMod?.Sentence.Length; i++)
         {
@@ -92,7 +97,12 @@ public class NovelUIController : BaseDialogueUIController
     {
         _canvas.enabled = true;
     }
-    
+
+    public override void Close()
+    {
+        _canvas.enabled = false;
+    }
+
     #region INPUT_SYSTEM
     private void OnEnable()
     {

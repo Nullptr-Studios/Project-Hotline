@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CC.DialogueSystem
 {
-    [CreateAssetMenu(fileName = "CS_UnnamedCharacter", menuName = "DialogueSystem/Character Sprites", order = 2)]
+    [CreateAssetMenu(fileName = "VNS_UnnamedCharacter", menuName = "DialogueSystem/Character Sprites", order = 2)]
     public class DialogueSprites_SO : ScriptableObject
     {
         public string CharactersName;
