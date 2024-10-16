@@ -128,7 +128,7 @@ public class FireWeapon : Weapon
                 lastHitPos = hit2D.point;
             }
 #endif
-            
+            //Do damage to all surfaces
             if (hit2D.transform.TryGetComponent(out IDamageable damageableInterface))
                 damageableInterface.DoDamage(1, fireDir.right, hit2D.point);
 
@@ -159,6 +159,7 @@ public class FireWeapon : Weapon
 
             if (layer == 9) //enemies
             {
+
                 //Calculate penetration
                 if (currentPenetration == fireWeaponData.penetrationAmount)
                 {
@@ -179,6 +180,8 @@ public class FireWeapon : Weapon
             //We treat default objects as walls
             break;
         }
+
+        /* There is a bug that does not render trails if there is no more colliders, wont fix since the game will take place indoors */
         
 
     }

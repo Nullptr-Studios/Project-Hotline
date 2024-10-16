@@ -22,22 +22,20 @@ public class FloorSplatterDisapear : MonoBehaviour
 
     void Update()
     {
-
         Vector3 scale = _trans.localScale;
-        float finalLerpMagnitudeCached = finalLerpMagnitude * Time.deltaTime;
 
-        if (scale.x > .05f)
-        {
-            scale = new Vector3(math.lerp(scale.x, 0, finalLerpMagnitudeCached),
-                math.lerp(scale.y, 0, finalLerpMagnitudeCached), 1);
-        }
-        else
+        if (scale.x < .05f)
         {
             gameObject.SetActive(false);
             Destroy(this);
             ResourceManager.GetBloodPool().Release(gameObject);
             return;
         }
+        
+        float finalLerpMagnitudeCached = finalLerpMagnitude * Time.deltaTime;
+        float lerpVal = math.lerp(scale.x, 0, finalLerpMagnitudeCached); 
+        
+        scale = new Vector3(lerpVal, lerpVal, 1);
 
         _trans.localScale = scale;
     }
