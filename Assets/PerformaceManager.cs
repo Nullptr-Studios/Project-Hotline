@@ -41,7 +41,7 @@ public class PerformanceManager : MonoBehaviour
             
 #if UNITY_EDITOR
             if(log)
-                Debug.LogError("PerformanceManager: Low FPS detected!!!" + Time.deltaTime + " " + (double)(1 / startingFPS));
+                Debug.LogError("PerformanceManager: Low FPS detected!!!");
 #endif
             
         }

@@ -12,24 +12,33 @@ public class FloorSplatterDisapear : MonoBehaviour
 
     private float finalLerpMagnitude;
 
+    private Transform _trans;
+
     private void Start()
     {
         finalLerpMagnitude = UnityEngine.Random.Range(lerpMagnitudeMin, lerpMagnitudeMax);
-        transform.localScale = new Vector3(.95f, .95f, 1);
+        _trans = transform;
     }
 
     void Update()
     {
-        if (transform.localScale.x > .05f)
+
+        Vector3 scale = _trans.localScale;
+        float finalLerpMagnitudeCached = finalLerpMagnitude * Time.deltaTime;
+
+        if (scale.x > .05f)
         {
-            transform.localScale = new Vector3(math.lerp(transform.localScale.x, 0, finalLerpMagnitude * Time.deltaTime),
-                math.lerp(transform.localScale.y, 0, finalLerpMagnitude * Time.deltaTime), 1);
+            scale = new Vector3(math.lerp(scale.x, 0, finalLerpMagnitudeCached),
+                math.lerp(scale.y, 0, finalLerpMagnitudeCached), 1);
         }
         else
         {
             gameObject.SetActive(false);
             Destroy(this);
             ResourceManager.GetBloodPool().Release(gameObject);
+            return;
         }
+
+        _trans.localScale = scale;
     }
 }

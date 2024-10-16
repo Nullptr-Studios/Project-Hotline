@@ -11,24 +11,31 @@ public class FloorSplatter : MonoBehaviour
     public float lerpMagnitudeMin = 4;
 
     private float finalLerpMagnitude;
-    private float _timer = 0.0f;
+
+    private Transform _trans;
 
     private void Start()
     {
         finalLerpMagnitude = UnityEngine.Random.Range(lerpMagnitudeMin, lerpMagnitudeMax);
-        transform.localScale = new Vector3(0, 0, 1);
+        _trans = transform;
     }
 
     void Update()
     {
-        if (transform.localScale.x < .95f)
+        Vector3 scale = _trans.localScale;
+        float finalLerpMagnitudeCached = finalLerpMagnitude * Time.deltaTime;
+
+        if (scale.x < .95f)
         {
-            transform.localScale = new Vector3(math.lerp(transform.localScale.x, 1, finalLerpMagnitude * Time.deltaTime),
-                math.lerp(transform.localScale.y, 1, finalLerpMagnitude * Time.deltaTime), 1);
+            scale = new Vector3(math.lerp(scale.x, 1, finalLerpMagnitudeCached),
+                math.lerp(scale.y, 1, finalLerpMagnitudeCached), 1);
         }
         else
         {
             Destroy(this);
+            return;
         }
+
+        _trans.localScale = scale;
     }
 }
