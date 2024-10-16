@@ -1,6 +1,6 @@
 /*
- *  To use this class, call SetMaxAmmo() to initialize the maximum amount of bullets a weapon has
- *  Then call SubtractBullet() every time you want to update the UI to have one less bullet
+ *  To use this class, call SetMaxAmmo() to initialize the maximum amount of bullets a weapon has.
+ *  Then call SubtractBullet() every time you want to update the UI to have one less bullet.
  *
  *  Made by: Xein
  */
@@ -14,9 +14,12 @@ public class AmmoPrompt : MonoBehaviour
 {
     [SerializeField] private Sprite fullAmmo;
     [SerializeField] private Sprite emptyAmmo;
+    [SerializeField] [Range(2f, 8f)] private float timeToHide = 3f;
 
     private int _maxAmmo;
-    [SerializeField] private int _currentAmmo;
+    private int _currentAmmo;
+    private float _timer;
+    private bool _isHidden;
     private RectTransform _transform;
     private List<Image> _ammoIcons;
     private Animator _animator;
@@ -37,15 +40,13 @@ public class AmmoPrompt : MonoBehaviour
         // Idk why but unity picks self in GetComponentsInChildren sometimes, so I just remove if that's the case -x
         // Fucking Unity -x
         if (_ammoIcons[0].name == gameObject.name) _ammoIcons.RemoveAt(0);
-        
-        SetMaxAmmo(14, 8);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Time.time - _timer > timeToHide && !_isHidden)
         {
-            SubtractBullet();
+            Hide();
         }
     }
 
@@ -87,15 +88,20 @@ public class AmmoPrompt : MonoBehaviour
             Hide();
             return;
         }
+        
+        _timer = Time.time;
     }
 
     private void Show()
     {
         gameObject.SetActive(true);
+        _timer = Time.time;
+        _isHidden = false;
     }
 
     private void Hide()
     {
         _animator.SetTrigger(CloseAnim);
+        _isHidden = true;
     }
 }
