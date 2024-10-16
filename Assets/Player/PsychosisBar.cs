@@ -3,37 +3,49 @@ using UnityEngine.UI;
 
 public class PsychosisBar : MonoBehaviour
 {
-    public Slider slider;
+    [SerializeField] private Slider slider;
     private float _timer;
-    public float currentValue;
-    public float coolDownTime;
+    [SerializeField] float currentValue;
+    [SerializeField] private float _coolDownTime;
+    [SerializeField] private float _coolDownSpeed;
+    [SerializeField] private float _barAdd;
     // Start is called before the first frame update
     void Start()
     {
         slider.value = currentValue;
+        _barAdd = 1.0f;
     }
     // Update is called once per frame
     void Update()
     {
         _timer += Time.deltaTime;
-        //if the time is bigger than cooldown, it decreases the bar value and restarts the cooldown
-        if (_timer >= coolDownTime)
+        if (currentValue >= slider.maxValue)
         {
-            currentValue -= 1f;
+            NoReturnPoint();
+        }
+        //if the time is bigger than cooldown, it decreases the bar value and restarts the cooldown
+        else if (_timer >= _coolDownTime)
+        {
+            currentValue -= _coolDownTime / _coolDownSpeed;
             currentValue = Mathf.Clamp(currentValue, slider.minValue, slider.maxValue);
             slider.value = currentValue;
-            _timer = 0f;
         }
     }
     /// <summary>
     /// On a kill, it increases the bar value
     /// </summary>
-    public void OnKill()
+    public void OnKill ()
     {
-        currentValue += 1f;
+        currentValue += _barAdd;
         currentValue = Mathf.Clamp(currentValue, slider.minValue, slider.maxValue);
         slider.value = currentValue;
         _timer = 0f;
     }
- 
+/// <summary>
+/// Leaves the value as maxed
+/// </summary>
+    private void NoReturnPoint()
+    {
+        currentValue = slider.maxValue;
+    }
 }
