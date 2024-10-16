@@ -1,3 +1,9 @@
+/*
+ *  To use this class just call the BeginTimer() function and pass the time you want the progress bar to last
+ * 
+ *  Made by: Xein
+ */
+
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -19,6 +25,8 @@ public class ProgressBar : MonoBehaviour
     private float _dividerValue;
     private int _size;
     private readonly List<char> _bar = new List<char>();
+    private Animator _animator;
+    private static readonly int CloseAnim = Animator.StringToHash("CloseAnim");
 
     /// <summary>
     /// Returns current percentage
@@ -32,47 +40,48 @@ public class ProgressBar : MonoBehaviour
     
     private void Awake()
     {
-        textUI = GetComponentInChildren<TextMeshProUGUI>();
+        // Warnings
+        if (textUI == null) Debug.LogError($"[ProgressBar] {name}: TextUI not defined");
+        if (background == null) Debug.LogWarning($"[ProgressBar] {name}: Background not defined");
+        if (divider == null) Debug.LogWarning($"[ProgressBar] {name}: Divider not defined");
+        
+        _animator = GetComponent<Animator>();
         SetValue(0);
-        Hide();
+        gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        if (_active)
+        if (!_active) return;
+        
+        if (!_isInverse)
         {
-            if (!_isInverse)
+            _current += Time.deltaTime / duration;
+            SetValue(_current);
+
+            if (_current >= 1)
             {
-                _current += Time.deltaTime / duration;
-                SetValue(_current);
-
-                if (_current >= 1)
-                {
-                    SetValue(0);
-                    Hide();
-                    _active = false;
-                }
+                Hide();
+                _active = false;
             }
-            else 
-            {
-                _current += Time.deltaTime / duration;
-                SetValue(1 - _current);
-
-                if (1 - _current <= 0)
-                {
-                    SetValue(0);
-                    Hide();
-                    _active = false;
-                }
-            }
-
-            // Color check for under divider value
-            if (_current < _dividerValue)
-                textUI.color = Color.red;
-            else
-                textUI.color = Color.white;
-                
         }
+        else 
+        {
+            _current += Time.deltaTime / duration;
+            SetValue(1 - _current);
+
+            if (1 - _current <= 0)
+            {
+                Hide();
+                _active = false;
+            }
+        }
+
+        // Color check for under divider value
+        if (_current < _dividerValue)
+            textUI.color = Color.red;
+        else
+            textUI.color = Color.white;
     }
 
     /// <summary>
@@ -160,15 +169,12 @@ public class ProgressBar : MonoBehaviour
 
     private void Show()
     {
-        textUI.enabled = true;
-        background.enabled = true;
-        divider.enabled = true;
+        SetValue(0);
+        gameObject.SetActive(true);
     }
 
     private void Hide()
     {
-        textUI.enabled = false;
-        background.enabled = false;
-        divider.enabled = false;
+        _animator.SetTrigger(CloseAnim);
     }
 }

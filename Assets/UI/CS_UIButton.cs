@@ -1,6 +1,13 @@
+/*
+ *  This class has to be paired with UIButtonController.
+ *  To use this class, inherit a child from it and override the Perform() function, this is what the 
+ *  UIButtonController will call when an action is performed.
+ *
+ *  Made by: Xein
+ */
+
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

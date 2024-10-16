@@ -1,5 +1,13 @@
+/*
+ *  This class has to be paired with UIButtonController. You must have all the buttons as child gameObjects.
+ *  If you need custom behaviour, you can inherit from this class and overwrite the Awake() and PerformAction()
+ *  functions.
+ *
+ *  Made by: Xein
+ */
+
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq; // .ToList() function
 using UnityEngine;
 using UnityEngine.InputSystem;
 
