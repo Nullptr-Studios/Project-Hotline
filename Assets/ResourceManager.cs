@@ -66,6 +66,8 @@ public class ResourceManager : MonoBehaviour
         trail.time = _bulletTrailConfig.Duration;
         trail.minVertexDistance = _bulletTrailConfig.MinVertexDistance;
 
+        trail.sortingOrder = 1;
+
         trail.emitting = false;
         trail.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
