@@ -14,6 +14,7 @@ public class MotionCurve : ScriptableObject
 
     [SerializeField] private AnimationCurve timeline;
 
+#if UNITY_EDITOR
     // Updates _timeline when acceleration and deceleration curves are changed
     // This DOESN'T run at runtime, only when values are changed in a MotionCurve at the editor
     private void OnValidate()
@@ -40,6 +41,8 @@ public class MotionCurve : ScriptableObject
             AnimationUtility.TangentMode.Constant
         );
     }
+#endif
+
 }
 
 
