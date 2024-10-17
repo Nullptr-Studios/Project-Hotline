@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 480768}
   - component: {fileID: 19880772}
   - component: {fileID: 19980772}
-  - component: {fileID: 114661552952649016}
   m_Layer: 0
   m_Name: MetalImpact (1)
   m_TagString: Untagged
@@ -4764,18 +4763,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &114661552952649016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 392ba55a1727b624eac5499eaf0effd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &180772
 GameObject:
   m_ObjectHideFlags: 0
@@ -4819,7 +4806,6 @@ GameObject:
   - component: {fileID: 4390458877888226}
   - component: {fileID: 198446526883529300}
   - component: {fileID: 199584942091073294}
-  - component: {fileID: 114425922971470952}
   m_Layer: 0
   m_Name: MetalImpact
   m_TagString: Untagged
@@ -9573,15 +9559,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &114425922971470952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290481542409568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 392ba55a1727b624eac5499eaf0effd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
