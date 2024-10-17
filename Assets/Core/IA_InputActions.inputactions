@@ -24,9 +24,18 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "ThrowOrGet",
+                    "type": "Button",
+                    "id": "10faa8df-41c4-48c7-be96-6501b1449977",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Aim",
                     "type": "Value",
-                    "id": "1a65be8c-b5da-4cb5-9434-87ae2c58279c",
+                    "id": "c9ea211a-f875-4da3-bf9a-ddfab717861e",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -36,6 +45,24 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "8441a8da-f85b-4bcc-83ca-618560d53f89",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "72e37d69-2cc6-4c43-a13c-d29e5be3cc67",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchWeapons",
+                    "type": "Button",
+                    "id": "6d412aae-db09-4a07-80e1-99ef0dce76c3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -133,7 +160,18 @@
                 },
                 {
                     "name": "",
-                    "id": "040181c7-3b1f-43b3-9561-ca2c48458c92",
+                    "id": "b117f2dc-eac6-4f77-a8de-e81e84a43b05",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowOrGet",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "368c8ebd-eef2-46e0-9775-3e02708b6a8a",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "StickDeadzone(min=0.4)",
@@ -144,12 +182,45 @@
                 },
                 {
                     "name": "",
-                    "id": "006a4374-d614-4313-bd02-83316a904002",
+                    "id": "d85a44d5-67d6-4b1d-80f9-0e53fcd9f507",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e6d3ad9-34fc-4d6e-a68b-30490723179e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "143a5cf3-1de7-433c-9d5f-252c6b56eb48",
+                    "path": "<Mouse>/backButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeapons",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de1d9d39-f6d7-4f61-82d7-3e63cf251a2a",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeapons",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

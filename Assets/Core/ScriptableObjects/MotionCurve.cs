@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "MC_UnnamedCurve", menuName = "Create MotionCurve")]
+[CreateAssetMenu(fileName = "MC_UnnamedCurve", menuName = "ProjectHotline/Create MotionCurve")]
 public class MotionCurve : ScriptableObject
 {
     // Animation curve variables
@@ -15,6 +15,7 @@ public class MotionCurve : ScriptableObject
     [SerializeField] private AnimationCurve timeline;
 
 #if UNITY_EDITOR
+    
     // Updates _timeline when acceleration and deceleration curves are changed
     // This DOESN'T run at runtime, only when values are changed in a MotionCurve at the editor
     private void OnValidate()
@@ -22,7 +23,7 @@ public class MotionCurve : ScriptableObject
         timeline = new AnimationCurve();
 
         // Acceleration
-        foreach (var k in accelerationCurve.keys)
+        foreach (Keyframe k in accelerationCurve.keys)
             timeline.AddKey(k);
 
         // Deceleration
@@ -41,8 +42,8 @@ public class MotionCurve : ScriptableObject
             AnimationUtility.TangentMode.Constant
         );
     }
+    
 #endif
-
 }
 
 
@@ -64,7 +65,7 @@ public class MotionCurve : ScriptableObject
     /// <param name="isMoving">Specify if the player is inputting something on the controller</param>
     public void Update(bool isMoving)
     {
-        var currentCurve = isMoving ? curve.accelerationCurve : curve.decelerationCurve;
+        AnimationCurve currentCurve = isMoving ? curve.accelerationCurve : curve.decelerationCurve;
         // Make so transition between acceleration and deceleration is smooth even if
         // movement is stopped before accelerationCurve is finished (value != 1){
 
