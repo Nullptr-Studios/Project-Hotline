@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 2322629527365507291}
   - component: {fileID: 9219392232182884951}
   - component: {fileID: 8330505946157900613}
+  - component: {fileID: 5020110233994094047}
   m_Layer: 0
   m_Name: PA_Player
   m_TagString: Player
@@ -114,10 +115,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4169479553980459501}
-  - {fileID: 3631742440223459523}
-  - {fileID: 2076086834673616306}
+  m_Children: [{fileID: 4169479553980459501}, {fileID: 3631742440223459523}, {fileID: 2076086834673616306}]
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -388,3 +386,20 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &5020110233994094047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136868407235776783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6b08b4f733e47418acb1b5fb182912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  currentValue: 0
+  coolDownTime: 1
+  coolDownSpeed: 0.5
+  barAdd: 0.2
