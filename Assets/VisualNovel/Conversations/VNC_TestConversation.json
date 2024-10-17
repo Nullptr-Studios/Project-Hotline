@@ -1,0 +1,145 @@
+{
+	"conversation":
+    [
+		{
+			"id": 1,
+			"nextId": 2,
+			"speakersName": "God",
+			"characterSpritesName": "God",
+			"startingSprite": "Default",
+			"theme": "VNT_Default",
+			"sentences":
+            [
+				"Hello mortal. Welcome to what could be the best game of all time."
+			]
+		},
+
+		{
+			"id": 2,
+			"nextId": 3,
+			"speakersName": "God",
+			"canBeUsedAsStartingPoint": false,
+			"sentences":
+			[
+				"Really, this is just a test about the dialog system, there is nothing more here to see.", 
+				"OR... IS IT REALLY"
+			]
+		},
+
+		{
+			"id": 3,
+			"nextId": 4,
+			"speakersName": "Blake",
+			"characterSpritesName": "Blake",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"sentences":
+			[
+				"Oh wow, I'm speaking to god itself. This is incredible."
+			]
+		},
+
+		{
+			"id": 4,
+			"nextId": 5,
+			"speakersName": "God",
+			"characterSpritesName": "God",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"sentences":
+			[
+				"Well, it's a bit corny and definitely a resource that have been copied to oblivion but... yeah, you could say so. Don't even think about this being in the game tho."
+			]
+		},
+
+		{
+			"id": 5,
+			"nextId": 6,
+			"speakersName": "Blake",
+			"characterSpritesName": "Blake",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"sentences":
+			[
+				"Oh. I wanted to kill god at the end. Now I'm sad."
+			]
+		},
+
+		{
+			"id": 6,
+			"speakersName": "God",
+			"characterSpritesName": "God",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"sentences":
+			[
+				"This isn't a Platinum game, Blake, you aren't supposed to fight god."
+			],
+			"options": 
+			[
+				{
+					"nextId": 7,
+					"text": "Don't worry"
+				},
+				{
+					"nextId": 9,
+					"text": "Goodbye"
+				},
+				{
+					"nextId": 10,
+					"text": "FUCK YOU"
+				}
+			]
+		},
+		
+		{
+			"id": 7,
+			"speakersName": "Blake",
+			"characterSpritesName": "Blake",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"nextId": 8,
+			"sentences":
+			[
+				"Don't worry about it, bro, we'll do it in the sequel (pls dario make a sequel of this game)"
+			]
+		},
+
+		{
+			"id": 8,
+			"speakersName": "God",
+			"characterSpritesName": "God",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"sentences":
+			[
+				"See you in a real scene, Blake. It will be sooner than what you think."
+			]
+		},
+
+		{
+			"id": 9,
+			"speakersName": "Blake",
+			"characterSpritesName": "Blake",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"nextId": 8,
+			"sentences":
+			[
+				"Well, it's a bit late, see you soon God."
+			]
+		},
+
+		{
+			"id": 10,
+			"speakersName": "Blake",
+			"characterSpritesName": "Blake",
+			"startingSprite": "Default",
+			"canBeUsedAsStartingPoint": false,
+			"sentences":
+			[
+				"<speed=3><changeTheme=VNT_Red>FUCK YOU GOD DOESN'T EXIST ANYWAYS"
+			]
+		}
+	]
+}
