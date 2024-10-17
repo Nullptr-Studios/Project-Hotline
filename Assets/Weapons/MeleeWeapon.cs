@@ -15,7 +15,7 @@ public class MeleeWeapon : Weapon
     [SerializeField] private bool drawGizmos;
 #endif
     
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         

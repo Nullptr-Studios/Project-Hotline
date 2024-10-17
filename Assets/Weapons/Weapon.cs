@@ -61,7 +61,7 @@ public class Weapon : MonoBehaviour, IWeapon
         return weaponType;
     }
 
-    public virtual void Start()
+    protected virtual void Start()
     {
         AddRb();
     }
