@@ -75,7 +75,7 @@ public class MotionCurve : ScriptableObject
         }
 
         _time += Time.deltaTime;
-        // Clamp is needed, so we don't go further than m_Timeline's length
+        // Clamp is needed so we don't go further than m_Timeline's length
         _time = Mathf.Clamp(_time, 0f, currentCurve.GetDuration());
         _speedPercentage = currentCurve.Evaluate(_time);
         
