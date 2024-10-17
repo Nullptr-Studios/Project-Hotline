@@ -17,6 +17,7 @@ public class NovelUIController : BaseDialogueUIController
     [SerializeField] private NovelUICharacter speaker;
     [SerializeField] private NovelUISprite sprite;
     [SerializeField] private Image continueButton;
+    [SerializeField] private FMODUnity.EventReference charSound;
     private NovelOptionsController _optionsController;
     private Canvas _canvas;
     private PlayerIA _input;
@@ -62,6 +63,10 @@ public class NovelUIController : BaseDialogueUIController
             yield return StartCoroutine(processTagsForPosition(i));
 
             text.maxVisibleCharacters++;
+            // Calling one-shots is literally very easy tf
+            if (!Mathf.Approximately(_textSpeed, fastTextSpeed)) 
+                FMODUnity.RuntimeManager.PlayOneShot(charSound, transform.position);
+            
             yield return new WaitForSeconds(_textSpeed * _speedMultiplyer);
         }
         

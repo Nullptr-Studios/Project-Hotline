@@ -23,7 +23,7 @@ public static class AnimationCurveExtensions
         // Useful to correct in case we have gone beyond in the path finding
         bool accelerating = curve[0].value < curve[curve.length - 1].value;
         float start = 0f, end = curve.GetDuration();
-        // Pathfinding logic for a way to find time (linear interpolation)
+        // Pathfinding logic for a way to find time (linear interpolation).
         while (start <= end)
         { 
             float time = (start + end) / 2f;

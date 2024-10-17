@@ -750,6 +750,8 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnThrowOrGet(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
+        void OnSwitchWeapons(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
@@ -757,7 +759,5 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         void OnAccept(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
-        void OnSwitchWeapons(InputAction.CallbackContext context);
     }
 }

@@ -1,2 +1,4 @@
-*.ase filter=lfs diff=lfs merge=lfs -text
-*.bank filter=lfs diff=lfs merge=lfs -text
+*.ase filter=lfs diff=lfs merge=lfs -text # Aseprite files
+*.bank filter=lfs diff=lfs merge=lfs -text # FMOD Audio Bank files
+*.wav filter=lfs diff=lfs merge=lfs -text 
+*.npr filter=lfs diff=lfs merge=lfs -text # Nuendo Project files
