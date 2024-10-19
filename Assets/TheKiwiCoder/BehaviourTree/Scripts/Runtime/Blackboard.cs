@@ -11,7 +11,9 @@ namespace TheKiwiCoder {
     public class Blackboard
     {
         public Vector3 moveToPosition;
-        public bool seePlayer;
         public Vector3 playerPos;
+
+        public bool seePlayer;
+        public bool finalizedShearch = true;
     }
 }

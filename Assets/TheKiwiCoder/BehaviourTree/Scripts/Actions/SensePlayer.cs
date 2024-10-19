@@ -12,7 +12,6 @@ public class SensePlayer : ActionNode
     {
         sensor = context.gameObject.GetComponent<AISensor>();
         hasSensedPlayerBefore = false;
-
     }
 
     protected override void OnStop() {
@@ -22,12 +21,18 @@ public class SensePlayer : ActionNode
         if (sensor.isDetecting)
         {
             blackboard.playerPos = sensor.detectedObjects[0].transform.position;
+            blackboard.seePlayer = true;
             context.agent.SetDestination(blackboard.playerPos);
             hasSensedPlayerBefore = true;
-        }else if (hasSensedPlayerBefore)
+        }
+        else if (hasSensedPlayerBefore)
         {
-            if(context.agent.remainingDistance <= context.agent.stoppingDistance)
+            if (context.agent.remainingDistance <= context.agent.stoppingDistance)
+            {
+                blackboard.seePlayer = false;
+                blackboard.finalizedShearch = false;
                 return State.Success;
+            }
         }
         return State.Running;
     }
