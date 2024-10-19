@@ -13,7 +13,7 @@ namespace CC.DialogueSystem
         #region MonoBehaviour
 
         // Initialize
-        private void Awake()
+        private void Start()
         {
             if (registerOnAwake)
                 LoadSprites();

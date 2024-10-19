@@ -9,11 +9,13 @@
 using System;
 using System.Collections.Generic;
 using CC.DialogueSystem;
+using CC.MessagingCentre;
 using UnityEngine;
 
 public class ConversationHandler : MonoBehaviour
 {
     private readonly List<string> _conversations = new List<string>();
+    private int ID;
     private ConversationRepo _conversationRepo;
 
     private void Start()
@@ -30,7 +32,7 @@ public class ConversationHandler : MonoBehaviour
     /// Send a message to this script to start a conversation
     /// </summary>
     /// <param name="id">Conversation ID to load</param>
-    private void StartConversation(int id) => DialogueController.Instance.StartConversation(_conversations[id]);
+    private void StartVNConversation(int id) => DialogueController.Instance.StartConversation(_conversations[id]);
 
     /// <summary>
     /// Send a message to this script to start a conversation using its name

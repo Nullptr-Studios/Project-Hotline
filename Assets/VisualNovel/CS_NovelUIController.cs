@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using CC.DialogueSystem;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class NovelUIController : BaseDialogueUIController
@@ -17,6 +19,7 @@ public class NovelUIController : BaseDialogueUIController
     [SerializeField] private NovelUICharacter speaker;
     [SerializeField] private NovelUISprite sprite;
     [SerializeField] private Image continueButton;
+    [SerializeField] private CinemachineVirtualCamera dialogueCamera;
     private NovelOptionsController _optionsController;
     private Canvas _canvas;
     private PlayerIA _input;
@@ -53,6 +56,8 @@ public class NovelUIController : BaseDialogueUIController
         Show();
         
         text.text = _currentTextMod?.Sentence;
+        text.ForceMeshUpdate();
+        var length = text.GetParsedText().Length;
         text.maxVisibleCharacters = 0;
         
         if (!sameSpeakerAsLastDialogue)
@@ -61,7 +66,7 @@ public class NovelUIController : BaseDialogueUIController
             sprite.SetSprite(characterSprite, speakerName);
         }
         
-        for (var i = 0; i < _currentTextMod?.Sentence.Length; i++)
+        for (var i = 0; i < length; i++)
         {
             yield return StartCoroutine(processTagsForPosition(i));
 
@@ -125,12 +130,14 @@ public class NovelUIController : BaseDialogueUIController
     private void Show()
     {
         _canvas.enabled = true;
+        dialogueCamera.gameObject.SetActive(true);
         EnableInput();
     }
 
     public override void Close()
     {
         _canvas.enabled = false;
+        dialogueCamera.gameObject.SetActive(false);
         DisableInput();
     }
 
