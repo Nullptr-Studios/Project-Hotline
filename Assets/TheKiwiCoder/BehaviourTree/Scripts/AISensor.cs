@@ -10,8 +10,8 @@ public class AISensor : MonoBehaviour
     
     public LayerMask layerToSee;
     public LayerMask layerToOcclude;
-    
-    public List<GameObject> detectedObjects = new List<GameObject>();
+
+    public GameObject detectedPlayer;
     
     public bool isDetecting = false;
     
@@ -26,6 +26,8 @@ public class AISensor : MonoBehaviour
     private int _count;
     private float _scanInterval;
     private float _scanTimer;
+
+    private Transform _trans;
     
     
     private Mesh _mesh;
@@ -33,6 +35,8 @@ public class AISensor : MonoBehaviour
     void Start()
     {
         _scanInterval = 1.0f / scanFrecuency;
+        _trans = transform;
+        
     }
 
     // Update is called once per frame
@@ -48,25 +52,23 @@ public class AISensor : MonoBehaviour
 
     private void Scan()
     {
-        _count = Physics2D.OverlapCircleNonAlloc(transform.position, range, _colliders, layerToSee);
+        _count = Physics2D.OverlapCircleNonAlloc(_trans.position, range, _colliders, layerToSee);
+
+        //This has been changed from a list to an array in order to optimize code
+        isDetecting = false;
+        detectedPlayer = null;
         
-        detectedObjects.Clear();
         for (int i = 0; i < _count; ++i)
         {
             GameObject obj = _colliders[i].gameObject;
             if (IsInSight(obj))
             {
-                detectedObjects.Add(obj);
+                detectedPlayer = obj;
+                isDetecting = true;
+                
+                //stop iterating the loop
+                break;
             }
-        }
-
-        if (detectedObjects.Count > 0)
-        {
-            isDetecting = true;
-        }
-        else
-        {
-            isDetecting = false;
         }
     }
 
@@ -74,14 +76,15 @@ public class AISensor : MonoBehaviour
     {
         bool result = true;
         
-        Vector3 origin = transform.position;
+        Vector3 origin = _trans.position;
         Vector3 dest = target.transform.position;
         Vector3 dir = dest - origin;
         
-        float deltaAngle = Vector3.Angle(dir, transform.up);
+        float deltaAngle = Vector3.Angle(dir, _trans.up);
         
         if(deltaAngle > angle)
             result = false;
+        
         if (result)
         {
             if (Physics2D.Linecast(origin, dest, layerToOcclude))
@@ -90,8 +93,9 @@ public class AISensor : MonoBehaviour
         
 #if UNITY_EDITOR
         if(drawGizmos)
-            Debug.DrawRay(origin, dir, result? Color.green : Color.red, .05f);
+            Debug.DrawRay(origin, dir, result ? Color.green : Color.red, .05f);
 #endif
+        
         return result;
     }
 
@@ -219,9 +223,9 @@ public class AISensor : MonoBehaviour
             }
 
             Gizmos.color = detectColor;
-            foreach (var obj in detectedObjects)
+            if(detectedPlayer != null)
             {
-                Gizmos.DrawSphere(obj.transform.position, .4f);
+                Gizmos.DrawSphere(detectedPlayer.transform.position, .4f);
 
             }
         }

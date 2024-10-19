@@ -68,8 +68,8 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 48
-  m_PointLightOuterAngle: 72.48
+  m_PointLightInnerAngle: 94.49042
+  m_PointLightOuterAngle: 118.97041
   m_PointLightInnerRadius: 13.250577
   m_PointLightOuterRadius: 50
   m_ShapeLightParametricSides: 5
@@ -119,7 +119,7 @@ Transform:
   - {fileID: 3631742440223459523}
   - {fileID: 2076086834673616306}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2398245412808944660
 SpriteRenderer:
@@ -275,6 +275,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 3631742440223459523}
   maxWeaponsEquipped: 2
   log: 0
+  drawGizmos: 0
 --- !u!1 &4983506758001091974
 GameObject:
   m_ObjectHideFlags: 0

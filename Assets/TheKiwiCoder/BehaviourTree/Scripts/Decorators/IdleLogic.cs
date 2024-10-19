@@ -5,6 +5,7 @@ using TheKiwiCoder;
 
 public class IdleLogic : DecoratorNode
 {
+    private bool abortOnce = true;
     protected override void OnStart() {
     }
 
@@ -16,10 +17,12 @@ public class IdleLogic : DecoratorNode
         if (!blackboard.seePlayer && blackboard.finalizedShearch)
         {
             child.Update();
+            abortOnce = false;
         }
-        else
+        else if(!abortOnce)
         {
             child.Abort();
+            abortOnce = true;
         }
         
         return State.Running;

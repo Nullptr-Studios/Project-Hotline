@@ -32,7 +32,7 @@ public class ConditionalSeenPlayer : DecoratorNode
             }
 
         }
-        else
+        else if(!blackboard.finalizedShearch)
         {
             child.Abort();
             blackboard.finalizedShearch = true;

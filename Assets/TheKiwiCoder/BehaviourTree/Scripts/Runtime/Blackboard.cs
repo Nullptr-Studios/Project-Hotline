@@ -15,5 +15,7 @@ namespace TheKiwiCoder {
 
         public bool seePlayer;
         public bool finalizedShearch = true;
+
+        public float distanceToUseWeapon = 10;
     }
 }

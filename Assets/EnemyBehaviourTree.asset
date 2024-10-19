@@ -21,6 +21,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 1
+    distanceToUseWeapon: 10
   description: 
   drawGizmos: 0
   children: []
@@ -45,6 +46,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 0
+    distanceToUseWeapon: 10
   description: 
   drawGizmos: 0
 --- !u!114 &-4618985241182373246
@@ -68,6 +70,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 1
+    distanceToUseWeapon: 10
   description: 
   drawGizmos: 0
   child: {fileID: 5873688865986017981}
@@ -93,6 +96,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 1
+    distanceToUseWeapon: 10
   description: 
   drawGizmos: 0
   child: {fileID: -7193734146315934132}
@@ -117,6 +121,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 0
+    distanceToUseWeapon: 10
   description: 
   drawGizmos: 0
   duration: 2
@@ -141,6 +146,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 0
+    distanceToUseWeapon: 10
   description: 'Main player seen function
 
 '
@@ -169,6 +175,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 1
+    distanceToUseWeapon: 10
   description: 
   drawGizmos: 0
   child: {fileID: 3770352333475839482}
@@ -195,6 +202,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 0
+    distanceToUseWeapon: 10
   description: we must run all of these at the same time
   drawGizmos: 0
   children:
@@ -234,6 +242,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 1
+    distanceToUseWeapon: 10
 --- !u!114 &2946057099227109268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +264,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 0
+    distanceToUseWeapon: 10
   description: 
   drawGizmos: 0
   child: {fileID: 4355037925672009581}
@@ -279,6 +289,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 0
+    distanceToUseWeapon: 10
   description: 
   drawGizmos: 0
   children:
@@ -302,12 +313,13 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: 58f955774cc69964f871a0bd15404255
-  position: {x: -256, y: -105.752045}
+  position: {x: -256.0001, y: -12.536705}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 0
+    distanceToUseWeapon: 10
   description: in case of failure, repeat
   drawGizmos: 0
   child: {fileID: -268853970919411774}
@@ -334,6 +346,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 0
+    distanceToUseWeapon: 10
   description: search player after lost for 5 times, then return to idle path
   drawGizmos: 0
   child: {fileID: 3770352333475839482}
@@ -360,6 +373,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 0
+    distanceToUseWeapon: 10
   description: 
   drawGizmos: 0
   speed: 5
@@ -386,6 +400,7 @@ MonoBehaviour:
     playerPos: {x: 0, y: 0, z: 0}
     seePlayer: 0
     finalizedShearch: 0
+    distanceToUseWeapon: 10
   description: 
   drawGizmos: 0
   min: {x: -5, y: -5}

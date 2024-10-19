@@ -33,7 +33,7 @@ public class EnemyLogic : MonoBehaviour
             
         if (_sensor.isDetecting)
         { 
-            _agent.destination = _sensor.detectedObjects[0].transform.position;
+            _agent.destination = _sensor.detectedPlayer.transform.position;
         }
         else
         {
