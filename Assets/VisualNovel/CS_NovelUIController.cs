@@ -20,6 +20,7 @@ public class NovelUIController : BaseDialogueUIController
     private NovelOptionsController _optionsController;
     private Canvas _canvas;
     private PlayerIA _input;
+    private PlayerInput _player;
     
     private bool _isShowing;
     private bool _isAnimatingText;
@@ -34,7 +35,10 @@ public class NovelUIController : BaseDialogueUIController
     private void Awake()
     {
         _canvas = GetComponent<Canvas>();
-        //_canvas.enabled = false;
+        _canvas.enabled = false;
+        
+        _player = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+        _input = new PlayerIA();
         
         _textSpeed = defaultTextSpeed;
         continueButton.enabled = false;
@@ -115,41 +119,36 @@ public class NovelUIController : BaseDialogueUIController
     public override void OptionButtonClicked(int index)
     {
         DialogueController.Instance.OptionSelected(index);
-        OnEnable();
+        EnableInput();
     }
 
     private void Show()
     {
         _canvas.enabled = true;
+        EnableInput();
     }
 
     public override void Close()
     {
         _canvas.enabled = false;
-    }
-
-    #region INPUT_SYSTEM
-    private void OnEnable()
-    {
-        _input = new PlayerIA();
-        EnableInput();
-    }
-
-    private void OnDisable()
-    {
         DisableInput();
     }
 
+    #region INPUT_SYSTEM
     private void EnableInput()
     {
         _input.Gameplay.Interact.Enable();
         _input.Gameplay.Interact.performed += Interact;
         _input.Gameplay.Interact.canceled += Interact;
+        
+        _player.OnDisable();
     }
 
     private void DisableInput()
     {
         _input.Gameplay.Interact.Disable();
+        
+        _player.OnEnable();
     }
 
     #endregion
