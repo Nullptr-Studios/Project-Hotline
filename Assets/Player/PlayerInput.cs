@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -38,7 +39,11 @@ public class PlayerInput : MonoBehaviour
     {
         _input = new PlayerIA();
         _rb = GetComponent<Rigidbody2D>();
-        _camera = Camera.main;
+    }
+
+    private void Start()
+    {
+        _camera = GameObject.Find("Cinemachine Brain").GetComponent<Camera>();
     }
 
     // NOTE: All Actions MUST be enabled AND disabled or code will explode (not joking) -x
