@@ -15,6 +15,10 @@ public class SetAllValuesToOverrider : ActionNode
         {
             blackboard.distanceToUseWeapon = ov.behaviourData.distanceToShoot;
             blackboard.timeToStartShooting = ov.behaviourData.timeToStartShooting;
+
+            blackboard.returnToInitialPos = ov.behaviourData.returnToInitialSpot;
+            blackboard.isStatic = ov.behaviourData.isStatic;
+            blackboard.waypoints = ov.behaviourData.waypoints;
         }
         else
         {

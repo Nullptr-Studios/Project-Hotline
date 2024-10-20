@@ -16,10 +16,22 @@ public class SlerpToRotation : ActionNode
 
     protected override State OnUpdate() 
     {
-        if(Mathf.Approximately(Mathf.Floor(context.transform.rotation.eulerAngles.z), Mathf.Floor(blackboard.moveToRotation.eulerAngles.z)))
+        if (blackboard.doSlerp)
+        {
+            if (Mathf.Approximately(Mathf.Floor(context.transform.rotation.eulerAngles.z),
+                    Mathf.Floor(blackboard.moveToRotation.eulerAngles.z)))
+            {
+                blackboard.doSlerp = false;
+                return State.Success;
+            }
+
+            context.transform.rotation =
+                Quaternion.Slerp(context.transform.rotation, blackboard.moveToRotation, 3 * Time.deltaTime);
+            return State.Running;
+        }
+        else
+        {
             return State.Success;
-        
-        context.transform.rotation = Quaternion.Slerp(context.transform.rotation, blackboard.moveToRotation,3 * Time.deltaTime);
-        return State.Running;
+        }
     }
 }

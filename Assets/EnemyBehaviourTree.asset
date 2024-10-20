@@ -24,10 +24,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 0
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
 --- !u!114 &-5547318569231332128
@@ -54,10 +56,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   children:
@@ -87,10 +91,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   child: {fileID: 5873688865986017981}
@@ -110,7 +116,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: bb65a69eaf5244d4b95423b80c058817
-  position: {x: 542.92957, y: 301.59995}
+  position: {x: 543, y: 300.47913}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -119,10 +125,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   child: {fileID: 6922028017448870757}
@@ -150,10 +158,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 0
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   duration: 2
@@ -181,10 +191,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   duration: 1
@@ -212,10 +224,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 0
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 'Main player seen function
 
 '
@@ -247,10 +261,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
 --- !u!114 &-2927336941746671997
@@ -277,10 +293,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   child: {fileID: 3770352333475839482}
@@ -310,10 +328,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 0
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: we must run all of these at the same time
   drawGizmos: 0
   children:
@@ -362,10 +382,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
 --- !u!114 &1325767032127553648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,10 +412,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   speed: 5
@@ -423,10 +447,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 0
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   child: {fileID: -5547318569231332128}
@@ -454,10 +480,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 0
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   children:
@@ -490,10 +518,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 0
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: in case of failure, repeat
   drawGizmos: 0
   child: {fileID: -268853970919411774}
@@ -523,10 +553,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 0
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: search player after lost for 5 times, then return to idle path
   drawGizmos: 0
   child: {fileID: 3770352333475839482}
@@ -556,10 +588,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 0
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   speed: 5
@@ -589,10 +623,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 0
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   min: {x: -5, y: -5}
@@ -621,10 +657,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
   children:
@@ -656,10 +694,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
 --- !u!114 &8609969670504424971
@@ -686,9 +726,12 @@ MonoBehaviour:
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
     finalizedShearch: 1
+    doSlerp: 0
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    waypoints: []
   description: 
   drawGizmos: 0
+  currentWaypointIndex: 0
