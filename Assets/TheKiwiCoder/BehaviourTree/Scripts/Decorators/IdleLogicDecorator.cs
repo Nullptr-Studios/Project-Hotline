@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
-public class IdleLogic : DecoratorNode
+public class IdleLogicDecorator : DecoratorNode
 {
     private bool abortOnce = true;
     protected override void OnStart() {

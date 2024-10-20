@@ -2,46 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
+using Unity.Mathematics;
 
 public class SensePlayer : ActionNode
 {
     
-    private AISensor sensor;
-    private EnemyWeaponManager WeaponManager;
+    private AISensor _sensor;
+    private EnemyWeaponManager _weaponManager;
 
-    private bool usingWeapon = false;
+    private bool _usingWeapon = false;
     
-    private bool hasSensedPlayerBefore = false;
+    private bool _hasSensedPlayerBefore = false;
 
-    private long detectingFrames = 0;
+    private long _detectingFrames = 0;
+
+    private float _shootTimer = 0.0f;
     
     protected override void OnStart() 
     {
-        sensor = context.gameObject.GetComponent<AISensor>();
-        WeaponManager = context.gameObject.GetComponent<EnemyWeaponManager>();
+        _sensor = context.gameObject.GetComponent<AISensor>();
+        _weaponManager = context.gameObject.GetComponent<EnemyWeaponManager>();
         
-        hasSensedPlayerBefore = false;
-        detectingFrames = 0;
+        _hasSensedPlayerBefore = false;
+        _detectingFrames = 0;
     }
 
     protected override void OnStop() {
     }
 
     protected override State OnUpdate() {
-        if (sensor.isDetecting)
+        if (_sensor.isDetecting)
         {
-            if(sensor.detectedPlayer)
-                blackboard.playerPos = sensor.detectedPlayer.transform.position;
+            if(_sensor.detectedPlayer)
+                blackboard.playerPos = _sensor.detectedPlayer.transform.position;
             
             blackboard.seePlayer = true;
-            hasSensedPlayerBefore = true;
+            _hasSensedPlayerBefore = true;
             
             context.agent.stoppingDistance = blackboard.distanceToUseWeapon;
             
             context.agent.SetDestination(blackboard.playerPos);
             
             
-            if (context.agent.remainingDistance <= context.agent.stoppingDistance && detectingFrames != 0)
+            if (context.agent.remainingDistance <= context.agent.stoppingDistance && _detectingFrames != 0)
             {
                 //@TODO: Do this with slerp
                 Vector3 targetPos = blackboard.playerPos;
@@ -49,33 +52,47 @@ public class SensePlayer : ActionNode
                 targetPos.x = targetPos.x - thisPos.x;
                 targetPos.y = targetPos.y - thisPos.y;
                 float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-                context.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                
-                if (!usingWeapon)
+                Quaternion look = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+                context.transform.rotation = Quaternion.Slerp(context.transform.rotation, look, 3 * Time.deltaTime);
+
+                if (_shootTimer > blackboard.timeToStartShooting)
                 {
-                    WeaponManager.useWeapon(true);
-                    usingWeapon = true;
+                    if (!_usingWeapon)
+                    {
+                        _weaponManager.useWeapon(true);
+                        _usingWeapon = true;
+                    }
                 }
+                else
+                {
+                    _shootTimer += Time.deltaTime;
+                }
+                
+                
             }
             else
             {
-                if (usingWeapon)
+                if (_usingWeapon)
                 {
-                    WeaponManager.useWeapon(false);
-                    usingWeapon = false;
+                    _weaponManager.useWeapon(false);
+                    _usingWeapon = false;
                 }
+
+                _shootTimer = 0;
             }
             
-            detectingFrames++;
+            _detectingFrames++;
         }
-        else if (hasSensedPlayerBefore)
+        else if (_hasSensedPlayerBefore)
         {
             context.agent.stoppingDistance = 2f;
             
-            if (usingWeapon)
+            _shootTimer = 0;
+            
+            if (_usingWeapon)
             {
-                WeaponManager.useWeapon(false);
-                usingWeapon = false;
+                _weaponManager.useWeapon(false);
+                _usingWeapon = false;
             }
             
             if (context.agent.remainingDistance <= context.agent.stoppingDistance)
@@ -85,7 +102,7 @@ public class SensePlayer : ActionNode
                 return State.Success;
             }
 
-            detectingFrames = 0;
+            _detectingFrames = 0;
         }
         return State.Running;
     }

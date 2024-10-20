@@ -11,7 +11,18 @@ public class SetAllValuesToOverrider : ActionNode
     {
         ov = context.gameObject.GetComponent<EnemyBehaviourDataOverrider>();
 
-        blackboard.distanceToUseWeapon = ov.behaviourData.distanceToShoot;
+        if (ov && ov.behaviourData != null)
+        {
+            blackboard.distanceToUseWeapon = ov.behaviourData.distanceToShoot;
+            blackboard.timeToStartShooting = ov.behaviourData.timeToStartShooting;
+        }
+        else
+        {
+            Debug.LogWarning("EnemyBehaviour: " + context.gameObject.name + " does not have a data overrider, it will have default behaviour values");
+        }
+
+        blackboard.initialPos = context.transform.position;
+        blackboard.initialRotation = context.transform.rotation;
 
     }
 

@@ -11,11 +11,20 @@ namespace TheKiwiCoder {
     public class Blackboard
     {
         public Vector3 moveToPosition;
+        public Quaternion moveToRotation;
         public Vector3 playerPos;
+
+        public Vector3 initialPos;
+        public Quaternion initialRotation;
 
         public bool seePlayer;
         public bool finalizedShearch = true;
 
+        [Header("Enemy behaviour")]
         public float distanceToUseWeapon = 10;
+        public float timeToStartShooting = 1;
+
+        public bool returnToInitialPos = true;
+        public bool isStatic = true;
     }
 }
