@@ -19,7 +19,6 @@ public class NovelUIController : BaseDialogueUIController
     [SerializeField] private NovelUICharacter speaker;
     [SerializeField] private NovelUISprite sprite;
     [SerializeField] private Image continueButton;
-    [SerializeField] private CinemachineVirtualCamera dialogueCamera;
     private NovelOptionsController _optionsController;
     private Canvas _canvas;
     private PlayerIA _input;
@@ -130,14 +129,12 @@ public class NovelUIController : BaseDialogueUIController
     private void Show()
     {
         _canvas.enabled = true;
-        dialogueCamera.gameObject.SetActive(true);
         EnableInput();
     }
 
     public override void Close()
     {
         _canvas.enabled = false;
-        dialogueCamera.gameObject.SetActive(false);
         DisableInput();
     }
 
