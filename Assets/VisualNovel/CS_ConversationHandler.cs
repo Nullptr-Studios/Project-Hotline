@@ -1,6 +1,6 @@
 /*
- *  Start conversation logic. Send a message to NovelManager to start a conversation. StartConversation() uses an
- *  int ID from the ConversationRepo component. StartConversationByNAME lets you start a loaded conversation by
+ *  Start conversation logic. Send a message to NovelManager to start a conversation. StartVNConversation() uses an
+ *  int ID from the ConversationRepo component. StartVNConversationByName lets you start a loaded conversation by
  *  inputting the name instead.
  *
  *  Made by: Xein
@@ -28,6 +28,14 @@ public class ConversationHandler : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            StartVNConversation(0);
+        }
+    }
+
     /// <summary>
     /// Send a message to this script to start a conversation
     /// </summary>
@@ -38,5 +46,5 @@ public class ConversationHandler : MonoBehaviour
     /// Send a message to this script to start a conversation using its name
     /// </summary>
     /// <param name="name">Name of the conversation to load</param>
-    private void StartConversationByName(string name) => DialogueController.Instance.StartConversation(name);
+    private void StartVNConversationByName(string name) => DialogueController.Instance.StartConversation(name);
 }

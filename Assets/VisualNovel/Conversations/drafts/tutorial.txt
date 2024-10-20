@@ -1,0 +1,24 @@
+"Alright, kid. Time to prove yourself. End of this hallway? There’s a guy who needs to disappear. <speed=3><color=#FA2A2A>Take him out<speed=1><color=white>."
+"Move with <sprite=6>, get in close, and press <sprite=5> to stick 'em with your knife. Don't make me regret bringing you in. We’ll talk when it’s done. <registerbool=meleeTutorial>true</registerbool>"
+
+"Good. Now, grab the gun with <sprite=4> and head to the room above. There's another guy. Make sure he <speed=3><color=#FA2A2A>eats lead<speed=1><color=white>."
+"Once he's down, scoop up the briefcase with <sprite=2> and meet me back at the car. <speed=3>No<speed=1> loose ends. <registerbool=gunTutorial>true</registerbool>"
+
+"Not bad, kid. You handled yourself. We’re gonna do some big things together, you and me. <action=endTutorial>"
+
+{
+    "name": "endTutorial",
+    "type": "sendMessage",
+    "target": "LevelManager",
+    "message": "EndLevel"
+}
+
+SPRITES:
+0: Cross
+1: Circle
+2: Square
+3: Triangle
+4: R1
+5: R2
+6: L Stick
+7: R Stick
