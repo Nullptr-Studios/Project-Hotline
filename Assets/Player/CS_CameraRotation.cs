@@ -9,14 +9,14 @@ public class CameraRotation : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private GameObject player;
-    [SerializeField] private CinemachineVirtualCamera camera;
+    [SerializeField] private CinemachineVirtualCamera vcamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        baseRotation = camera.transform.eulerAngles.z;
+        baseRotation = vcamera.transform.eulerAngles.z;
 
-        if (player == null || camera == null)
+        if (player == null || vcamera == null)
         {
             Debug.LogWarning($"[Camera Rotation] {this.name}: No reference for player or camera. Disabling camera rotation.");
             gameObject.SetActive(false);
@@ -28,7 +28,7 @@ public class CameraRotation : MonoBehaviour
     {
         var distance = player.transform.position.x - transform.position.x;
         var rotation = maxRotation * Mathf.Clamp((distance / maxDistance), -1, 1) + baseRotation;
-        camera.transform.eulerAngles = new Vector3(0f, 0f, rotation);
+        vcamera.transform.eulerAngles = new Vector3(0f, 0f, rotation);
     }
 
 #if UNITY_EDITOR
