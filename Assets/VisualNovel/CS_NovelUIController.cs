@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using CC.DialogueSystem;
-using Cinemachine;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class NovelUIController : BaseDialogueUIController
@@ -22,7 +21,7 @@ public class NovelUIController : BaseDialogueUIController
     private NovelOptionsController _optionsController;
     private Canvas _canvas;
     private PlayerIA _input;
-    private PlayerInput _player;
+    [CanBeNull] private PlayerInput _player;
     
     private bool _isShowing;
     private bool _isAnimatingText;
@@ -39,7 +38,8 @@ public class NovelUIController : BaseDialogueUIController
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
         
-        _player = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+        if (GameObject.FindWithTag("Player") != null)
+            _player = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
         _input = new PlayerIA();
         
         _textSpeed = defaultTextSpeed;
@@ -145,14 +145,16 @@ public class NovelUIController : BaseDialogueUIController
         _input.Gameplay.Interact.performed += Interact;
         _input.Gameplay.Interact.canceled += Interact;
         
-        _player.OnDisable();
+        if (_player != null)
+            _player.OnDisable();
     }
 
     private void DisableInput()
     {
         _input.Gameplay.Interact.Disable();
         
-        _player.OnEnable();
+        if (_player != null)
+            _player.OnEnable();
     }
 
     #endregion
