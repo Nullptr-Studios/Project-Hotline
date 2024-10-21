@@ -259,6 +259,7 @@ MonoBehaviour:
   speaker: {fileID: 5911503744310695512}
   sprite: {fileID: 4245677748800856254}
   continueButton: {fileID: 2403437431126261358}
+  dialogueCamera: {fileID: 0}
   logInput: 0
 --- !u!1 &1937161800417992277
 GameObject:
@@ -569,7 +570,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Dialog \n\n6x38, 228 chars max"
+  m_text: 'Dialog <sprite=0> test
+
+
+    6x38, 228 chars max'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd062c0cea64fd241a61d21dbf1b5230, type: 2}
   m_sharedMaterial: {fileID: 128718551518401579, guid: fd062c0cea64fd241a61d21dbf1b5230, type: 2}
@@ -588,7 +592,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 24fc17ce64f00b44b92cc6417f3ee573, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901

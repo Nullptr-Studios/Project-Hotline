@@ -84,14 +84,15 @@ public class FireWeapon : Weapon
 #if UNITY_EDITOR
             if(log)
                 Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have fireWeaponData assigned!!!!!!!!");
+#endif              
         }
         if (!gunMuzzle)
         {
+#if UNITY_EDITOR
             if(log)
                 Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have gunMuzzle assigned!!!!!!!!");
+#endif
         }
-#endif        
-        
     }
 
     private void DoBulletVFX(GameObject VFX, RaycastHit2D hit)

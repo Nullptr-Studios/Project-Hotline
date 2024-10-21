@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Vector2 = UnityEngine.Vector2;
@@ -38,26 +37,25 @@ public class PlayerInput : MonoBehaviour
     {
         _input = new PlayerIA();
         _rb = GetComponent<Rigidbody2D>();
-        _camera = Camera.main;
+        _camera = GameObject.Find("Cinemachine Brain").GetComponent<Camera>();
+        
+        _input.Gameplay.Debug.performed += OnDebug;
+        _input.Gameplay.Movement.performed += OnMove;
+        _input.Gameplay.Movement.canceled += OnMove;
+        _input.Gameplay.Aim.performed += OnAim;
+        // _input.Gameplay.Aim.canceled += OnAim;
     }
 
     // NOTE: All Actions MUST be enabled AND disabled or code will explode (not joking) -x
     // Please enable them individually to avoid errors
-    private void OnEnable()
+    public void OnEnable()
     {
-        _input.Gameplay.Debug.performed += OnDebug;
         _input.Gameplay.Debug.Enable();
-        
-        _input.Gameplay.Movement.performed += OnMove;
-        _input.Gameplay.Movement.canceled += OnMove;
         _input.Gameplay.Movement.Enable();
-
-        _input.Gameplay.Aim.performed += OnAim;
-        // _input.Gameplay.Aim.canceled += OnAim;
         _input.Gameplay.Aim.Enable();
     }
     
-    private void OnDisable()
+    public void OnDisable()
     {
         //Reset Movement curves variables
         movementController.OnDisable();
