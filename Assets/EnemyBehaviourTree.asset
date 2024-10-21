@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7808836056307065234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbcff87445f36e4582938670d757ed5, type: 3}
+  m_Name: Succeed
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: ed925af78e32a5d4db1d36ea3b765ac0
+  position: {x: -82.01004, y: 28.000029}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
+    playerPos: {x: 0, y: 0, z: 0}
+    initialPos: {x: 0, y: 0, z: 0}
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+    seePlayer: 0
+    finalizedShearch: 1
+    doSlerp: 0
+    distanceToUseWeapon: 10
+    timeToStartShooting: 1
+    returnToInitialPos: 1
+    isStatic: 1
+    waypoints: []
+  description: Fail safe
+  drawGizmos: 0
+  child: {fileID: -268853970919411774}
 --- !u!114 &-6966228403497897799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,7 +352,7 @@ MonoBehaviour:
   state: 2
   started: 1
   guid: 694426bfff7d9bc4b8eae417568b4b64
-  position: {x: -255.20007, y: 96.80001}
+  position: {x: -254.00006, y: 123.45002}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -374,6 +407,7 @@ MonoBehaviour:
   - {fileID: 8609969670504424971}
   - {fileID: 1325767032127553648}
   - {fileID: 8000755662886063312}
+  - {fileID: -7808836056307065234}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -509,7 +543,7 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: 58f955774cc69964f871a0bd15404255
-  position: {x: -255.20001, y: -6.399994}
+  position: {x: -254.00009, y: -36.000004}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -526,7 +560,7 @@ MonoBehaviour:
     waypoints: []
   description: in case of failure, repeat
   drawGizmos: 0
-  child: {fileID: -268853970919411774}
+  child: {fileID: -7808836056307065234}
   restartOnSuccess: 1
   restartOnFailure: 0
 --- !u!114 &5178274741259517980
