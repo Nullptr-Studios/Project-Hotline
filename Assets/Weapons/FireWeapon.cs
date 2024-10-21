@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
 public class FireWeapon : Weapon
 {
@@ -11,6 +9,12 @@ public class FireWeapon : Weapon
     [Header("Fire Weapon")] 
     public FireWeaponData fireWeaponData;
 
+    public GameObject bulletHitWallVFX;
+    public GameObject bulletHitGlassVFX;
+    public GameObject bulletHitWallBangVFX;
+
+    public GameObject muzzleVFX;
+    
     //Gun muzzle wil be used for FX
     public Transform gunMuzzle;
     //The transform where the ray casts will be emitted
@@ -22,8 +26,7 @@ public class FireWeapon : Weapon
     //Fire rate global variables
     private float _fireRateTimer;
     private float _fireRateCurveTimer;
-
-    //@TODO: Fix initial spamming
+    
     private bool _wantsToFire;
     private bool _canFire = true;
 
@@ -53,7 +56,6 @@ public class FireWeapon : Weapon
         {
             if (fireWeaponData.useFireRateCurve)
             {
-                //@TODO: Fix Spamming issue
                 //so it fires as soon as it´s pressed
                 _fireRateTimer = fireWeaponData.fireRateCurve.Evaluate(0);
             }
@@ -68,7 +70,7 @@ public class FireWeapon : Weapon
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    protected override void Start()
     {
         //Implement Base class functionality
         base.Start();
@@ -82,10 +84,7 @@ public class FireWeapon : Weapon
 #if UNITY_EDITOR
             if(log)
                 Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have fireWeaponData assigned!!!!!!!!");
-#endif
         }
-        
-#if UNITY_EDITOR
         if (!gunMuzzle)
         {
             if(log)
@@ -95,9 +94,18 @@ public class FireWeapon : Weapon
         
     }
 
+    private void DoBulletVFX(GameObject VFX, RaycastHit2D hit)
+    {
+        //Do bulletHitVFX Wall
+        GameObject hitVFX = Instantiate(VFX, hit.point, new Quaternion());
+        hitVFX.transform.LookAt(hit.point + hit.normal);
+                
+        Destroy(hitVFX, 1);    
+    }
+
     private void Fire(Transform fireDir)
     {
-        //Raycast2D list
+        //Ray-cast2D list
         List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
         int amountHits = Physics2D.Raycast(fireDir.position, fireDir.right, new ContactFilter2D(), rayHitList);
 
@@ -138,6 +146,10 @@ public class FireWeapon : Weapon
                 
                 //Do trail
                 StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
+
+                //Bullet hit VFX
+                DoBulletVFX(bulletHitWallVFX, hit2D);
+                
                 break;
             }
 
@@ -151,6 +163,14 @@ public class FireWeapon : Weapon
                     //Do trail
                     StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
                     break;
+                }
+
+                if (layer == 7) //Glass
+                {
+                    DoBulletVFX(bulletHitGlassVFX, hit2D);
+                }else // wallbang
+                {
+                    DoBulletVFX(bulletHitWallBangVFX, hit2D);
                 }
 
                 currentPenetration++;
@@ -177,11 +197,13 @@ public class FireWeapon : Weapon
             //Do trail
             StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
             
+            DoBulletVFX(bulletHitWallVFX, hit2D);
+            
             //We treat default objects as walls
             break;
         }
 
-        /* There is a bug that does not render trails if there is no more colliders, wont fix since the game will take place indoors */
+        /* There is a bug that does not render trails if there is no more colliders, won't fix since the game will take place indoors */
         
 
     }
@@ -242,6 +264,11 @@ public class FireWeapon : Weapon
             }
         }
         
+        //Muzzle VFX
+        GameObject mVFX = Instantiate(muzzleVFX, gunMuzzle.transform);
+        mVFX.transform.forward = gunMuzzle.transform.right;
+        Destroy(mVFX, 1);
+        
         //subtract current ammo
         _currentAmmo--;
 
@@ -300,11 +327,6 @@ public class FireWeapon : Weapon
 
         instance.transform.position = EndPoint;
 
-        if (Hit.collider != null)
-        {
-            //@TODO: Do impact
-        }
-
         yield return new WaitForSeconds(ResourceManager.GetBulletTrailConfig().Duration);
         yield return null;
         instance.emitting = false;
@@ -312,8 +334,7 @@ public class FireWeapon : Weapon
         ResourceManager.GetBulletTrailPool().Release(instance);
     }
 
-
-    //@TODO: Fix initial spamming
+    
     /// <summary>
     /// Automatic, fire rate curve and dispersion curve logic
     /// </summary>

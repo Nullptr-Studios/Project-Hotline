@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Vector2 = UnityEngine.Vector2;
@@ -156,6 +157,7 @@ public class PlayerInput : MonoBehaviour
         
 #if UNITY_EDITOR
         Debug.Log("Debug Pressed " + context.duration);
+        SendMessage("OnKill");
 #endif
         
     }

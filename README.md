@@ -65,13 +65,13 @@ Project files are structured by object rather than by type. Example of a project
 
 ## Coding conventions
 
-All variables **MUST** be named using `camelCase`, putting a `_` prefix on private variables
+Public variables **MUST** be named with PascalCase. Private variables **MUST** be named using `camelCase`, putting a `_` prefix on Non Serialized private variables
 
 Constant are named using `SCREAMING_CASE`
 
-Functions and classes are named using `PascalCase` and **MUST** have proper documentation with parameters and returns (if not void)
+Functions, classes and GetSet variables are named using `PascalCase` and **MUST** have proper documentation with parameters and returns (if not void). Not having documentation with result on the dismission of a pull request
 
-When using `Debug.Log("message");`, a variable must be declared so it can be turn on or off. 
+When using `Debug.Log("message");`, a variable must be declared so it can be turn on or off. You **MUST** provide the name of the script that is calling the function. Warnings and errors don't need to have a variable to disable them as they are critical for development.
 Variable **MUST** be declared like this: 
 ```csharp
 #if UNITY_EDITOR
@@ -81,7 +81,7 @@ Variable **MUST** be declared like this:
 
 // Example of Log
 #if UNITY_EDITOR
-if (log) Debug.Log("message");
+if (log) Debug.Log($"{this.name}: message");
 #endif
 ```
 Remember to put debug staff on compiler IFs so they aren't included on build
