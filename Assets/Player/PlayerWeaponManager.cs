@@ -127,6 +127,7 @@ public class PlayerWeaponManager : MonoBehaviour
     }
 
     // Throw and get logic
+    // I dont like this implementation on the fucking update cuz i cant call it  -x
     private void Update()
     {
         if (_isWeaponHeld)

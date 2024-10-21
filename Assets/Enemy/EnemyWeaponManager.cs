@@ -113,7 +113,7 @@ public class EnemyWeaponManager : MonoBehaviour
     
     /*private void ThrowOrGetOnPerformed(InputAction.CallbackContext context)
     {
-        _wantsToThrowOrGet = context.ReadValueAsButton();
+        WantsToThrowOrGet = context.ReadValueAsButton();
     }*/
     
     /// <summary>

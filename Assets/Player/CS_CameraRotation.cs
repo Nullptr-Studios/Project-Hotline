@@ -34,10 +34,13 @@ public class CameraRotation : MonoBehaviour
 #if UNITY_EDITOR
 
     [Header("Debug")]
+    [SerializeField] private bool drawGizmos = true;
     [SerializeField] private float lineLength;
 
     private void OnDrawGizmos()
     {
+        if (!drawGizmos) return;
+        
         // World divider gizmo
         var startPos = new Vector3(transform.position.x, transform.position.y + lineLength/2, transform.position.z);
         var endPos = new Vector3(transform.position.x, transform.position.y - lineLength/2, transform.position.z);
