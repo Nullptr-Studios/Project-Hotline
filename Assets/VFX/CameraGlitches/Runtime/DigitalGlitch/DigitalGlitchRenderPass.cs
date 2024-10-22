@@ -1,3 +1,5 @@
+#pragma warning disable 0618
+
 using System;
 using UnityEngine;
 using UnityEngine.Rendering;

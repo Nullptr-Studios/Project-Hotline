@@ -13,7 +13,7 @@ public class PlayerHealth : Damageable
     [SerializeField] private Canvas deathScreenUI;
     [SerializeField] [CanBeNull] private GameObject mainCamera;
     private bool _disableFX;
-    private PlayerInput _player;
+    private PlayerMovement _player;
     private PlayerIA _input;
 
     public bool IsDead { get; private set; }
@@ -26,7 +26,7 @@ public class PlayerHealth : Damageable
     {
         base.Start();
 
-        _player = GetComponent<PlayerInput>();
+        _player = GetComponent<PlayerMovement>();
 
         if (mainCamera == null)
         {
