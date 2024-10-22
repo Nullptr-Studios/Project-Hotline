@@ -57,7 +57,7 @@ public class BloodManager : MonoBehaviour
                 
                 //sprite shit
                 SpriteRenderer sprW = wallB.GetComponent<SpriteRenderer>();
-                sprW.sortingOrder = 0;
+                sprW.sortingOrder = 2;
                 sprW.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
 
                 //Script

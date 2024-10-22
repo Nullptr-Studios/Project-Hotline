@@ -30,5 +30,7 @@ namespace TheKiwiCoder {
         public bool isStatic = true;
 
         public List<Vector2> waypoints;
+
+        public int searchTimes = 3;
     }
 }

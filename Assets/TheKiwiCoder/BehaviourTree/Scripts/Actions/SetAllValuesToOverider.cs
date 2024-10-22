@@ -19,6 +19,8 @@ public class SetAllValuesToOverrider : ActionNode
             blackboard.returnToInitialPos = ov.behaviourData.returnToInitialSpot;
             blackboard.isStatic = ov.behaviourData.isStatic;
             blackboard.waypoints = ov.behaviourData.waypoints;
+
+            blackboard.searchTimes = ov.behaviourData.searchTimes;
         }
         else
         {

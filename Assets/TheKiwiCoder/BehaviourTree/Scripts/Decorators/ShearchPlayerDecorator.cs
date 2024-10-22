@@ -6,12 +6,12 @@ using TheKiwiCoder;
 public class ConditionalSeenPlayer : DecoratorNode
 {
 
-    public int repeatTimes = 2;
+    //public int repeatTimes = 2;
     
     [SerializeField] private int currentRepeatTimes = 0;
     protected override void OnStart() 
     {
-        currentRepeatTimes = repeatTimes;
+        currentRepeatTimes = blackboard.searchTimes;
     }
 
     protected override void OnStop() {
@@ -36,7 +36,7 @@ public class ConditionalSeenPlayer : DecoratorNode
         {
             child.Abort();
             blackboard.finalizedShearch = true;
-            currentRepeatTimes = repeatTimes;
+            currentRepeatTimes = blackboard.searchTimes;
         }
         return State.Running;
     }
