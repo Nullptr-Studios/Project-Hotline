@@ -35,7 +35,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Awake()
     {
-        _input = new PlayerIA();
+        _input = ResourceManager.GetPlayerIA();
         _rb = GetComponent<Rigidbody2D>();
         _camera = GameObject.Find("Cinemachine Brain").GetComponent<Camera>();
         
@@ -44,6 +44,7 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Movement.canceled += OnMove;
         _input.Gameplay.Aim.performed += OnAim;
         // _input.Gameplay.Aim.canceled += OnAim;
+        
     }
 
     // NOTE: All Actions MUST be enabled AND disabled or code will explode (not joking) -x
@@ -53,6 +54,10 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Debug.Enable();
         _input.Gameplay.Movement.Enable();
         _input.Gameplay.Aim.Enable();
+        
+        _input.Gameplay.ThrowOrGet.Enable();
+        _input.Gameplay.Fire.Enable();
+        _input.Gameplay.SwitchWeapons.Enable();
     }
     
     public void OnDisable()
@@ -63,6 +68,10 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Debug.Disable();   
         _input.Gameplay.Movement.Disable();
         _input.Gameplay.Aim.Disable();
+        
+        _input.Gameplay.ThrowOrGet.Disable();
+        _input.Gameplay.Fire.Disable();
+        _input.Gameplay.SwitchWeapons.Disable();
     }
     
     private void Update()

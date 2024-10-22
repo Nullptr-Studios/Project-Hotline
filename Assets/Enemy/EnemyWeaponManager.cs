@@ -36,14 +36,6 @@ public class EnemyWeaponManager : MonoBehaviour
     private int _currentIndex;
 
     private bool _wantsToFire;
-    
-    private void OnDisable()
-    {
-        /*_playerInput.Gameplay.ThrowOrGet.Disable();
-        _playerInput.Gameplay.Fire.Disable();
-        _playerInput.Gameplay.SwitchWeapons.Disable();*/
-
-    }
 
     // Setting all inputs and variables
     void Start()
@@ -75,14 +67,14 @@ public class EnemyWeaponManager : MonoBehaviour
         _playerInput.Gameplay.SwitchWeapons.Enable();*/
     }
 
-    private void SwitchWeaponsOnPerformed(InputAction.CallbackContext context)
+    /*private void SwitchWeaponsOnPerformed(InputAction.CallbackContext context)
     {
         //Do only if performed, not cancelled
         if (context.performed)
         {
             SwitchWeapon();
         }
-    }
+    }*/
 
     /// <summary>
     /// On fire logic that calls Weapon->Use(_wantsToFire)
@@ -103,6 +95,19 @@ public class EnemyWeaponManager : MonoBehaviour
         }
     }*/
 
+    public void DropWeapon()
+    {
+        if (_isWeaponHeld)
+        {
+            _heldWeaponInterface.Drop();
+            
+            _heldWeaponInterface = null;
+            _heldWeaponGameObject[_currentIndex] = null;
+                
+            _isWeaponHeld = false;
+        }
+    }
+
     public void useWeapon(bool fire)
     {
         if (_isWeaponHeld)
@@ -119,7 +124,7 @@ public class EnemyWeaponManager : MonoBehaviour
     /// <summary>
     /// Switch weapon logic
     /// </summary>
-    private void SwitchWeapon()
+    /*private void SwitchWeapon()
     {
         //In case current index is null
         if (_heldWeaponGameObject[_currentIndex] != null)
@@ -144,10 +149,10 @@ public class EnemyWeaponManager : MonoBehaviour
             _heldWeaponGameObject[_currentIndex].gameObject.TryGetComponent(out _heldWeaponInterface);
             _isWeaponHeld = true;
         }
-    }
+    }*/
 
     // Throw and get logic
-    private void Update()
+    /*private void Update()
     {
         if (_isWeaponHeld)
         {
@@ -218,18 +223,18 @@ public class EnemyWeaponManager : MonoBehaviour
             _wantsToThrowOrGet = false;
         }
 
-    }
+    }*/
 
-    private bool IsCurrentIndexAlreadyEquipped()
+    /*private bool IsCurrentIndexAlreadyEquipped()
     {
         return _heldWeaponGameObject[_currentIndex] != null;
-    }
+    }*/
 
     /// <summary>
     /// As _heldWeaponGameObject contains nulls we need to do this
     /// </summary>
     /// <returns></returns>
-    private bool CanEquipMoreWeapons()
+    /*private bool CanEquipMoreWeapons()
     {
         int notNulls = 0;
         foreach (var w in _heldWeaponGameObject)
@@ -241,7 +246,7 @@ public class EnemyWeaponManager : MonoBehaviour
         }
 
         return notNulls < _maxWeaponsEquipped;
-    }
+    }*/
 
     /// <summary>
     /// Checks which weapon is the closest to the player
@@ -249,7 +254,7 @@ public class EnemyWeaponManager : MonoBehaviour
     /// <param name="hitArr">The hit array</param>
     /// <param name="hitNumber">Amount of hits</param>
     /// <returns>The closest weapon index</returns>
-    private int DecideWeapon(RaycastHit2D[] hitArr, int hitNumber)
+    /*private int DecideWeapon(RaycastHit2D[] hitArr, int hitNumber)
     {
         if (hitNumber >= 2)
         {
@@ -288,6 +293,6 @@ public class EnemyWeaponManager : MonoBehaviour
         if(drawGizmos)
             Gizmos.DrawWireSphere(transform.position, pickupRange/2);
     }
-#endif
+#endif*/
     
 }
