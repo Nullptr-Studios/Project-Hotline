@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDamageable : Damageable
+public class  EnemyDamageable : Damageable
 {
     public GameObject bloodEffectManager;
     // Start is called before the first frame update
