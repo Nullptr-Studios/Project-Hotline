@@ -27,8 +27,6 @@ public class PlayerInput : MonoBehaviour
     private Vector3 _currentDir;
     private Vector3 _dir;
 
-    private PlayerInput _playerI;
-
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool debugSpeed;
@@ -46,8 +44,6 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Movement.canceled += OnMove;
         _input.Gameplay.Aim.performed += OnAim;
         // _input.Gameplay.Aim.canceled += OnAim;
-
-        _playerI = GetComponent<PlayerInput>();
     }
 
     // NOTE: All Actions MUST be enabled AND disabled or code will explode (not joking) -x
