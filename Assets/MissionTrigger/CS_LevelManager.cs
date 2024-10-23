@@ -52,6 +52,17 @@ public class LevelManager : MonoBehaviour
         
     }
 
+    public void OpenScore()
+    {
+        
+#if UNITY_EDITOR
+        if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Opening Score...");
+#endif
+        
+        //TODO: Open score screen logic here
+        SceneManager.LoadScene("MainMenu");
+    }
+
     private void EndLevel()
     {
         //TODO: Make this go to next scene instead
