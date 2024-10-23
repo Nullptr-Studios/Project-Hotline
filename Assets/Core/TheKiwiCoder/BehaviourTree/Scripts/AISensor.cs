@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TheKiwiCoder;
 using UnityEngine;
 
 public class AISensor : MonoBehaviour
@@ -63,6 +64,21 @@ public class AISensor : MonoBehaviour
             GameObject obj = _colliders[i].gameObject;
             if (IsInSight(obj))
             {
+                PlayerHealth ph = obj.GetComponent<PlayerHealth>();
+                if (ph && ph.IsDead)
+                {
+                    detectedPlayer = null;
+                    isDetecting = false;
+
+                    //Disable tree
+                    GetComponent<BehaviourTreeRunner>().enabled = false;
+                    GetComponent<EnemyWeaponManager>().useWeapon(false);
+
+                    this.enabled = false;
+                    
+                    break;
+                }
+                
                 detectedPlayer = obj;
                 isDetecting = true;
                 

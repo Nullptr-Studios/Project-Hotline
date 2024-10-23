@@ -18,6 +18,8 @@ public class PlayerHealth : Damageable
     private PlayerMovement _player;
     private PlayerIA _input;
 
+    private Vector3 _lastShootDir;
+
     public bool IsDead { get; private set; }
 
 #if UNITY_EDITOR
@@ -40,30 +42,28 @@ public class PlayerHealth : Damageable
         _input.Gameplay.Interact.performed += RestartGame;
     }
 
-    public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint)
+    public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
     {
-        base.DoDamage(amount, shootDir, hitPoint);
-
+        _lastShootDir = shootDir;
         GameObject bulletManager = Instantiate(bloodEffectManager, hitPoint, new Quaternion());
-        bulletManager.transform.right = shootDir;
+        bulletManager.transform.right = _lastShootDir;
+        
+        base.DoDamage(amount, shootDir, hitPoint);
     }
 
     public override void OnDead()
     {
         IsDead = true;  
         _player.OnDisable(); // Deactivates all inputs from the game
-        StartCoroutine(OpenDeathScreen(deathScreenDelay));
+        
+        Invoke("OpenDeathScreen", deathScreenDelay);
     }
 
     /// <summary>
-    /// Opens death screen after an ammount of seconds seconds
+    /// Opens death screen after an amount of seconds
     /// </summary>
-    /// <param=time>Time to wait</param>
-    /// <returns>Time to wait</returns>
-    private IEnumerator OpenDeathScreen(float time)
+    private void OpenDeathScreen()
     {
-        yield return new WaitForSeconds(time);
-
         // Have to deactivate pixel perfect camera as it disables antialiasing so the shader won't work
         // TODO: Look y the shader doesnt work w/o antialiasing
         if (!_disableFX) mainCamera!.GetComponent<PixelPerfectCamera>().enabled = false;
