@@ -7,38 +7,68 @@ public class ResourceManager : MonoBehaviour
 {
     public BulletTrailConfig bulletTrailConfig;
     public BloodConfig bloodConfig;
+    public CorpseConfig corpseConfig;
     
     //Static shit
     private static BulletTrailConfig _bulletTrailConfig;
+    private static CorpseConfig _corpseConfig;
+    
     //This is done here so enemies can share the same pool
     private static ObjectPool<TrailRenderer> _bulletTrailPool;
     private static ObjectPool<GameObject> _bloodPool;
+    private static ObjectPool<GameObject> _corpsePool;
 
 
     public static ObjectPool<GameObject> GetBloodPool()
     {
         return _bloodPool;
     }
-    
-    public static BulletTrailConfig GetBulletTrailConfig()
-    {
-        return _bulletTrailConfig;
-    }
     public static ObjectPool<TrailRenderer> GetBulletTrailPool()
     {
         return _bulletTrailPool;
     }
+    public static ObjectPool<GameObject> GetCorpsePool()
+    {
+        return _corpsePool;
+    }
     
+    public static BulletTrailConfig GetBulletTrailConfig()
+    { 
+        return _bulletTrailConfig;
+    }
+    public static CorpseConfig GetCorpseConfig()
+    {
+        return _corpseConfig;
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
+        //Static shit
         _bulletTrailConfig = bulletTrailConfig;
+        _corpseConfig = corpseConfig;
         
         //initialize trail pooling
         _bulletTrailPool = new ObjectPool<TrailRenderer>(CreateTrail);
 
         //blood
         _bloodPool = new ObjectPool<GameObject>(CreateBlood);
+
+        _corpsePool = new ObjectPool<GameObject>(CreateCorpse);
+    }
+
+    private GameObject CreateCorpse()
+    {
+        GameObject instance = new GameObject("Corpse");
+        instance.transform.parent = transform;
+
+        instance.tag = "Corpse";
+        
+        SpriteRenderer spr = instance.AddComponent<SpriteRenderer>();
+        spr.sprite = corpseConfig.Sprites[UnityEngine.Random.Range(0, corpseConfig.Sprites.Count - 1)];
+        spr.material = corpseConfig.Material;
+        spr.sortingOrder = -1;
+        return instance;
     }
 
     private GameObject CreateBlood()
@@ -46,6 +76,8 @@ public class ResourceManager : MonoBehaviour
         GameObject instance = new GameObject("BloodSplatter");
         instance.tag = "Blood";
         instance.transform.parent = transform;
+        instance.transform.eulerAngles = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));
+
         
         SpriteRenderer spr = instance.AddComponent<SpriteRenderer>();
         spr.sprite = bloodConfig.Sprites[UnityEngine.Random.Range(0, bloodConfig.Sprites.Count - 1)];

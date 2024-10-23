@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 620825279225639238}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: weaponholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ Transform:
   - {fileID: 8299933761365119448}
   - {fileID: 620825279225639238}
   m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &4320165183307307060
 NavMeshAgent:
@@ -263,6 +263,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
+  weaponHandler: {fileID: 620825279225639238}
+  stunCooldown: 1
 --- !u!114 &8546987331332865949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa78ab6e146158b4d8ea601843126a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviourData: {fileID: 0}
+  behaviourData: {fileID: 11400000, guid: 993091c46f483664a8a8c63b423f6631, type: 2}
 --- !u!114 &5774344439103843990
 MonoBehaviour:
   m_ObjectHideFlags: 0
