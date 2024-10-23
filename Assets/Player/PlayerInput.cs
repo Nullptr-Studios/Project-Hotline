@@ -27,6 +27,8 @@ public class PlayerInput : MonoBehaviour
     private Vector3 _currentDir;
     private Vector3 _dir;
 
+    private PlayerWeaponManager _weaponManager;
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool debugSpeed;
@@ -35,9 +37,10 @@ public class PlayerInput : MonoBehaviour
 
     private void Awake()
     {
-        _input = ResourceManager.GetPlayerIA();
+        _input = new PlayerIA();
         _rb = GetComponent<Rigidbody2D>();
         _camera = GameObject.Find("Cinemachine Brain").GetComponent<Camera>();
+        _weaponManager = GetComponent<PlayerWeaponManager>();
         
         _input.Gameplay.Debug.performed += OnDebug;
         _input.Gameplay.Movement.performed += OnMove;
@@ -54,10 +57,8 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Debug.Enable();
         _input.Gameplay.Movement.Enable();
         _input.Gameplay.Aim.Enable();
-        
-        _input.Gameplay.ThrowOrGet.Enable();
-        _input.Gameplay.Fire.Enable();
-        _input.Gameplay.SwitchWeapons.Enable();
+
+        _weaponManager.EnableInput();
     }
     
     public void OnDisable()
@@ -68,12 +69,11 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Debug.Disable();   
         _input.Gameplay.Movement.Disable();
         _input.Gameplay.Aim.Disable();
-        
-        _input.Gameplay.ThrowOrGet.Disable();
-        _input.Gameplay.Fire.Disable();
-        _input.Gameplay.SwitchWeapons.Disable();
+
+        _weaponManager.DisableInput();
+
     }
-    
+
     private void Update()
     {
         // Movement stuff

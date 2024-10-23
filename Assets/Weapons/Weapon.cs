@@ -65,7 +65,8 @@ public class Weapon : MonoBehaviour, IWeapon
 
     protected virtual void Start()
     {
-        AddRb();
+        if(!_held)
+            AddRb();
     }
 
     /// <summary>
@@ -74,10 +75,6 @@ public class Weapon : MonoBehaviour, IWeapon
     private void AddRb()
     {
         _rb = gameObject.AddComponent<Rigidbody2D>();
-        
-        //Idunno but sometimes this happens xd
-        if (!_rb)
-            _rb = gameObject.GetComponent<Rigidbody2D>();
         
         _rb.mass = 0.1f;
         _rb.gravityScale = 0;

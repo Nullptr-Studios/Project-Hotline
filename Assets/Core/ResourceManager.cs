@@ -12,8 +12,6 @@ public class ResourceManager : MonoBehaviour
     //Static shit
     private static BulletTrailConfig _bulletTrailConfig;
     private static CorpseConfig _corpseConfig;
-
-    private static PlayerIA _playerIa;
     
     //This is done here so enemies can share the same pool
     private static ObjectPool<TrailRenderer> _bulletTrailPool;
@@ -43,20 +41,12 @@ public class ResourceManager : MonoBehaviour
         return _corpseConfig;
     }
 
-    public static PlayerIA GetPlayerIA()
-    {
-        if (_playerIa == null)
-            _playerIa = new PlayerIA();
-        
-        return _playerIa;
-    }
     // Start is called before the first frame update
     void Awake()
     {
         //Static shit
         _bulletTrailConfig = bulletTrailConfig;
         _corpseConfig = corpseConfig;
-        //_playerIa = new PlayerIA();
         
         //initialize trail pooling
         _bulletTrailPool = new ObjectPool<TrailRenderer>(CreateTrail);
@@ -71,6 +61,8 @@ public class ResourceManager : MonoBehaviour
     {
         GameObject instance = new GameObject("Corpse");
         instance.transform.parent = transform;
+
+        instance.tag = "Corpse";
         
         SpriteRenderer spr = instance.AddComponent<SpriteRenderer>();
         spr.sprite = corpseConfig.Sprites[UnityEngine.Random.Range(0, corpseConfig.Sprites.Count - 1)];
