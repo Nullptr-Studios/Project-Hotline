@@ -202,6 +202,17 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""358e8cf9-2b70-4b18-9f93-800c5cef94ef"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowOrGet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""368c8ebd-eef2-46e0-9775-3e02708b6a8a"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -224,6 +235,17 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""34854ebe-772a-4abe-91e1-2efd612a6464"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""143a5cf3-1de7-433c-9d5f-252c6b56eb48"",
                     ""path"": ""<Mouse>/backButton"",
                     ""interactions"": """",
@@ -237,6 +259,28 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""de1d9d39-f6d7-4f61-82d7-3e63cf251a2a"",
                     ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8049374e-f23d-4b28-a246-ed755711c8a1"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65fbb63f-bd29-4909-b13e-f6cd2376ff81"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

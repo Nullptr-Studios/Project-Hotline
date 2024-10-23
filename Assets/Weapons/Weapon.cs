@@ -30,6 +30,8 @@ public interface IWeapon
 
     public void Throw(Vector2 forwardVector);
 
+    public void Drop();
+
     public void Use(bool pressed);
 }
 
@@ -63,7 +65,8 @@ public class Weapon : MonoBehaviour, IWeapon
 
     protected virtual void Start()
     {
-        AddRb();
+        if(!_held)
+            AddRb();
     }
 
     /// <summary>
@@ -72,6 +75,7 @@ public class Weapon : MonoBehaviour, IWeapon
     private void AddRb()
     {
         _rb = gameObject.AddComponent<Rigidbody2D>();
+        
         _rb.mass = 0.1f;
         _rb.gravityScale = 0;
         _rb.drag = 1;
@@ -113,6 +117,25 @@ public class Weapon : MonoBehaviour, IWeapon
         _rb.velocity = forwardVector * throwForce;
         _rb.angularVelocity = Random.Range(-rotationForce,rotationForce);
         
+        
+        transform.parent = null;
+        
+        gfxCollider2D.enabled = true;
+        
+        _held = false;
+        
+        //reset Use
+        Use(false);
+    }
+
+    public virtual void Drop()
+    {
+        if (!_held)
+            return;
+        
+        AddRb();
+
+        _rb.angularVelocity = Random.Range(-(rotationForce / 2), rotationForce / 2);
         
         transform.parent = null;
         

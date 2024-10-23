@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class FireWeapon : Weapon
 {
@@ -44,6 +46,11 @@ public class FireWeapon : Weapon
     public override int UsesLeft()
     {
         return _currentAmmo;
+    }
+
+    private void Awake()
+    {
+        weaponType = EWeaponType.Fire;
     }
 
     /// <summary>
@@ -139,7 +146,11 @@ public class FireWeapon : Weapon
 #endif
             //Do damage to all surfaces
             if (hit2D.transform.TryGetComponent(out IDamageable damageableInterface))
-                damageableInterface.DoDamage(1, fireDir.right, hit2D.point);
+                damageableInterface.DoDamage(1, fireDir.right, hit2D.point, weaponType);
+            
+            //Ignore weapon layer
+            if (layer == 3)
+                continue;
 
             if (layer == 6) //wall
             {  

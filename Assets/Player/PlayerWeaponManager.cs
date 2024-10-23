@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class PlayerWeaponManager : MonoBehaviour
 {
+    public GameObject spawningWeapon;
     
     [Header("Pickup")]
     public float pickupRange = 2.0f;
@@ -35,7 +36,14 @@ public class PlayerWeaponManager : MonoBehaviour
 
     private bool _wantsToFire;
     
-    private void OnDisable()
+    public void EnableInput()
+    {
+        _playerInput.Gameplay.ThrowOrGet.Enable();
+        _playerInput.Gameplay.Fire.Enable();
+        _playerInput.Gameplay.SwitchWeapons.Enable();
+    }
+
+    public void DisableInput()
     {
         _playerInput.Gameplay.ThrowOrGet.Disable();
         _playerInput.Gameplay.Fire.Disable();
@@ -43,29 +51,31 @@ public class PlayerWeaponManager : MonoBehaviour
 
     }
 
-    private void Awake()
-    {
-        // This was throwing an error so I moved it here -x
-        _playerInput = new PlayerIA();
-    }
-
     // Setting all inputs and variables
-    void Start()
+    void Awake()
     {
         //All maximum elements needs to be null
         for (int i = 0; i < maxWeaponsEquipped; i++)
         {
             _heldWeaponGameObject.Add(null);
         }
+    
+        //###############################################
+        //#####This is just a placeholder for now########
+        //###############################################
+        if (spawningWeapon)
+        {
+            Instantiate(spawningWeapon, transform.position, new Quaternion());
+            _wantsToThrowOrGet = true;
+        }
+        //###############################################
+
+        _playerInput = new PlayerIA();
         
         _playerInput.Gameplay.ThrowOrGet.performed += ThrowOrGetOnPerformed;
         _playerInput.Gameplay.Fire.performed += OnFire;
         _playerInput.Gameplay.Fire.canceled += OnFire;
         _playerInput.Gameplay.SwitchWeapons.performed += SwitchWeaponsOnPerformed;
-        
-        _playerInput.Gameplay.ThrowOrGet.Enable();
-        _playerInput.Gameplay.Fire.Enable();
-        _playerInput.Gameplay.SwitchWeapons.Enable();
     }
 
     private void SwitchWeaponsOnPerformed(InputAction.CallbackContext context)

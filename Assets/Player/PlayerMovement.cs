@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         _input = new PlayerIA();
         _rb = GetComponent<Rigidbody2D>();
         _camera = GameObject.Find("Cinemachine Brain").GetComponent<Camera>();
+        _weaponManager = GetComponent<PlayerWeaponManager>();
         
         _input.Gameplay.Debug.performed += OnDebug;
         _input.Gameplay.Movement.performed += OnMove;
@@ -115,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
         _input.Gameplay.Movement.Enable();
         _input.Gameplay.Aim.Enable();
         _input.Gameplay.AimMouse.Enable();
+
+        _weaponManager.EnableInput();
     }
     
     public void OnDisable()
@@ -126,8 +129,11 @@ public class PlayerMovement : MonoBehaviour
         _input.Gameplay.Movement.Disable();
         _input.Gameplay.Aim.Disable();
         _input.Gameplay.AimMouse.Disable();
+
+        _weaponManager.DisableInput();
+
     }
-    
+
     private void Update()
     {
         // Movement stuff
