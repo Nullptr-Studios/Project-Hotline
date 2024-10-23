@@ -94,7 +94,7 @@ public class BloodManager : MonoBehaviour
             }
 
 
-            Vector3 randLocInRange = splatterTransform.right * UnityEngine.Random.Range(currentMaxTravelDistance * .15f, currentMaxTravelDistance);
+            Vector3 randLocInRange = splatterTransform.right * UnityEngine.Random.Range(0, currentMaxTravelDistance);
             
             GameObject floorB = ResourceManager.GetBloodPool().Get();
 

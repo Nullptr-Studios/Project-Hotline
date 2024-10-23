@@ -1,3 +1,4 @@
+using CC.MessagingCentre;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,6 +57,9 @@ public class EnemyDamageable : Damageable
         com.CorpseAddForceInDir(_lastShootDir);
         
         _enemyWeaponManager.DropWeapon();
+
+        //Send kill message
+        ScoreManager.AddKill();
         
         Destroy(gameObject);
     }
