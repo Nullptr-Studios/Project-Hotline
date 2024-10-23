@@ -98,9 +98,11 @@ public class PlayerWeaponManager : MonoBehaviour
     /// </summary>
     private void OnFire(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !_reloading)
         {
             _wantsToFire = true;
+            _ammoPrompt.SubtractBullet();
+            _bulletsUITimer = 0;
         }else if (context.canceled)
         {
             _wantsToFire = false;
@@ -144,6 +146,11 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponGameObject[_currentIndex].gameObject.SetActive(true);
             _heldWeaponGameObject[_currentIndex].gameObject.TryGetComponent(out _heldWeaponInterface);
             _isWeaponHeld = true;
+            
+            if(_heldWeaponInterface.MaxUses() != -1)
+                _ammoPrompt.SetMaxAmmo(_heldWeaponInterface.UsesLeft(), 8);
+            else
+                _ammoPrompt.DoHide();
         }
     }
 
@@ -158,6 +165,10 @@ public class PlayerWeaponManager : MonoBehaviour
                 _progressBar.BeginTimer(_heldWeaponInterface.ReloadTime());
 
                 _reloading = true;
+                
+                //This is one of the most crappy fixes, but im tired, end my suffering
+                //Substarct one bullet more just in case
+                _ammoPrompt.SubtractBullet();
 
                 Invoke("FinishReload", _heldWeaponInterface.ReloadTime());
 
@@ -165,7 +176,7 @@ public class PlayerWeaponManager : MonoBehaviour
 
             if (_wantsToFire)
             {
-                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses())
+                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses() && !_reloading)
                 {
                     _bulletsUITimer = 0;
                     _ammoPrompt.SubtractBullet();
@@ -190,6 +201,8 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponGameObject[_currentIndex] = null;
                 
             _isWeaponHeld = false;
+            
+            _ammoPrompt.DoHide();
 
             //reset input variable
             _wantsToThrowOrGet = false;
@@ -221,8 +234,14 @@ public class PlayerWeaponManager : MonoBehaviour
                             if (!IsCurrentIndexAlreadyEquipped())
                             {
                                 _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
-
+                                
                                 _heldWeaponInterface.Pickup(weaponHolder);
+
+                                if (_heldWeaponInterface.MaxUses() != -1)
+                                    _ammoPrompt.SetMaxAmmo(_heldWeaponInterface.UsesLeft(), 8);
+                                else
+                                    _ammoPrompt.DoHide();
+                                
                                 _isWeaponHeld = true;
                             }
                             //This won't ever happen as if you have a weapon already equipped it will throw it, but just in case
@@ -235,7 +254,7 @@ public class PlayerWeaponManager : MonoBehaviour
 
                                 _heldWeaponInterface.Pickup(weaponHolder);
 
-                                _ammoPrompt.SetMaxAmmo(24, 8);
+                                
 
                                 _isWeaponHeld = true;
                             }
@@ -257,8 +276,9 @@ public class PlayerWeaponManager : MonoBehaviour
     private void FinishReload()
     {
         _reloading = false;
+        _wantsToFire = false;
 
-        _ammoPrompt.SetMaxAmmo(24, 8);
+        _ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
     }
 
     private bool IsCurrentIndexAlreadyEquipped()

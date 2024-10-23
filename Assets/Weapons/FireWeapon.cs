@@ -82,6 +82,7 @@ public class FireWeapon : Weapon
             {
                 //so it fires as soon as it´s pressed
                 _fireRateTimer = fireWeaponData.fireRateCurve.Evaluate(0);
+                _currentTimeToFire = _fireRateTimer;
             }
         }
         else
