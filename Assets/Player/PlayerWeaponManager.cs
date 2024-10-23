@@ -26,6 +26,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private bool _isWeaponHeld;
     private bool _wantsToThrowOrGet;
     [SerializeField] ProgressBar _progressBar;
+    [SerializeField] AmmoPrompt _ammoPrompt;
 
     private PlayerIA _playerInput;
     
@@ -37,6 +38,8 @@ public class PlayerWeaponManager : MonoBehaviour
     private bool _wantsToFire;
 
     private bool _reloading;
+
+    private float _bulletsUITimer = 0.0f;
     
     private void OnDisable()
     {
@@ -144,7 +147,22 @@ public class PlayerWeaponManager : MonoBehaviour
                 Invoke("FinishReload", _heldWeaponInterface.ReloadTime());
 
             }
+
+            if (_wantsToFire)
+            {
+                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses())
+                {
+                    _bulletsUITimer = 0;
+                    _ammoPrompt.SubtractBullet();
+                }
+                else
+                {
+                    _bulletsUITimer += Time.deltaTime;
+                }
+            }
         }
+
+       
 
         if (_isWeaponHeld)
         {
@@ -157,7 +175,7 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponGameObject[_currentIndex] = null;
                 
             _isWeaponHeld = false;
-                
+
             //reset input variable
             _wantsToThrowOrGet = false;
         }
@@ -201,6 +219,9 @@ public class PlayerWeaponManager : MonoBehaviour
                                 _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
 
                                 _heldWeaponInterface.Pickup(weaponHolder);
+
+                                _ammoPrompt.SetMaxAmmo(24, 8);
+
                                 _isWeaponHeld = true;
                             }
                         }
@@ -221,6 +242,8 @@ public class PlayerWeaponManager : MonoBehaviour
     private void FinishReload()
     {
         _reloading = false;
+
+        _ammoPrompt.SetMaxAmmo(24, 8);
     }
 
     private bool IsCurrentIndexAlreadyEquipped()

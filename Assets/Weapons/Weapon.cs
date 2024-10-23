@@ -25,11 +25,15 @@ public interface IWeapon
 
     public float ReloadTime();
 
+    public int MaxUses();
+
     public void Pickup(Transform weaponHolder);
 
     public void Throw(Vector2 forwardVector);
 
     public void Use(bool pressed);
+
+    public float TimeBetweenUses();
 }
 
 /// <summary>
@@ -54,7 +58,17 @@ public class Weapon : MonoBehaviour, IWeapon
         return -1;
     }
 
+    public virtual int MaxUses()
+    {
+        return -1;
+    }
+
     public virtual float ReloadTime()
+    {
+        return -1;
+    }
+
+    public virtual float TimeBetweenUses()
     {
         return -1;
     }
