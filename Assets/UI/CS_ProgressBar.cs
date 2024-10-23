@@ -111,8 +111,9 @@ public class ProgressBar : MonoBehaviour
             divider.rectTransform.sizeDelta = new Vector2(_dividerValue * size * 4f, divider.rectTransform.sizeDelta.y);
         }
 
+        _current = isInverse ? 1 : 0;
+        SetValue(isInverse ? 1 : 0);
         Show();
-        SetValue(isInverse? 1 : 0);
         _active = true;
     }
 

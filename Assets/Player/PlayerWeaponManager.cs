@@ -25,6 +25,7 @@ public class PlayerWeaponManager : MonoBehaviour
     
     private bool _isWeaponHeld;
     private bool _wantsToThrowOrGet;
+    [SerializeField] ProgressBar _progressBar;
 
     private PlayerIA _playerInput;
     
@@ -34,6 +35,8 @@ public class PlayerWeaponManager : MonoBehaviour
     private int _currentIndex;
 
     private bool _wantsToFire;
+
+    private bool _reloading;
     
     private void OnDisable()
     {
@@ -132,8 +135,22 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         if (_isWeaponHeld)
         {
+            if (_heldWeaponInterface.UsesLeft() == 0 && !_reloading)
+            {
+                _progressBar.BeginTimer(_heldWeaponInterface.ReloadTime());
+
+                _reloading = true;
+
+                Invoke("FinishReload", _heldWeaponInterface.ReloadTime());
+
+            }
+        }
+
+        if (_isWeaponHeld)
+        {
             //throw
-            if (!_wantsToThrowOrGet) return;
+            if (!_wantsToThrowOrGet) 
+                return;
             
             _heldWeaponInterface.Throw(transform.right);
             _heldWeaponInterface = null;
@@ -147,7 +164,8 @@ public class PlayerWeaponManager : MonoBehaviour
         else
         {
             //get
-            if (!_wantsToThrowOrGet) return;
+            if (!_wantsToThrowOrGet) 
+                return;
             
             ContactFilter2D cf2D = new ContactFilter2D();
             RaycastHit2D[] hitArr = new RaycastHit2D[32];
@@ -198,7 +216,11 @@ public class PlayerWeaponManager : MonoBehaviour
             //reset input variable
             _wantsToThrowOrGet = false;
         }
+    }
 
+    private void FinishReload()
+    {
+        _reloading = false;
     }
 
     private bool IsCurrentIndexAlreadyEquipped()

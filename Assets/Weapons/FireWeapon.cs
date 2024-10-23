@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class FireWeapon : Weapon
 {
-
+    
     [Header("Fire Weapon")] 
     public FireWeaponData fireWeaponData;
 
@@ -22,7 +22,7 @@ public class FireWeapon : Weapon
 
     private int _currentAmmo;
     private bool _isReloading;
-
+  
     //Fire rate global variables
     private float _fireRateTimer;
     private float _fireRateCurveTimer;
@@ -44,6 +44,11 @@ public class FireWeapon : Weapon
     public override int UsesLeft()
     {
         return _currentAmmo;
+    }
+
+    public override float ReloadTime()
+    {
+        return fireWeaponData.reloadTime;
     }
 
     /// <summary>

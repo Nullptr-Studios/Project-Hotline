@@ -21,10 +21,9 @@ public interface IWeapon
     /// <summary>
     /// Returns the amount of uses (bullets left), -1 if this weapon has no Uses functionality 
     /// </summary>
-    public int UsesLeft()
-    {
-        return -1;
-    }
+    public int UsesLeft();
+
+    public float ReloadTime();
 
     public void Pickup(Transform weaponHolder);
 
@@ -51,6 +50,11 @@ public class Weapon : MonoBehaviour, IWeapon
     private Rigidbody2D _rb;
     
     public virtual int UsesLeft()
+    {
+        return -1;
+    }
+
+    public virtual float ReloadTime()
     {
         return -1;
     }
