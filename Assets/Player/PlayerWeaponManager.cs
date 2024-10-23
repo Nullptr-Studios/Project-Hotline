@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 /// <summary>
 /// This class acts as the manager for equipped weapons, including input
@@ -36,8 +35,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private int _currentIndex;
 
     private bool _wantsToFire;
-
-
+    
     public void EnableInput()
     {
         _playerInput.Gameplay.ThrowOrGet.Enable();
@@ -50,8 +48,8 @@ public class PlayerWeaponManager : MonoBehaviour
         _playerInput.Gameplay.ThrowOrGet.Disable();
         _playerInput.Gameplay.Fire.Disable();
         _playerInput.Gameplay.SwitchWeapons.Disable();
-    }
 
+    }
 
     // Setting all inputs and variables
     void Awake()
