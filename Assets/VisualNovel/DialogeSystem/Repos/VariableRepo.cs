@@ -130,6 +130,14 @@ namespace CC.DialogueSystem
             }
         }
 
+        /// <summary>
+        /// Removes all variables from the repo
+        /// </summary>
+        public void RemoveAll()
+        {
+            _variables.Clear();
+        }
+
         #endregion
     }
 
