@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private PlayerIA _input;
+    [FormerlySerializedAs("_inputComponent")] [SerializeField] private PlayerInput inputComponent;
     private Rigidbody2D _rb;
     private Camera _camera;
-    
+
+    /// <summary>
+    /// Returns controller being used
+    /// </summary>
+    public static EController Controller { get; private set; }
+
     [Header("Player Movement")]
     [SerializeField] private float currentSpeed;
     [SerializeField] private MotionController movementController;
@@ -20,10 +27,13 @@ public class PlayerInput : MonoBehaviour
     
     [Header("Player Aim")]
     [SerializeField] private float aimSmoothTime = 0.2f;
+    [SerializeField] private float aimMinimumDistance = 0.2f;
     [Tooltip("This makes the player rotate from its center rather than from its collider")]
     [SerializeField] private bool pivotRotation;
-    private bool _usingMouse;
-    private Vector2 _rawAimPosition;
+    [SerializeField] private GameObject sprite;
+    [SerializeField] private Collider2D playerCollider;
+    private Vector2 _rawControllerPosition;
+    private Vector2 _rawMousePosition;
     private Vector3 _currentDir;
     private Vector3 _dir;
 
@@ -43,7 +53,58 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Movement.performed += OnMove;
         _input.Gameplay.Movement.canceled += OnMove;
         _input.Gameplay.Aim.performed += OnAim;
+        _input.Gameplay.AimMouse.performed += OnAimMouse;
         // _input.Gameplay.Aim.canceled += OnAim;
+
+        // The fact that i have to use this class for a fucking controller change makes me mad -x
+        // like VERY VERY mad in a level that if i were to write it on this comment i would get banned from digipen -x
+        inputComponent.onControlsChanged += OnChangeController;
+
+        // This gives us the ability to choose the pivot from center to body center
+        // We'll see which one feels better
+        if (pivotRotation)
+        {
+            playerCollider.offset = new Vector2(-0.2f, 0f);
+            sprite.transform.localPosition = Vector3.zero;
+        }
+
+        switch (inputComponent.currentControlScheme)
+        {
+            case "KeyboardMouse":
+                Controller = EController.KeyboardMouse;
+                break;
+            case "Dualsense":
+                Controller = EController.Dualsense;
+                break;
+            default:
+                Controller = EController.Xbox;
+                return;
+        }
+    }
+
+    /// <summary>
+    /// Handles controller change and stores it on an enum
+    /// </summary>
+    /// <param name="o">Idk what is this but it works</param>
+    private void OnChangeController(PlayerInput o)
+    {
+        switch (o.currentControlScheme)
+        {   // Cases needs to be named exactly the same as on InputAction file -x
+            case "KeyboardMouse":
+                Controller = EController.KeyboardMouse;
+                break;
+            case "Dualsense":
+                Controller = EController.Dualsense;
+                break;
+            case "Controller":
+                Controller = EController.Xbox;
+                break;
+            default:
+                Controller = EController.Xbox;
+                Debug.LogWarning($"[PlayerMovement]: Controller of type {o.currentControlScheme} not found. " + 
+                    "Xbox prompts will appear.");
+                break;
+        }
     }
 
     // NOTE: All Actions MUST be enabled AND disabled or code will explode (not joking) -x
@@ -53,6 +114,7 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Debug.Enable();
         _input.Gameplay.Movement.Enable();
         _input.Gameplay.Aim.Enable();
+        _input.Gameplay.AimMouse.Enable();
     }
     
     public void OnDisable()
@@ -63,6 +125,7 @@ public class PlayerInput : MonoBehaviour
         _input.Gameplay.Debug.Disable();   
         _input.Gameplay.Movement.Disable();
         _input.Gameplay.Aim.Disable();
+        _input.Gameplay.AimMouse.Disable();
     }
     
     private void Update()
@@ -92,9 +155,9 @@ public class PlayerInput : MonoBehaviour
         
         // Aim stuff
         _dir = GetAimWorldPosition();
-        _currentDir = Vector3.Slerp(_currentDir, _dir, aimSmoothTime * Time.deltaTime);
+        _currentDir = Vector3.Slerp(_currentDir, _dir.normalized, aimSmoothTime * Time.deltaTime);
         float angle = Mathf.Atan2(_currentDir.y, _currentDir.x) * Mathf.Rad2Deg;
-        _rb.MoveRotation(angle);
+        transform.eulerAngles = new Vector3(0, 0, angle);
 
 #if UNITY_EDITOR
         if (debugSpeed)
@@ -109,15 +172,21 @@ public class PlayerInput : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets raw mouse and controller data
+    /// Gets raw controller data
     /// </summary>
     /// <param name="context">Input Context</param>
     private void OnAim(InputAction.CallbackContext context)
     {
-        // TODO: Find a better way to do this
-        _usingMouse = context.control.layout.Equals("Vector2");
-        
-        _rawAimPosition = context.ReadValue<Vector2>();
+        _rawControllerPosition = context.ReadValue<Vector2>();
+    }
+    
+    /// <summary>
+    /// Gets raw mouse data
+    /// </summary>
+    /// <param name="context">Input Context</param>
+    private void OnAimMouse(InputAction.CallbackContext context)
+    {
+        _rawMousePosition = context.ReadValue<Vector2>();
     }
 
     /// <summary>
@@ -126,15 +195,17 @@ public class PlayerInput : MonoBehaviour
     /// <returns>Vector from player to position</returns>
     private Vector2 GetAimWorldPosition()
     {
-        if (_usingMouse)
+        if (Controller == EController.KeyboardMouse)
         {
-            Vector2 aimPosition = _camera.ScreenToWorldPoint(_rawAimPosition);
-            //Updates the vector of the direction the player is facing
-            return (aimPosition - (Vector2)transform.position).normalized;
+            Vector2 mousePosition = _camera.ScreenToWorldPoint(_rawMousePosition);
+            // Threshold distance check
+            if (mousePosition.magnitude < aimMinimumDistance)
+                return Vector2.zero;
+            return (mousePosition - (Vector2)transform.position);
         }
         
-        Vector2 controllerPosition = _rawAimPosition + (Vector2)transform.position;
-        return (controllerPosition - (Vector2)transform.position).normalized;
+        Vector2 controllerPosition = _rawControllerPosition + (Vector2)transform.position;
+        return (controllerPosition - (Vector2)transform.position);
     }
 
     /// <summary>
@@ -145,7 +216,7 @@ public class PlayerInput : MonoBehaviour
     {
         _inputDir = context.ReadValue<Vector2>();
     }
-    
+
     /// <summary>
     /// Logic for the Debug Button
     /// </summary>
@@ -159,4 +230,11 @@ public class PlayerInput : MonoBehaviour
 #endif
         
     }
+}
+
+public enum EController
+{
+    KeyboardMouse,
+    Dualsense,
+    Xbox
 }

@@ -21,7 +21,7 @@ public class NovelUIController : BaseDialogueUIController
     private NovelOptionsController _optionsController;
     private Canvas _canvas;
     private PlayerIA _input;
-    [CanBeNull] private PlayerInput _player;
+    [CanBeNull] private PlayerMovement _player;
     
     private bool _isShowing;
     private bool _isAnimatingText;
@@ -39,7 +39,7 @@ public class NovelUIController : BaseDialogueUIController
         _canvas.enabled = false;
         
         if (GameObject.FindWithTag("Player") != null)
-            _player = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+            _player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         _input = new PlayerIA();
         
         _textSpeed = defaultTextSpeed;

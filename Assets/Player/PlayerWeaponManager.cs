@@ -43,6 +43,12 @@ public class PlayerWeaponManager : MonoBehaviour
 
     }
 
+    private void Awake()
+    {
+        // This was throwing an error so I moved it here -x
+        _playerInput = new PlayerIA();
+    }
+
     // Setting all inputs and variables
     void Start()
     {
@@ -52,7 +58,6 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponGameObject.Add(null);
         }
         
-        _playerInput = new PlayerIA();
         _playerInput.Gameplay.ThrowOrGet.performed += ThrowOrGetOnPerformed;
         _playerInput.Gameplay.Fire.performed += OnFire;
         _playerInput.Gameplay.Fire.canceled += OnFire;
