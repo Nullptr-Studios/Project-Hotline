@@ -1,4 +1,5 @@
-using JetBrains.Annotations;
+using JetBrains.Annotations; // Used for [CanBeNull] (Unity alternative for ? variable indicator)
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,7 @@ public class PlayerHealth : Damageable
     [Header("PlayerHealth")]
     [SerializeField] private Canvas deathScreenUI;
     [SerializeField] [CanBeNull] private GameObject mainCamera;
+    [SerializeField] private float deathScreenDelay = 1f;
     private bool _disableFX;
     private PlayerMovement _player;
     private PlayerIA _input;
@@ -50,6 +52,18 @@ public class PlayerHealth : Damageable
     {
         IsDead = true;  
         _player.OnDisable(); // Deactivates all inputs from the game
+        StartCoroutine(OpenDeathScreen(deathScreenDelay));
+    }
+
+    /// <summary>
+    /// Opens death screen after an ammount of seconds seconds
+    /// </summary>
+    /// <param=time>Time to wait</param>
+    /// <returns>Time to wait</returns>
+    private IEnumerator OpenDeathScreen(float time)
+    {
+        yield return new WaitForSeconds(time);
+
         // Have to deactivate pixel perfect camera as it disables antialiasing so the shader won't work
         // TODO: Look y the shader doesnt work w/o antialiasing
         if (!_disableFX) mainCamera!.GetComponent<PixelPerfectCamera>().enabled = false;
