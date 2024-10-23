@@ -46,7 +46,7 @@ public class SensePlayer : ActionNode
             
             if (context.agent.remainingDistance <= context.agent.stoppingDistance && _detectingFrames != 0)
             {
-
+                //@TODO: Do this with slerp
                 Vector3 targetPos = blackboard.playerPos;
                 Vector3 thisPos = context.transform.position;
                 targetPos.x = targetPos.x - thisPos.x;
