@@ -26,6 +26,8 @@ public class PlayerWeaponManager : MonoBehaviour
     
     private bool _isWeaponHeld;
     private bool _wantsToThrowOrGet;
+    [SerializeField] ProgressBar _progressBar;
+    [SerializeField] AmmoPrompt _ammoPrompt;
 
     private PlayerIA _playerInput;
     
@@ -35,6 +37,10 @@ public class PlayerWeaponManager : MonoBehaviour
     private int _currentIndex;
 
     private bool _wantsToFire;
+
+    private bool _reloading;
+
+    private float _bulletsUITimer = 0.0f;
     
     public void EnableInput()
     {
@@ -147,22 +153,52 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         if (_isWeaponHeld)
         {
+            if (_heldWeaponInterface.UsesLeft() == 0 && !_reloading)
+            {
+                _progressBar.BeginTimer(_heldWeaponInterface.ReloadTime());
+
+                _reloading = true;
+
+                Invoke("FinishReload", _heldWeaponInterface.ReloadTime());
+
+            }
+
+            if (_wantsToFire)
+            {
+                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses())
+                {
+                    _bulletsUITimer = 0;
+                    _ammoPrompt.SubtractBullet();
+                }
+                else
+                {
+                    _bulletsUITimer += Time.deltaTime;
+                }
+            }
+        }
+
+       
+
+        if (_isWeaponHeld)
+        {
             //throw
-            if (!_wantsToThrowOrGet) return;
+            if (!_wantsToThrowOrGet) 
+                return;
             
             _heldWeaponInterface.Throw(transform.right);
             _heldWeaponInterface = null;
             _heldWeaponGameObject[_currentIndex] = null;
                 
             _isWeaponHeld = false;
-                
+
             //reset input variable
             _wantsToThrowOrGet = false;
         }
         else
         {
             //get
-            if (!_wantsToThrowOrGet) return;
+            if (!_wantsToThrowOrGet) 
+                return;
             
             ContactFilter2D cf2D = new ContactFilter2D();
             RaycastHit2D[] hitArr = new RaycastHit2D[32];
@@ -198,6 +234,9 @@ public class PlayerWeaponManager : MonoBehaviour
                                 _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
 
                                 _heldWeaponInterface.Pickup(weaponHolder);
+
+                                _ammoPrompt.SetMaxAmmo(24, 8);
+
                                 _isWeaponHeld = true;
                             }
                         }
@@ -213,7 +252,13 @@ public class PlayerWeaponManager : MonoBehaviour
             //reset input variable
             _wantsToThrowOrGet = false;
         }
+    }
 
+    private void FinishReload()
+    {
+        _reloading = false;
+
+        _ammoPrompt.SetMaxAmmo(24, 8);
     }
 
     private bool IsCurrentIndexAlreadyEquipped()

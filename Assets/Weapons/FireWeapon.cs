@@ -35,7 +35,9 @@ public class FireWeapon : Weapon
     //Dispersion global variables
     private float _currentDispersion;
     private float _dispersionCurveTimer;
-    
+
+    private float _currentTimeToFire;
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool log;
@@ -47,10 +49,25 @@ public class FireWeapon : Weapon
     {
         return _currentAmmo;
     }
-
+    
     private void Awake()
     {
         weaponType = EWeaponType.Fire;
+    }
+
+    public override float ReloadTime()
+    {
+        return fireWeaponData.reloadTime;
+    }
+
+    public override float TimeBetweenUses()
+    {
+        return _currentTimeToFire;
+    }
+
+    public override int MaxUses()
+    {
+        return fireWeaponData.maxAmmo;
     }
 
     /// <summary>
@@ -361,10 +378,10 @@ public class FireWeapon : Weapon
                     //Fire rate
                     if (fireWeaponData.useFireRateCurve)
                     {
-                        float currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
+                        _currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
 
                         //Debug.Log(currentTimeToFire);
-                        if (_fireRateTimer >= currentTimeToFire)
+                        if (_fireRateTimer >= _currentTimeToFire)
                         {
                             _fireRateTimer = 0;
                             UpdateCanFire();
@@ -398,6 +415,7 @@ public class FireWeapon : Weapon
 
                         if (!fireWeaponData.useFireRateCurve)
                         {
+                            _fireRateCurveTimer = fireWeaponData.finalFireRate;
                             Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
                         }
                     }
