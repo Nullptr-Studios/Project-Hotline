@@ -81,6 +81,8 @@ public class PlayerHealth : Damageable
 #if UNITY_EDITOR
         if (logReload) Debug.LogWarning($"[PlayerHealth] {name}: Reloading game");
 #endif
+
+        _input.Gameplay.Interact.performed -= RestartGame;
         
         // TODO: this should be fixed after prototype to not have the player read the VN every time
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
