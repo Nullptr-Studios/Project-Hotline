@@ -1,12 +1,7 @@
-using CC.MessagingCentre;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
 using TheKiwiCoder;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemyDamageable : Damageable
 {
@@ -20,6 +15,8 @@ public class EnemyDamageable : Damageable
     private Vector3 _lastShootDir;
 
     public float stunCooldown = 1.0f;
+
+    [SerializeField] private UnityEvent killEvent;
     
     
     //Components to disable
@@ -60,6 +57,7 @@ public class EnemyDamageable : Damageable
 
         //Send kill message
         ScoreManager.AddKill();
+        killEvent.Invoke();
         
         Destroy(gameObject);
     }

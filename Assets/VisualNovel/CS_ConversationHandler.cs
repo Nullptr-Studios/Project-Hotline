@@ -40,11 +40,11 @@ public class ConversationHandler : MonoBehaviour
     /// Send a message to this script to start a conversation
     /// </summary>
     /// <param name="id">Conversation ID to load</param>
-    private void StartVNConversation(int id) => DialogueController.Instance.StartConversation(_conversations[id]);
+    public void StartVNConversation(int id) => DialogueController.Instance.StartConversation(_conversations[id]);
 
     /// <summary>
     /// Send a message to this script to start a conversation using its name
     /// </summary>
     /// <param name="name">Name of the conversation to load</param>
-    private void StartVNConversationByName(string name) => DialogueController.Instance.StartConversation(name);
+    public void StartVNConversationByName(string name) => DialogueController.Instance.StartConversation(name);
 }
