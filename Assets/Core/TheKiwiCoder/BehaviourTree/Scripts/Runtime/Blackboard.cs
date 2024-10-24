@@ -22,6 +22,8 @@ namespace TheKiwiCoder {
 
         public bool doSlerp = false;
 
+        public float waitTime = .5f;
+
         [Header("Enemy behaviour")]
         public float distanceToUseWeapon = 10;
         public float timeToStartShooting = 1;
@@ -29,7 +31,10 @@ namespace TheKiwiCoder {
         public bool returnToInitialPos = true;
         public bool isStatic = true;
 
-        public List<Vector2> waypoints;
+        public float chaseSpeed = 8;
+        public float idleSpeed = 2.5f;
+
+        public List<SWaypoints> waypoints;
 
         public int searchTimes = 3;
     }

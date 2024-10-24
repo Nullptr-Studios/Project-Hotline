@@ -22,7 +22,27 @@ public class IdleLogic : ActionNode
             if (currentWaypointIndex > blackboard.waypoints.Count - 1)
                 currentWaypointIndex = 0;
             
-            blackboard.moveToPosition = blackboard.waypoints[currentWaypointIndex++];
+            blackboard.moveToPosition = blackboard.waypoints[currentWaypointIndex].waypointPos;
+
+            if (blackboard.waypoints[currentWaypointIndex].letItRotate)
+            {
+                blackboard.doSlerp = true;
+
+                int nextIndex = currentWaypointIndex + 1;
+                if (nextIndex > blackboard.waypoints.Count - 1)
+                    nextIndex = 0;
+                
+                Vector3 dir = blackboard.waypoints[nextIndex].waypointPos -
+                              blackboard.waypoints[currentWaypointIndex].waypointPos;
+
+                Quaternion rotateTo = Quaternion.FromToRotation(Vector2.up, dir.normalized);
+
+                blackboard.moveToRotation = rotateTo;
+            }
+
+            blackboard.waitTime = blackboard.waypoints[currentWaypointIndex].wait;
+
+            currentWaypointIndex++;
         }
     }
 

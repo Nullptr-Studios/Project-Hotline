@@ -38,8 +38,10 @@ public class SensePlayer : ActionNode
             
             blackboard.seePlayer = true;
             _hasSensedPlayerBefore = true;
-            
+
             context.agent.stoppingDistance = blackboard.distanceToUseWeapon;
+
+            context.agent.speed = blackboard.chaseSpeed;
             
             context.agent.SetDestination(blackboard.playerPos);
             

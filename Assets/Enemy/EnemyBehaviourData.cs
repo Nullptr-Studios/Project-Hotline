@@ -1,5 +1,14 @@
-using System.Collections.Generic;
+using System;using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+
+[Serializable]
+public struct SWaypoints
+{
+    public Vector2 waypointPos;
+    public bool letItRotate;
+    public float wait;
+}
 
 [CreateAssetMenu(fileName = "Enemy Behaviour Data", menuName = "ProjectHotline/Enemy Behaviour Data", order = 6)]
 public class EnemyBehaviourData : ScriptableObject
@@ -8,7 +17,11 @@ public class EnemyBehaviourData : ScriptableObject
     public bool isStatic;
     public bool returnToInitialSpot;
     
-    public List<Vector2> waypoints;
+    public List<SWaypoints> waypoints;
+
+    [Header("Movement")] 
+    public float idleSpeed = 2.5f;
+    public float chasingSpeed = 8.0f;
     
     [Header("Shooting")]
     public float distanceToShoot = 10;
