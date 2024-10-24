@@ -1,12 +1,8 @@
-using CC.MessagingCentre;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
 using TheKiwiCoder;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemyDamageable : Damageable
 {
@@ -20,6 +16,9 @@ public class EnemyDamageable : Damageable
     private Vector3 _lastShootDir;
 
     public float stunCooldown = 1.0f;
+
+    [Header("Event")] 
+    [SerializeField] private UnityEvent killEvent;
     
     
     //Components to disable
@@ -60,6 +59,7 @@ public class EnemyDamageable : Damageable
 
         //Send kill message
         ScoreManager.AddKill();
+        killEvent.Invoke();
         
         Destroy(gameObject);
     }
@@ -78,6 +78,7 @@ public class EnemyDamageable : Damageable
     private void Update()
     {
         //@TODO: fix fucking unity
+        // xd -x
         /*
         if (_onStun)
         {
@@ -85,8 +86,11 @@ public class EnemyDamageable : Damageable
         }*/
     }
 
-    private void Stun(Vector3 dir)
+    public override void Stun(Vector3 dir)
     {
+        if (_onStun)
+            return;
+        
         if (!_aiSensor)
             _aiSensor = gameObject.GetComponent<AISensor>();
 
@@ -107,6 +111,8 @@ public class EnemyDamageable : Damageable
         _rb.AddForce(dir * 200);
 
         _onStun = true;
+
+        GetComponent<EnemyBehaviourDataOverrider>().justStunned = true;
         
         _enemyWeaponManager.DropWeapon();
         

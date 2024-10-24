@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [FormerlySerializedAs("_inputComponent")] [SerializeField] private PlayerInput inputComponent;
     private Rigidbody2D _rb;
     private Camera _camera;
+    private PlayerWeaponManager _weaponManager;
 
     /// <summary>
     /// Returns controller being used

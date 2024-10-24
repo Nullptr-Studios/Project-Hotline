@@ -8,7 +8,7 @@ public class MissionObjective : Weapon
     {
         base.Start();
 
-        _levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        _levelManager = GameObject.Find("PA_LevelManager").GetComponent<LevelManager>();
         if (_levelManager == null) Debug.LogError($"[Mission Objective] {name}: Level Manager not found");
     }
 

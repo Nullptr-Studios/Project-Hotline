@@ -1,25 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using TheKiwiCoder;
 using UnityEngine;
 
 public class AISensor : MonoBehaviour
 {
     public float range = 10;
     public float angle = 45;
-    public int scanFrecuency = 15;
+    public int scanFrequency = 15; // Frequency is with q uwu -x
     
     public LayerMask layerToSee;
     public LayerMask layerToOcclude;
 
     public GameObject detectedPlayer;
     
-    public bool isDetecting = false;
+    public bool isDetecting;
     
 #if UNITY_EDITOR
     [Header("Debug")]
-    [SerializeField] private bool drawGizmos = false;
+    [SerializeField] private bool drawGizmos;
     [SerializeField] private Color meshColor = Color.red;
     [SerializeField] private Color detectColor = Color.white;
+    [SerializeField] private bool logVisionHit;
 #endif
     
     private Collider2D[] _colliders = new Collider2D[50];
@@ -34,7 +34,7 @@ public class AISensor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _scanInterval = 1.0f / scanFrecuency;
+        _scanInterval = 1.0f / scanFrequency;
         _trans = transform;
         
     }
@@ -63,6 +63,21 @@ public class AISensor : MonoBehaviour
             GameObject obj = _colliders[i].gameObject;
             if (IsInSight(obj))
             {
+                PlayerHealth ph = obj.GetComponent<PlayerHealth>();
+                if (ph && ph.IsDead)
+                {
+                    detectedPlayer = null;
+                    isDetecting = false;
+
+                    //Disable tree
+                    GetComponent<BehaviourTreeRunner>().enabled = false;
+                    GetComponent<EnemyWeaponManager>().useWeapon(false);
+
+                    this.enabled = false;
+                    
+                    break;
+                }
+                
                 detectedPlayer = obj;
                 isDetecting = true;
                 
@@ -89,6 +104,12 @@ public class AISensor : MonoBehaviour
         {
             if (Physics2D.Linecast(origin, dest, layerToOcclude))
                 result = false;
+
+#if UNITY_EDITOR
+            if (logVisionHit) 
+                Debug.Log(Physics2D.Linecast(origin, dest, layerToOcclude).collider?.gameObject.name);
+#endif
+            
         }
         
 #if UNITY_EDITOR
@@ -102,7 +123,7 @@ public class AISensor : MonoBehaviour
 #if UNITY_EDITOR
     Mesh CreateMesh()
     {
-        Mesh _mesh = new Mesh();
+        Mesh gizmoMesh = new Mesh(); // renamed to avoid occlude warning, was hard containing myself to use var -x
 
         int segments = 10;
         int numTriangles = (segments * 4) + 2 + 2;
@@ -178,27 +199,27 @@ public class AISensor : MonoBehaviour
             triangles[i] = i;
         }
         
-        _mesh.vertices = vertices;
-        _mesh.triangles = triangles;
-        _mesh.RecalculateNormals();
+        gizmoMesh.vertices = vertices;
+        gizmoMesh.triangles = triangles;
+        gizmoMesh.RecalculateNormals();
         
-        Vector3[] normals = _mesh.normals;
+        Vector3[] normals = gizmoMesh.normals;
         for (int i = 0; i < normals.Length; i++)
             normals[i] = -normals[i];
-        _mesh.normals = normals;
+        gizmoMesh.normals = normals;
 
-        for (int m = 0; m < _mesh.subMeshCount; m++)
+        for (int m = 0; m < gizmoMesh.subMeshCount; m++)
         {
-            int[] triangles2 = _mesh.GetTriangles(m);
+            int[] triangles2 = gizmoMesh.GetTriangles(m);
             for (int i = 0; i < triangles2.Length; i += 3)
             {
                 (triangles2[i + 0], triangles2[i + 1]) = (triangles2[i + 1], triangles2[i + 0]);
             }
-            _mesh.SetTriangles(triangles2, m);
+            gizmoMesh.SetTriangles(triangles2, m);
         }
         
         
-        return _mesh;
+        return gizmoMesh;
     }
 
     private void OnValidate()

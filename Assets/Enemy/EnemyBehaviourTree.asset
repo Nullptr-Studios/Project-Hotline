@@ -15,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: ed925af78e32a5d4db1d36ea3b765ac0
-  position: {x: -235.91266, y: -41.960217}
+  position: {x: -254.00008, y: -3.4572678}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -25,10 +25,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: Fail safe
@@ -49,7 +52,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 2dbe2f08c2cf81346bbe4a98201c7645
-  position: {x: -529.60004, y: 473.60007}
+  position: {x: -484, y: 486}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -59,14 +62,54 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
+--- !u!114 &-5715794855966951915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648bc376b902fe147b71c350cfc87c46, type: 3}
+  m_Name: AfterStun
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 1ba3eee490b92d1448d1964b69f16bad
+  position: {x: -704.17975, y: 335}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
+    playerPos: {x: 0, y: 0, z: 0}
+    initialPos: {x: 0, y: 0, z: 0}
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+    seePlayer: 0
+    finalizedShearch: 1
+    doSlerp: 0
+    waitTime: 0.5
+    distanceToUseWeapon: 10
+    timeToStartShooting: 1
+    returnToInitialPos: 1
+    isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
+    waypoints: []
+    searchTimes: 3
+  description: 
+  drawGizmos: 0
+  child: {fileID: 8840422715588192871}
 --- !u!114 &-5547318569231332128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,10 +135,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -128,10 +174,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -163,10 +212,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -197,49 +249,18 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
   duration: 2
---- !u!114 &-3815094074370621375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
-  m_Name: Wait
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: acdaaecb215e0fc479917628ea803130
-  position: {x: 361.32974, y: 607.9999}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
-    playerPos: {x: 0, y: 0, z: 0}
-    initialPos: {x: 0, y: 0, z: 0}
-    initialRotation: {x: 0, y: 0, z: 0, w: 0}
-    seePlayer: 0
-    finalizedShearch: 1
-    doSlerp: 0
-    distanceToUseWeapon: 10
-    timeToStartShooting: 1
-    returnToInitialPos: 1
-    isStatic: 1
-    waypoints: []
-    searchTimes: 0
-  description: 
-  drawGizmos: 0
-  duration: 1
 --- !u!114 &-3750841371633188628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +276,7 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: fcacb284f17e2ed409bd02d93ac94378
-  position: {x: -529.52124, y: 335.19983}
+  position: {x: -484, y: 347.00003}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -265,10 +286,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 'Main player seen function
@@ -293,7 +317,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 99da339786ba5df489b4d1f3e0f3549d
-  position: {x: -466.01196, y: -163.40253}
+  position: {x: -442.00006, y: -104.74959}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -303,10 +327,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -336,10 +363,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 3
   description: 
@@ -362,7 +392,7 @@ MonoBehaviour:
   state: 2
   started: 1
   guid: 694426bfff7d9bc4b8eae417568b4b64
-  position: {x: -254.00006, y: 123.45002}
+  position: {x: -254, y: 109}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -372,15 +402,19 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: we must run all of these at the same time
   drawGizmos: 0
   children:
+  - {fileID: -5715794855966951915}
   - {fileID: -3750841371633188628}
   - {fileID: 5178274741259517980}
   - {fileID: -4223474538306020012}
@@ -414,11 +448,13 @@ MonoBehaviour:
   - {fileID: -3707205459360130002}
   - {fileID: -5547318569231332128}
   - {fileID: 6922028017448870757}
-  - {fileID: -3815094074370621375}
   - {fileID: 8609969670504424971}
   - {fileID: 1325767032127553648}
   - {fileID: 8000755662886063312}
   - {fileID: -7808836056307065234}
+  - {fileID: 4887444683586557037}
+  - {fileID: -5715794855966951915}
+  - {fileID: 8840422715588192871}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -428,10 +464,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
 --- !u!114 &1325767032127553648
@@ -449,7 +488,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: cf0d0c85f95760743ab89342bd2994d4
-  position: {x: 772.52966, y: 607.9999}
+  position: {x: 453.00015, y: 616.83295}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -459,15 +498,17 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
-  description: 
+  description: Idle logic
   drawGizmos: 0
-  speed: 5
   stoppingDistance: 0.1
   tolerance: 1
 --- !u!114 &2946057099227109268
@@ -485,7 +526,7 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: 2774d89fa6bbcbf44b2cce7329bceba4
-  position: {x: -235.012, y: -480.40256}
+  position: {x: -254.00008, y: -355.62433}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -495,10 +536,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -519,7 +563,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b520347416ac90c4798c80927ed8d3bc
-  position: {x: -254.40019, y: 474.00006}
+  position: {x: -253.99991, y: 461.83304}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -529,10 +573,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -558,7 +605,7 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: 58f955774cc69964f871a0bd15404255
-  position: {x: -233.01202, y: -207.40257}
+  position: {x: -254.00008, y: -104.74959}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -568,10 +615,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: in case of failure, repeat
@@ -579,6 +629,43 @@ MonoBehaviour:
   child: {fileID: -7808836056307065234}
   restartOnSuccess: 1
   restartOnFailure: 0
+--- !u!114 &4887444683586557037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce830f2f6a60aea43ae2496d06d31d61, type: 3}
+  m_Name: WaitMine
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: a2d03b66434aa4f438e10d14b5d2745a
+  position: {x: 375, y: 608}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
+    playerPos: {x: 0, y: 0, z: 0}
+    initialPos: {x: 0, y: 0, z: 0}
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+    seePlayer: 0
+    finalizedShearch: 1
+    doSlerp: 0
+    waitTime: 0.5
+    distanceToUseWeapon: 10
+    timeToStartShooting: 1
+    returnToInitialPos: 1
+    isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
+    waypoints: []
+    searchTimes: 3
+  description: 
+  drawGizmos: 0
+  duration: 1
 --- !u!114 &5178274741259517980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,10 +691,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: search player after lost for 5 times, then return to idle path
@@ -629,7 +719,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1195e45b9736bcd41a05f73ab65c076e
-  position: {x: -42.03552, y: 784.29596}
+  position: {x: -95.99999, y: 720.4374}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -639,15 +729,17 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
-  speed: 5
   stoppingDistance: 0.1
   tolerance: 1
 --- !u!114 &6342177816646311186
@@ -665,7 +757,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: e9abdfac76067c2468554a6fb602b3f6
-  position: {x: -256.43555, y: 673.09595}
+  position: {x: -253.99991, y: 616.83295}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -675,10 +767,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -700,7 +795,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 943ef75a0fc27a946bed03d9c7b4d505
-  position: {x: 542.92957, y: 425.59995}
+  position: {x: 378.00012, y: 461.83304}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -710,16 +805,19 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
   children:
-  - {fileID: -3815094074370621375}
+  - {fileID: 4887444683586557037}
   - {fileID: 8609969670504424971}
   - {fileID: 1325767032127553648}
   - {fileID: 8000755662886063312}
@@ -738,7 +836,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: abd0b55311e9c754d9f71c39fb6b3650
-  position: {x: 962.92957, y: 608.7999}
+  position: {x: 618.00024, y: 616.83295}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -748,14 +846,18 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
+  timeout: 1
 --- !u!114 &8609969670504424971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,7 +873,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 54196b371f3b213418d2b24278d5017e
-  position: {x: 557.3296, y: 607.9999}
+  position: {x: 287.00012, y: 616.83295}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -781,12 +883,51 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
   currentWaypointIndex: 0
+--- !u!114 &8840422715588192871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae278d347a12786449e7b5b73df63634, type: 3}
+  m_Name: LookForNearestWeapon
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 2e3cfa8ce93790f4ba378c73dd85e3a3
+  position: {x: -716.7749, y: 454.00006}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
+    playerPos: {x: 0, y: 0, z: 0}
+    initialPos: {x: 0, y: 0, z: 0}
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+    seePlayer: 0
+    finalizedShearch: 1
+    doSlerp: 0
+    waitTime: 0.5
+    distanceToUseWeapon: 10
+    timeToStartShooting: 1
+    returnToInitialPos: 1
+    isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
+    waypoints: []
+    searchTimes: 3
+  description: 
+  drawGizmos: 0

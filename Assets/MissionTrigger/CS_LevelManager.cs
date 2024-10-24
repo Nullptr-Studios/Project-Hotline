@@ -1,12 +1,12 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D missionTrigger;
     [SerializeField] private BoxCollider2D endTrigger;
     [SerializeField] private MissionObjective objective;
+    [SerializeField] private ScoreUI score;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -51,5 +51,15 @@ public class LevelManager : MonoBehaviour
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Mission paused");
 #endif
         
+    }
+
+    public void OpenScore()
+    {
+        
+#if UNITY_EDITOR
+        if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Opening Score...");
+#endif
+
+        score.Activate();
     }
 }

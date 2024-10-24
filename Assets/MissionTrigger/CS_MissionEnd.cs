@@ -1,9 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class MissionEnd : MonoBehaviour
 {
     private BoxCollider2D _endCollider;
+    [SerializeField] private UnityEvent onLevelFinished;
 
     private void Start()
     {
@@ -16,6 +17,6 @@ public class MissionEnd : MonoBehaviour
         
         // TODO: Go to score screen
         Debug.Log($"[MissionEnd] {this.name}: Level Ended");
-        SceneManager.LoadScene("MainMenu");
+        onLevelFinished.Invoke();
     }
 }

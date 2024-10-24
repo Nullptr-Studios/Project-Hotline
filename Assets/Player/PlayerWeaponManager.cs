@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// This class acts as the manager for equipped weapons, including input
@@ -26,15 +27,30 @@ public class PlayerWeaponManager : MonoBehaviour
     
     private bool _isWeaponHeld;
     private bool _wantsToThrowOrGet;
+    [SerializeField] ProgressBar progressBar;
+    [SerializeField] ProgressBar progressBar2;
+    [SerializeField] AmmoPrompt ammoPrompt;
 
     private PlayerIA _playerInput;
     
     private IWeapon _heldWeaponInterface;
     private readonly List<GameObject> _heldWeaponGameObject = new List<GameObject>();
+    private List<bool> _reloadingCurrentWeapon = new List<bool>();
 
     private int _currentIndex;
 
     private bool _wantsToFire;
+
+    private bool _reloading;
+
+    private float _bulletsUITimer = 0.0f;
+
+    private int _lastReloadingWeaponIndex;
+    private GameObject _lastReloadingWeaponGO;
+
+    private float _timeToShootAgain;
+    private float _timerAgain;
+    private bool _canShootAgain = true;
     
     public void EnableInput()
     {
@@ -58,6 +74,7 @@ public class PlayerWeaponManager : MonoBehaviour
         for (int i = 0; i < maxWeaponsEquipped; i++)
         {
             _heldWeaponGameObject.Add(null);
+            _reloadingCurrentWeapon.Add(false);
         }
     
         //###############################################
@@ -92,9 +109,11 @@ public class PlayerWeaponManager : MonoBehaviour
     /// </summary>
     private void OnFire(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !_reloadingCurrentWeapon[_currentIndex] && _canShootAgain)
         {
             _wantsToFire = true;
+            ammoPrompt.SubtractBullet();
+            _bulletsUITimer = 0;
         }else if (context.canceled)
         {
             _wantsToFire = false;
@@ -103,6 +122,14 @@ public class PlayerWeaponManager : MonoBehaviour
         if (_isWeaponHeld)
         {
             _heldWeaponInterface.Use(_wantsToFire);
+            if (!_heldWeaponInterface.IsAutomatic())
+            {
+                _wantsToFire = false;
+
+                _timeToShootAgain = _heldWeaponInterface.TimeBetweenUses();
+
+                _canShootAgain = false;
+            }
         }
     }
     
@@ -119,12 +146,16 @@ public class PlayerWeaponManager : MonoBehaviour
         //In case current index is null
         if (_heldWeaponGameObject[_currentIndex] != null)
         {
+            _heldWeaponInterface.Use(false);
             _heldWeaponGameObject[_currentIndex].gameObject.SetActive(false);
         }
 
         //Changes variables to default
         _heldWeaponInterface = null;
         _isWeaponHeld = false;
+
+        //temporal fix :)
+        _canShootAgain = true;
 
         //Loop around variable
         if (_currentIndex == maxWeaponsEquipped - 1)
@@ -138,6 +169,23 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponGameObject[_currentIndex].gameObject.SetActive(true);
             _heldWeaponGameObject[_currentIndex].gameObject.TryGetComponent(out _heldWeaponInterface);
             _isWeaponHeld = true;
+
+            if (_heldWeaponInterface.MaxUses() != -1)
+            {
+                ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+                ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
+
+                if (_heldWeaponInterface.UsesLeft() == 0)
+                    _reloadingCurrentWeapon[_currentIndex] = true;
+                else
+                    _reloadingCurrentWeapon[_currentIndex] = false;
+            }
+            else
+                ammoPrompt.DoHide();
+        }
+        else
+        {
+            ammoPrompt.DoHide();
         }
     }
 
@@ -147,22 +195,86 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         if (_isWeaponHeld)
         {
+            if (_heldWeaponInterface.UsesLeft() == 0 && !_reloadingCurrentWeapon[_currentIndex])
+            {
+                //Hard coded cuz player won't be able to hold more than 2 weapons at a time
+                if(_currentIndex == 0)
+                    progressBar.BeginTimer(_heldWeaponInterface.ReloadTime());
+                else
+                    progressBar2.BeginTimer(_heldWeaponInterface.ReloadTime());
+                
+                _reloadingCurrentWeapon[_currentIndex] = true;
+                
+                //This is one of the most crappy fixes, but im tired, end my suffering
+                //Substarct one bullet more just in case
+                if(_heldWeaponInterface.IsAutomatic())
+                    ammoPrompt.SubtractBullet();
+                
+                ammoPrompt.DoHide();
+
+                _lastReloadingWeaponIndex = _currentIndex;
+                _lastReloadingWeaponGO = _heldWeaponGameObject[_currentIndex];
+
+                Invoke("FinishReload", _heldWeaponInterface.ReloadTime());
+
+            }
+
+            if (_wantsToFire && _heldWeaponInterface.IsAutomatic())
+            {
+                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses() && !_reloadingCurrentWeapon[_currentIndex])
+                {
+                    _bulletsUITimer = 0;
+                    ammoPrompt.SubtractBullet();
+                }
+                else
+                {
+                    _bulletsUITimer += Time.deltaTime;
+                }
+            }
+        }
+
+        if(_isWeaponHeld)
+            if (!_heldWeaponInterface.IsAutomatic())
+            {
+                if (!_canShootAgain)
+                {
+                    if (_timerAgain >= _timeToShootAgain)
+                    {
+                        _canShootAgain = true;
+                        _timerAgain = 0;
+                    }
+                    else
+                    {
+                        _timerAgain += Time.deltaTime;
+                    }
+                }
+            }
+       
+
+        if (_isWeaponHeld)
+        {
             //throw
-            if (!_wantsToThrowOrGet) return;
+            if (!_wantsToThrowOrGet) 
+                return;
             
             _heldWeaponInterface.Throw(transform.right);
             _heldWeaponInterface = null;
             _heldWeaponGameObject[_currentIndex] = null;
+
+            _reloadingCurrentWeapon[_currentIndex] = false;
                 
             _isWeaponHeld = false;
-                
+            
+            ammoPrompt.DoHide();
+
             //reset input variable
             _wantsToThrowOrGet = false;
         }
         else
         {
             //get
-            if (!_wantsToThrowOrGet) return;
+            if (!_wantsToThrowOrGet) 
+                return;
             
             ContactFilter2D cf2D = new ContactFilter2D();
             RaycastHit2D[] hitArr = new RaycastHit2D[32];
@@ -185,9 +297,21 @@ public class PlayerWeaponManager : MonoBehaviour
                             if (!IsCurrentIndexAlreadyEquipped())
                             {
                                 _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
-
+                                
                                 _heldWeaponInterface.Pickup(weaponHolder);
+
+                                if (_heldWeaponInterface.MaxUses() != -1)
+                                {
+                                    ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+                                    ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
+                                    
+                                }
+                                else
+                                    ammoPrompt.DoHide();
+                                
                                 _isWeaponHeld = true;
+                                
+                                _heldWeaponInterface.setClaimed(true);
                             }
                             //This won't ever happen as if you have a weapon already equipped it will throw it, but just in case
                             else
@@ -198,6 +322,9 @@ public class PlayerWeaponManager : MonoBehaviour
                                 _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
 
                                 _heldWeaponInterface.Pickup(weaponHolder);
+
+                                
+
                                 _isWeaponHeld = true;
                             }
                         }
@@ -213,7 +340,19 @@ public class PlayerWeaponManager : MonoBehaviour
             //reset input variable
             _wantsToThrowOrGet = false;
         }
+    }
 
+    private void FinishReload()
+    {
+        _reloadingCurrentWeapon[_lastReloadingWeaponIndex] = false;
+        //_wantsToFire = false;
+        
+        if (_isWeaponHeld && _lastReloadingWeaponIndex == _currentIndex && _lastReloadingWeaponGO == _heldWeaponGameObject[_currentIndex])
+            _heldWeaponInterface.Use(_wantsToFire);
+        
+        if(_heldWeaponGameObject[_currentIndex] != null)
+            if(_heldWeaponInterface.MaxUses() != -1 && _lastReloadingWeaponIndex == _currentIndex && _lastReloadingWeaponGO == _heldWeaponGameObject[_currentIndex])
+                ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
     }
 
     private bool IsCurrentIndexAlreadyEquipped()

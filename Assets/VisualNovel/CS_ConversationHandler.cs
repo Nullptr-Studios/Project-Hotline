@@ -6,10 +6,9 @@
  *  Made by: Xein
  */
 
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using CC.DialogueSystem;
-using CC.MessagingCentre;
 using UnityEngine;
 
 public class ConversationHandler : MonoBehaviour
@@ -40,11 +39,23 @@ public class ConversationHandler : MonoBehaviour
     /// Send a message to this script to start a conversation
     /// </summary>
     /// <param name="id">Conversation ID to load</param>
-    private void StartVNConversation(int id) => DialogueController.Instance.StartConversation(_conversations[id]);
+    public void StartVNConversation(int id) => DialogueController.Instance.StartConversation(_conversations[id]);
+    
+    /// <summary>
+    /// Send a message to this script to start a conversation
+    /// </summary>
+    /// <param name="id">Conversation ID to load</param>
+    /// <param name="time">Time before conversation starts</param>
+    /// <returns></returns>
+    public IEnumerator StartVNConversation(int id, float time)
+    {
+        yield return new WaitForSeconds(time);
+        DialogueController.Instance.StartConversation(_conversations[id]);
+    }
 
     /// <summary>
     /// Send a message to this script to start a conversation using its name
     /// </summary>
     /// <param name="name">Name of the conversation to load</param>
-    private void StartVNConversationByName(string name) => DialogueController.Instance.StartConversation(name);
+    public void StartVNConversation(string name) => DialogueController.Instance.StartConversation(name);
 }
