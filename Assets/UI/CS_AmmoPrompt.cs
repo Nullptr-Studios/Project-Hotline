@@ -51,6 +51,21 @@ public class AmmoPrompt : MonoBehaviour
         }*/
     }
 
+    public void SetCurrentAmmo(int value)
+    {
+        for (var i = 0; i < _maxAmmo; i++)
+        {
+            _ammoIcons[i].sprite = emptyAmmo;
+        }
+
+        for (int i = 0; i < value; i++)
+        {
+            _ammoIcons[i].sprite = fullAmmo;
+        }
+        
+        _currentAmmo = value;
+    }
+
     /// <summary>
     /// Sets the maximum amount of bullets on the file
     /// </summary>

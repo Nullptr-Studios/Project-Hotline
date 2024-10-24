@@ -27,12 +27,14 @@ public class PlayerWeaponManager : MonoBehaviour
     private bool _isWeaponHeld;
     private bool _wantsToThrowOrGet;
     [SerializeField] ProgressBar _progressBar;
+    [SerializeField] ProgressBar _progressBar2;
     [SerializeField] AmmoPrompt _ammoPrompt;
 
     private PlayerIA _playerInput;
     
     private IWeapon _heldWeaponInterface;
     private readonly List<GameObject> _heldWeaponGameObject = new List<GameObject>();
+    private List<bool> _reloadingCurrentWeapon = new List<bool>();
 
     private int _currentIndex;
 
@@ -41,6 +43,8 @@ public class PlayerWeaponManager : MonoBehaviour
     private bool _reloading;
 
     private float _bulletsUITimer = 0.0f;
+
+    private int _lastReloadingWeaponIndex;
     
     public void EnableInput()
     {
@@ -64,6 +68,7 @@ public class PlayerWeaponManager : MonoBehaviour
         for (int i = 0; i < maxWeaponsEquipped; i++)
         {
             _heldWeaponGameObject.Add(null);
+            _reloadingCurrentWeapon.Add(false);
         }
     
         //###############################################
@@ -98,7 +103,7 @@ public class PlayerWeaponManager : MonoBehaviour
     /// </summary>
     private void OnFire(InputAction.CallbackContext context)
     {
-        if (context.performed && !_reloading)
+        if (context.performed && !_reloadingCurrentWeapon[_currentIndex])
         {
             _wantsToFire = true;
             _ammoPrompt.SubtractBullet();
@@ -127,6 +132,7 @@ public class PlayerWeaponManager : MonoBehaviour
         //In case current index is null
         if (_heldWeaponGameObject[_currentIndex] != null)
         {
+            _heldWeaponInterface.Use(false);
             _heldWeaponGameObject[_currentIndex].gameObject.SetActive(false);
         }
 
@@ -146,9 +152,17 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponGameObject[_currentIndex].gameObject.SetActive(true);
             _heldWeaponGameObject[_currentIndex].gameObject.TryGetComponent(out _heldWeaponInterface);
             _isWeaponHeld = true;
-            
-            if(_heldWeaponInterface.MaxUses() != -1)
-                _ammoPrompt.SetMaxAmmo(_heldWeaponInterface.UsesLeft(), 8);
+
+            if (_heldWeaponInterface.MaxUses() != -1)
+            {
+                _ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+                _ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
+
+                if (_heldWeaponInterface.UsesLeft() == 0)
+                    _reloadingCurrentWeapon[_currentIndex] = true;
+                else
+                    _reloadingCurrentWeapon[_currentIndex] = false;
+            }
             else
                 _ammoPrompt.DoHide();
         }
@@ -164,15 +178,23 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         if (_isWeaponHeld)
         {
-            if (_heldWeaponInterface.UsesLeft() == 0 && !_reloading)
+            if (_heldWeaponInterface.UsesLeft() == 0 && !_reloadingCurrentWeapon[_currentIndex])
             {
-                _progressBar.BeginTimer(_heldWeaponInterface.ReloadTime());
-
-                _reloading = true;
+                //Hard coded cuz player won't be able to hold more than 2 weapons at a time
+                if(_currentIndex == 0)
+                    _progressBar.BeginTimer(_heldWeaponInterface.ReloadTime());
+                else
+                    _progressBar2.BeginTimer(_heldWeaponInterface.ReloadTime());
+                
+                _reloadingCurrentWeapon[_currentIndex] = true;
                 
                 //This is one of the most crappy fixes, but im tired, end my suffering
                 //Substarct one bullet more just in case
                 _ammoPrompt.SubtractBullet();
+                
+                _ammoPrompt.DoHide();
+
+                _lastReloadingWeaponIndex = _currentIndex;
 
                 Invoke("FinishReload", _heldWeaponInterface.ReloadTime());
 
@@ -180,7 +202,7 @@ public class PlayerWeaponManager : MonoBehaviour
 
             if (_wantsToFire)
             {
-                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses() && !_reloading)
+                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses() && !_reloadingCurrentWeapon[_currentIndex])
                 {
                     _bulletsUITimer = 0;
                     _ammoPrompt.SubtractBullet();
@@ -203,6 +225,8 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponInterface.Throw(transform.right);
             _heldWeaponInterface = null;
             _heldWeaponGameObject[_currentIndex] = null;
+
+            _reloadingCurrentWeapon[_currentIndex] = false;
                 
             _isWeaponHeld = false;
             
@@ -242,7 +266,10 @@ public class PlayerWeaponManager : MonoBehaviour
                                 _heldWeaponInterface.Pickup(weaponHolder);
 
                                 if (_heldWeaponInterface.MaxUses() != -1)
-                                    _ammoPrompt.SetMaxAmmo(_heldWeaponInterface.UsesLeft(), 8);
+                                {
+                                    _ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+                                    _ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
+                                }
                                 else
                                     _ammoPrompt.DoHide();
                                 
@@ -279,10 +306,14 @@ public class PlayerWeaponManager : MonoBehaviour
 
     private void FinishReload()
     {
-        _reloading = false;
-        _wantsToFire = false;
-
-        _ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+        _reloadingCurrentWeapon[_lastReloadingWeaponIndex] = false;
+        //_wantsToFire = false;
+        
+        if (_isWeaponHeld && _lastReloadingWeaponIndex == _currentIndex)
+            _heldWeaponInterface.Use(_wantsToFire);
+        
+        if(_heldWeaponInterface.MaxUses() != -1 && _lastReloadingWeaponIndex == _currentIndex)
+            _ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
     }
 
     private bool IsCurrentIndexAlreadyEquipped()
