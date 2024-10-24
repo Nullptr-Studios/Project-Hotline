@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D missionTrigger;
     [SerializeField] private BoxCollider2D endTrigger;
     [SerializeField] private MissionObjective objective;
-
+    private ScorePrinter _scorePrinter;
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool logMissionEnd;
@@ -59,7 +60,8 @@ public class LevelManager : MonoBehaviour
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Opening Score...");
 #endif
         
-        //TODO: Open score screen logic here
+        //Open score screen logic here
+        _scorePrinter.Activate();
         SceneManager.LoadScene("MainMenu");
     }
 

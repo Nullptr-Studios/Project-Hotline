@@ -18,7 +18,6 @@ public class PlayerHealth : Damageable
     private bool _disableFX;
     private PlayerMovement _player;
     private PlayerIA _input;
-
     private Vector3 _lastShootDir;
 
     public bool IsDead { get; private set; }
@@ -56,7 +55,7 @@ public class PlayerHealth : Damageable
     {
         IsDead = true;  
         _player.OnDisable(); // Deactivates all inputs from the game
-        
+        ScoreManager.AddDeath();
         Invoke("OpenDeathScreen", deathScreenDelay);
     }
 
