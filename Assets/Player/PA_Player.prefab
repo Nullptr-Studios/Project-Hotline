@@ -68,8 +68,8 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 48
-  m_PointLightOuterAngle: 70.15967
+  m_PointLightInnerAngle: 95
+  m_PointLightOuterAngle: 130
   m_PointLightInnerRadius: 8
   m_PointLightOuterRadius: 11.5
   m_ShapeLightParametricSides: 5
@@ -176,12 +176,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7844238277263270493}
   - component: {fileID: 4029661644337495018}
-  - component: {fileID: 262001858545247385}
   - component: {fileID: 2322629527365507291}
   - component: {fileID: 9219392232182884951}
   - component: {fileID: 8330505946157900613}
   - component: {fileID: 5020110233994094047}
   - component: {fileID: 8219012985781061561}
+  - component: {fileID: 6649251340098386191}
   m_Layer: 10
   m_Name: PA_Player
   m_TagString: Player
@@ -243,41 +243,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.3, y: 0.75}
   m_Direction: 0
---- !u!58 &262001858545247385
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3136868407235776783}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.35, y: -0.19}
-  serializedVersion: 2
-  m_Radius: 0.1
 --- !u!50 &2322629527365507291
 Rigidbody2D:
   serializedVersion: 4
@@ -303,7 +268,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &9219392232182884951
 MonoBehaviour:
@@ -317,13 +282,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b8a23459494b1ba0ec5b2b15eb0337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputComponent: {fileID: 8219012985781061561}
   currentSpeed: 0
   movementController:
     curve: {fileID: 11400000, guid: ddaf781850e4fb24595be3ea1743716c, type: 2}
-    speedMax: 5
+    speedMax: 7
   inputSmoothTime: 0.2
-  aimSmoothTime: 8
-  pivotRotation: 1
+  aimSmoothTime: 9
+  aimMinimumDistance: 0.45
+  pivotRotation: 0
+  sprite: {fileID: 1296727842978240662}
+  playerCollider: {fileID: 4029661644337495018}
   debugSpeed: 0
   debugInput: 0
 --- !u!114 &8330505946157900613
@@ -338,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14dbbc726472efe40996f2664ae5f49b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawningWeapon: {fileID: 4223289585622608669, guid: 3473ee2e2ea9c974aa9fc5981d891b87, type: 3}
   pickupRange: 3
   weaponLm:
     serializedVersion: 2
@@ -433,6 +403,24 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6649251340098386191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136868407235776783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90afd25672b2ad4dae0d47786cbe7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
+  bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
+  deathScreenUI: {fileID: 0}
+  mainCamera: {fileID: 0}
+  deathScreenDelay: 0.5
+  logReload: 0
 --- !u!1 &4983506758001091974
 GameObject:
   m_ObjectHideFlags: 0
