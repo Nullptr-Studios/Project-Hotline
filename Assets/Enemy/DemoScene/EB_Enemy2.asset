@@ -15,9 +15,17 @@ MonoBehaviour:
   isStatic: 0
   returnToInitialSpot: 0
   waypoints:
-  - {x: 8, y: 1}
-  - {x: 5, y: -4.5}
-  - {x: -7.5, y: 1}
+  - waypointPos: {x: 8, y: 1}
+    letItRotate: 0
+    wait: 0
+  - waypointPos: {x: 5, y: -4.5}
+    letItRotate: 0
+    wait: 0
+  - waypointPos: {x: -7.5, y: 1}
+    letItRotate: 0
+    wait: 0
+  idleSpeed: 2.5
+  chasingSpeed: 8
   distanceToShoot: 4
   timeToStartShooting: 0.12
   searchTimes: 3

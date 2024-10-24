@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private BoxCollider2D missionTrigger;
     [SerializeField] private BoxCollider2D endTrigger;
     [SerializeField] private MissionObjective objective;
+    [SerializeField] private ScoreUI score;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -58,14 +59,7 @@ public class LevelManager : MonoBehaviour
 #if UNITY_EDITOR
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Opening Score...");
 #endif
-        
-        //TODO: Open score screen logic here
-        SceneManager.LoadScene("MainMenu");
-    }
 
-    private void EndLevel()
-    {
-        //TODO: Make this go to next scene instead
-        SceneManager.LoadScene("MainMenu");
+        score.Activate();
     }
 }

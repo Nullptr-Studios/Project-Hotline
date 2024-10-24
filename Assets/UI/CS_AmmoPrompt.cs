@@ -14,7 +14,6 @@ public class AmmoPrompt : MonoBehaviour
 {
     [SerializeField] private Sprite fullAmmo;
     [SerializeField] private Sprite emptyAmmo;
-    [SerializeField] [Range(2f, 8f)] private float timeToHide = 3f;
 
     private int _maxAmmo;
     private int _currentAmmo;
@@ -24,12 +23,14 @@ public class AmmoPrompt : MonoBehaviour
     private List<Image> _ammoIcons;
     private Animator _animator;
     private static readonly int CloseAnim = Animator.StringToHash("CloseAnim");
+    private RectTransform _parentTransform;
 
     private void Awake()
     {
         gameObject.SetActive(false);
         _animator = GetComponent<Animator>();
         _transform = GetComponent<RectTransform>();
+        _parentTransform = transform.parent.GetComponent<RectTransform>();
         // Set all disabled at the beginning
         _ammoIcons = gameObject.GetComponentsInChildren<Image>().ToList();
         foreach (var spr in _ammoIcons)

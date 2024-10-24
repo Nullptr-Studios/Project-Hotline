@@ -55,6 +55,7 @@ public class PlayerHealth : Damageable
     public override void OnDead()
     {
         IsDead = true;  
+        ScoreManager.AddDeath();
         _player.OnDisable(); // Deactivates all inputs from the game
         
         Invoke("OpenDeathScreen", deathScreenDelay);
