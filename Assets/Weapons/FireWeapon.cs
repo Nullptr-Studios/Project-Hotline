@@ -373,8 +373,10 @@ public class FireWeapon : Weapon
     /// <summary>
     /// Automatic, fire rate curve and dispersion curve logic
     /// </summary>
-    void Update()
+    public override void Update()
     {
+        base.Update();
+        
         if (_wantsToFire)
         {
             if(_currentAmmo > 0){

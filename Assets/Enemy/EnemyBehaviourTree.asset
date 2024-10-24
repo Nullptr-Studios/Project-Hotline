@@ -52,7 +52,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 2dbe2f08c2cf81346bbe4a98201c7645
-  position: {x: -529.60004, y: 473.60007}
+  position: {x: -484, y: 486}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -73,6 +73,43 @@ MonoBehaviour:
     searchTimes: 0
   description: 
   drawGizmos: 0
+--- !u!114 &-5715794855966951915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648bc376b902fe147b71c350cfc87c46, type: 3}
+  m_Name: AfterStun
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 1ba3eee490b92d1448d1964b69f16bad
+  position: {x: -704.17975, y: 335}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
+    playerPos: {x: 0, y: 0, z: 0}
+    initialPos: {x: 0, y: 0, z: 0}
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+    seePlayer: 0
+    finalizedShearch: 1
+    doSlerp: 0
+    waitTime: 0.5
+    distanceToUseWeapon: 10
+    timeToStartShooting: 1
+    returnToInitialPos: 1
+    isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
+    waypoints: []
+    searchTimes: 3
+  description: 
+  drawGizmos: 0
+  child: {fileID: 8840422715588192871}
 --- !u!114 &-5547318569231332128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +276,7 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: fcacb284f17e2ed409bd02d93ac94378
-  position: {x: -529.52124, y: 335.19983}
+  position: {x: -484, y: 347.00003}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -377,6 +414,7 @@ MonoBehaviour:
   description: we must run all of these at the same time
   drawGizmos: 0
   children:
+  - {fileID: -5715794855966951915}
   - {fileID: -3750841371633188628}
   - {fileID: 5178274741259517980}
   - {fileID: -4223474538306020012}
@@ -415,6 +453,8 @@ MonoBehaviour:
   - {fileID: 8000755662886063312}
   - {fileID: -7808836056307065234}
   - {fileID: 4887444683586557037}
+  - {fileID: -5715794855966951915}
+  - {fileID: 8840422715588192871}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -855,3 +895,39 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   currentWaypointIndex: 0
+--- !u!114 &8840422715588192871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae278d347a12786449e7b5b73df63634, type: 3}
+  m_Name: LookForNearestWeapon
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 2e3cfa8ce93790f4ba378c73dd85e3a3
+  position: {x: -716.7749, y: 454.00006}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
+    playerPos: {x: 0, y: 0, z: 0}
+    initialPos: {x: 0, y: 0, z: 0}
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+    seePlayer: 0
+    finalizedShearch: 1
+    doSlerp: 0
+    waitTime: 0.5
+    distanceToUseWeapon: 10
+    timeToStartShooting: 1
+    returnToInitialPos: 1
+    isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
+    waypoints: []
+    searchTimes: 3
+  description: 
+  drawGizmos: 0

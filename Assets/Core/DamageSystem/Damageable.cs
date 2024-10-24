@@ -14,6 +14,8 @@ public interface IDamageable
     
     public void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType);
 
+    public void Stun(Vector3 dir);
+
     //Pretty self-explanatory
     public float GetCurrentHealth();
 }
@@ -30,6 +32,11 @@ public class Damageable : MonoBehaviour, IDamageable
     public virtual void Start()
     {
         _currentHealth = maxHealth;
+    }
+
+    public virtual void Stun(Vector3 dir)
+    {
+        
     }
 
     public virtual void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)

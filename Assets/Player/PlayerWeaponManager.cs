@@ -310,6 +310,8 @@ public class PlayerWeaponManager : MonoBehaviour
                                     ammoPrompt.DoHide();
                                 
                                 _isWeaponHeld = true;
+                                
+                                _heldWeaponInterface.setClaimed(true);
                             }
                             //This won't ever happen as if you have a weapon already equipped it will throw it, but just in case
                             else

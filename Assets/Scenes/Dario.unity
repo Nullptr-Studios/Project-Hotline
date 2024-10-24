@@ -560,6 +560,10 @@ MonoBehaviour:
   throwForce: 15
   rotationForce: 1000
   gfxCollider2D: {fileID: 246901038}
+  canStun: 1
+  maskToStun:
+    serializedVersion: 2
+    m_Bits: 0
   fireWeaponData: {fileID: 11400000, guid: ce83b8836abb9a843a3902e607175a79, type: 2}
   bulletHitWallVFX: {fileID: 180772, guid: 697d9a1e52bb99d468a5d727e5a4b435, type: 3}
   bulletHitGlassVFX: {fileID: 168394, guid: 93983eaa39ee5d4408c0b10200e234b4, type: 3}
@@ -3685,6 +3689,10 @@ MonoBehaviour:
   throwForce: 15
   rotationForce: 1000
   gfxCollider2D: {fileID: 1262163123}
+  canStun: 1
+  maskToStun:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!212 &1262163125
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4284,6 +4292,10 @@ MonoBehaviour:
   throwForce: 15
   rotationForce: 1000
   gfxCollider2D: {fileID: 1435309152}
+  canStun: 1
+  maskToStun:
+    serializedVersion: 2
+    m_Bits: 0
   meleeWeaponData: {fileID: 11400000, guid: 7e64bfaf7410c0849b6217cbf3b32a04, type: 2}
   offset: 0
   log: 0
@@ -6384,6 +6396,10 @@ MonoBehaviour:
   throwForce: 15
   rotationForce: 1000
   gfxCollider2D: {fileID: 2133404293}
+  canStun: 1
+  maskToStun:
+    serializedVersion: 2
+    m_Bits: 0
   meleeWeaponData: {fileID: 11400000, guid: 0dd44528de1f1654fa9451933a21fc6b, type: 2}
   offset: 0.86
   log: 0
@@ -6399,6 +6415,10 @@ PrefabInstance:
     - target: {fileID: 4223289585622608669, guid: 1f3a110296d5acf4e9997829d9ff0271, type: 3}
       propertyPath: m_Name
       value: Gun (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223289585622608669, guid: 1f3a110296d5acf4e9997829d9ff0271, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 8293000475427228458, guid: 1f3a110296d5acf4e9997829d9ff0271, type: 3}
       propertyPath: m_RootOrder

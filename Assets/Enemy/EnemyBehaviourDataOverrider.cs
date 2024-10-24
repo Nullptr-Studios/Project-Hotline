@@ -7,6 +7,8 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
 {
     public EnemyBehaviourData behaviourData;
 
+    public bool justStunned = false;
+
 #if UNITY_EDITOR
     [Header("Debug")] 
     

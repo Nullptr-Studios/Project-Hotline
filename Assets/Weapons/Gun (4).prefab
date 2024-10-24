@@ -211,6 +211,10 @@ MonoBehaviour:
   throwForce: 15
   rotationForce: 1000
   gfxCollider2D: {fileID: 2350645429869695454}
+  canStun: 1
+  maskToStun:
+    serializedVersion: 2
+    m_Bits: 512
   fireWeaponData: {fileID: 11400000, guid: 27d9cfa74f291754eab62551f2c67d2f, type: 2}
   bulletHitWallVFX: {fileID: 180772, guid: 697d9a1e52bb99d468a5d727e5a4b435, type: 3}
   bulletHitGlassVFX: {fileID: 168394, guid: 93983eaa39ee5d4408c0b10200e234b4, type: 3}
