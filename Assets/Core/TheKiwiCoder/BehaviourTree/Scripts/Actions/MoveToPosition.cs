@@ -5,13 +5,14 @@ using TheKiwiCoder;
 
 public class MoveToPosition : ActionNode
 {
-    public float speed = 5;
+    //public float speed = 5;
     public float stoppingDistance = 0.1f;
     public float tolerance = 1.0f;
 
     protected override void OnStart() {
         context.agent.stoppingDistance = stoppingDistance;
-        context.agent.speed = speed;
+        //Override idle speed
+        context.agent.speed = blackboard.idleSpeed;
         context.agent.SetDestination(blackboard.moveToPosition);
     }
 

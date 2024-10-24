@@ -25,10 +25,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: Fail safe
@@ -59,10 +62,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -92,10 +98,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -128,10 +137,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -163,10 +175,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -197,49 +212,18 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
   duration: 2
---- !u!114 &-3815094074370621375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
-  m_Name: Wait
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: acdaaecb215e0fc479917628ea803130
-  position: {x: 361.32974, y: 607.9999}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
-    playerPos: {x: 0, y: 0, z: 0}
-    initialPos: {x: 0, y: 0, z: 0}
-    initialRotation: {x: 0, y: 0, z: 0, w: 0}
-    seePlayer: 0
-    finalizedShearch: 1
-    doSlerp: 0
-    distanceToUseWeapon: 10
-    timeToStartShooting: 1
-    returnToInitialPos: 1
-    isStatic: 1
-    waypoints: []
-    searchTimes: 0
-  description: 
-  drawGizmos: 0
-  duration: 1
 --- !u!114 &-3750841371633188628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,10 +249,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 'Main player seen function
@@ -303,10 +290,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -336,10 +326,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 3
   description: 
@@ -372,10 +365,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: we must run all of these at the same time
@@ -414,11 +410,11 @@ MonoBehaviour:
   - {fileID: -3707205459360130002}
   - {fileID: -5547318569231332128}
   - {fileID: 6922028017448870757}
-  - {fileID: -3815094074370621375}
   - {fileID: 8609969670504424971}
   - {fileID: 1325767032127553648}
   - {fileID: 8000755662886063312}
   - {fileID: -7808836056307065234}
+  - {fileID: 4887444683586557037}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -428,10 +424,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
 --- !u!114 &1325767032127553648
@@ -459,15 +458,17 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
-  speed: 5
   stoppingDistance: 0.1
   tolerance: 1
 --- !u!114 &2946057099227109268
@@ -495,10 +496,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -529,10 +533,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -568,10 +575,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: in case of failure, repeat
@@ -579,6 +589,43 @@ MonoBehaviour:
   child: {fileID: -7808836056307065234}
   restartOnSuccess: 1
   restartOnFailure: 0
+--- !u!114 &4887444683586557037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce830f2f6a60aea43ae2496d06d31d61, type: 3}
+  m_Name: WaitMine
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: a2d03b66434aa4f438e10d14b5d2745a
+  position: {x: 375, y: 608}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
+    playerPos: {x: 0, y: 0, z: 0}
+    initialPos: {x: 0, y: 0, z: 0}
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+    seePlayer: 0
+    finalizedShearch: 1
+    doSlerp: 0
+    waitTime: 0.5
+    distanceToUseWeapon: 10
+    timeToStartShooting: 1
+    returnToInitialPos: 1
+    isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
+    waypoints: []
+    searchTimes: 3
+  description: 
+  drawGizmos: 0
+  duration: 1
 --- !u!114 &5178274741259517980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,10 +651,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: search player after lost for 5 times, then return to idle path
@@ -639,15 +689,17 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
-  speed: 5
   stoppingDistance: 0.1
   tolerance: 1
 --- !u!114 &6342177816646311186
@@ -675,10 +727,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 0
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
@@ -710,16 +765,19 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
   children:
-  - {fileID: -3815094074370621375}
+  - {fileID: 4887444683586557037}
   - {fileID: 8609969670504424971}
   - {fileID: 1325767032127553648}
   - {fileID: 8000755662886063312}
@@ -748,14 +806,18 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 
   drawGizmos: 0
+  timeout: 1
 --- !u!114 &8609969670504424971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,10 +843,13 @@ MonoBehaviour:
     seePlayer: 0
     finalizedShearch: 1
     doSlerp: 0
+    waitTime: 0.5
     distanceToUseWeapon: 10
     timeToStartShooting: 1
     returnToInitialPos: 1
     isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
     waypoints: []
     searchTimes: 0
   description: 

@@ -21,6 +21,9 @@ public class SetAllValuesToOverrider : ActionNode
             blackboard.waypoints = ov.behaviourData.waypoints;
 
             blackboard.searchTimes = ov.behaviourData.searchTimes;
+
+            blackboard.idleSpeed = ov.behaviourData.idleSpeed;
+            blackboard.chaseSpeed = ov.behaviourData.chasingSpeed;
         }
         else
         {
