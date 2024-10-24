@@ -55,6 +55,11 @@ public class FireWeapon : Weapon
         weaponType = EWeaponType.Fire;
     }
 
+    public override bool IsAutomatic()
+    {
+        return fireWeaponData.automatic;
+    }
+
     public override float ReloadTime()
     {
         return fireWeaponData.reloadTime;
@@ -426,8 +431,9 @@ public class FireWeapon : Weapon
                     if (_canFire)
                     {
                         _currentDispersion = fireWeaponData.maxDispersionAngle;
+                        _currentTimeToFire = fireWeaponData.finalFireRate;
 
-                        Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
+                        Invoke(nameof(UpdateCanFire), _currentTimeToFire);
                         FireImplementation();
                         
                         _canFire = false;
@@ -437,7 +443,7 @@ public class FireWeapon : Weapon
             }
             else
             {
-                //Do automatic reload
+                //Do semiautomatic reload
                 if (!_isReloading)
                 {
 #if UNITY_EDITOR
@@ -447,6 +453,21 @@ public class FireWeapon : Weapon
                     _isReloading = true;
                     Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
                 }
+            }
+        }
+        
+        //Do automatic reload
+        if (_currentAmmo <= 0)
+        {
+            
+            if (!_isReloading)
+            {
+#if UNITY_EDITOR
+                if (log)
+                    Debug.Log("Reloading");
+#endif
+                _isReloading = true;
+                Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
             }
         }
     }

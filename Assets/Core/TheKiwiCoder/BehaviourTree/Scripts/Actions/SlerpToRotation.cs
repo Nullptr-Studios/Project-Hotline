@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
-using Unity.Mathematics;
-using UnityEditor.Timeline.Actions;
 
 public class SlerpToRotation : ActionNode
 {

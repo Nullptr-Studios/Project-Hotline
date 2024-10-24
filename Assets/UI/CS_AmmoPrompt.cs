@@ -55,11 +55,12 @@ public class AmmoPrompt : MonoBehaviour
     {
         for (var i = 0; i < _maxAmmo; i++)
         {
-            _ammoIcons[i].sprite = emptyAmmo;
+            _ammoIcons[i].gameObject.SetActive(false);
         }
 
         for (int i = 0; i < value; i++)
         {
+            _ammoIcons[i].gameObject.SetActive(true);
             _ammoIcons[i].sprite = fullAmmo;
         }
         

@@ -12,18 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aee424af42d0cb4386688b8fec2bf02, type: 3}
   m_Name: Enemy Behaviour Data
   m_EditorClassIdentifier: 
-  isStatic: 0
+  isStatic: 1
   returnToInitialSpot: 1
-  waypoints:
-  - waypointPos: {x: 0, y: 0}
-    letItRotate: 1
-    wait: 0
-  - waypointPos: {x: -8, y: 0}
-    letItRotate: 0
-    wait: 2.68
-  - waypointPos: {x: -10.24, y: 2.71}
-    letItRotate: 1
-    wait: 0
+  waypoints: []
+  idleSpeed: 2.5
+  chasingSpeed: 8
   distanceToShoot: 7
   timeToStartShooting: 0.4
   searchTimes: 3

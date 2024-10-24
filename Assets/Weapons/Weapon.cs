@@ -23,6 +23,8 @@ public interface IWeapon
     /// </summary>
     public int UsesLeft();
 
+    public bool IsAutomatic();
+
     public float ReloadTime();
 
     public int MaxUses();
@@ -58,6 +60,11 @@ public class Weapon : MonoBehaviour, IWeapon
     public virtual int UsesLeft()
     {
         return -1;
+    }
+
+    public virtual bool IsAutomatic()
+    {
+        return false;
     }
 
     public virtual int MaxUses()
