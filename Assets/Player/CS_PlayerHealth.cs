@@ -1,5 +1,6 @@
 using JetBrains.Annotations; // Used for [CanBeNull] (Unity alternative for ? variable indicator)
 using System.Collections;
+using CC.DialogueSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -83,6 +84,7 @@ public class PlayerHealth : Damageable
 #endif
 
         _input.Gameplay.Interact.performed -= RestartGame;
+        VariableRepo.Instance.RemoveAll();
         
         // TODO: this should be fixed after prototype to not have the player read the VN every time
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1531941549506603996}
   - component: {fileID: 8220087036707416801}
   - component: {fileID: 6686610125033126089}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PA_EndTrigger
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &8220087036707416801
 BoxCollider2D:
@@ -90,3 +90,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7d9ec5c8594864296548750637afb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onLevelFinished:
+    m_PersistentCalls:
+      m_Calls: []

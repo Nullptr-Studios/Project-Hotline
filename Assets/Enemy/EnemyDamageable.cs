@@ -1,3 +1,4 @@
+using System.Collections;
 using TheKiwiCoder;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,6 +17,7 @@ public class EnemyDamageable : Damageable
 
     public float stunCooldown = 1.0f;
 
+    [Header("Event")] 
     [SerializeField] private UnityEvent killEvent;
     
     
@@ -76,6 +78,7 @@ public class EnemyDamageable : Damageable
     private void Update()
     {
         //@TODO: fix fucking unity
+        // xd -x
         /*
         if (_onStun)
         {
