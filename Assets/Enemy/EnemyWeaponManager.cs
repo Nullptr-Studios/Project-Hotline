@@ -26,7 +26,7 @@ public class EnemyWeaponManager : MonoBehaviour
 #endif
     
     private bool _isWeaponHeld;
-    private bool _wantsToThrowOrGet;
+    public bool _wantsToThrowOrGet;
 
     private PlayerIA _playerInput;
     
@@ -152,7 +152,7 @@ public class EnemyWeaponManager : MonoBehaviour
     }*/
 
     // Throw and get logic
-    /*private void Update()
+    private void Update()
     {
         if (_isWeaponHeld)
         {
@@ -196,24 +196,12 @@ public class EnemyWeaponManager : MonoBehaviour
                                 _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
 
                                 _heldWeaponInterface.Pickup(weaponHolder);
-                                _isWeaponHeld = true;
-                            }
-                            //This won't ever happen as if you have a weapon already equipped it will throw it, but just in case
-                            else
-                            {
-                                //Quality of life improvement
-                                SwitchWeapon();
-                                    
-                                _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
-
-                                _heldWeaponInterface.Pickup(weaponHolder);
+                                
+                                _heldWeaponInterface.setClaimed(true);
+                                
                                 _isWeaponHeld = true;
                             }
                         }
-                        // else
-                        // {
-                        //     //Debug.Log("Max Equipped");
-                        // }
                     }
 
                 }
@@ -223,18 +211,18 @@ public class EnemyWeaponManager : MonoBehaviour
             _wantsToThrowOrGet = false;
         }
 
-    }*/
+    }
 
-    /*private bool IsCurrentIndexAlreadyEquipped()
+    private bool IsCurrentIndexAlreadyEquipped()
     {
         return _heldWeaponGameObject[_currentIndex] != null;
-    }*/
+    }
 
     /// <summary>
     /// As _heldWeaponGameObject contains nulls we need to do this
     /// </summary>
     /// <returns></returns>
-    /*private bool CanEquipMoreWeapons()
+    private bool CanEquipMoreWeapons()
     {
         int notNulls = 0;
         foreach (var w in _heldWeaponGameObject)
@@ -246,7 +234,7 @@ public class EnemyWeaponManager : MonoBehaviour
         }
 
         return notNulls < _maxWeaponsEquipped;
-    }*/
+    }
 
     /// <summary>
     /// Checks which weapon is the closest to the player
@@ -254,7 +242,7 @@ public class EnemyWeaponManager : MonoBehaviour
     /// <param name="hitArr">The hit array</param>
     /// <param name="hitNumber">Amount of hits</param>
     /// <returns>The closest weapon index</returns>
-    /*private int DecideWeapon(RaycastHit2D[] hitArr, int hitNumber)
+    private int DecideWeapon(RaycastHit2D[] hitArr, int hitNumber)
     {
         if (hitNumber >= 2)
         {
@@ -293,6 +281,6 @@ public class EnemyWeaponManager : MonoBehaviour
         if(drawGizmos)
             Gizmos.DrawWireSphere(transform.position, pickupRange/2);
     }
-#endif*/
+#endif
     
 }

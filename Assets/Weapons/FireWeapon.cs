@@ -35,7 +35,9 @@ public class FireWeapon : Weapon
     //Dispersion global variables
     private float _currentDispersion;
     private float _dispersionCurveTimer;
-    
+
+    private float _currentTimeToFire;
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool log;
@@ -47,10 +49,30 @@ public class FireWeapon : Weapon
     {
         return _currentAmmo;
     }
-
+    
     private void Awake()
     {
         weaponType = EWeaponType.Fire;
+    }
+
+    public override bool IsAutomatic()
+    {
+        return fireWeaponData.automatic;
+    }
+
+    public override float ReloadTime()
+    {
+        return fireWeaponData.reloadTime;
+    }
+
+    public override float TimeBetweenUses()
+    {
+        return _currentTimeToFire;
+    }
+
+    public override int MaxUses()
+    {
+        return fireWeaponData.maxAmmo;
     }
 
     /// <summary>
@@ -65,6 +87,7 @@ public class FireWeapon : Weapon
             {
                 //so it fires as soon as it´s pressed
                 _fireRateTimer = fireWeaponData.fireRateCurve.Evaluate(0);
+                _currentTimeToFire = _fireRateTimer;
             }
         }
         else
@@ -355,8 +378,10 @@ public class FireWeapon : Weapon
     /// <summary>
     /// Automatic, fire rate curve and dispersion curve logic
     /// </summary>
-    void Update()
+    public override void Update()
     {
+        base.Update();
+        
         if (_wantsToFire)
         {
             if(_currentAmmo > 0){
@@ -366,10 +391,10 @@ public class FireWeapon : Weapon
                     //Fire rate
                     if (fireWeaponData.useFireRateCurve)
                     {
-                        float currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
+                        _currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
 
                         //Debug.Log(currentTimeToFire);
-                        if (_fireRateTimer >= currentTimeToFire)
+                        if (_fireRateTimer >= _currentTimeToFire)
                         {
                             _fireRateTimer = 0;
                             UpdateCanFire();
@@ -403,6 +428,7 @@ public class FireWeapon : Weapon
 
                         if (!fireWeaponData.useFireRateCurve)
                         {
+                            _fireRateCurveTimer = fireWeaponData.finalFireRate;
                             Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
                         }
                     }
@@ -412,8 +438,9 @@ public class FireWeapon : Weapon
                     if (_canFire)
                     {
                         _currentDispersion = fireWeaponData.maxDispersionAngle;
+                        _currentTimeToFire = fireWeaponData.finalFireRate;
 
-                        Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
+                        Invoke(nameof(UpdateCanFire), _currentTimeToFire);
                         FireImplementation();
                         
                         _canFire = false;
@@ -423,7 +450,7 @@ public class FireWeapon : Weapon
             }
             else
             {
-                //Do automatic reload
+                //Do semiautomatic reload
                 if (!_isReloading)
                 {
 #if UNITY_EDITOR
@@ -433,6 +460,21 @@ public class FireWeapon : Weapon
                     _isReloading = true;
                     Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
                 }
+            }
+        }
+        
+        //Do automatic reload
+        if (_currentAmmo <= 0)
+        {
+            
+            if (!_isReloading)
+            {
+#if UNITY_EDITOR
+                if (log)
+                    Debug.Log("Reloading");
+#endif
+                _isReloading = true;
+                Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
             }
         }
     }

@@ -44,10 +44,27 @@ public class AmmoPrompt : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time - _timer > timeToHide && !_isHidden)
+        //tf is this, this makes the ui hidden, but the player could still be with a weapon!!!!!!!!!!
+        /*if (Time.time - _timer > timeToHide && !_isHidden)
         {
             Hide();
+        }*/
+    }
+
+    public void SetCurrentAmmo(int value)
+    {
+        for (var i = 0; i < _maxAmmo; i++)
+        {
+            _ammoIcons[i].gameObject.SetActive(false);
         }
+
+        for (int i = 0; i < value; i++)
+        {
+            _ammoIcons[i].gameObject.SetActive(true);
+            _ammoIcons[i].sprite = fullAmmo;
+        }
+        
+        _currentAmmo = value;
     }
 
     /// <summary>
@@ -56,7 +73,7 @@ public class AmmoPrompt : MonoBehaviour
     /// <param name="value">Max ammunition value</param>
     /// <param name="rowSize">Number of bullets per row</param>
     public void SetMaxAmmo(int value, int rowSize) 
-    { 
+    {
         _maxAmmo = value;
         _transform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, rowSize * 4 + 3);
         Show();
@@ -69,6 +86,14 @@ public class AmmoPrompt : MonoBehaviour
         _currentAmmo = _maxAmmo;
     }
 
+    public void DoHide()
+    {
+        if(_isHidden)
+            return;
+        
+        Hide();
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -78,6 +103,10 @@ public class AmmoPrompt : MonoBehaviour
 
         for (var i = _currentAmmo; i < _maxAmmo; i++)
         {
+            //Safe check
+            if (i < 0)
+                break;
+            
             if (_ammoIcons[i].sprite == fullAmmo)
                 _ammoIcons[i].sprite = emptyAmmo;
         }

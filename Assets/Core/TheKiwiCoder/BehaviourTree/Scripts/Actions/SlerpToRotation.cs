@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
-using Unity.Mathematics;
 
 public class SlerpToRotation : ActionNode
 {
-    protected override void OnStart() 
+
+    public float timeout = 1;
+
+    private float _timer = 0.0f;
+    protected override void OnStart()
     {
-        
+        _timer = 0.0f;
     }
 
     protected override void OnStop() {
@@ -16,6 +17,15 @@ public class SlerpToRotation : ActionNode
 
     protected override State OnUpdate() 
     {
+        if (_timer >= timeout)
+        {
+            return State.Success;
+        }
+        else
+        {
+            _timer += Time.deltaTime;
+        }
+        
         if (blackboard.doSlerp)
         {
             if (Mathf.Approximately(Mathf.Floor(context.transform.rotation.eulerAngles.z),

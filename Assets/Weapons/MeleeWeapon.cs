@@ -46,17 +46,6 @@ public class MeleeWeapon : Weapon
     {
         _canAttack = true;
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (!_wantsToAttack) return;
-        if (!_canAttack) return;
-        
-        _canAttack = false;
-        Invoke(nameof(UpdateCanAttack), meleeWeaponData.cooldownTime);
-        Attack();
-    }
 
     private void Attack()
     {
@@ -85,6 +74,19 @@ public class MeleeWeapon : Weapon
             
         }
     }
+
+    public override void Update()
+    {
+        base.Update();
+        
+        if (!_wantsToAttack) return;
+        if (!_canAttack) return;
+        
+        _canAttack = false;
+        Invoke(nameof(UpdateCanAttack), meleeWeaponData.cooldownTime);
+        Attack();
+    }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()

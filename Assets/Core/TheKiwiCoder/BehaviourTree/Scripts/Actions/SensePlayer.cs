@@ -6,6 +6,8 @@ using Unity.Mathematics;
 
 public class SensePlayer : ActionNode
 {
+
+    private EnemyBehaviourDataOverrider _ov;
     
     private AISensor _sensor;
     private EnemyWeaponManager _weaponManager;
@@ -22,6 +24,8 @@ public class SensePlayer : ActionNode
     {
         _sensor = context.gameObject.GetComponent<AISensor>();
         _weaponManager = context.gameObject.GetComponent<EnemyWeaponManager>();
+
+        _ov = context.gameObject.GetComponent<EnemyBehaviourDataOverrider>();
         
         _hasSensedPlayerBefore = false;
         _detectingFrames = 0;
@@ -31,79 +35,87 @@ public class SensePlayer : ActionNode
     }
 
     protected override State OnUpdate() {
-        if (_sensor.isDetecting)
+        if (!_ov.justStunned)
         {
-            if(_sensor.detectedPlayer)
-                blackboard.playerPos = _sensor.detectedPlayer.transform.position;
-            
-            blackboard.seePlayer = true;
-            _hasSensedPlayerBefore = true;
-            
-            context.agent.stoppingDistance = blackboard.distanceToUseWeapon;
-            
-            context.agent.SetDestination(blackboard.playerPos);
-            
-            
-            if (context.agent.remainingDistance <= context.agent.stoppingDistance && _detectingFrames != 0)
+            if (_sensor.isDetecting)
             {
-                //@TODO: Do this with slerp
-                Vector3 targetPos = blackboard.playerPos;
-                Vector3 thisPos = context.transform.position;
-                targetPos.x = targetPos.x - thisPos.x;
-                targetPos.y = targetPos.y - thisPos.y;
-                float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-                Quaternion look = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                context.transform.rotation = Quaternion.Slerp(context.transform.rotation, look, 3 * Time.deltaTime);
 
-                if (_shootTimer > blackboard.timeToStartShooting)
+
+                if (_sensor.detectedPlayer)
+                    blackboard.playerPos = _sensor.detectedPlayer.transform.position;
+
+                blackboard.seePlayer = true;
+                _hasSensedPlayerBefore = true;
+
+                context.agent.stoppingDistance = blackboard.distanceToUseWeapon;
+
+                context.agent.speed = blackboard.chaseSpeed;
+
+                context.agent.SetDestination(blackboard.playerPos);
+
+
+                if (context.agent.remainingDistance <= context.agent.stoppingDistance && _detectingFrames != 0)
                 {
-                    if (!_usingWeapon)
+
+                    Vector3 targetPos = blackboard.playerPos;
+                    Vector3 thisPos = context.transform.position;
+                    targetPos.x = targetPos.x - thisPos.x;
+                    targetPos.y = targetPos.y - thisPos.y;
+                    float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
+                    Quaternion look = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+                    context.transform.rotation = Quaternion.Slerp(context.transform.rotation, look, 3 * Time.deltaTime);
+
+                    if (_shootTimer > blackboard.timeToStartShooting)
                     {
-                        _weaponManager.useWeapon(true);
-                        _usingWeapon = true;
+                        if (!_usingWeapon)
+                        {
+                            _weaponManager.useWeapon(true);
+                            _usingWeapon = true;
+                        }
                     }
+                    else
+                    {
+                        _shootTimer += Time.deltaTime;
+                    }
+
+
                 }
                 else
                 {
-                    _shootTimer += Time.deltaTime;
+                    if (_usingWeapon)
+                    {
+                        _weaponManager.useWeapon(false);
+                        _usingWeapon = false;
+                    }
+
+                    _shootTimer = 0;
                 }
-                
-                
+
+                _detectingFrames++;
             }
-            else
+            else if (_hasSensedPlayerBefore)
             {
+                context.agent.stoppingDistance = 2f;
+
+                _shootTimer = 0;
+
                 if (_usingWeapon)
                 {
                     _weaponManager.useWeapon(false);
                     _usingWeapon = false;
                 }
 
-                _shootTimer = 0;
-            }
-            
-            _detectingFrames++;
-        }
-        else if (_hasSensedPlayerBefore)
-        {
-            context.agent.stoppingDistance = 2f;
-            
-            _shootTimer = 0;
-            
-            if (_usingWeapon)
-            {
-                _weaponManager.useWeapon(false);
-                _usingWeapon = false;
-            }
-            
-            if (context.agent.remainingDistance <= context.agent.stoppingDistance)
-            {
-                blackboard.seePlayer = false;
-                blackboard.finalizedShearch = false;
-                return State.Success;
-            }
+                if (context.agent.remainingDistance <= context.agent.stoppingDistance)
+                {
+                    blackboard.seePlayer = false;
+                    blackboard.finalizedShearch = false;
+                    return State.Success;
+                }
 
-            _detectingFrames = 0;
+                _detectingFrames = 0;
+            }
         }
+
         return State.Running;
     }
 }

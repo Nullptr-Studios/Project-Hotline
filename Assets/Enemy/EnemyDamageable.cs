@@ -86,8 +86,11 @@ public class EnemyDamageable : Damageable
         }*/
     }
 
-    private void Stun(Vector3 dir)
+    public override void Stun(Vector3 dir)
     {
+        if (_onStun)
+            return;
+        
         if (!_aiSensor)
             _aiSensor = gameObject.GetComponent<AISensor>();
 
@@ -108,6 +111,8 @@ public class EnemyDamageable : Damageable
         _rb.AddForce(dir * 200);
 
         _onStun = true;
+
+        GetComponent<EnemyBehaviourDataOverrider>().justStunned = true;
         
         _enemyWeaponManager.DropWeapon();
         
