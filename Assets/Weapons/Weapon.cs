@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,19 +19,30 @@ public interface IWeapon
 {
     public EWeaponType GetWeaponType();
 
+    public bool isClaimed();
+
+    public void setClaimed(bool claimed);
+
     /// <summary>
     /// Returns the amount of uses (bullets left), -1 if this weapon has no Uses functionality 
     /// </summary>
-    public int UsesLeft()
-    {
-        return -1;
-    }
+    public int UsesLeft();
+
+    public bool IsAutomatic();
+
+    public float ReloadTime();
+
+    public int MaxUses();
 
     public void Pickup(Transform weaponHolder);
 
     public void Throw(Vector2 forwardVector);
 
+    public void Drop();
+
     public void Use(bool pressed);
+
+    public float TimeBetweenUses();
 }
 
 /// <summary>
@@ -41,16 +53,54 @@ public class Weapon : MonoBehaviour, IWeapon
     [Header("Base")] 
     public EWeaponType weaponType = EWeaponType.Default;
     
+    //for AI
+    private bool _isClaimed = false;
+
+    public bool isClaimed()
+    {
+        return _isClaimed;
+    }
+
+    public void setClaimed(bool claimed)
+    {
+        _isClaimed = claimed;
+    }
+    
     public float throwForce = 15;
     
     public float rotationForce = 1000;
 
     public Collider2D gfxCollider2D;
 
+    public bool canStun = true;
+    public LayerMask maskToStun;
+
+    private bool _stun;
+
     private bool _held;
     private Rigidbody2D _rb;
     
     public virtual int UsesLeft()
+    {
+        return -1;
+    }
+
+    public virtual bool IsAutomatic()
+    {
+        return false;
+    }
+
+    public virtual int MaxUses()
+    {
+        return -1;
+    }
+
+    public virtual float ReloadTime()
+    {
+        return -1;
+    }
+
+    public virtual float TimeBetweenUses()
     {
         return -1;
     }
@@ -63,7 +113,8 @@ public class Weapon : MonoBehaviour, IWeapon
 
     protected virtual void Start()
     {
-        AddRb();
+        if(!_held)
+            AddRb();
     }
 
     /// <summary>
@@ -72,6 +123,7 @@ public class Weapon : MonoBehaviour, IWeapon
     private void AddRb()
     {
         _rb = gameObject.AddComponent<Rigidbody2D>();
+        
         _rb.mass = 0.1f;
         _rb.gravityScale = 0;
         _rb.drag = 1;
@@ -97,6 +149,8 @@ public class Weapon : MonoBehaviour, IWeapon
         gfxCollider2D.enabled = false;
         
         _held = true;
+
+        _isClaimed = true;
     }
     
     /// <summary>
@@ -112,16 +166,80 @@ public class Weapon : MonoBehaviour, IWeapon
         
         _rb.velocity = forwardVector * throwForce;
         _rb.angularVelocity = Random.Range(-rotationForce,rotationForce);
-        
+
+        _stun = true;
         
         transform.parent = null;
         
         gfxCollider2D.enabled = true;
         
         _held = false;
+
+        _isClaimed = false;
         
         //reset Use
         Use(false);
+    }
+
+    public virtual void Drop()
+    {
+        if (!_held)
+            return;
+        
+        AddRb();
+
+        _rb.angularVelocity = Random.Range(-(rotationForce / 2), rotationForce / 2);
+        
+        transform.parent = null;
+        
+        gfxCollider2D.enabled = true;
+        
+        _held = false;
+
+        _isClaimed = false;
+        
+        //reset Use
+        Use(false);
+    }
+
+    public virtual void Update()
+    {
+        if (_stun && canStun)
+        {
+            if(!_rb)
+                return;
+            
+            Debug.Log(_rb.velocity.magnitude);
+
+            if (_rb.velocity.magnitude >= 5)
+            {
+                ContactFilter2D cf2D = new ContactFilter2D();
+                RaycastHit2D[] hitArr = new RaycastHit2D[10];
+
+                cf2D.SetLayerMask(maskToStun);
+                cf2D.useLayerMask = true;
+                
+                int hitNumber = Physics2D.CapsuleCast(transform.position, new Vector2(.6f, .6f),
+                    CapsuleDirection2D.Horizontal,0,new Vector2(0,0),cf2D, hitArr);
+
+                if (hitNumber > 0)
+                {
+                    for (int i = 0; i < hitNumber; i++)
+                    {
+                        IDamageable d = hitArr[i].transform.GetComponent<IDamageable>();
+                        
+                        if (d == null)
+                            return;
+                        
+                        d.Stun((hitArr[i].transform.position - transform.position).normalized);
+                    }
+                }
+            }
+            else
+            {
+                _stun = false;
+            }
+        }
     }
 
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4255126698001893495
+--- !u!114 &-2768057446997512794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15,30 +15,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638646868142383652
+  lastModified: 638650229200169906
   FileSizes:
   - Name: Desktop
     Value: 768
-  Exists: 1
---- !u!114 &-4198927413659911938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638646868142378188
-  FileSizes:
-  - Name: Desktop
-    Value: 3257024
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -53,18 +33,18 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -4255126698001893495}
-  - {fileID: -4198927413659911938}
+  - {fileID: -2768057446997512794}
+  - {fileID: 7001593021806771270}
   EditorEvents:
-  - {fileID: 4966421726038867806}
+  - {fileID: 5473233621598740718}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -4198927413659911938}
+  - {fileID: 7001593021806771270}
   StringsBanks:
-  - {fileID: -4255126698001893495}
-  cacheTime: 638646868142383652
+  - {fileID: -2768057446997512794}
+  cacheTime: 638650229200169906
   cacheVersion: 131620
---- !u!114 &4966421726038867806
+--- !u!114 &5473233621598740718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,7 +63,7 @@ MonoBehaviour:
     Data3: 1395997369
     Data4: -2022657501
   Banks:
-  - {fileID: -4198927413659911938}
+  - {fileID: 7001593021806771270}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -91,3 +71,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &7001593021806771270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638650229200169906
+  FileSizes:
+  - Name: Desktop
+    Value: 3257024
+  Exists: 1

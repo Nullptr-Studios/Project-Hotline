@@ -94,6 +94,10 @@ public class ProgressBar : MonoBehaviour
     /// <param name="dividerSize">Percentage of the bar division</param>
     public void BeginTimer(float time, bool isInverse = false, int size = 10, bool hasDivider = false, float dividerSize = 0f)
     {
+        //fix for bug in player weapon manager
+        if (_active)
+            return;
+        
         duration = time;
         _isInverse = isInverse;
         _dividerValue = dividerSize;
@@ -111,8 +115,9 @@ public class ProgressBar : MonoBehaviour
             divider.rectTransform.sizeDelta = new Vector2(_dividerValue * size * 4f, divider.rectTransform.sizeDelta.y);
         }
 
+        _current = isInverse ? 1 : 0;
+        SetValue(isInverse ? 1 : 0);
         Show();
-        SetValue(isInverse? 1 : 0);
         _active = true;
     }
 

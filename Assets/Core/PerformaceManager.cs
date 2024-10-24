@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PerformanceManager : MonoBehaviour
 {
-    
+    [Header("Blood")]
     public int maxBlood = 1000;
     public int bloodThreshold = 10;
+
+    [Header("Corpses")]
+    public int maxCorpses = 100;
+    public int corpseThreshold = 10;
 
     public float startingFPS = 60.0f;
     
@@ -15,7 +19,7 @@ public class PerformanceManager : MonoBehaviour
     [SerializeField] private bool log;
 #endif
 
-    public void CheckBlood()
+    public bool CheckBlood()
     {
         GameObject[] arr = GameObject.FindGameObjectsWithTag("Blood");
 
@@ -30,11 +34,31 @@ public class PerformanceManager : MonoBehaviour
             if(log)
                 Debug.LogWarning("PerformanceManager: Vanishing " + diference + " blood instances");
 #endif
-            
+            return true;
         }
+        return false;
+    }
+    public bool CheckCorpses()
+    {
+        GameObject[] arr = GameObject.FindGameObjectsWithTag("Corpse");
+
+        if (arr.Length > maxCorpses + corpseThreshold)
+        {
+            int diference = arr.Length - (maxCorpses); //threshold
+            for (int i = 0; i < diference - 1; i++)
+            {
+                ResourceManager.GetCorpsePool().Release(arr[i]);
+            }
+#if UNITY_EDITOR
+            if (log)
+                Debug.LogWarning("PerformanceManager: Vanishing " + diference + " blood instances");
+#endif
+            return true;
+        }
+        return false;
     }
 
-    public void CheckFPS()
+    public bool CheckFPS()
     {
         if (Time.deltaTime > (double)(1 / startingFPS))
         {
@@ -43,15 +67,24 @@ public class PerformanceManager : MonoBehaviour
             if(log)
                 Debug.LogWarning("PerformanceManager: Low FPS detected!!!");
 #endif
-            
+            return true;
         }
+
+        return false;
+    }
+
+    public void Cleanup()
+    {
+        bool blood = CheckBlood();
+        bool corpses = CheckCorpses();
+
+        CheckFPS();
     }
     
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("CheckBlood", 5, 5);
-        InvokeRepeating("CheckFPS", 5, 5);
+        InvokeRepeating("Cleanup", 5, 5);
     }
     
 }

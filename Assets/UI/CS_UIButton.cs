@@ -10,6 +10,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UIButton : MonoBehaviour
@@ -17,6 +18,7 @@ public class UIButton : MonoBehaviour
     public Color textColor = Color.blue;
     [NonSerialized] public int ID;
     [SerializeField] private int maxLabelLength = 12;
+    [SerializeField] private UnityEvent perform;
 
     private bool _disableMouse;
 
@@ -30,20 +32,23 @@ public class UIButton : MonoBehaviour
         RemoveFocus();
     }
 
-    private void OnMouseOver()
+    public void OnMouseOver()
     {
         if (_disableMouse) return;
         
-        transform.parent.SendMessage("SetFocusByMouse", ID);
+        transform.parent.GetComponent<UIButtonController>().SetFocusByMouse(ID);
         _disableMouse = true;
     }
 
-    private void OnMouseExit()
+    public void OnMouseExit()
     {
         _disableMouse = false;
     }
 
-    public virtual void Perform() { }
+    public virtual void Perform()
+    {
+        perform?.Invoke();
+    }
 
     /// <summary>
     /// Set button label to given text

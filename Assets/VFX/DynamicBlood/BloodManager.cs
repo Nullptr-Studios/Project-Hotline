@@ -44,8 +44,9 @@ public class BloodManager : MonoBehaviour
             foreach (var hit in rayHitList)
             {
                 int layer = hit.transform.gameObject.layer;
-
-                if (layer == 9 || layer == 10)
+                
+                //ignore
+                if (layer == 9 || layer == 10 || layer == 3)
                     continue;
 
                 GameObject wallB = ResourceManager.GetBloodPool().Get();
@@ -53,11 +54,10 @@ public class BloodManager : MonoBehaviour
                 wallB.SetActive(true);
                 
                 wallB.transform.position = hit.point;
-                wallB.transform.eulerAngles = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));
                 
                 //sprite shit
                 SpriteRenderer sprW = wallB.GetComponent<SpriteRenderer>();
-                sprW.sortingOrder = 0;
+                sprW.sortingOrder = 2;
                 sprW.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
 
                 //Script
@@ -85,7 +85,8 @@ public class BloodManager : MonoBehaviour
             {
                 int layer = hit.transform.gameObject.layer;
 
-                if (layer == 9 || layer == 10)
+                //Ignore
+                if (layer == 9 || layer == 10 || layer == 3)
                     continue;
 
                 currentMaxTravelDistance = hit.distance;
@@ -93,18 +94,17 @@ public class BloodManager : MonoBehaviour
             }
 
 
-            Vector3 randLocInRange = splatterTransform.right * UnityEngine.Random.Range(currentMaxTravelDistance * .15f, currentMaxTravelDistance);
+            Vector3 randLocInRange = splatterTransform.right * UnityEngine.Random.Range(0, currentMaxTravelDistance);
             
             GameObject floorB = ResourceManager.GetBloodPool().Get();
 
             floorB.SetActive(true);
                 
             floorB.transform.position = randLocInRange + splatterTransform.position;
-            floorB.transform.eulerAngles = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));
                 
             //sprite shit
             SpriteRenderer sprW = floorB.GetComponent<SpriteRenderer>();
-            sprW.sortingOrder = -1;
+            sprW.sortingOrder = -2;
             sprW.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
 
             //Script

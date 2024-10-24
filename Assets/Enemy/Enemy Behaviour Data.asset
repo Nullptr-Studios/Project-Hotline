@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aee424af42d0cb4386688b8fec2bf02, type: 3}
   m_Name: Enemy Behaviour Data
   m_EditorClassIdentifier: 
-  isStatic: 0
+  isStatic: 1
   returnToInitialSpot: 1
-  waypoints:
-  - {x: -7, y: -15}
-  - {x: -10, y: -15}
-  - {x: -9, y: 10}
-  - {x: -7, y: -30}
-  distanceToShoot: 10
-  timeToStartShooting: 1
+  waypoints: []
+  idleSpeed: 2.5
+  chasingSpeed: 8
+  distanceToShoot: 4
+  timeToStartShooting: 0.4
+  searchTimes: 3

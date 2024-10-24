@@ -1,20 +1,21 @@
 ﻿#pragma warning disable 649
 
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CC.DialogueSystem
 {
     public class CharacterSpriteLoader : MonoBehaviour
     {
         [SerializeField] private DialogueSprites_SO _spritesObject;
-        [SerializeField] private bool _registerOnStart;
+        [FormerlySerializedAs("_registerOnStart")] [SerializeField] private bool registerOnAwake;
 
         #region MonoBehaviour
 
         // Initialize
         private void Start()
         {
-            if (_registerOnStart)
+            if (registerOnAwake)
                 LoadSprites();
         }
 

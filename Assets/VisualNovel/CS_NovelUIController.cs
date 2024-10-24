@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using CC.DialogueSystem;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +21,7 @@ public class NovelUIController : BaseDialogueUIController
     private NovelOptionsController _optionsController;
     private Canvas _canvas;
     private PlayerIA _input;
+    [CanBeNull] private PlayerMovement _player;
     
     private bool _isShowing;
     private bool _isAnimatingText;
@@ -34,7 +36,11 @@ public class NovelUIController : BaseDialogueUIController
     private void Awake()
     {
         _canvas = GetComponent<Canvas>();
-        //_canvas.enabled = false;
+        _canvas.enabled = false;
+        
+        if (GameObject.FindWithTag("Player") != null)
+            _player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        _input = new PlayerIA();
         
         _textSpeed = defaultTextSpeed;
         continueButton.enabled = false;
@@ -49,6 +55,8 @@ public class NovelUIController : BaseDialogueUIController
         Show();
         
         text.text = _currentTextMod?.Sentence;
+        text.ForceMeshUpdate();
+        var length = text.GetParsedText().Length;
         text.maxVisibleCharacters = 0;
         
         if (!sameSpeakerAsLastDialogue)
@@ -57,7 +65,7 @@ public class NovelUIController : BaseDialogueUIController
             sprite.SetSprite(characterSprite, speakerName);
         }
         
-        for (var i = 0; i < _currentTextMod?.Sentence.Length; i++)
+        for (var i = 0; i < length; i++)
         {
             yield return StartCoroutine(processTagsForPosition(i));
 
@@ -115,41 +123,38 @@ public class NovelUIController : BaseDialogueUIController
     public override void OptionButtonClicked(int index)
     {
         DialogueController.Instance.OptionSelected(index);
-        OnEnable();
+        EnableInput();
     }
 
     private void Show()
     {
         _canvas.enabled = true;
+        EnableInput();
     }
 
     public override void Close()
     {
         _canvas.enabled = false;
-    }
-
-    #region INPUT_SYSTEM
-    private void OnEnable()
-    {
-        _input = new PlayerIA();
-        EnableInput();
-    }
-
-    private void OnDisable()
-    {
         DisableInput();
     }
 
+    #region INPUT_SYSTEM
     private void EnableInput()
     {
         _input.Gameplay.Interact.Enable();
         _input.Gameplay.Interact.performed += Interact;
         _input.Gameplay.Interact.canceled += Interact;
+        
+        if (_player != null)
+            _player.OnDisable();
     }
 
     private void DisableInput()
     {
         _input.Gameplay.Interact.Disable();
+        
+        if (_player != null)
+            _player.OnEnable();
     }
 
     #endregion

@@ -1,11 +1,13 @@
 using CC.DialogueSystem;
 using UnityEngine;
 
-public class CS_NovelStartTest : MonoBehaviour
+public class NovelStartTest : MonoBehaviour
 {
+    [SerializeField] private string dialogueName = "VNC_TestConversation";
+    
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        DialogueController.Instance.StartConversation("VNC_TestConversation");
+        DialogueController.Instance.StartConversation(dialogueName);
     }
 }

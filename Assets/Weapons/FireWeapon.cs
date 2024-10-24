@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class FireWeapon : Weapon
 {
@@ -33,7 +35,9 @@ public class FireWeapon : Weapon
     //Dispersion global variables
     private float _currentDispersion;
     private float _dispersionCurveTimer;
-    
+
+    private float _currentTimeToFire;
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool log;
@@ -44,6 +48,31 @@ public class FireWeapon : Weapon
     public override int UsesLeft()
     {
         return _currentAmmo;
+    }
+    
+    private void Awake()
+    {
+        weaponType = EWeaponType.Fire;
+    }
+
+    public override bool IsAutomatic()
+    {
+        return fireWeaponData.automatic;
+    }
+
+    public override float ReloadTime()
+    {
+        return fireWeaponData.reloadTime;
+    }
+
+    public override float TimeBetweenUses()
+    {
+        return _currentTimeToFire;
+    }
+
+    public override int MaxUses()
+    {
+        return fireWeaponData.maxAmmo;
     }
 
     /// <summary>
@@ -58,6 +87,7 @@ public class FireWeapon : Weapon
             {
                 //so it fires as soon as it´s pressed
                 _fireRateTimer = fireWeaponData.fireRateCurve.Evaluate(0);
+                _currentTimeToFire = _fireRateTimer;
             }
         }
         else
@@ -84,14 +114,15 @@ public class FireWeapon : Weapon
 #if UNITY_EDITOR
             if(log)
                 Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have fireWeaponData assigned!!!!!!!!");
+#endif              
         }
         if (!gunMuzzle)
         {
+#if UNITY_EDITOR
             if(log)
                 Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have gunMuzzle assigned!!!!!!!!");
+#endif
         }
-#endif        
-        
     }
 
     private void DoBulletVFX(GameObject VFX, RaycastHit2D hit)
@@ -105,9 +136,14 @@ public class FireWeapon : Weapon
 
     private void Fire(Transform fireDir)
     {
+        // I don't like that this is hardcoded but we don't need to ignore any other layer so ig it's ok -x
+        var contactFilter = new ContactFilter2D();
+        contactFilter.SetLayerMask(~LayerMask.GetMask("HalfHeight"));
+        contactFilter.useLayerMask = true;
+        
         //Ray-cast2D list
         List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
-        int amountHits = Physics2D.Raycast(fireDir.position, fireDir.right, new ContactFilter2D(), rayHitList);
+        int amountHits = Physics2D.Raycast(fireDir.position, fireDir.right, contactFilter, rayHitList);
 
         if (amountHits == 0)
         {
@@ -138,7 +174,11 @@ public class FireWeapon : Weapon
 #endif
             //Do damage to all surfaces
             if (hit2D.transform.TryGetComponent(out IDamageable damageableInterface))
-                damageableInterface.DoDamage(1, fireDir.right, hit2D.point);
+                damageableInterface.DoDamage(1, fireDir.right, hit2D.point, weaponType);
+            
+            //Ignore weapon layer
+            if (layer == 3)
+                continue;
 
             if (layer == 6) //wall
             {  
@@ -338,8 +378,10 @@ public class FireWeapon : Weapon
     /// <summary>
     /// Automatic, fire rate curve and dispersion curve logic
     /// </summary>
-    void Update()
+    public override void Update()
     {
+        base.Update();
+        
         if (_wantsToFire)
         {
             if(_currentAmmo > 0){
@@ -349,10 +391,10 @@ public class FireWeapon : Weapon
                     //Fire rate
                     if (fireWeaponData.useFireRateCurve)
                     {
-                        float currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
+                        _currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
 
                         //Debug.Log(currentTimeToFire);
-                        if (_fireRateTimer >= currentTimeToFire)
+                        if (_fireRateTimer >= _currentTimeToFire)
                         {
                             _fireRateTimer = 0;
                             UpdateCanFire();
@@ -386,6 +428,7 @@ public class FireWeapon : Weapon
 
                         if (!fireWeaponData.useFireRateCurve)
                         {
+                            _fireRateCurveTimer = fireWeaponData.finalFireRate;
                             Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
                         }
                     }
@@ -395,8 +438,9 @@ public class FireWeapon : Weapon
                     if (_canFire)
                     {
                         _currentDispersion = fireWeaponData.maxDispersionAngle;
+                        _currentTimeToFire = fireWeaponData.finalFireRate;
 
-                        Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
+                        Invoke(nameof(UpdateCanFire), _currentTimeToFire);
                         FireImplementation();
                         
                         _canFire = false;
@@ -406,7 +450,7 @@ public class FireWeapon : Weapon
             }
             else
             {
-                //Do automatic reload
+                //Do semiautomatic reload
                 if (!_isReloading)
                 {
 #if UNITY_EDITOR
@@ -416,6 +460,21 @@ public class FireWeapon : Weapon
                     _isReloading = true;
                     Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
                 }
+            }
+        }
+        
+        //Do automatic reload
+        if (_currentAmmo <= 0)
+        {
+            
+            if (!_isReloading)
+            {
+#if UNITY_EDITOR
+                if (log)
+                    Debug.Log("Reloading");
+#endif
+                _isReloading = true;
+                Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
             }
         }
     }

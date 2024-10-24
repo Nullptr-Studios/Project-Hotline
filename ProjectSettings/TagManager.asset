@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Blood
+  - Corpse
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - CanWallbang
   - Enemy
   - Player
-  - 
-  - 
+  - HalfHeight
+  - Triggers
   - 
   - 
   - 
@@ -41,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1749632643
+    locked: 0
+  - name: Colliders
+    uniqueID: 224295105
+    locked: 0
+  - name: Player
+    uniqueID: 3888069827
+    locked: 0
+  - name: Walls
+    uniqueID: 3078961027
     locked: 0

@@ -2,13 +2,14 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CC.DialogueSystem
 {
     // Parses and stores all the conversations for this scene. 
     public class ConversationRepo : MonoBehaviour
     {
-        [SerializeField] private List<TextAsset> _conversationsToLoad;
+        [FormerlySerializedAs("_conversationsToLoad")] public List<TextAsset> conversationsToLoad;
 
         private Dictionary<string, Conversation> _conversations;
         private IDeserializer _deserializer;
@@ -30,15 +31,15 @@ namespace CC.DialogueSystem
             _conversations = new Dictionary<string, Conversation>();
             _deserializer = new JSONDeserializer();
 
-            loadConversations();
+            LoadConversations();
         }
 
         #endregion
 
         // Parse the text assets that have been assigned in the editor
-        private void loadConversations()
+        private void LoadConversations()
         {
-            foreach (var file in _conversationsToLoad)
+            foreach (var file in conversationsToLoad)
                 RegisterConversation(file.name, file);
         }
 
@@ -67,7 +68,7 @@ namespace CC.DialogueSystem
             }
 
             tempObject.PreValidation();
-            if (valdateConversation(tempObject, name))
+            if (ValdateConversation(tempObject, name))
             {
                 if (_conversations.ContainsKey(name))
                     DialogueLogger.LogWarning($"Conversation {name} already registered, overwritting");
@@ -79,7 +80,7 @@ namespace CC.DialogueSystem
 
         // Do simple validation on the conversation e.g. That it's not empy, that all nextIds go somewhere, things like that
         // TODO: Move all validation code to the relevant class in the Conversation.cs
-        private bool valdateConversation(Conversation tempConversation, string fileName)
+        private bool ValdateConversation(Conversation tempConversation, string fileName)
         {
             var dialogueIds = new List<int>();
             var actionNames = new List<string>();

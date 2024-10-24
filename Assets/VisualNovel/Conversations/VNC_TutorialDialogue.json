@@ -1,0 +1,92 @@
+{
+  "conversation": 
+  [
+    // First dialogue
+    {
+      "id": 1,
+      // "nextId": 2,
+      "speakersName": "???",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Alright, kid. Time to prove yourself. End of this hallway? There’s a guy who needs to disappear. <speed=3><color=#FA2A2A>Take him out<speed=1><color=white>.",
+        "Move with <sprite=6> , get in close, and press <sprite=5> to stick 'em with your knife. Don't make me regret bringing you in. We’ll talk when it’s done. <registerint=tutorialPhase>1</registerint>"
+        // tutorialPhase is not a bool cuz im enby and im afraid of 0s and 1s -x
+        // just kidding the fix didn't work nd still throws an error iwtkms -x
+      ]
+    },
+
+    // Melee Tutorial dialogue
+    {
+      "id": 2,
+      "speakersName": "???",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "sentences":
+      [
+        "Good. Now, grab the gun with <sprite=4> and head to the room above. There's another guy. Make sure he <speed=3><color=#FA2A2A>eats lead<speed=1><color=white>.",
+        "Once he's down, scoop up the briefcase with <sprite=2> and meet me back at the car. <speed=3>No<speed=1> loose ends. <registerint=tutorialPhase>2</registerint>"
+      ], 
+      "startConditions":
+      [
+        {
+          "comparison": "==",
+          "variables":
+          [
+            {
+              "fromRepo": true,
+              "name": "tutorialPhase"
+            },
+            {
+              "value": 1,
+              "type": "int"
+            }
+          ]
+        }
+      ]
+    },
+
+    // Tutorial end dialogue
+    {
+      "id": 3,
+      "speakersName": "???",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "sentences":
+      [
+        "Not bad, kid. You handled yourself. We’re gonna do some big things together, you and me.<wait=1><action=endTutorial>.",
+        "<action=endTutorial>This shouldn't have happened, sowwy :(" // In case they skipped it somehow
+      ],
+      "startConditions":
+      [
+        {
+          "comparison": "==",
+          "variables":
+          [
+            {
+              "fromRepo": true,
+              "name": "tutorialPhase"
+            },
+            {
+              "value": 2,
+              "type": "int"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  
+  "actions":
+  [
+    // End scene action
+    {
+      "name": "endTutorial",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "EndLevel"
+    }
+  ]
+}
