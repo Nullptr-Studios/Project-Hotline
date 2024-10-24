@@ -152,6 +152,10 @@ public class PlayerWeaponManager : MonoBehaviour
             else
                 _ammoPrompt.DoHide();
         }
+        else
+        {
+            _ammoPrompt.DoHide();
+        }
     }
 
     // Throw and get logic
