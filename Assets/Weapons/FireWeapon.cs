@@ -113,9 +113,14 @@ public class FireWeapon : Weapon
 
     private void Fire(Transform fireDir)
     {
+        // I don't like that this is hardcoded but we don't need to ignore any other layer so ig it's ok -x
+        var contactFilter = new ContactFilter2D();
+        contactFilter.SetLayerMask(~LayerMask.GetMask("HalfHeight"));
+        contactFilter.useLayerMask = true;
+        
         //Ray-cast2D list
         List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
-        int amountHits = Physics2D.Raycast(fireDir.position, fireDir.right, new ContactFilter2D(), rayHitList);
+        int amountHits = Physics2D.Raycast(fireDir.position, fireDir.right, contactFilter, rayHitList);
 
         if (amountHits == 0)
         {
