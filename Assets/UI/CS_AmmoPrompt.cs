@@ -138,6 +138,7 @@ public class AmmoPrompt : MonoBehaviour
     private void Hide()
     {
         //  _animator.SetTrigger(CloseAnim);
+        gameObject.SetActive(false);
         _isHidden = true;
     }
 }
