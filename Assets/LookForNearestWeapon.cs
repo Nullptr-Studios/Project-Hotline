@@ -6,9 +6,9 @@ using TheKiwiCoder;
 public class LookForNearestWeapon : ActionNode
 {
 
-    private bool justStarted = true;
-
-    private GameObject weapon;
+    private bool _justStarted = true;
+    
+    private GameObject _weapon;
     
     protected override void OnStart()
     {
@@ -54,9 +54,9 @@ public class LookForNearestWeapon : ActionNode
             }
         }
 
-        weapon = weapons[smallestIndex];
+        _weapon = weapons[smallestIndex];
         
-        context.agent.SetDestination(weapon.transform.position);
+        context.agent.SetDestination(_weapon.transform.position);
 
         context.agent.stoppingDistance = .3f;
 
@@ -67,17 +67,21 @@ public class LookForNearestWeapon : ActionNode
 
     protected override State OnUpdate() 
     {
-        if (justStarted)
+        if (_justStarted)
         {
-            justStarted = false;
+            _justStarted = false;
             return State.Running;
         }
         
-        context.agent.SetDestination(weapon.transform.position);
+        context.agent.SetDestination(_weapon.transform.position);
+        
         
         if (context.agent.remainingDistance <= context.agent.stoppingDistance)
         {
             context.transform.GetComponent<EnemyWeaponManager>()._wantsToThrowOrGet = true;
+
+            context.agent.SetDestination(blackboard.playerPos);
+
             return State.Success;
         }
 

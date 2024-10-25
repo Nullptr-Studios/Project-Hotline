@@ -206,7 +206,7 @@ Transform:
   - {fileID: 2076086834673616306}
   - {fileID: 6914766930394450923}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &4029661644337495018
 CapsuleCollider2D:
@@ -315,7 +315,10 @@ MonoBehaviour:
   weaponHolder: {fileID: 3631742440223459523}
   maxWeaponsEquipped: 2
   log: 0
-  drawGizmos: 0
+  drawGizmos: 1
+  progressBar: {fileID: 0}
+  progressBar2: {fileID: 0}
+  ammoPrompt: {fileID: 0}
 --- !u!114 &5020110233994094047
 MonoBehaviour:
   m_ObjectHideFlags: 0
