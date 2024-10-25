@@ -26,6 +26,7 @@ namespace TheKiwiCoder {
 
         [Header("Enemy behaviour")]
         public float distanceToUseWeapon = 10;
+        public float distanceToUseMelee = 1.5f;
         public float timeToStartShooting = 1;
 
         public bool returnToInitialPos = true;

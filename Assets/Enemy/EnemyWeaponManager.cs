@@ -109,6 +109,14 @@ public class EnemyWeaponManager : MonoBehaviour
             _isWeaponHeld = false;
         }
     }
+    
+    public bool IsMelee()
+    {
+        if (!_isWeaponHeld)
+            return false;
+        
+        return _heldWeaponInterface.GetWeaponType() == EWeaponType.Melee;
+    }
 
     public void useWeapon(bool fire)
     {
