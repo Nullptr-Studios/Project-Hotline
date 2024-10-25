@@ -27,13 +27,13 @@ public class ConversationHandler : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            StartVNConversation(0);
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.O))
+    //     {
+    //         StartVNConversation(0);
+    //     }
+    // }
 
     /// <summary>
     /// Send a message to this script to start a conversation

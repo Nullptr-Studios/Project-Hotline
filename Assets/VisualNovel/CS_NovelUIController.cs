@@ -141,9 +141,9 @@ public class NovelUIController : BaseDialogueUIController
     #region INPUT_SYSTEM
     private void EnableInput()
     {
-        _input.Gameplay.Interact.Enable();
-        _input.Gameplay.Interact.performed += Interact;
-        _input.Gameplay.Interact.canceled += Interact;
+        _input.UI.Accept.Enable();
+        _input.UI.Accept.performed += Interact;
+        _input.UI.Accept.canceled += Interact;
         
         if (_player != null)
             _player.OnDisable();
@@ -151,7 +151,7 @@ public class NovelUIController : BaseDialogueUIController
 
     private void DisableInput()
     {
-        _input.Gameplay.Interact.Disable();
+        _input.UI.Accept.Disable();
         
         if (_player != null)
             _player.OnEnable();
