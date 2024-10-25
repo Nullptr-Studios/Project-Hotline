@@ -37,6 +37,8 @@ public class EnemyWeaponManager : MonoBehaviour
 
     private bool _wantsToFire;
 
+    private float _fireTimer;
+
     // Setting all inputs and variables
     void Start()
     {
@@ -110,10 +112,17 @@ public class EnemyWeaponManager : MonoBehaviour
 
     public void useWeapon(bool fire)
     {
+        //to fix the semi-automatic weapons in the enemy, wel treat them as automatic weapons :)
         if (_isWeaponHeld)
         {
             _heldWeaponInterface.Use(fire);
+            _fireTimer = 0;
         }
+        
+        if(_isWeaponHeld && !_heldWeaponInterface.IsAutomatic())
+            _heldWeaponInterface.Use(false);
+        
+        _wantsToFire = fire;
     }
     
     /*private void ThrowOrGetOnPerformed(InputAction.CallbackContext context)
@@ -154,6 +163,19 @@ public class EnemyWeaponManager : MonoBehaviour
     // Throw and get logic
     private void Update()
     {
+        if (_isWeaponHeld && _wantsToFire && !_heldWeaponInterface.IsAutomatic())
+        {
+            if (_fireTimer >= _heldWeaponInterface.TimeBetweenUses())
+            {
+                _heldWeaponInterface.Use(true);
+                _fireTimer = 0;
+            }
+            else
+            {
+                _fireTimer += Time.deltaTime;
+            }
+        }
+        
         if (_isWeaponHeld)
         {
             //throw

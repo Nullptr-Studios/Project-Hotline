@@ -2131,8 +2131,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 6.9980507, y: 3.38325, z: 0}
-    m_Extent: {x: 9.74695, y: 6.24175, z: 0}
+    m_Center: {x: 6.9967003, y: 3.3931499, z: 0}
+    m_Extent: {x: 9.7456, y: 6.24585, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.5
@@ -29277,6 +29277,10 @@ PrefabInstance:
     - target: {fileID: 3136868407235776783, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
       propertyPath: m_Name
       value: PA_Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649251340098386191, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
+      propertyPath: maxHealth
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 6649251340098386191, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
       propertyPath: mainCamera
