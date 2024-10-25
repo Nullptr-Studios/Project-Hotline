@@ -28,6 +28,9 @@ public class EnemyBehaviourData : ScriptableObject
     public float distanceToShoot = 10;
     public float timeToStartShooting = 1;
 
+    [Header("Melee")] 
+    public float meleeDistance = 2;
+
     [Header("Search")]
     public int searchTimes = 3;
 }

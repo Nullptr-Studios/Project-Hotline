@@ -56,6 +56,8 @@ public class LookForNearestWeapon : ActionNode
         }
 
         _weapon = weapons[smallestIndex];
+
+        context.agent.speed = blackboard.chaseSpeed;
         
         if (_weapon is not null)
             context.agent.SetDestination(_weapon.transform.position);

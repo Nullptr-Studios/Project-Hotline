@@ -40,18 +40,18 @@ public class SensePlayer : ActionNode
             if (_sensor.isDetecting)
             {
 
-
                 if (_sensor.detectedPlayer)
                     blackboard.playerPos = _sensor.detectedPlayer.transform.position;
 
                 blackboard.seePlayer = true;
                 _hasSensedPlayerBefore = true;
 
-                context.agent.stoppingDistance = blackboard.distanceToUseWeapon;
-
                 context.agent.speed = blackboard.chaseSpeed;
 
                 context.agent.SetDestination(blackboard.playerPos);
+
+                
+                context.agent.stoppingDistance = _weaponManager.IsMelee() ? blackboard.distanceToUseMelee : blackboard.distanceToUseWeapon;
 
 
                 if (context.agent.remainingDistance <= context.agent.stoppingDistance && _detectingFrames != 0)
@@ -59,8 +59,8 @@ public class SensePlayer : ActionNode
 
                     Vector3 targetPos = blackboard.playerPos;
                     Vector3 thisPos = context.transform.position;
-                    targetPos.x = targetPos.x - thisPos.x;
-                    targetPos.y = targetPos.y - thisPos.y;
+                    targetPos.x -= thisPos.x;
+                    targetPos.y -= thisPos.y;
                     float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
                     Quaternion look = Quaternion.Euler(new Vector3(0, 0, angle - 90));
                     context.transform.rotation = Quaternion.Slerp(context.transform.rotation, look, 3 * Time.deltaTime);
