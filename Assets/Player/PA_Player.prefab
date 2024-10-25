@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7844238277263270493}
-  - component: {fileID: 4029661644337495018}
+  - component: {fileID: 8018001871774116870}
   - component: {fileID: 2322629527365507291}
   - component: {fileID: 9219392232182884951}
   - component: {fileID: 8330505946157900613}
@@ -206,10 +206,10 @@ Transform:
   - {fileID: 2076086834673616306}
   - {fileID: 6914766930394450923}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &4029661644337495018
-CapsuleCollider2D:
+--- !u!58 &8018001871774116870
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -240,9 +240,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.3, y: 0.75}
-  m_Direction: 0
+  m_Offset: {x: 1.3440624e-10, y: 0.0011274813}
+  serializedVersion: 2
+  m_Radius: 0.44024312
 --- !u!50 &2322629527365507291
 Rigidbody2D:
   serializedVersion: 4
@@ -292,7 +292,7 @@ MonoBehaviour:
   aimMinimumDistance: 0.45
   pivotRotation: 0
   sprite: {fileID: 1296727842978240662}
-  playerCollider: {fileID: 4029661644337495018}
+  playerCollider: {fileID: 0}
   debugSpeed: 0
   debugInput: 0
 --- !u!114 &8330505946157900613
