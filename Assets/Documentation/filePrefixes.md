@@ -1,0 +1,19 @@
+- Input Action Asset: IA_
+- C# Scripts: CS_ (optional)
+- Prefabs: PA_
+- MotionCurves: MC_
+- Textures: T_
+  - Normals: _N suffix
+  - Occlusion: _AO suffix
+- Fonts: FON_
+- Font Atlases: SDF_
+- Shaders: S_
+- Shader includes: SI_
+- Materials: M_
+- Material Instances: MI_
+- Particles: VFX_
+- VN Conversations: VNC_
+- VN Sprites: VNS_
+- VN Themes: VNT_
+- Animations: A_
+- Animators: AG_
