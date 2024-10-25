@@ -470,7 +470,6 @@ GameObject:
   - component: {fileID: 5732660611517584935}
   - component: {fileID: 5717462031141865317}
   - component: {fileID: 1920450810564798699}
-  - component: {fileID: 4083336746401475935}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -612,28 +611,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullAmmo: {fileID: -5284359501410437519, guid: f8ee44d7729fa364ba4c30c0adbc153a, type: 3}
   emptyAmmo: {fileID: 1603026877506435433, guid: f8ee44d7729fa364ba4c30c0adbc153a, type: 3}
-  _currentAmmo: 0
---- !u!95 &4083336746401475935
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3197153951598501617}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c963bf5e910ce304285e17a06604b07a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3330640025178494330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1480,7 @@ RectTransform:
   m_Children:
   - {fileID: 7226794456605704989}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

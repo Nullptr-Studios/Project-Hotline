@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using TheKiwiCoder;
 
@@ -8,7 +9,7 @@ public class LookForNearestWeapon : ActionNode
 
     private bool _justStarted = true;
     
-    private GameObject _weapon;
+    [CanBeNull] private GameObject _weapon;
     
     protected override void OnStart()
     {
@@ -56,7 +57,8 @@ public class LookForNearestWeapon : ActionNode
 
         _weapon = weapons[smallestIndex];
         
-        context.agent.SetDestination(_weapon.transform.position);
+        if (_weapon is not null)
+            context.agent.SetDestination(_weapon.transform.position);
 
         context.agent.stoppingDistance = .3f;
 
@@ -73,7 +75,8 @@ public class LookForNearestWeapon : ActionNode
             return State.Running;
         }
         
-        context.agent.SetDestination(_weapon.transform.position);
+        if (_weapon is not null) // what the fuck is this C# syntax -x
+            context.agent.SetDestination(_weapon.transform.position);
         
         
         if (context.agent.remainingDistance <= context.agent.stoppingDistance)

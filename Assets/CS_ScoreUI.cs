@@ -83,15 +83,18 @@ public class ScoreUI : MonoBehaviour
         killsObject.SetActive(true);
         for (int i = 0; i < kills; i++)
         {
-            killsValue.text = i+1.ToString();
+            killsValue.text = (i+1).ToString();
             yield return new WaitForSeconds(killsTime/kills);
         }
+        
+        if (kills == 0)
+            yield return new WaitForSeconds(deathsTime);
         
         int deaths = _score.Deaths;
         deathsObject.SetActive(true);
         for (int i = 0; i < deaths; i++)
         {
-            deathsValue.text = i+1.ToString();
+            deathsValue.text = (i+1).ToString();
             yield return new WaitForSeconds(deathsTime/deaths);
         }
 
@@ -108,7 +111,7 @@ public class ScoreUI : MonoBehaviour
         scoreObject.SetActive(true);
         for (int i = 0; i < score; i++)
         {
-            scoreValue.text = i+1.ToString();
+            scoreValue.text = (i+1).ToString();
             yield return new WaitForSeconds(scoreTime/score);
         }
         
