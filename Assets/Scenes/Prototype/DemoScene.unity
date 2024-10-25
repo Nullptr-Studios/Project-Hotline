@@ -1661,7 +1661,7 @@ Camera:
   far clip plane: 5000
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 6.75
+  orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -2131,8 +2131,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 6.9967003, y: 3.3931499, z: 0}
-    m_Extent: {x: 9.7456, y: 6.24585, z: 0}
+    m_Center: {x: 6.9962997, y: 3.3943996, z: 0}
+    m_Extent: {x: 9.7453, y: 6.2457, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.5
@@ -23758,14 +23758,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8546987331332865949, guid: a2a468a3aa7425f45aada0fa9b6b66db, type: 3}
-      propertyPath: angle
-      value: 110
-      objectReference: {fileID: 0}
-    - target: {fileID: 8546987331332865949, guid: a2a468a3aa7425f45aada0fa9b6b66db, type: 3}
-      propertyPath: range
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29280,7 +29272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6649251340098386191, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
       propertyPath: maxHealth
-      value: 10000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6649251340098386191, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
       propertyPath: mainCamera
