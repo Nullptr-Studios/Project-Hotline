@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using TheKiwiCoder;
 
 public class LookForNearestWeapon : ActionNode
 {
 
-    private bool justStarted = true;
-
-    private GameObject weapon;
+    private bool _justStarted = true;
+    
+    [CanBeNull] private GameObject _weapon;
     
     protected override void OnStart()
     {
@@ -54,9 +55,12 @@ public class LookForNearestWeapon : ActionNode
             }
         }
 
-        weapon = weapons[smallestIndex];
+        _weapon = weapons[smallestIndex];
+
+        context.agent.speed = blackboard.chaseSpeed;
         
-        context.agent.SetDestination(weapon.transform.position);
+        if (_weapon is not null)
+            context.agent.SetDestination(_weapon.transform.position);
 
         context.agent.stoppingDistance = .3f;
 
@@ -67,17 +71,22 @@ public class LookForNearestWeapon : ActionNode
 
     protected override State OnUpdate() 
     {
-        if (justStarted)
+        if (_justStarted)
         {
-            justStarted = false;
+            _justStarted = false;
             return State.Running;
         }
         
-        context.agent.SetDestination(weapon.transform.position);
+        if (_weapon is not null) // what the fuck is this C# syntax -x
+            context.agent.SetDestination(_weapon.transform.position);
+        
         
         if (context.agent.remainingDistance <= context.agent.stoppingDistance)
         {
             context.transform.GetComponent<EnemyWeaponManager>()._wantsToThrowOrGet = true;
+
+            context.agent.SetDestination(blackboard.playerPos);
+
             return State.Success;
         }
 

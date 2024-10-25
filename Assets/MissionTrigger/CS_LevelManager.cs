@@ -51,7 +51,10 @@ public class LevelManager : MonoBehaviour
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Mission paused");
 #endif
         
-    }
+    } 
+    
+    [System.Obsolete("This method is obsolete. Please use OpenScore instead")]
+    public void EndLevel() => SceneManager.LoadScene("MainMenu");
 
     public void OpenScore()
     {

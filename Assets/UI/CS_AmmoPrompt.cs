@@ -56,7 +56,7 @@ public class AmmoPrompt : MonoBehaviour
     {
         for (var i = 0; i < _maxAmmo; i++)
         {
-            _ammoIcons[i].gameObject.SetActive(false);
+            _ammoIcons[i].sprite = emptyAmmo;
         }
 
         for (int i = 0; i < value; i++)
@@ -78,6 +78,12 @@ public class AmmoPrompt : MonoBehaviour
         _maxAmmo = value;
         _transform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, rowSize * 4 + 3);
         Show();
+        foreach (var icons in _ammoIcons)
+        {
+            icons.gameObject.SetActive(false);
+            icons.sprite = emptyAmmo;
+        }
+        
         for (var i = 0; i < _maxAmmo; i++)
         {
             _ammoIcons[i].gameObject.SetActive(true);
@@ -131,7 +137,8 @@ public class AmmoPrompt : MonoBehaviour
 
     private void Hide()
     {
-        _animator.SetTrigger(CloseAnim);
+        //  _animator.SetTrigger(CloseAnim);
+        gameObject.SetActive(false);
         _isHidden = true;
     }
 }

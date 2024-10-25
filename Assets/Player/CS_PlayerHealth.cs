@@ -40,7 +40,7 @@ public class PlayerHealth : Damageable
         }
 
         _input = new PlayerIA();
-        _input.Gameplay.Interact.performed += RestartGame;
+        _input.UI.Accept.performed += RestartGame;
     }
 
     public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
@@ -69,7 +69,7 @@ public class PlayerHealth : Damageable
         // Have to deactivate pixel perfect camera as it disables antialiasing so the shader won't work
         // TODO: Look y the shader doesnt work w/o antialiasing
         if (!_disableFX) mainCamera!.GetComponent<PixelPerfectCamera>().enabled = false;
-        _input.Gameplay.Interact.Enable();
+        _input.UI.Accept.Enable();
         deathScreenUI.gameObject.SetActive(true);
     }
 
@@ -84,7 +84,8 @@ public class PlayerHealth : Damageable
         if (logReload) Debug.LogWarning($"[PlayerHealth] {name}: Reloading game");
 #endif
 
-        _input.Gameplay.Interact.performed -= RestartGame;
+        _input.UI.Accept.performed -= RestartGame;
+        _input.UI.Accept.Disable();
         VariableRepo.Instance.RemoveAll();
         
         // TODO: this should be fixed after prototype to not have the player read the VN every time

@@ -208,8 +208,6 @@ public class Weapon : MonoBehaviour, IWeapon
         {
             if(!_rb)
                 return;
-            
-            Debug.Log(_rb.velocity.magnitude);
 
             if (_rb.velocity.magnitude >= 5)
             {

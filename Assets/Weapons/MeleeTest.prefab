@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 4135931793659384008}
   m_Layer: 3
   m_Name: MeleeTest
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +211,11 @@ MonoBehaviour:
   throwForce: 15
   rotationForce: 1000
   gfxCollider2D: {fileID: 2350645429869695454}
+  canStun: 1
+  maskToStun:
+    serializedVersion: 2
+    m_Bits: 512
   meleeWeaponData: {fileID: 11400000, guid: 0dd44528de1f1654fa9451933a21fc6b, type: 2}
-  offset: 0
+  offset: 0.5
   log: 0
-  drawGizmos: 0
+  drawGizmos: 1

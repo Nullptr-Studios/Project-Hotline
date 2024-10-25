@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -51,7 +52,8 @@ public class PlayerMovement : MonoBehaviour
         _camera = GameObject.Find("Cinemachine Brain").GetComponent<Camera>();
         _weaponManager = GetComponent<PlayerWeaponManager>();
         
-        _input.Gameplay.Debug.performed += OnDebug;
+        _input.Debug.Debug.performed += OnDebug;
+        _input.Debug.Restart.performed += ForceRestart;
         _input.Gameplay.Movement.performed += OnMove;
         _input.Gameplay.Movement.canceled += OnMove;
         _input.Gameplay.Aim.performed += OnAim;
@@ -113,7 +115,8 @@ public class PlayerMovement : MonoBehaviour
     // Please enable them individually to avoid errors
     public void OnEnable()
     {
-        _input.Gameplay.Debug.Enable();
+        _input.Debug.Debug.Enable();
+        _input.Debug.Restart.Enable();
         _input.Gameplay.Movement.Enable();
         _input.Gameplay.Aim.Enable();
         _input.Gameplay.AimMouse.Enable();
@@ -126,7 +129,8 @@ public class PlayerMovement : MonoBehaviour
         //Reset Movement curves variables
         movementController.OnDisable();
 
-        _input.Gameplay.Debug.Disable();   
+        _input.Debug.Debug.Disable();   
+        _input.Debug.Restart.Disable();
         _input.Gameplay.Movement.Disable();
         _input.Gameplay.Aim.Disable();
         _input.Gameplay.AimMouse.Disable();
@@ -236,6 +240,11 @@ public class PlayerMovement : MonoBehaviour
         SendMessage("OnKill");
 #endif
         
+    }
+
+    private void ForceRestart(InputAction.CallbackContext ctx)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
 

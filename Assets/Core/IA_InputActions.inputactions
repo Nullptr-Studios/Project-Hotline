@@ -6,15 +6,6 @@
             "id": "1b590eb7-c417-4d4e-9ad6-bdc3f286bf72",
             "actions": [
                 {
-                    "name": "Debug",
-                    "type": "Button",
-                    "id": "03d7bd9e-939e-4943-a26b-e553c1a97f62",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Movement",
                     "type": "Value",
                     "id": "c75b7bc5-b7d1-4412-bb6d-b1717b3730c9",
@@ -79,28 +70,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "4dd1510f-f35a-4a76-b186-f18326633c87",
-                    "path": "<Keyboard>/l",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Debug",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "227d150b-1519-4a66-93b6-38ae545c32e4",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Debug",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "92c37def-7274-420c-bd11-0859593dfe4a",
@@ -181,7 +150,7 @@
                 {
                     "name": "",
                     "id": "358e8cf9-2b70-4b18-9f93-800c5cef94ef",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -216,7 +185,7 @@
                     "id": "34854ebe-772a-4abe-91e1-2efd612a6464",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone(min=0.5)",
                     "groups": "",
                     "action": "Fire",
                     "isComposite": false,
@@ -542,6 +511,76 @@
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Debug",
+            "id": "035c47b2-2ea8-4a81-8b45-985b263ab64d",
+            "actions": [
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "533518df-7739-4fc6-a0de-31f71dbfb8e4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Debug",
+                    "type": "Button",
+                    "id": "11e1605e-bb72-4b8f-9039-65444252a644",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d0204003-ba8a-46d8-9e03-8565886043e3",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9b0b731-6a33-4f78-a2fd-b29388d78fbc",
+                    "path": "<Keyboard>/insert",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c58cb95b-0c8f-4d3a-819a-4c8976c9717f",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Debug",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f84a6b3f-891d-4a9d-a32d-141d3e9c5959",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Debug",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

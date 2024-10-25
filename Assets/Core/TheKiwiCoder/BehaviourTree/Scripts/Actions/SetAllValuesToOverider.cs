@@ -24,6 +24,8 @@ public class SetAllValuesToOverrider : ActionNode
 
             blackboard.idleSpeed = ov.behaviourData.idleSpeed;
             blackboard.chaseSpeed = ov.behaviourData.chasingSpeed;
+
+            blackboard.distanceToUseMelee = ov.behaviourData.meleeDistance;
         }
         else
         {

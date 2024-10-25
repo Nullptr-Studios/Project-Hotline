@@ -29,11 +29,14 @@ public class ScoreManager : MonoBehaviour
     // Time
     private static float _startTime;
 
-    public void Start()
+    public void Awake()
     {
         // Sets timer when scene begins
         _startTime = Time.time;
-        
+    }
+
+    public void Start()
+    {
         // Set up variables because they're static
         _killXP = killXP;
         _deathXP = deathXP;
@@ -45,6 +48,8 @@ public class ScoreManager : MonoBehaviour
         // Setup formulas
         _minFormula.xOffset = _minTime;
         _maxFormula.xOffset = _maxTime;
+        
+        _playerKills = 0;
     }
 
     public static void AddKill()
