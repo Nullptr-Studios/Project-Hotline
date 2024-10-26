@@ -28,15 +28,6 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             ""id"": ""1b590eb7-c417-4d4e-9ad6-bdc3f286bf72"",
             ""actions"": [
                 {
-                    ""name"": ""Debug"",
-                    ""type"": ""Button"",
-                    ""id"": ""03d7bd9e-939e-4943-a26b-e553c1a97f62"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""c75b7bc5-b7d1-4412-bb6d-b1717b3730c9"",
@@ -58,6 +49,15 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""name"": ""Aim"",
                     ""type"": ""Value"",
                     ""id"": ""c9ea211a-f875-4da3-bf9a-ddfab717861e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""AimMouse"",
+                    ""type"": ""Value"",
+                    ""id"": ""8cf16e81-2928-4920-b73f-7b747bcc561e"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -92,28 +92,6 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""4dd1510f-f35a-4a76-b186-f18326633c87"",
-                    ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Debug"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""227d150b-1519-4a66-93b6-38ae545c32e4"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Debug"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""92c37def-7274-420c-bd11-0859593dfe4a"",
@@ -193,6 +171,17 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""358e8cf9-2b70-4b18-9f93-800c5cef94ef"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowOrGet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""368c8ebd-eef2-46e0-9775-3e02708b6a8a"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -204,21 +193,21 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d85a44d5-67d6-4b1d-80f9-0e53fcd9f507"",
-                    ""path"": ""<Mouse>/position"",
+                    ""id"": ""3e6d3ad9-34fc-4d6e-a68b-30490723179e"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Aim"",
+                    ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3e6d3ad9-34fc-4d6e-a68b-30490723179e"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""34854ebe-772a-4abe-91e1-2efd612a6464"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone(min=0.5)"",
                     ""groups"": """",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
@@ -248,6 +237,28 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""8049374e-f23d-4b28-a246-ed755711c8a1"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65fbb63f-bd29-4909-b13e-f6cd2376ff81"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""84fe7d4a-e805-474f-8be9-4ac58ad6e7e4"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -265,6 +276,17 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f6eb04c-715f-49fc-9bac-f444e9d55f21"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -513,16 +535,135 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""035c47b2-2ea8-4a81-8b45-985b263ab64d"",
+            ""actions"": [
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""533518df-7739-4fc6-a0de-31f71dbfb8e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Debug"",
+                    ""type"": ""Button"",
+                    ""id"": ""11e1605e-bb72-4b8f-9039-65444252a644"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d0204003-ba8a-46d8-9e03-8565886043e3"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9b0b731-6a33-4f78-a2fd-b29388d78fbc"",
+                    ""path"": ""<Keyboard>/insert"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c58cb95b-0c8f-4d3a-819a-4c8976c9717f"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f84a6b3f-891d-4a9d-a32d-141d3e9c5959"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Dualsense"",
+            ""bindingGroup"": ""Dualsense"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<DualShockGamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""KeyboardMouse"",
+            ""bindingGroup"": ""KeyboardMouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Controller"",
+            ""bindingGroup"": ""Controller"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<XInputController>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<WebGLGamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<SwitchProControllerHID>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Debug = m_Gameplay.FindAction("Debug", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_ThrowOrGet = m_Gameplay.FindAction("ThrowOrGet", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
+        m_Gameplay_AimMouse = m_Gameplay.FindAction("AimMouse", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
         m_Gameplay_SwitchWeapons = m_Gameplay.FindAction("SwitchWeapons", throwIfNotFound: true);
@@ -531,6 +672,10 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
         m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_Restart = m_Debug.FindAction("Restart", throwIfNotFound: true);
+        m_Debug_Debug = m_Debug.FindAction("Debug", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -592,10 +737,10 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-    private readonly InputAction m_Gameplay_Debug;
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_ThrowOrGet;
     private readonly InputAction m_Gameplay_Aim;
+    private readonly InputAction m_Gameplay_AimMouse;
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Fire;
     private readonly InputAction m_Gameplay_SwitchWeapons;
@@ -603,10 +748,10 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
     {
         private @PlayerIA m_Wrapper;
         public GameplayActions(@PlayerIA wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Debug => m_Wrapper.m_Gameplay_Debug;
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @ThrowOrGet => m_Wrapper.m_Gameplay_ThrowOrGet;
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
+        public InputAction @AimMouse => m_Wrapper.m_Gameplay_AimMouse;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
         public InputAction @SwitchWeapons => m_Wrapper.m_Gameplay_SwitchWeapons;
@@ -619,9 +764,6 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
-            @Debug.started += instance.OnDebug;
-            @Debug.performed += instance.OnDebug;
-            @Debug.canceled += instance.OnDebug;
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
@@ -631,6 +773,9 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @AimMouse.started += instance.OnAimMouse;
+            @AimMouse.performed += instance.OnAimMouse;
+            @AimMouse.canceled += instance.OnAimMouse;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -644,9 +789,6 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IGameplayActions instance)
         {
-            @Debug.started -= instance.OnDebug;
-            @Debug.performed -= instance.OnDebug;
-            @Debug.canceled -= instance.OnDebug;
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
@@ -656,6 +798,9 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @AimMouse.started -= instance.OnAimMouse;
+            @AimMouse.performed -= instance.OnAimMouse;
+            @AimMouse.canceled -= instance.OnAimMouse;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -744,12 +889,93 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
+    private readonly InputAction m_Debug_Restart;
+    private readonly InputAction m_Debug_Debug;
+    public struct DebugActions
+    {
+        private @PlayerIA m_Wrapper;
+        public DebugActions(@PlayerIA wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Restart => m_Wrapper.m_Debug_Restart;
+        public InputAction @Debug => m_Wrapper.m_Debug_Debug;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void AddCallbacks(IDebugActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
+            @Debug.started += instance.OnDebug;
+            @Debug.performed += instance.OnDebug;
+            @Debug.canceled += instance.OnDebug;
+        }
+
+        private void UnregisterCallbacks(IDebugActions instance)
+        {
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
+            @Debug.started -= instance.OnDebug;
+            @Debug.performed -= instance.OnDebug;
+            @Debug.canceled -= instance.OnDebug;
+        }
+
+        public void RemoveCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDebugActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
+    private int m_DualsenseSchemeIndex = -1;
+    public InputControlScheme DualsenseScheme
+    {
+        get
+        {
+            if (m_DualsenseSchemeIndex == -1) m_DualsenseSchemeIndex = asset.FindControlSchemeIndex("Dualsense");
+            return asset.controlSchemes[m_DualsenseSchemeIndex];
+        }
+    }
+    private int m_KeyboardMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardMouseScheme
+    {
+        get
+        {
+            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("KeyboardMouse");
+            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+        }
+    }
+    private int m_ControllerSchemeIndex = -1;
+    public InputControlScheme ControllerScheme
+    {
+        get
+        {
+            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
+            return asset.controlSchemes[m_ControllerSchemeIndex];
+        }
+    }
     public interface IGameplayActions
     {
-        void OnDebug(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnThrowOrGet(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnAimMouse(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnSwitchWeapons(InputAction.CallbackContext context);
@@ -759,5 +985,10 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         void OnAccept(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnRestart(InputAction.CallbackContext context);
+        void OnDebug(InputAction.CallbackContext context);
     }
 }

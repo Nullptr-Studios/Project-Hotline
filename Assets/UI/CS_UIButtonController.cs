@@ -33,7 +33,7 @@ public class UIButtonController : MonoBehaviour
         }
         
         MaxIndex = Buttons.Count;
-        CurrentFocus = -1;
+        CurrentFocus = 0;
     }
 
     protected virtual void PerformAction(InputAction.CallbackContext context)
@@ -52,7 +52,7 @@ public class UIButtonController : MonoBehaviour
         }
     }
 
-    private void SetFocusByMouse(int ID)
+    public void SetFocusByMouse(int ID)
     {
         CurrentFocus = ID;
         SetFocus();

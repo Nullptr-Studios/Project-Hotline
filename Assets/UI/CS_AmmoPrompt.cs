@@ -14,7 +14,6 @@ public class AmmoPrompt : MonoBehaviour
 {
     [SerializeField] private Sprite fullAmmo;
     [SerializeField] private Sprite emptyAmmo;
-    [SerializeField] [Range(2f, 8f)] private float timeToHide = 3f;
 
     private int _maxAmmo;
     private int _currentAmmo;
@@ -24,12 +23,14 @@ public class AmmoPrompt : MonoBehaviour
     private List<Image> _ammoIcons;
     private Animator _animator;
     private static readonly int CloseAnim = Animator.StringToHash("CloseAnim");
+    private RectTransform _parentTransform;
 
     private void Awake()
     {
         gameObject.SetActive(false);
         _animator = GetComponent<Animator>();
         _transform = GetComponent<RectTransform>();
+        _parentTransform = transform.parent.GetComponent<RectTransform>();
         // Set all disabled at the beginning
         _ammoIcons = gameObject.GetComponentsInChildren<Image>().ToList();
         foreach (var spr in _ammoIcons)
@@ -44,10 +45,27 @@ public class AmmoPrompt : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time - _timer > timeToHide && !_isHidden)
+        //tf is this, this makes the ui hidden, but the player could still be with a weapon!!!!!!!!!!
+        /*if (Time.time - _timer > timeToHide && !_isHidden)
         {
             Hide();
+        }*/
+    }
+
+    public void SetCurrentAmmo(int value)
+    {
+        for (var i = 0; i < _maxAmmo; i++)
+        {
+            _ammoIcons[i].sprite = emptyAmmo;
         }
+
+        for (int i = 0; i < value; i++)
+        {
+            _ammoIcons[i].gameObject.SetActive(true);
+            _ammoIcons[i].sprite = fullAmmo;
+        }
+        
+        _currentAmmo = value;
     }
 
     /// <summary>
@@ -56,10 +74,16 @@ public class AmmoPrompt : MonoBehaviour
     /// <param name="value">Max ammunition value</param>
     /// <param name="rowSize">Number of bullets per row</param>
     public void SetMaxAmmo(int value, int rowSize) 
-    { 
+    {
         _maxAmmo = value;
         _transform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, rowSize * 4 + 3);
         Show();
+        foreach (var icons in _ammoIcons)
+        {
+            icons.gameObject.SetActive(false);
+            icons.sprite = emptyAmmo;
+        }
+        
         for (var i = 0; i < _maxAmmo; i++)
         {
             _ammoIcons[i].gameObject.SetActive(true);
@@ -67,6 +91,14 @@ public class AmmoPrompt : MonoBehaviour
         }
 
         _currentAmmo = _maxAmmo;
+    }
+
+    public void DoHide()
+    {
+        if(_isHidden)
+            return;
+        
+        Hide();
     }
 
     /// <summary>
@@ -78,6 +110,10 @@ public class AmmoPrompt : MonoBehaviour
 
         for (var i = _currentAmmo; i < _maxAmmo; i++)
         {
+            //Safe check
+            if (i < 0)
+                break;
+            
             if (_ammoIcons[i].sprite == fullAmmo)
                 _ammoIcons[i].sprite = emptyAmmo;
         }
@@ -101,7 +137,8 @@ public class AmmoPrompt : MonoBehaviour
 
     private void Hide()
     {
-        _animator.SetTrigger(CloseAnim);
+        //  _animator.SetTrigger(CloseAnim);
+        gameObject.SetActive(false);
         _isHidden = true;
     }
 }

@@ -5,11 +5,16 @@ using UnityEngine;
 /// </summary>
 public interface IDamageable
 {
-
+    public void DoDamage(float amount);
+    
     /// <param name="amount">Amount to damage</param>
     /// <param name="shootDir">The normalized shooting direction</param>
     /// <param name="hitPoint">The hit point in world coordinates</param>
     public void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint);
+    
+    public void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType);
+
+    public void Stun(Vector3 dir);
 
     //Pretty self-explanatory
     public float GetCurrentHealth();
@@ -29,10 +34,25 @@ public class Damageable : MonoBehaviour, IDamageable
         _currentHealth = maxHealth;
     }
 
+    public virtual void Stun(Vector3 dir)
+    {
+        
+    }
+
+    public virtual void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
+    {
+        DoDamage(amount);
+    }
+    
+    public virtual void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint)
+    {
+        DoDamage(amount);
+    }
+
     /// <summary>
     /// Base Damage function with basic functionality 
     /// </summary>
-    public virtual void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint)
+    public virtual void DoDamage(float amount)
     {
         //Subtract health
         _currentHealth -= amount;

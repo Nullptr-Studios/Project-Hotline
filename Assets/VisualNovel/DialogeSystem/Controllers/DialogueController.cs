@@ -105,7 +105,7 @@ namespace CC.DialogueSystem
 
             if (needToChangeTheme())
                 ChangeTheme(_currentDialogue.Theme);
-
+            
             _uiController.ShowSentence(_currentDialogue.SpeakersName,
                 parseSentenceForCustomTags(_currentDialogue.Sentences[_currentSentence]),
                 SpriteRepo.Instance.RetrieveSprite(_currentDialogue.CharacterSpritesName,

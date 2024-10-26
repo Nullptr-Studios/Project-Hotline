@@ -26,7 +26,7 @@ public class EnemyWeaponManager : MonoBehaviour
 #endif
     
     private bool _isWeaponHeld;
-    private bool _wantsToThrowOrGet;
+    public bool _wantsToThrowOrGet;
 
     private PlayerIA _playerInput;
     
@@ -36,14 +36,8 @@ public class EnemyWeaponManager : MonoBehaviour
     private int _currentIndex;
 
     private bool _wantsToFire;
-    
-    private void OnDisable()
-    {
-        /*_playerInput.Gameplay.ThrowOrGet.Disable();
-        _playerInput.Gameplay.Fire.Disable();
-        _playerInput.Gameplay.SwitchWeapons.Disable();*/
 
-    }
+    private float _fireTimer;
 
     // Setting all inputs and variables
     void Start()
@@ -75,14 +69,14 @@ public class EnemyWeaponManager : MonoBehaviour
         _playerInput.Gameplay.SwitchWeapons.Enable();*/
     }
 
-    private void SwitchWeaponsOnPerformed(InputAction.CallbackContext context)
+    /*private void SwitchWeaponsOnPerformed(InputAction.CallbackContext context)
     {
         //Do only if performed, not cancelled
         if (context.performed)
         {
             SwitchWeapon();
         }
-    }
+    }*/
 
     /// <summary>
     /// On fire logic that calls Weapon->Use(_wantsToFire)
@@ -103,23 +97,51 @@ public class EnemyWeaponManager : MonoBehaviour
         }
     }*/
 
-    public void useWeapon(bool fire)
+    public void DropWeapon()
     {
         if (_isWeaponHeld)
         {
-            _heldWeaponInterface.Use(fire);
+            _heldWeaponInterface.Drop();
+            
+            _heldWeaponInterface = null;
+            _heldWeaponGameObject[_currentIndex] = null;
+                
+            _isWeaponHeld = false;
         }
+    }
+    
+    public bool IsMelee()
+    {
+        if (!_isWeaponHeld)
+            return false;
+        
+        return _heldWeaponInterface.GetWeaponType() == EWeaponType.Melee;
+    }
+
+    public void useWeapon(bool fire)
+    {
+        //to fix the semi-automatic weapons in the enemy, wel treat them as automatic weapons :)
+        if (_isWeaponHeld)
+        {
+            _heldWeaponInterface.Use(fire);
+            _fireTimer = 0;
+        }
+        
+        if(_isWeaponHeld && !_heldWeaponInterface.IsAutomatic())
+            _heldWeaponInterface.Use(false);
+        
+        _wantsToFire = fire;
     }
     
     /*private void ThrowOrGetOnPerformed(InputAction.CallbackContext context)
     {
-        _wantsToThrowOrGet = context.ReadValueAsButton();
+        WantsToThrowOrGet = context.ReadValueAsButton();
     }*/
     
     /// <summary>
     /// Switch weapon logic
     /// </summary>
-    private void SwitchWeapon()
+    /*private void SwitchWeapon()
     {
         //In case current index is null
         if (_heldWeaponGameObject[_currentIndex] != null)
@@ -144,11 +166,24 @@ public class EnemyWeaponManager : MonoBehaviour
             _heldWeaponGameObject[_currentIndex].gameObject.TryGetComponent(out _heldWeaponInterface);
             _isWeaponHeld = true;
         }
-    }
+    }*/
 
     // Throw and get logic
     private void Update()
     {
+        if (_isWeaponHeld && _wantsToFire && !_heldWeaponInterface.IsAutomatic())
+        {
+            if (_fireTimer >= _heldWeaponInterface.TimeBetweenUses())
+            {
+                _heldWeaponInterface.Use(true);
+                _fireTimer = 0;
+            }
+            else
+            {
+                _fireTimer += Time.deltaTime;
+            }
+        }
+        
         if (_isWeaponHeld)
         {
             //throw
@@ -191,24 +226,12 @@ public class EnemyWeaponManager : MonoBehaviour
                                 _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
 
                                 _heldWeaponInterface.Pickup(weaponHolder);
-                                _isWeaponHeld = true;
-                            }
-                            //This won't ever happen as if you have a weapon already equipped it will throw it, but just in case
-                            else
-                            {
-                                //Quality of life improvement
-                                SwitchWeapon();
-                                    
-                                _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
-
-                                _heldWeaponInterface.Pickup(weaponHolder);
+                                
+                                _heldWeaponInterface.setClaimed(true);
+                                
                                 _isWeaponHeld = true;
                             }
                         }
-                        // else
-                        // {
-                        //     //Debug.Log("Max Equipped");
-                        // }
                     }
 
                 }
