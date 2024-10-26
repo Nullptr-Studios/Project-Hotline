@@ -8,19 +8,29 @@ Blake wakes up without remembering anything. A phone buzzes in the sink, casting
 
 # Scene drafts
 
-## Act I
+## Prologue
 
-1. Unnamed 
-2. Unnamed
-3. Unnamed
+Tutorial scene, narrative tells this is the first time killing someone for Blake, game shows the controls: movement, shooting, melee combat and picking up items
 
-## Act II
+## Act I - Rockstar's Requiem
+
+> Phone buzzes for first time, screen is Dark, only the dialog is shown. They talk about not being able to remember anything, and ask him how they met. 
+1. **Alleyway**: Recover an stolen drug package. This is a low-stake mission that is essential for Blake to be trusted by Delta. It also acts as a test, with Delta seeing how Blake behaves in a real mission. In this scene, Blakes goes to a small gang hideout to recover a package that was compromised in a transaction. They sold it to someone that didn't pay them what they accorded, so they're getting it back. This setup is a matter of loyalty and proving Blake's worth
+> Dialogue 2 will go here
+2. **Metro**: Leave a message on an abandoned metro station. This is set on an abandoned metro station similar to the New York ones, trains do cross the station but they wont stop. **The gimmick of the scene is the train moving on the rails**. The metro station has an old locker room where Delta will have to leave the card. Inside it there is a note and a bullet. This is meant as a warning for the rival gang that tricked Delta's. The abandoned metro station has to provide the tension that will appear more as the mental ilnesses begin to unravel on Acts II and III. Symbolically, this scene represents Blake's own descent and isolation, as they starts going to a world where they no longer truly belong in daylight society
+> Dialogue 3 will go here
+3. **Skyscraper**: Killing an important figure. This is set on a luxurious skyscraper where a higher up of the oposing mafia resides. **The gimmick of this scene is the introduction to glass and the rooftop part**. Blake will have to get their way through the security until they arrieve at the balcony where their objective is. He won't have a weapon and will approach conversation first, begging for his life. Blake will have the first dialogue choice in the game. Symbolically, this mission affects more Blake's psyche as it's the first one where the objective IS to kill someone
+> Dialogue 4 will go here
+
+## Act II - The Descent
+
+Game graphics will start becoming bizarre from here. Blood, grafitti, dead corpses will begin to appear as Blake starts to become insane. Are they products of their imagination or is it all real? First full screen text will appear at the end of mission 6.
 
 4. Unnamed
 5. Unnamed
 6. Unnamed
 
-## Act III
+## Act III - Crimson Skull
 
 7. Unnamed
 8. Unnamed
