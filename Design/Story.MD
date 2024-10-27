@@ -16,22 +16,28 @@ Tutorial scene, narrative tells this is the first time killing someone for Blake
 
 > Phone buzzes for first time, screen is Dark, only the dialog is shown. They talk about not being able to remember anything, and ask him how they met. 
 1. **Alleyway**: Recover an stolen drug package. This is a low-stake mission that is essential for Blake to be trusted by Delta. It also acts as a test, with Delta seeing how Blake behaves in a real mission. In this scene, Blakes goes to a small gang hideout to recover a package that was compromised in a transaction. They sold it to someone that didn't pay them what they accorded, so they're getting it back. This setup is a matter of loyalty and proving Blake's worth
-> Dialogue 2 will go here
+> Blake will ask about their life before this; Delta will answer he don't really know and talk about how he find them when they didn't have any money after their rock career ended and how he started paying their expenses in exchange of them doing some tasks for him. He will tell a partial truth
 2. **Metro**: Leave a message on an abandoned metro station. This is set on an abandoned metro station similar to the New York ones, trains do cross the station but they wont stop. **The gimmick of the scene is the train moving on the rails**. The metro station has an old locker room where Delta will have to leave the card. Inside it there is a note and a bullet. This is meant as a warning for the rival gang that tricked Delta's. The abandoned metro station has to provide the tension that will appear more as the mental ilnesses begin to unravel on Acts II and III. Symbolically, this scene represents Blake's own descent and isolation, as they starts going to a world where they no longer truly belong in daylight society
-> Dialogue 3 will go here
+> Blake will ask what all this things were about, Delta will say this was all part of a bigger scheme they both were a part of. He won't give much details and will say he was just following orders and couldn't do anything about it
 3. **Skyscraper**: Killing an important figure. This is set on a luxurious skyscraper where a higher up of the oposing mafia resides. **The gimmick of this scene is the introduction to glass and the rooftop part**. Blake will have to get their way through the security until they arrieve at the balcony where their objective is. He won't have a weapon and will approach conversation first, begging for his life. Blake will have the first dialogue choice in the game. Symbolically, this mission affects more Blake's psyche as it's the first one where the objective IS to kill someone
-> Dialogue 4 will go here
+> **This will be the first confrontation between Blake and Delta**. Blake will start telling him the mental toll of killing people, they will reference hearing the news the day after, will mention how different it felt when the ecstasy of the night wore off. The conversation will heat up and both will end up yelling
 
 ## Act II - The Descent
 
 Game graphics will start becoming bizarre from here. Blood, grafitti, dead corpses will begin to appear as Blake starts to become insane. Are they products of their imagination or is it all real? First full screen text will appear at the end of mission 6.
 
-4. Unnamed
-5. Unnamed
-6. Unnamed
+4. **Club**:
+> Conversation 5
+5. **Containers**:
+> Conversation 6
+6. **Mansion**:
+> Conversation 7
 
 ## Act III - Crimson Skull
 
-7. Unnamed
-8. Unnamed
-9. Unnamed
+7. **Motel**:
+> Conversation 8
+8. **Hideout**:
+> Conversation 9
+9. **Mercy**:
+> Conversation finale
