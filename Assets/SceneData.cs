@@ -14,9 +14,10 @@ public class SceneData : ScriptableObject
     {
         for (int i = 0; i < sceneObjects.Count; i++)
         {
-            if (sceneObjects[i].Equals(scene))
+            var sceneObject = sceneObjects[i];
+            if (sceneObject.Equals(scene))
             {
-                sceneObjects[i].isLoaded = b;
+                sceneObject.isLoaded = b;
             }
         }
     }

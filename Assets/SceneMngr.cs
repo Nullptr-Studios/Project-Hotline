@@ -7,7 +7,11 @@ public class SceneMng : MonoBehaviour
 {
 
     public SceneData SceneData;
-
+    
+    #if UNITY_EDITOR
+    [Header("Debug")] 
+    [SerializeField] private bool log = false;
+    #endif
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +41,12 @@ public class SceneMng : MonoBehaviour
 
     private void AsyncOperUnloading_completed(AsyncOperation obj)
     {
-        Debug.Log("Scene " + obj.ToString() + " finished unloading");
+#if UNITY_EDITOR
+        if (log)
+        {
+            Debug.Log("Scene " + obj.ToString() + " finished unloading");
+        }
+#endif
     }
 
     private void LoadScenePrivateAsync(string sceneName)
@@ -48,7 +57,12 @@ public class SceneMng : MonoBehaviour
 
     private void AsyncOperLoading_completed(AsyncOperation obj)
     {
-        Debug.Log("Scene " + obj.ToString() + " finished loading");
+#if UNITY_EDITOR
+        if (log)
+        {
+            Debug.Log("Scene " + obj.ToString() + " finished loading");
+        }
+#endif
     }
 
     public void LoadScene(string levelName)
@@ -70,7 +84,6 @@ public class SceneMng : MonoBehaviour
             if (scene.sceneObject == levelName)
             {
                 LoadScenePrivateAsync(scene.sceneObject);
-                
                 return;
             }
         }
