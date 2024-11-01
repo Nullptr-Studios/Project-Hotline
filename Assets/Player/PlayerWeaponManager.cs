@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -18,6 +19,11 @@ public class PlayerWeaponManager : MonoBehaviour
 
     [Header("Player")] 
     public int maxWeaponsEquipped = 2;
+    
+    [Header("Sound")]
+    public EventReference pickupSound;
+    public EventReference throwSound;
+    public EventReference switchSound;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -169,6 +175,9 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponGameObject[_currentIndex].gameObject.SetActive(true);
             _heldWeaponGameObject[_currentIndex].gameObject.TryGetComponent(out _heldWeaponInterface);
             _isWeaponHeld = true;
+            
+            //switch sound
+            FMODUnity.RuntimeManager.PlayOneShot(switchSound, transform.position);
 
             if (_heldWeaponInterface.MaxUses() != -1 && _heldWeaponInterface.UsesLeft() != 0)
             {
@@ -260,6 +269,9 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponInterface.Throw(transform.right);
             _heldWeaponInterface = null;
             _heldWeaponGameObject[_currentIndex] = null;
+            
+            //throw sound
+            FMODUnity.RuntimeManager.PlayOneShot(throwSound, transform.position);
 
             _reloadingCurrentWeapon[_currentIndex] = false;
                 
@@ -310,6 +322,9 @@ public class PlayerWeaponManager : MonoBehaviour
                                     ammoPrompt.DoHide();
                                 
                                 _isWeaponHeld = true;
+                                
+                                //pickup sound
+                                FMODUnity.RuntimeManager.PlayOneShot(pickupSound, transform.position);
                                 
                                 _heldWeaponInterface.setClaimed(true);
                             }

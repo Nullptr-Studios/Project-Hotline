@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public enum FireType
@@ -45,6 +46,11 @@ public class FireWeaponData : ScriptableObject
     public float timeToReachMaxDispersion = 1.0f;
     public float minDispersionAngle = 5;
     public float maxDispersionAngle = 25;
+    
+    [Header("Audio")]
+    public EventReference fireSound;
+    public EventReference reloadSound;
+    public EventReference finishReloadSound;
 
     /// <summary>
     /// Generate Curves

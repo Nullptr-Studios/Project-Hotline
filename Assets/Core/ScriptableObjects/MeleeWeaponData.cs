@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MD_UnnamedMelee", menuName = "ProjectHotline/Create MeleeWeaponData")]
@@ -8,4 +9,7 @@ public class MeleeWeaponData : ScriptableObject
     public float damage = .5f;
 
     public float cooldownTime = .25f;
+    
+    [Header("Audio")]
+    public EventReference useSound;
 }

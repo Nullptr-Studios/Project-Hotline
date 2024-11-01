@@ -309,6 +309,9 @@ public class FireWeapon : Weapon
         mVFX.transform.forward = gunMuzzle.transform.right;
         Destroy(mVFX, 1);
         
+        //Play fire sound
+        FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.fireSound, transform.position);
+        
         //subtract current ammo
         _currentAmmo--;
 
@@ -339,6 +342,9 @@ public class FireWeapon : Weapon
         _fireRateCurveTimer = 0;
 
         _dispersionCurveTimer = 0;
+        
+        //Play finish reload sound
+        FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.finishReloadSound, transform.position);
     }
     
     //Trail
@@ -457,6 +463,10 @@ public class FireWeapon : Weapon
                     if(log)
                         Debug.Log("Reloading");
 #endif
+                    
+                    //Play reload sound
+                    FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.reloadSound, transform.position);
+                    
                     _isReloading = true;
                     Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
                 }

@@ -73,6 +73,9 @@ public class MeleeWeapon : Weapon
             }
             
         }
+        
+        //Play Sound
+        FMODUnity.RuntimeManager.PlayOneShot(meleeWeaponData.useSound, transform.position);
     }
 
     public override void Update()
