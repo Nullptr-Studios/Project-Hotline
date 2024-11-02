@@ -11,6 +11,8 @@ public class PlayerHealth : Damageable
 {
     public GameObject bloodEffectManager;
 
+    public GameObject PlayerCorpsePrefab;
+    
     [Header("PlayerHealth")]
     [SerializeField] private Canvas deathScreenUI;
     [SerializeField] [CanBeNull] private GameObject mainCamera;
@@ -58,7 +60,12 @@ public class PlayerHealth : Damageable
         ScoreManager.AddDeath();
         _player.OnDisable(); // Deactivates all inputs from the game
         
-        Invoke("OpenDeathScreen", deathScreenDelay);
+        GameObject c = Instantiate(PlayerCorpsePrefab, transform.position, Quaternion.identity);
+        c.GetComponent<PlayerCorpse>().CorpseAddForceInDir(_lastShootDir, deathScreenUI, mainCamera?.GetComponent<PixelPerfectCamera>());
+        
+        gameObject.SetActive(false);
+        
+        //Invoke("OpenDeathScreen", deathScreenDelay);
     }
 
     /// <summary>
