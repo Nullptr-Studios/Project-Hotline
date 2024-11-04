@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using ToolBox.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class MissionEnd : MonoBehaviour
 {
@@ -17,6 +20,12 @@ public class MissionEnd : MonoBehaviour
         
         // TODO: Go to score screen
         Debug.Log($"[MissionEnd] {this.name}: Level Ended");
+        var _ls = DataSerializer.Load<List<bool>>(SaveKeywords.LevelPassed);
+        if (_ls[SceneManager.GetActiveScene().buildIndex - 1] == false)
+        {
+            _ls[SceneManager.GetActiveScene().buildIndex - 1] = true;
+            DataSerializer.Save(SaveKeywords.LevelScore, _ls);
+        }
         onLevelFinished.Invoke();
     }
 }

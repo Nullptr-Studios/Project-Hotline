@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using GD.MinMaxSlider;
+using ToolBox.Serialization;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -52,15 +55,9 @@ public class ScoreManager : MonoBehaviour
         _playerKills = 0;
     }
 
-    public static void AddKill()
-    {
-        _playerKills++;
-    }
+    public static void AddKill() => _playerKills++;
 
-    public static void AddDeath()
-    {
-        _playerDeaths++; 
-    }
+    public static void AddDeath() => _playerDeaths++; 
 
     public static Score CalculateScore()
     {
@@ -80,6 +77,14 @@ public class ScoreManager : MonoBehaviour
         else if (finalScore.Time > _maxTime)
         {
             finalScore.Value = _maxFormula.Calculate(finalScore.Value);
+        }
+
+        var _ls = DataSerializer.Load<List<float>>(SaveKeywords.LevelScore);
+
+        if (_ls[SceneManager.GetActiveScene().buildIndex - 1] < finalScore.Value)
+        {
+            _ls[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Value;
+            DataSerializer.Save(SaveKeywords.LevelScore, _ls);
         }
 
         return finalScore;
@@ -104,6 +109,7 @@ public class ScoreManager : MonoBehaviour
                 FormulaType.Log => Mathf.Log((sign * x + pow*100 + xOffset), pow*100),
                 _ => -1
             };
+
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using ToolBox.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -114,7 +115,9 @@ public class ScoreUI : MonoBehaviour
             scoreValue.text = (i+1).ToString();
             yield return new WaitForSeconds(scoreTime/score);
         }
+
         
+
         yield return new WaitForSeconds(2);
         
         EnableExit();
