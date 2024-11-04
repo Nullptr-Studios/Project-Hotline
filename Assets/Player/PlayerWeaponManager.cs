@@ -25,6 +25,9 @@ public class PlayerWeaponManager : MonoBehaviour
     public EventReference throwSound;
     public EventReference switchSound;
 
+    [Header("Animation")]
+    public Animator anim;
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool log;
@@ -202,6 +205,13 @@ public class PlayerWeaponManager : MonoBehaviour
     // I dont like this implementation on the fucking update cuz i cant call it  -x
     private void Update()
     {
+        //Amimation
+        anim.SetBool("WeaponEquipped", _isWeaponHeld);
+        if (_isWeaponHeld)
+        {
+            anim.SetBool("FireOrMelee", _heldWeaponInterface.GetWeaponType() == EWeaponType.Fire ? true : false);
+        }
+
         if (_isWeaponHeld)
         {
             if (_heldWeaponInterface.UsesLeft() == 0 && !_reloadingCurrentWeapon[_currentIndex])
