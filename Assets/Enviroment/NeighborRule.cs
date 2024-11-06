@@ -6,89 +6,106 @@ using UnityEngine.Tilemaps;
 /// A custom rule tile that defines neighbor-based rules for tile placement.
 /// </summary>
 [CreateAssetMenu]
-public class NeighborRule : RuleTile<NeighborRule.Neighbor> {
+public class NeighborRule : RuleTile<NeighborRule.Neighbor>
+{
+    /// <summary>
+    /// If enabled, the tile will connect to these tiles too when the mode is set to "This".
+    /// </summary>
     [Header("Advanced Tile")]
     [Tooltip("If enabled, the tile will connect to these tiles too when the mode is set to \"This\"")]
-    public bool alwaysConnect;
-    [Tooltip("Tiles to connect to")]
-    public TileBase[] tilesToConnect;
-    [Space]
-    [Tooltip("Check itseft when the mode is set to \"any\"")]
-    public bool checkSelf = true;
+    public bool AlwaysConnect;
 
-    public class Neighbor : RuleTile.TilingRule.Neighbor {
+    /// <summary>
+    /// Tiles to connect to.
+    /// </summary>
+    [Tooltip("Tiles to connect to")]
+    public TileBase[] TilesToConnect;
+
+    /// <summary>
+    /// Check itself when the mode is set to "any".
+    /// </summary>
+    [Space]
+    [Tooltip("Check itself when the mode is set to \"any\"")]
+    public bool CheckSelf = true;
+
+    /// <summary>
+    /// Nested class defining neighbor constants.
+    /// </summary>
+    public class Neighbor : RuleTile.TilingRule.Neighbor
+    {
         public const int Any = 3;
         public const int Specified = 4;
         public const int Nothing = 5;
     }
 
-    public override bool RuleMatch(int neighbor, TileBase tile) {
-        switch (neighbor) {
-            case Neighbor.This: return Check_This(tile);
-            case Neighbor.NotThis: return Check_NotThis(tile);
-            case Neighbor.Any: return Check_Any(tile);
-            case Neighbor.Specified: return Check_Specified(tile);
-            case Neighbor.Nothing: return Check_Nothing(tile);
+    /// <summary>
+    /// Determines if a rule matches based on the neighbor type and tile.
+    /// </summary>
+    /// <param name="neighbor">The type of neighbor.</param>
+    /// <param name="tile">The tile to check against.</param>
+    /// <returns>True if the rule matches, otherwise false.</returns>
+    public override bool RuleMatch(int neighbor, TileBase tile)
+    {
+        switch (neighbor)
+        {
+            case Neighbor.This: return CheckThis(tile);
+            case Neighbor.NotThis: return CheckNotThis(tile);
+            case Neighbor.Any: return CheckAny(tile);
+            case Neighbor.Specified: return CheckSpecified(tile);
+            case Neighbor.Nothing: return CheckNothing(tile);
         }
         return base.RuleMatch(neighbor, tile);
     }
 
     /// <summary>
-    /// Returns true if the tile is this, or if the tile is one of the tiles specified if always connect is enabled.
+    /// Checks if the given tile is the same as this tile.
     /// </summary>
-    /// <param name="tile">Neighboring tile to compare to</param>
-    /// <returns></returns>
-    bool Check_This(TileBase tile)
+    /// <param name="tile">The tile to check.</param>
+    /// <returns>True if the tile is the same as this tile, otherwise false.</returns>
+    private bool CheckThis(TileBase tile)
     {
-        if (!alwaysConnect) return tile == this;
-        else return tilesToConnect.Contains(tile) || tile == this;
-
-        //.Contains requires "using System.Linq;"
+        if (!AlwaysConnect) return tile == this;
+        else return TilesToConnect.Contains(tile) || tile == this;
     }
 
     /// <summary>
-    /// Returns true if the tile is not this.
+    /// Checks if the given tile is not the same as this tile.
     /// </summary>
-    /// <param name="tile">Neighboring tile to compare to</param>
-    /// <returns></returns>
-    bool Check_NotThis(TileBase tile)
+    /// <param name="tile">The tile to check.</param>
+    /// <returns>True if the tile is not the same as this tile, otherwise false.</returns>
+    private bool CheckNotThis(TileBase tile)
     {
-        if (!alwaysConnect) return tile != this;
-        else return !tilesToConnect.Contains(tile) && tile != this;
-
-        //.Contains requires "using System.Linq;"
+        if (!AlwaysConnect) return tile != this;
+        else return !TilesToConnect.Contains(tile) && tile != this;
     }
 
     /// <summary>
-    /// Return true if the tile is not empty, or not this if the check self option is disabled.
+    /// Checks if the given tile is not null.
     /// </summary>
-    /// <param name="tile">Neighboring tile to compare to</param>
-    /// <returns></returns>
-    bool Check_Any(TileBase tile)
+    /// <param name="tile">The tile to check.</param>
+    /// <returns>True if the tile is not null, otherwise false.</returns>
+    private bool CheckAny(TileBase tile)
     {
-        if (checkSelf) return tile != null;
+        if (CheckSelf) return tile != null;
         else return tile != null && tile != this;
     }
 
     /// <summary>
-    /// Returns true if the tile is one of the specified tiles.
+    /// Checks if the given tile is in the list of tiles to connect.
     /// </summary>
-    /// <param name="tile">Neighboring tile to compare to</param>
-    /// <returns></returns>
-    bool Check_Specified(TileBase tile)
+    /// <param name="tile">The tile to check.</param>
+    /// <returns>True if the tile is in the list of tiles to connect, otherwise false.</returns>
+    private bool CheckSpecified(TileBase tile)
     {
-        return tilesToConnect.Contains(tile);
-
-        //.Contains requires "using System.Linq;"
+        return TilesToConnect.Contains(tile);
     }
 
     /// <summary>
-    /// Returns true if the tile is empty.
+    /// Checks if the given tile is null.
     /// </summary>
-    /// <param name="tile">Neighboring tile to compare to</param>
-    /// <param name="tile"></param>
-    /// <returns></returns>
-    bool Check_Nothing(TileBase tile)
+    /// <param name="tile">The tile to check.</param>
+    /// <returns>True if the tile is null, otherwise false.</returns>
+    private bool CheckNothing(TileBase tile)
     {
         return tile == null;
     }
