@@ -1,3 +1,6 @@
+//To use this save system, put DataSerializer.Save(SaveKeywords.KeyWordBeingSaved, variable with the value it has)
+//To load it: DataSerializer.Load<List<VariableType>>(SaveKeywords.KeyWordBeingLoaded)
+
 using UnityEngine;
 using ToolBox.Serialization;
 using UnityEditor;
@@ -6,18 +9,15 @@ using System;
 
 public class SaveSystem : MonoBehaviour
 {
-    private void Start()
-    {
-        Debug.Log(DataSerializer.Load<int>(SaveKeywords.LevelScore));
-        Debug.Log(DataSerializer.Load<bool>(SaveKeywords.LevelPassed));
-    }
+    
 }
-
+/// <summary>
+/// Saves different parameters on the game as strings that will be assigned a value later on
+/// </summary>
 public class SaveKeywords
 {
     public const string LevelScore = "LevelScore";
     public const string LevelPassed = "LevelPassed";
-    public const string TestValue = "TestValue";
 }
 
 #if UNITY_EDITOR
