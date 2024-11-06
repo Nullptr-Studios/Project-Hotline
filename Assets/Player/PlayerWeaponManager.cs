@@ -140,6 +140,9 @@ public class PlayerWeaponManager : MonoBehaviour
                 _canShootAgain = false;
             }
         }
+
+        //Animation
+        anim.SetTrigger("Use");
     }
     
     private void ThrowOrGetOnPerformed(InputAction.CallbackContext context)
