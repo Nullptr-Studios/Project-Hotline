@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638650623619353575
+  platformSettingsDirtyTick: 638665052424832328
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -9862,20 +9862,20 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
-    guid: 1558597883
-    name: T_Tilemap
+    guid: 1819302001
+    name: T_Prototype
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: T_Tilemap
+    - name: T_Prototype
       frameIndex: 0
       cellRect:
         x: 0
         y: 0
         width: 432
         height: 320
-      spriteId: 72440af15c96ee84eab505df9b646ae8
+      spriteId: b25de75055adc5e40ac075523b0d676a
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -9904,6 +9904,30 @@ ScriptedImporter:
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
   - name: Server
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Windows Store Apps
     overridden: 0
     ignorePlatformSupport: 0
     maxTextureSize: 2048
