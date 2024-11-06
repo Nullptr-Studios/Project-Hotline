@@ -1,46 +1,47 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PasueMenu : MonoBehaviour
 {
-    private Canvas _canvas;
-    private PlayerMovement _input;
+    private PlayerMovement _playerinput;
+    private PlayerIA _input;
     private Animator _animator;
 
     private void Awake()
     {
-        _canvas = GetComponent<Canvas>();
         _animator = GetComponentInChildren<Animator>();
-        _input = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        _playerinput = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        _input = new PlayerIA();
+        _input.UI.Cancel.performed += OnContinue;
     }
 
-    /*private void OnFinishAnimation()
-    {
-        Time.timeScale = 0f;
-    }*/
-
-    private void OnDisable()
-    {
-        Time.timeScale = 1f;
-    }
+    private void OnDisable() => Time.timeScale = 1f;
 
     private void OnEnable()
     {
-        _input.OnDisable();
+        _playerinput.OnDisable();
     }
 
-    public void OnContinue()
-    { 
-        _input.OnEnable();
+    // This happens when the open animations finishes
+    public void OnOpen() 
+    {
+        Time.timeScale = 0f;
+        _input.UI.Cancel.Enable();
+        transform.localScale = Vector3.one;
+    }
+
+    // Continue button
+    public void OnContinue(InputAction.CallbackContext context)
+    {
+        Time.timeScale = 1f;
+        _playerinput.OnEnable();
+        _input.UI.Cancel.Disable();
         _animator.SetTrigger("CloseAnim");
     }
 
-    public void OnExit()
-    {
-        LevelManager.EndLevel();
-    }
+    // Exit to main menu button
+    public void OnExit() => LevelManager.EndLevel();
 
-    public void OnRestart()
-    {
-        LevelManager.RestartLevel();
-    }
+    // Restart level button
+    public void OnRestart() => LevelManager.RestartLevel();
 }
