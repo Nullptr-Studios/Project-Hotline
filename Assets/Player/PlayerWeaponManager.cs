@@ -9,6 +9,11 @@ using UnityEngine.Serialization;
 /// </summary>
 public class PlayerWeaponManager : MonoBehaviour
 {
+    //animator thingis
+    private static readonly int WeaponEquipped = Animator.StringToHash("WeaponEquipped");
+    private static readonly int FireOrMelee = Animator.StringToHash("FireOrMelee");
+    private static readonly int Type = Animator.StringToHash("Type");
+    
     public GameObject spawningWeapon;
     
     [Header("Pickup")]
@@ -209,10 +214,11 @@ public class PlayerWeaponManager : MonoBehaviour
     private void Update()
     {
         //Amimation
-        anim.SetBool("WeaponEquipped", _isWeaponHeld);
+        anim.SetBool(WeaponEquipped, _isWeaponHeld);
         if (_isWeaponHeld)
         {
-            anim.SetBool("FireOrMelee", _heldWeaponInterface.GetWeaponType() == EWeaponType.Fire ? true : false);
+            anim.SetBool(FireOrMelee, _heldWeaponInterface.GetWeaponType() == EWeaponType.Fire ? true : false);
+            anim.SetInteger(Type, _heldWeaponInterface.GetWeaponSpriteID());
         }
 
         if (_isWeaponHeld)

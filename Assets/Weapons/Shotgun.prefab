@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3556062507638411451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.847, y: -0.076, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 2350645429869695454}
   - component: {fileID: 869534294009392999}
   m_Layer: 3
-  m_Name: Gun (4)
+  m_Name: Shotgun
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ Transform:
   m_Children:
   - {fileID: 6706905818999419598}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8074293480335287787
 SpriteRenderer:
@@ -140,7 +140,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.31889045, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.06511307, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   maskToStun:
     serializedVersion: 2
     m_Bits: 512
-  fireWeaponData: {fileID: 11400000, guid: b2391ff17887c5c4fa13aa8058e49aae, type: 2}
+  fireWeaponData: {fileID: 11400000, guid: b7c8c2e4093af104aade85dc851278e6, type: 2}
   bulletHitWallVFX: {fileID: 180772, guid: 697d9a1e52bb99d468a5d727e5a4b435, type: 3}
   bulletHitGlassVFX: {fileID: 168394, guid: 93983eaa39ee5d4408c0b10200e234b4, type: 3}
   bulletHitWallBangVFX: {fileID: 138412, guid: c75e5a4fa5c842546a553399e24eb22d, type: 3}

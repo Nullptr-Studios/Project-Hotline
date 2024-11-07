@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MeleeWeapon : Weapon
 {
@@ -80,6 +81,24 @@ public class MeleeWeapon : Weapon
         
         //Play Sound
         FMODUnity.RuntimeManager.PlayOneShot(meleeWeaponData.useSound, transform.position);
+    }
+
+    public override void Pickup(Transform weaponHolder)
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        base.Pickup(weaponHolder);
+    }
+
+    public override void Throw(Vector2 forwardVector)
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        base.Throw(forwardVector);
+    }
+
+    public override void Drop()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        base.Drop();
     }
 
     public override void Update()

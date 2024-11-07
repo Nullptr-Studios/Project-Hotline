@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3556062507638411451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.192, y: -0.014, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -74,9 +74,9 @@ GameObject:
   - component: {fileID: 8293000475427228458}
   - component: {fileID: 8074293480335287787}
   - component: {fileID: 2350645429869695454}
-  - component: {fileID: 4135931793659384008}
+  - component: {fileID: 869534294009392999}
   m_Layer: 3
-  m_Name: MeleeTest
+  m_Name: Pistol
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ Transform:
   m_Children:
   - {fileID: 6706905818999419598}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8074293480335287787
 SpriteRenderer:
@@ -140,7 +140,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0.5592301, b: 1, a: 1}
+  m_Color: {r: 0.3578205, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -195,7 +195,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4135931793659384008
+--- !u!114 &869534294009392999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,10 +204,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4223289585622608669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36bb1a8c834837c418257c5ff87e6ac8, type: 3}
+  m_Script: {fileID: 11500000, guid: a199e2e5da8945c43833c22a031caa75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 1
+  weaponType: 0
   throwForce: 15
   rotationForce: 1000
   gfxCollider2D: {fileID: 2350645429869695454}
@@ -215,7 +215,13 @@ MonoBehaviour:
   maskToStun:
     serializedVersion: 2
     m_Bits: 512
-  meleeWeaponData: {fileID: 11400000, guid: 0dd44528de1f1654fa9451933a21fc6b, type: 2}
-  offset: 1
+  fireWeaponData: {fileID: 11400000, guid: b2391ff17887c5c4fa13aa8058e49aae, type: 2}
+  bulletHitWallVFX: {fileID: 180772, guid: 697d9a1e52bb99d468a5d727e5a4b435, type: 3}
+  bulletHitGlassVFX: {fileID: 168394, guid: 93983eaa39ee5d4408c0b10200e234b4, type: 3}
+  bulletHitWallBangVFX: {fileID: 138412, guid: c75e5a4fa5c842546a553399e24eb22d, type: 3}
+  muzzleVFX: {fileID: 146992, guid: 4e20780f83b08084f9f9435e4b48bac4, type: 3}
+  gunMuzzle: {fileID: 6706905818999419598}
+  dispersionTransform: {fileID: 6900966375679216604}
   log: 0
   drawGizmos: 1
+  gizmosDuration: 0.5

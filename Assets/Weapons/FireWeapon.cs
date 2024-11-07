@@ -138,6 +138,24 @@ public class FireWeapon : Weapon
                 
         Destroy(hitVFX, 1);    
     }
+    
+    public override void Pickup(Transform weaponHolder)
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        base.Pickup(weaponHolder);
+    }
+
+    public override void Throw(Vector2 forwardVector)
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        base.Throw(forwardVector);
+    }
+
+    public override void Drop()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        base.Drop();
+    }
 
     private void Fire(Transform fireDir)
     {
