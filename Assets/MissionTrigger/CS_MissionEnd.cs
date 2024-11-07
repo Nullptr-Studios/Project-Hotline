@@ -20,6 +20,11 @@ public class MissionEnd : MonoBehaviour
         
         // TODO: Go to score screen
         Debug.Log($"[MissionEnd] {this.name}: Level Ended");
+        if (DataSerializer.Load<List<bool>>(SaveKeywords.LevelPassed) == null)
+        {
+            var initLevelPassed = new List<bool>(new bool[10]);
+            DataSerializer.Save(SaveKeywords.LevelPassed, initLevelPassed);
+        }
         var _ls = DataSerializer.Load<List<bool>>(SaveKeywords.LevelPassed);
         if (_ls[SceneManager.GetActiveScene().buildIndex - 1] == false)
         {

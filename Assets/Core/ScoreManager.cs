@@ -66,18 +66,10 @@ public class ScoreManager : MonoBehaviour
             Time = Time.time - _startTime,
             Kills = _playerKills,
             Deaths = _playerDeaths,
+            InnocentKills = 0,
             
             Value = _playerKills * _killXP - _playerDeaths * _deathXP
         };
-
-        var _ts = DataSerializer.Load<List<float>>(SaveKeywords.TimeTaken);
-
-        if (_ts[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Time)
-        {
-            _ts[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Time;
-            DataSerializer.Save(SaveKeywords.TimeTaken, _ts);
-        }
-
         if (finalScore.Time < _minTime)
         {
             finalScore.Value = _minFormula.Calculate(finalScore.Value);
@@ -86,7 +78,11 @@ public class ScoreManager : MonoBehaviour
         {
             finalScore.Value = _maxFormula.Calculate(finalScore.Value);
         }
-
+        if (DataSerializer.Load<List<float>>(SaveKeywords.LevelScore) == null)
+        {
+            var initLevelScore = new List<float>(new float[10]);
+            DataSerializer.Save(SaveKeywords.LevelScore, initLevelScore);
+        }
         var _ls = DataSerializer.Load<List<float>>(SaveKeywords.LevelScore);
 
         if (_ls[SceneManager.GetActiveScene().buildIndex - 1] < finalScore.Value)
@@ -94,7 +90,43 @@ public class ScoreManager : MonoBehaviour
             _ls[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Value;
             DataSerializer.Save(SaveKeywords.LevelScore, _ls);
         }
+        if (DataSerializer.Load<List<float>>(SaveKeywords.TimeTaken) == null)
+        {
+            var initTimeTaken = new List<float>(new float[10]);
+            DataSerializer.Save(SaveKeywords.TimeTaken, initTimeTaken);
+        }
+        var _ts = DataSerializer.Load<List<float>>(SaveKeywords.TimeTaken);
 
+        if (_ts[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Time)
+        {
+            _ts[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Time;
+            DataSerializer.Save(SaveKeywords.TimeTaken, _ts);
+        }
+        if (DataSerializer.Load<List<int>>(SaveKeywords.EnemyKills) == null)
+        {
+            var initKills = new List<int>(new int[10]);
+            DataSerializer.Save(SaveKeywords.EnemyKills, initKills);
+        }
+        var _kills = DataSerializer.Load<List<int>>(SaveKeywords.EnemyKills);
+
+        if (_kills[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Kills)
+        {
+            _kills[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Kills;
+            DataSerializer.Save(SaveKeywords.EnemyKills, _kills);
+        }
+        
+        if (DataSerializer.Load<List<int>>(SaveKeywords.EnemyKills) == null)
+        {
+            var initKills = new List<int>(new int[10]);
+            DataSerializer.Save(SaveKeywords.EnemyKills, initKills);
+        }
+        var _civkills = DataSerializer.Load<List<int>>(SaveKeywords.InnocentKills);
+
+        if (_civkills[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Kills)
+        {
+            _civkills[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Kills;
+            DataSerializer.Save(SaveKeywords.InnocentKills, _civkills);
+        }
         return finalScore;
     }
 
