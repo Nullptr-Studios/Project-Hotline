@@ -1,3 +1,4 @@
+using CC.DialogueSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -53,8 +54,21 @@ public class LevelManager : MonoBehaviour
         
     } 
     
-    [System.Obsolete("This method is obsolete. Please use OpenScore instead")]
-    public void EndLevel() => SceneManager.LoadScene("MainMenu");
+    /// <summary>
+    /// Exit to main menu
+    /// </summary>
+    public static void EndLevel() => SceneManager.LoadScene("MainMenu"); // TODO: This should call the loading screen
+
+    /// <summary>
+    /// Make the player restart the current level
+    /// </summary>
+    public static void RestartLevel()
+    {
+        VariableRepo.Instance.RemoveAll();
+
+        // TODO: this should be fixed after prototype to not have the player read the VN every time
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void OpenScore()
     {
