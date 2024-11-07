@@ -70,6 +70,14 @@ public class ScoreManager : MonoBehaviour
             Value = _playerKills * _killXP - _playerDeaths * _deathXP
         };
 
+        var _ts = DataSerializer.Load<List<float>>(SaveKeywords.TimeTaken);
+
+        if (_ts[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Time)
+        {
+            _ts[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Time;
+            DataSerializer.Save(SaveKeywords.TimeTaken, _ts);
+        }
+
         if (finalScore.Time < _minTime)
         {
             finalScore.Value = _minFormula.Calculate(finalScore.Value);

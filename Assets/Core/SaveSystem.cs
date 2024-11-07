@@ -9,7 +9,10 @@ using System;
 
 public class SaveSystem : MonoBehaviour
 {
-    
+    private void Start()
+    {
+        Debug.Log(DataSerializer.Load<List<float>>(SaveKeywords.TimeTaken));
+    }
 }
 /// <summary>
 /// Saves different parameters on the game as strings that will be assigned a value later on
@@ -18,6 +21,7 @@ public class SaveKeywords
 {
     public const string LevelScore = "LevelScore";
     public const string LevelPassed = "LevelPassed";
+    public const string TimeTaken = "TimeTaken";
 }
 
 #if UNITY_EDITOR
