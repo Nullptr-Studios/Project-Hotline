@@ -86,13 +86,6 @@ public class PlayerWeaponManager : MonoBehaviour
             _wantsToThrowOrGet = true;
         }
         //###############################################
-
-        _playerInput = new PlayerIA();
-        
-        _playerInput.Gameplay.ThrowOrGet.performed += ThrowOrGetOnPerformed;
-        _playerInput.Gameplay.Fire.performed += OnFire;
-        _playerInput.Gameplay.Fire.canceled += OnFire;
-        _playerInput.Gameplay.SwitchWeapons.performed += SwitchWeaponsOnPerformed;
     }
 
     private void SwitchWeaponsOnPerformed(InputAction.CallbackContext context)
@@ -187,6 +180,19 @@ public class PlayerWeaponManager : MonoBehaviour
         {
             ammoPrompt.DoHide();
         }
+    }
+    
+    // thx copilot for the comments btw -x
+    /// <summary>
+    /// Initializes the player input actions and binds the input events to their respective handlers.
+    /// </summary>
+    public void InitializeInput()
+    {
+        _playerInput = new PlayerIA();
+        _playerInput.Gameplay.ThrowOrGet.performed += ThrowOrGetOnPerformed;
+        _playerInput.Gameplay.Fire.performed += OnFire;
+        _playerInput.Gameplay.Fire.canceled += OnFire;
+        _playerInput.Gameplay.SwitchWeapons.performed += SwitchWeaponsOnPerformed;
     }
 
     // Throw and get logic

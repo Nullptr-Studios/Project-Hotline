@@ -1,4 +1,5 @@
 using CC.DialogueSystem;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D missionTrigger;
     [SerializeField] private BoxCollider2D endTrigger;
-    [SerializeField] private MissionObjective objective;
+    [SerializeField] [CanBeNull] private MissionObjective objective;
     [SerializeField] private ScoreUI score;
 
 #if UNITY_EDITOR
@@ -29,8 +30,11 @@ public class LevelManager : MonoBehaviour
             Debug.LogError($"[LevelManager] {name}: Objective mot found. Level unwinnable.");
             this.enabled = false;
         }
+        else
+        {
+            missionTrigger.GetComponent<MissionTrigger>().Objective = objective.gameObject;
+        }
         
-        missionTrigger.GetComponent<MissionTrigger>().Objective = objective.gameObject;
     }
 
     public void CompleteMission()
