@@ -46,6 +46,15 @@ public class FireWeaponData : ScriptableObject
     public float timeToReachMaxDispersion = 1.0f;
     public float minDispersionAngle = 5;
     public float maxDispersionAngle = 25;
+
+    [Header("Sprite")]
+    /*
+     * 0 -> pistol
+     * 1 -> SMG
+     * 2 -> rifle
+     * 3 -> Shotgun
+     */
+    public int SpriteAnimID = 0; //default is pistol
     
     [Header("Audio")]
     public EventReference fireSound;

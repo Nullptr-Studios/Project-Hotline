@@ -44,7 +44,12 @@ public class FireWeapon : Weapon
     [SerializeField] private bool drawGizmos;
     [SerializeField] private float gizmosDuration = .5f;
 #endif
-    
+
+    public override int GetWeaponSpriteID()
+    {
+        return fireWeaponData.SpriteAnimID;
+    }
+
     public override int UsesLeft()
     {
         return _currentAmmo;

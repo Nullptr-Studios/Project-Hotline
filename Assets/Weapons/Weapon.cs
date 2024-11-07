@@ -19,6 +19,8 @@ public interface IWeapon
 {
     public EWeaponType GetWeaponType();
 
+    public int GetWeaponSpriteID();
+
     public bool isClaimed();
 
     public void setClaimed(bool claimed);
@@ -55,6 +57,11 @@ public class Weapon : MonoBehaviour, IWeapon
     
     //for AI
     private bool _isClaimed = false;
+
+    public virtual int GetWeaponSpriteID()
+    {
+        return -1;
+    }
 
     public bool isClaimed()
     {

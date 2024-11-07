@@ -37,6 +37,10 @@ public class MeleeWeapon : Weapon
         
     }
 
+    public override int GetWeaponSpriteID()
+    {
+        return meleeWeaponData.SpriteID;
+    }
     public override void Use(bool pressed)
     {
         _wantsToAttack = pressed;

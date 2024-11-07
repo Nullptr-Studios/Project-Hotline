@@ -9,6 +9,9 @@ public class MeleeWeaponData : ScriptableObject
     public float damage = .5f;
 
     public float cooldownTime = .25f;
+
+    [Header("Sprite")]
+    public int SpriteID = 0;
     
     [Header("Audio")]
     public EventReference useSound;
