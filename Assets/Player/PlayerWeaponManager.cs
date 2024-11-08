@@ -13,7 +13,8 @@ public class PlayerWeaponManager : MonoBehaviour
     private static readonly int WeaponEquipped = Animator.StringToHash("WeaponEquipped");
     private static readonly int FireOrMelee = Animator.StringToHash("FireOrMelee");
     private static readonly int Type = Animator.StringToHash("Type");
-    
+    private static readonly int Use = Animator.StringToHash("Use");
+
     public GameObject spawningWeapon;
     
     [Header("Pickup")]
@@ -147,7 +148,9 @@ public class PlayerWeaponManager : MonoBehaviour
         }
 
         //Animation
-        anim.SetTrigger("Use");
+        //do animation only on pressed, not on relased
+        if(context.performed)
+            anim.SetTrigger(Use);
     }
     
     private void ThrowOrGetOnPerformed(InputAction.CallbackContext context)
@@ -207,6 +210,9 @@ public class PlayerWeaponManager : MonoBehaviour
         {
             ammoPrompt.DoHide();
         }
+        
+        //AnimationReset
+        anim.ResetTrigger(Use);
     }
 
     // Throw and get logic
@@ -297,6 +303,9 @@ public class PlayerWeaponManager : MonoBehaviour
             _isWeaponHeld = false;
             
             ammoPrompt.DoHide();
+            
+            //AnimationReset
+            anim.ResetTrigger(Use);
 
             //reset input variable
             _wantsToThrowOrGet = false;
