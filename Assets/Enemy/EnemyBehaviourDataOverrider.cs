@@ -16,7 +16,6 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
 
     private NavMeshAgent _rb;
     
-    private static readonly int AnimRate = Animator.StringToHash("AnimRate");
     private static readonly int IsIdle = Animator.StringToHash("IsIdle");
 
     private void Start()

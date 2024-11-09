@@ -8,6 +8,12 @@ using UnityEngine.InputSystem;
 public class EnemyWeaponManager : MonoBehaviour
 {
     
+    //animator thingis
+    private static readonly int WeaponEquipped = Animator.StringToHash("WeaponEquipped");
+    private static readonly int FireOrMelee = Animator.StringToHash("FireOrMelee");
+    private static readonly int Type = Animator.StringToHash("Type");
+    private static readonly int Use = Animator.StringToHash("Use");
+    
     [Header("Pickup")]
     public float pickupRange = 2.0f;
     public LayerMask weaponLm;
@@ -27,6 +33,8 @@ public class EnemyWeaponManager : MonoBehaviour
     
     private bool _isWeaponHeld;
     public bool _wantsToThrowOrGet;
+
+    public Animator anim;
 
     private PlayerIA _playerInput;
     
@@ -131,6 +139,11 @@ public class EnemyWeaponManager : MonoBehaviour
             _heldWeaponInterface.Use(false);
         
         _wantsToFire = fire;
+        
+        //Animation
+        //do animation only on pressed, not on relased
+        if(fire)
+            anim.SetTrigger(Use);
     }
     
     /*private void ThrowOrGetOnPerformed(InputAction.CallbackContext context)
@@ -171,6 +184,14 @@ public class EnemyWeaponManager : MonoBehaviour
     // Throw and get logic
     private void Update()
     {
+        //Amimation
+        anim.SetBool(WeaponEquipped, _isWeaponHeld);
+        if (_isWeaponHeld)
+        {
+            anim.SetBool(FireOrMelee, _heldWeaponInterface.GetWeaponType() == EWeaponType.Fire ? true : false);
+            anim.SetInteger(Type, _heldWeaponInterface.GetWeaponSpriteID());
+        }
+        
         if (_isWeaponHeld && _wantsToFire && !_heldWeaponInterface.IsAutomatic())
         {
             if (_fireTimer >= _heldWeaponInterface.TimeBetweenUses())
