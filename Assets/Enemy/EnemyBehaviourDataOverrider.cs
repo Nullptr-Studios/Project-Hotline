@@ -4,25 +4,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Overrides the behavior data for an enemy, including handling animations and movement.
+/// </summary>
 public class EnemyBehaviourDataOverrider : MonoBehaviour
 {
+    /// <summary>
+    /// The behavior data for the enemy.
+    /// </summary>
     public EnemyBehaviourData behaviourData;
 
+    /// <summary>
+    /// Indicates if the enemy was just stunned.
+    /// </summary>
     public bool justStunned = false;
 
+    /// <summary>
+    /// The animator for the enemy.
+    /// </summary>
     public Animator animatorEnemy;
+
+    /// <summary>
+    /// The animator for the enemy's foot.
+    /// </summary>
     public Animator animatorEnemyFoot;
+
+    /// <summary>
+    /// The transform for the enemy's foot.
+    /// </summary>
     public Transform footTransform;
 
     private NavMeshAgent _rb;
-    
+
     private static readonly int IsIdle = Animator.StringToHash("IsIdle");
 
+    /// <summary>
+    /// Initializes the NavMeshAgent component.
+    /// </summary>
     private void Start()
     {
         _rb = GetComponent<NavMeshAgent>();
     }
 
+    /// <summary>
+    /// Updates the enemy's animations based on its velocity.
+    /// </summary>
     private void Update()
     {
         // Animation stuff
@@ -43,20 +69,22 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    [Header("Debug")] 
-    
+    [Header("Debug")]
+
     [SerializeField] private bool DrawGizmos = true;
     [SerializeField] private Color ColorSphere = Color.magenta;
     [SerializeField] private Color ColorSphereTurn = Color.green;
     [SerializeField] private Color Colorline = Color.yellow;
-    
+
+    /// <summary>
+    /// Draws gizmos in the editor for debugging purposes.
+    /// </summary>
     public void OnDrawGizmos()
     {
         if(DrawGizmos)
-            //Added visual help for waypoints
+            // Added visual help for waypoints
             if (behaviourData.waypoints.Count > 0)
             {
-
                 Vector2 lastPos = transform.position;
                 foreach (var waypoint in behaviourData.waypoints)
                 {
@@ -64,18 +92,18 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
                         Gizmos.color = ColorSphereTurn;
                     else
                         Gizmos.color = ColorSphere;
-                    
-                    Gizmos.DrawSphere(waypoint.waypointPos,.5f);
-                    
+
+                    Gizmos.DrawSphere(waypoint.waypointPos, .5f);
+
                     Gizmos.color = Colorline;
                     Gizmos.DrawLine(lastPos, waypoint.waypointPos);
-                    
+
                     lastPos = waypoint.waypointPos;
                 }
-                //last line
+                // Last line
                 Gizmos.DrawLine(lastPos, behaviourData.waypoints[0].waypointPos);
             }
     }
-    
+
 #endif
 }
