@@ -35,6 +35,13 @@ public class SceneMng : MonoBehaviour
     /// </summary>
     void Start()
     {
+        if(SceneData == null)
+        {
+            Debug.LogError("SceneData is not assigned in " + gameObject.name);
+            //Destroy(this);
+            //return;
+        }
+        
         ExitNodes = new List<GameObject>(GameObject.FindGameObjectsWithTag("ExitNode"));
 
         foreach(var scene in SceneData.sceneObjects)
@@ -51,6 +58,9 @@ public class SceneMng : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
+        if(SceneData == null)
+            return;
+        
         foreach (var scene in SceneData.sceneObjects)
         {
             UnloadScenePrivateAsync(scene.sceneObject);
@@ -64,7 +74,7 @@ public class SceneMng : MonoBehaviour
     private void UnloadScenePrivateAsync(string sceneName)
     {
         AsyncOperation asyncOper = SceneManager.UnloadSceneAsync(sceneName);
-        asyncOper.completed += AsyncOperUnloading_completed;
+        asyncOper!.completed += AsyncOperUnloading_completed;
     }
 
     /// <summary>
@@ -79,6 +89,7 @@ public class SceneMng : MonoBehaviour
             Debug.Log("Scene " + obj.ToString() + " finished unloading");
         }
 #endif
+        obj.completed -= AsyncOperUnloading_completed;
     }
 
     /// <summary>
@@ -88,7 +99,7 @@ public class SceneMng : MonoBehaviour
     private void LoadScenePrivateAsync(string sceneName)
     {
         AsyncOperation asyncOper = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        asyncOper.completed += AsyncOperLoading_completed;
+        asyncOper!.completed += AsyncOperLoading_completed;
     }
 
     /// <summary>
@@ -103,6 +114,7 @@ public class SceneMng : MonoBehaviour
             Debug.Log("Scene " + obj.ToString() + " finished loading");
         }
 #endif
+        obj.completed -= AsyncOperLoading_completed;
     }
 
     /// <summary>
@@ -134,6 +146,20 @@ public class SceneMng : MonoBehaviour
                 LoadScenePrivateAsync(scene.sceneObject);
                 return;
             }
+        }
+    }
+
+    /// <summary>
+    /// reloads the scenes as they were initially loaded.
+    /// </summary>
+    public void ReloadScenes()
+    {
+        foreach (var scene in SceneData.sceneObjects)
+        {
+            if (scene.isInitialyLoaded)
+                continue;
+            if(scene.isLoaded)
+                UnloadScenePrivateAsync(scene.sceneObject);
         }
     }
 }
