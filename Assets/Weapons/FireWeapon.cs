@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -22,6 +23,7 @@ public class FireWeapon : Weapon
 
     // Gun muzzle will be used for FX
     public Transform gunMuzzle;
+    public MuzzleLightController muzzleLightController;
     // The transform where the ray casts will be emitted
     public Transform dispersionTransform;
 
@@ -381,7 +383,10 @@ public class FireWeapon : Weapon
         GameObject mVFX = Instantiate(muzzleVFX, gunMuzzle.transform);
         mVFX.transform.forward = gunMuzzle.transform.right;
         Destroy(mVFX, 1);
-
+        
+        //light flash sfx
+        muzzleLightController.ActivateLight(fireWeaponData.sfxMuzzleFlashCurve);
+        
         // Play fire sound
         FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.fireSound, transform.position);
 
