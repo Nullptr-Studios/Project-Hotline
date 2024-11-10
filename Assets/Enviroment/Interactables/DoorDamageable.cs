@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class DoorDamageable : Damageable
 {
+    public float hitForce = 100;
     private Rigidbody2D _doorRb;
 
     /// <summary>
@@ -29,7 +30,7 @@ public class DoorDamageable : Damageable
     public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
     {
         // This is done so the door opens when hit
-        _doorRb.AddForce(shootDir * 50);
+        _doorRb.AddForce(shootDir * hitForce);
         base.DoDamage(amount, shootDir, hitPoint, weaponType);
     }
 

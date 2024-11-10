@@ -14,7 +14,7 @@ public class GlassDamageable : Damageable
     /// </summary>
     public override void OnDead()
     {
-        
+        base.OnDead();
     }
     
 }
