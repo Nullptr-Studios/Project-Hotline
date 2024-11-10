@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -2729283819422813558, guid: 156d9602094ad344e9143816ac57d4ce, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.15814185, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -149,14 +149,11 @@ GameObject:
   - component: {fileID: 4320165183307307060}
   - component: {fileID: 6114627427478298440}
   - component: {fileID: 4441475060996046577}
-  - component: {fileID: 2337270951896560456}
   - component: {fileID: 4929575349862732123}
-  - component: {fileID: 5774344439103843990}
-  - component: {fileID: 1155971598429141389}
-  - component: {fileID: 8546987331332865949}
-  - component: {fileID: 167974589469007201}
+  - component: {fileID: 5199228981774329626}
+  - component: {fileID: -8704503309668860407}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Civilian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,8 +186,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 2975961158892791207}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.6
-  m_Speed: 3.5
+  m_Radius: 0.3
+  m_Speed: 7
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -227,27 +224,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angularSpeed: 360
---- !u!114 &2337270951896560456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2975961158892791207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa78ab6e146158b4d8ea601843126a75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  behaviourData: {fileID: 11400000, guid: 993091c46f483664a8a8c63b423f6631, type: 2}
-  justStunned: 0
-  animatorEnemy: {fileID: 1586720700333565052}
-  animatorEnemyFoot: {fileID: 2898076770262181485}
-  footTransform: {fileID: 5296668497393563518}
-  DrawGizmos: 1
-  ColorSphere: {r: 1, g: 0, b: 1, a: 1}
-  ColorSphereTurn: {r: 0, g: 1, b: 0, a: 1}
-  Colorline: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!61 &4929575349862732123
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -293,7 +269,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.98, y: 0.86}
   m_EdgeRadius: 0
---- !u!114 &5774344439103843990
+--- !u!114 &5199228981774329626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,20 +278,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2975961158892791207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6664940afd805f459666a849b68bcef, type: 3}
+  m_Script: {fileID: 11500000, guid: 576fef4d2587e57449500aca77db51b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupRange: 2
-  weaponLm:
-    serializedVersion: 2
-    m_Bits: 8
-  weaponHolder: {fileID: 620825279225639238}
-  weaponGO: {fileID: 4223289585622608669, guid: 1f3a110296d5acf4e9997829d9ff0271, type: 3}
-  log: 0
-  drawGizmos: 0
-  _wantsToThrowOrGet: 0
-  anim: {fileID: 1586720700333565052}
---- !u!114 &1155971598429141389
+--- !u!114 &-8704503309668860407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -324,56 +290,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2975961158892791207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 093e30f03094262428559cebbd0019f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 2285126202965bc43a76014f390a1cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
   bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
-  weaponHandler: {fileID: 620825279225639238}
   stunCooldown: 1
   killEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8546987331332865949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2975961158892791207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8855b2f4448365747b31cf25518d3346, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 7
-  angle: 110
-  scanFrequency: 15
-  layerToSee:
-    serializedVersion: 2
-    m_Bits: 1024
-  layerToOcclude:
-    serializedVersion: 2
-    m_Bits: 375
-  detectedPlayer: {fileID: 0}
-  isDetecting: 0
-  drawGizmos: 1
-  meshColor: {r: 1, g: 1, b: 0, a: 0.25490198}
-  detectColor: {r: 1, g: 0.0252119, b: 0, a: 1}
-  logVisionHit: 0
---- !u!114 &167974589469007201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2975961158892791207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c6f9b140a52a14881ec09eaebb66eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: 78b67775dbcedd74287be81be6bd026a, type: 2}
 --- !u!1 &3229305270992216113
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +374,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1026207259909828271, guid: 54d573fa38b9c8f439073dcff6640012, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.13907313, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

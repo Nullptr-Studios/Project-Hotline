@@ -74,6 +74,10 @@ public class MeleeWeapon : Weapon
     /// </summary>
     private void Attack()
     {
+        //Call civilian panic delegate
+        if(SceneMng.CivilianPanicDelegate != null)
+            SceneMng.CivilianPanicDelegate();
+        
         var hitArr = new RaycastHit2D[32];
         var cf2D = new ContactFilter2D();
 

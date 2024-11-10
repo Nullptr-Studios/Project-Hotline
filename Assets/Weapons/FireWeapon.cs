@@ -378,6 +378,10 @@ public class FireWeapon : Weapon
                 Fire(dispersionTransform);
             }
         }
+        
+        //Call civilian panic delegate
+        if(SceneMng.CivilianPanicDelegate != null)
+            SceneMng.CivilianPanicDelegate();
 
         // Muzzle VFX
         GameObject mVFX = Instantiate(muzzleVFX, gunMuzzle.transform);
