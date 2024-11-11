@@ -85,6 +85,7 @@ public class PlayerWeaponManager : MonoBehaviour
         _playerInput.Gameplay.ThrowOrGet.Disable();
         _playerInput.Gameplay.Fire.Disable();
         _playerInput.Gameplay.SwitchWeapons.Disable();
+
     }
 
     /// <summary>
@@ -105,13 +106,7 @@ public class PlayerWeaponManager : MonoBehaviour
             Instantiate(spawningWeapon, transform.position, new Quaternion());
             _wantsToThrowOrGet = true;
         }
-
-        _playerInput = new PlayerIA();
-
-        _playerInput.Gameplay.ThrowOrGet.performed += ThrowOrGetOnPerformed;
-        _playerInput.Gameplay.Fire.performed += OnFire;
-        _playerInput.Gameplay.Fire.canceled += OnFire;
-        _playerInput.Gameplay.SwitchWeapons.performed += SwitchWeaponsOnPerformed;
+        //###############################################
     }
 
     /// <summary>
@@ -120,6 +115,7 @@ public class PlayerWeaponManager : MonoBehaviour
     /// <param name="context">The input action context.</param>
     private void SwitchWeaponsOnPerformed(InputAction.CallbackContext context)
     {
+        //Do only if performed, not cancelled
         if (context.performed)
         {
             SwitchWeapon();
@@ -149,7 +145,9 @@ public class PlayerWeaponManager : MonoBehaviour
             if (!_heldWeaponInterface.IsAutomatic())
             {
                 _wantsToFire = false;
+
                 _timeToShootAgain = _heldWeaponInterface.TimeBetweenUses();
+
                 _canShootAgain = false;
             }
         }
@@ -172,21 +170,27 @@ public class PlayerWeaponManager : MonoBehaviour
     /// </summary>
     private void SwitchWeapon()
     {
+        //In case current index is null
         if (_heldWeaponGameObject[_currentIndex] != null)
         {
             _heldWeaponInterface.Use(false);
             _heldWeaponGameObject[_currentIndex].gameObject.SetActive(false);
         }
 
+        //Changes variables to default
         _heldWeaponInterface = null;
         _isWeaponHeld = false;
+
+        //temporal fix :)
         _canShootAgain = true;
 
+        //Loop around variable
         if (_currentIndex == maxWeaponsEquipped - 1)
             _currentIndex = 0;
         else
             _currentIndex++;
 
+        //if there is something on the second slot, update variables
         if (_heldWeaponGameObject[_currentIndex] != null)
         {
             _heldWeaponGameObject[_currentIndex].gameObject.SetActive(true);
@@ -217,8 +221,19 @@ public class PlayerWeaponManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates the player weapon manager state.
+    /// Initializes the player input actions and binds the input events to their respective handlers.
     /// </summary>
+    public void InitializeInput()
+    {
+        _playerInput = new PlayerIA();
+        _playerInput.Gameplay.ThrowOrGet.performed += ThrowOrGetOnPerformed;
+        _playerInput.Gameplay.Fire.performed += OnFire;
+        _playerInput.Gameplay.Fire.canceled += OnFire;
+        _playerInput.Gameplay.SwitchWeapons.performed += SwitchWeaponsOnPerformed;
+    }
+
+    // Throw and get logic
+    // I dont like this implementation on the fucking update cuz i cant call it  -x
     private void Update()
     {
         anim.SetBool(WeaponEquipped, _isWeaponHeld);
@@ -248,6 +263,7 @@ public class PlayerWeaponManager : MonoBehaviour
                 _lastReloadingWeaponGO = _heldWeaponGameObject[_currentIndex];
 
                 Invoke("FinishReload", _heldWeaponInterface.ReloadTime());
+
             }
 
             if (_wantsToFire && _heldWeaponInterface.IsAutomatic())
@@ -334,6 +350,7 @@ public class PlayerWeaponManager : MonoBehaviour
                                 {
                                     ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
                                     ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
+                                    
                                 }
                                 else
                                     ammoPrompt.DoHide();
@@ -344,18 +361,27 @@ public class PlayerWeaponManager : MonoBehaviour
 
                                 _heldWeaponInterface.setClaimed(true);
                             }
+                            //This won't ever happen as if you have a weapon already equipped it will throw it, but just in case
                             else
                             {
+                                //Quality of life improvement
                                 SwitchWeapon();
 
                                 _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
 
                                 _heldWeaponInterface.Pickup(weaponHolder);
 
+                                
+
                                 _isWeaponHeld = true;
                             }
                         }
+                        // else
+                        // {
+                        //     //Debug.Log("Max Equipped");
+                        // }
                     }
+
                 }
             }
 

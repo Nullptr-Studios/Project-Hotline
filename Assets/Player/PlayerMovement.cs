@@ -49,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _currentDir;
     private Vector3 _dir;
 
+    [Header("Pause Menu")]
+    [SerializeField] private GameObject pauseMenu;
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool debugSpeed;
@@ -61,6 +64,10 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _camera = GameObject.Find("Cinemachine Brain").GetComponent<Camera>();
         _weaponManager = GetComponent<PlayerWeaponManager>();
+        // Decided to do this here because it was causing issues on the weapon manager -x
+        // Unity decided to do this OnEnable before the Awake on the weapon manager so it crashed -x
+        // Don't know why it does that now, but it does -x
+        _weaponManager.InitializeInput();
         
         _input.Debug.Debug.performed += OnDebug;
         _input.Debug.Restart.performed += ForceRestart;
@@ -68,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         _input.Gameplay.Movement.canceled += OnMove;
         _input.Gameplay.Aim.performed += OnAim;
         _input.Gameplay.AimMouse.performed += OnAimMouse;
+        _input.Gameplay.Pause.performed += OnOpenPause;
         // _input.Gameplay.Aim.canceled += OnAim;
 
         // The fact that i have to use this class for a fucking controller change makes me mad -x
@@ -130,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
         _input.Gameplay.Movement.Enable();
         _input.Gameplay.Aim.Enable();
         _input.Gameplay.AimMouse.Enable();
+        _input.Gameplay.Pause.Enable();
 
         _weaponManager.EnableInput();
     }
@@ -144,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
         _input.Gameplay.Movement.Disable();
         _input.Gameplay.Aim.Disable();
         _input.Gameplay.AimMouse.Disable();
+        _input.Gameplay.Pause.Disable();
 
         _weaponManager.DisableInput();
 
@@ -267,6 +277,11 @@ public class PlayerMovement : MonoBehaviour
         SendMessage("OnKill");
 #endif
         
+    }
+
+    private void OnOpenPause(InputAction.CallbackContext context)
+    {
+        pauseMenu.SetActive(true);
     }
 
     private void ForceRestart(InputAction.CallbackContext ctx)

@@ -93,9 +93,6 @@ public class PlayerHealth : Damageable
 
         _input.UI.Accept.performed -= RestartGame;
         _input.UI.Accept.Disable();
-        VariableRepo.Instance.RemoveAll();
-        
-        // TODO: this should be fixed after prototype to not have the player read the VN every time
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 }
