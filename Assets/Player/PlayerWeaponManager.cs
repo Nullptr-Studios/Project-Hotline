@@ -193,6 +193,8 @@ public class PlayerWeaponManager : MonoBehaviour
     // I dont like this implementation on the fucking update cuz i cant call it  -x
     private void Update()
     {
+        DoAimlock();
+
         if (_isWeaponHeld)
         {
             if (_heldWeaponInterface.UsesLeft() == 0 && !_reloadingCurrentWeapon[_currentIndex])
@@ -416,7 +418,34 @@ public class PlayerWeaponManager : MonoBehaviour
             return 0;
         }
     }
-    
+
+    private void DoAimlock()
+    {
+        if (!_isWeaponHeld) return;
+        if (PlayerMovement.Controller == EController.KeyboardMouse) return;
+
+        RaycastHit2D[] hitArr = new RaycastHit2D[16];
+        ContactFilter2D _contactFilter = new ContactFilter2D();
+
+        _contactFilter.SetLayerMask(LayerMask.NameToLayer("Enemies"));
+        _contactFilter.useLayerMask = true;
+
+        Physics2D.CapsuleCastNonAlloc(transform.position,new Vector2(1,1), CapsuleDirection2D.Vertical, 0,transform.right, hitArr, 5.0f);
+
+        /*
+         * obtener la posicion del enemigo
+         * obtener multiple(shoot location) object
+         * multiple girar en z para apuntar hacia el enemigo
+         * //if (hitArr[0] == null)
+         * en el momento q enemy es null volver el multiple a rotacion z 0 
+         */
+
+
+
+        //hitArr[0]
+
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
