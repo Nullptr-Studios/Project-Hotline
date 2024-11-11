@@ -5,29 +5,39 @@ using UnityEngine.Events;
 
 public class SceneTrigger : MonoBehaviour
 {
-    public UnityEvent triggerEvent;
+    public GameObject ExitLoc;
+
+    /// <summary>
+    /// this is done in order to call external functions whenever we enter the trigger (loading scenes, unloading scenes, scene logic ...)
+    /// </summary>
+    public UnityEvent EntranceTriggerEvent;
+
+    private Vector2 _exitPos;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _exitPos = ExitLoc.transform.position;
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player"))
-            triggerEvent.Invoke();
+        if (other.gameObject.CompareTag("Player"))
+        {
+            EntranceTriggerEvent.Invoke();
+            other.transform.position = _exitPos;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        DrawArrow(transform.position, transform.position + Vector3.right);
+        Color boxCol = Color.red;
+        boxCol.a = .25f;
+        Gizmos.color = boxCol;
+        Gizmos.DrawCube(transform.position, transform.localScale);
+        Gizmos.color = Color.yellow;
+        DrawArrow(transform.position, ExitLoc.transform.position);
     }
     
     /// <summary>
@@ -51,4 +61,5 @@ public class SceneTrigger : MonoBehaviour
         Gizmos.DrawRay(_arrowPos, _upTmp);
         Gizmos.DrawRay(_arrowPos, _downTmp);
     }
+#endif
 }
