@@ -66,6 +66,14 @@ public class PlayerWeaponManager : MonoBehaviour
     private float _timeToShootAgain;
     private float _timerAgain;
     private bool _canShootAgain = true;
+    
+    public EWeaponType GetCurrentWeaponType()
+    {
+        if(_heldWeaponInterface == null)
+            return EWeaponType.Default;
+        
+        return _heldWeaponInterface.GetWeaponType();
+    }
 
     /// <summary>
     /// Enables the player input.

@@ -1,19 +1,36 @@
+using System;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
+/// <summary>
+/// Represents a scene object in the game.
+/// </summary>
 [System.Serializable]
 public class SceneObject
 {
+    /// <summary>
+    /// The name of the scene.
+    /// </summary>
     [SerializeField]
     private string m_SceneName;
 
+    /// <summary>
+    /// Implicit conversion from SceneObject to string.
+    /// </summary>
+    /// <param name="sceneObject">The SceneObject instance.</param>
+    /// <returns>The name of the scene.</returns>
     public static implicit operator string(SceneObject sceneObject)
     {
         return sceneObject.m_SceneName;
     }
 
+    /// <summary>
+    /// Implicit conversion from string to SceneObject.
+    /// </summary>
+    /// <param name="sceneName">The name of the scene.</param>
+    /// <returns>A new SceneObject instance with the specified scene name.</returns>
     public static implicit operator SceneObject(string sceneName)
     {
         return new SceneObject() { m_SceneName = sceneName };
@@ -21,9 +38,17 @@ public class SceneObject
 }
 
 #if UNITY_EDITOR
+/// <summary>
+/// Custom property drawer for SceneObject in the Unity Editor.
+/// </summary>
 [CustomPropertyDrawer(typeof(SceneObject))]
 public class SceneObjectEditor : PropertyDrawer
 {
+    /// <summary>
+    /// Retrieves the SceneAsset associated with the given scene name.
+    /// </summary>
+    /// <param name="sceneObjectName">The name of the scene.</param>
+    /// <returns>The SceneAsset if found, otherwise null.</returns>
     protected SceneAsset GetSceneObject(string sceneObjectName)
     {
         if (string.IsNullOrEmpty(sceneObjectName))
@@ -32,7 +57,7 @@ public class SceneObjectEditor : PropertyDrawer
         for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
         {
             EditorBuildSettingsScene scene = EditorBuildSettings.scenes[i];
-            if (scene.path.IndexOf(sceneObjectName) != -1)
+            if (scene.path.IndexOf(sceneObjectName, StringComparison.Ordinal) != -1)
             {
                 return AssetDatabase.LoadAssetAtPath(scene.path, typeof(SceneAsset)) as SceneAsset;
             }
@@ -42,6 +67,12 @@ public class SceneObjectEditor : PropertyDrawer
         return null;
     }
 
+    /// <summary>
+    /// Draws the custom property GUI for SceneObject.
+    /// </summary>
+    /// <param name="position">The position of the property in the inspector.</param>
+    /// <param name="property">The serialized property being drawn.</param>
+    /// <param name="label">The label of the property.</param>
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         var sceneObj = GetSceneObject(property.FindPropertyRelative("m_SceneName").stringValue);
