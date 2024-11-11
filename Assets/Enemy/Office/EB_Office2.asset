@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aee424af42d0cb4386688b8fec2bf02, type: 3}
-  m_Name: EB_Enemy2
+  m_Name: EB_Office2
   m_EditorClassIdentifier: 
   isStatic: 0
-  returnToInitialSpot: 1
+  returnToInitialSpot: 0
   waypoints:
-  - waypointPos: {x: 8, y: -8}
+  - waypointPos: {x: 2.5, y: -12}
     letItRotate: 1
-    wait: 0.3
-  - waypointPos: {x: -4, y: -8}
+    wait: 0.8
+  - waypointPos: {x: -8, y: -12}
     letItRotate: 1
-    wait: 0.3
+    wait: 0.8
   idleSpeed: 2.5
   chasingSpeed: 8
-  distanceToShoot: 5
-  timeToStartShooting: 0.25
-  meleeDistance: 1.5
+  distanceToShoot: 10
+  timeToStartShooting: 1
+  meleeDistance: 2
   searchTimes: 3

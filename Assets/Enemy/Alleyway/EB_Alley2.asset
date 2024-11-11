@@ -10,11 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aee424af42d0cb4386688b8fec2bf02, type: 3}
-  m_Name: EB_Enemy4
+  m_Name: EB_Alley2
   m_EditorClassIdentifier: 
-  isStatic: 1
+  isStatic: 0
   returnToInitialSpot: 1
-  waypoints: []
+  waypoints:
+  - waypointPos: {x: 8, y: -8}
+    letItRotate: 1
+    wait: 0.3
+  - waypointPos: {x: -4, y: -8}
+    letItRotate: 1
+    wait: 0.3
   idleSpeed: 2.5
   chasingSpeed: 8
   distanceToShoot: 5
