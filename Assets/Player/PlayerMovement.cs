@@ -54,6 +54,10 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _camera = GameObject.Find("Cinemachine Brain").GetComponent<Camera>();
         _weaponManager = GetComponent<PlayerWeaponManager>();
+        // Decided to do this here because it was causing issues on the weapon manager -x
+        // Unity decided to do this OnEnable before the Awake on the weapon manager so it crashed -x
+        // Don't know why it does that now, but it does -x
+        _weaponManager.InitializeInput();
         
         _input.Debug.Debug.performed += OnDebug;
         _input.Debug.Restart.performed += ForceRestart;

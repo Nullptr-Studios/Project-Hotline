@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4579865753492758048}
   - component: {fileID: 2913125032203985343}
+  - component: {fileID: 2424098765982670923}
   m_Layer: 0
   m_Name: PA_LevelManager
   m_TagString: Untagged
@@ -47,4 +48,32 @@ MonoBehaviour:
   missionTrigger: {fileID: 0}
   endTrigger: {fileID: 0}
   objective: {fileID: 0}
+  score: {fileID: 0}
   logMissionEnd: 1
+--- !u!114 &2424098765982670923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325153471056053108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2d09d48d855e74c8788425442ae72f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Power formula is calculated sign * (x * factor/100) ^ pow. Log formula is
+    calculated Log{100pow} (sign * x + 100pow)
+  killXP: 99
+  deathXP: 51
+  timeThreshold: {x: 0, y: 900}
+  minFormula:
+    type: 0
+    sign: 1
+    factor: -1
+    pow: 1.3
+  maxFormula:
+    type: 1
+    sign: -1
+    factor: 1
+    pow: 2

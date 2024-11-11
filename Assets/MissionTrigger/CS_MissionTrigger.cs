@@ -1,9 +1,10 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class MissionTrigger : MonoBehaviour
 {
-    [NonSerialized] public GameObject Objective;
+    [NonSerialized] [CanBeNull] public GameObject Objective;
 
     private void Start()
     {
@@ -14,12 +15,16 @@ public class MissionTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (Objective == null) return;
+        
         if (collision.gameObject.CompareTag("Player"))
             Objective.GetComponent<Collider2D>().enabled = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (Objective == null) return;
+        
         if (collision.gameObject.CompareTag("Player"))
             Objective.GetComponent<Collider2D>().enabled = false;
     }
