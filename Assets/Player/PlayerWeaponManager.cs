@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using System.Reflection;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// This class acts as the manager for equipped weapons, including input
@@ -421,29 +424,53 @@ public class PlayerWeaponManager : MonoBehaviour
 
     private void DoAimlock()
     {
-        if (!_isWeaponHeld) return;
-        if (PlayerMovement.Controller == EController.KeyboardMouse) return;
+        if (!_isWeaponHeld) 
+            return;
+
+        if (PlayerMovement.Controller == EController.KeyboardMouse) 
+            return;
+
+        if (_heldWeaponInterface.GetWeaponType() != EWeaponType.Fire)
+            return;
 
         RaycastHit2D[] hitArr = new RaycastHit2D[16];
         ContactFilter2D _contactFilter = new ContactFilter2D();
 
-        _contactFilter.SetLayerMask(LayerMask.NameToLayer("Enemies"));
+        _contactFilter.SetLayerMask(LayerMask.NameToLayer("Enemy"));
         _contactFilter.useLayerMask = true;
 
         Physics2D.CapsuleCastNonAlloc(transform.position,new Vector2(1,1), CapsuleDirection2D.Vertical, 0,transform.right, hitArr, 5.0f);
 
-        /*
-         * obtener la posicion del enemigo
-         * obtener multiple(shoot location) object
-         * multiple girar en z para apuntar hacia el enemigo
-         * //if (hitArr[0] == null)
-         * en el momento q enemy es null volver el multiple a rotacion z 0 
-         */
+        Transform trans = _heldWeaponInterface.GetWeaponFireSpawnTransform();
 
 
+        if (hitArr[0] == null) 
+        { 
+            trans.eulerAngles = new Vector3(0,0,0);
+            return;
+        }
+            /*
+             * obtener la posicion del enemigo
+             * obtener multiple(shoot location) object
+             * multiple girar en z para apuntar hacia el enemigo
+             * //if (hitArr[0] == null)
+             * en el momento q enemy es null volver el multiple a rotacion z 0 
+             */
 
-        //hitArr[0]
 
+        Vector3 enemyPos = hitArr[0].transform.position;
+
+        Vector3 weaponPos = trans.position;
+
+        Vector3 direction = enemyPos - weaponPos;
+
+        Vector3 normal = _heldWeaponGameObject[_currentIndex].transform.right;
+
+        float cos = normal.magnitude/ direction.magnitude;
+
+        float angle = math.acos(cos);
+
+        trans.eulerAngles = new Vector3(0, 0, angle);
     }
 
 #if UNITY_EDITOR

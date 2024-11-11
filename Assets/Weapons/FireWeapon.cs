@@ -75,6 +75,11 @@ public class FireWeapon : Weapon
         return fireWeaponData.maxAmmo;
     }
 
+    public override Transform GetWeaponFireSpawnTransform()
+    {
+        return dispersionTransform;
+    }
+
     /// <summary>
     /// Use Functionality
     /// </summary>

@@ -19,6 +19,8 @@ public interface IWeapon
 {
     public EWeaponType GetWeaponType();
 
+    public Transform GetWeaponFireSpawnTransform();
+
     public bool isClaimed();
 
     public void setClaimed(bool claimed);
@@ -103,6 +105,11 @@ public class Weapon : MonoBehaviour, IWeapon
     public virtual float TimeBetweenUses()
     {
         return -1;
+    }
+
+    public virtual Transform GetWeaponFireSpawnTransform()
+    {
+        return null;
     }
 
     /// <returns>Returns this weapon type</returns>
