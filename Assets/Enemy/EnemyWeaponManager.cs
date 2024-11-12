@@ -187,6 +187,8 @@ public class EnemyWeaponManager : MonoBehaviour
                                 _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
 
                                 _heldWeaponInterface.Pickup(weaponHolder);
+                                
+                                _heldWeaponInterface.SetIsPlayer(false);
 
                                 _heldWeaponInterface.setClaimed(true);
 

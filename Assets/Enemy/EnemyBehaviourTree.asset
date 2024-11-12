@@ -20,6 +20,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -58,6 +60,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -90,11 +94,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1ba3eee490b92d1448d1964b69f16bad
-  position: {x: -704.17975, y: 335}
+  position: {x: -940.44, y: 336}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -133,6 +139,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -153,6 +161,45 @@ MonoBehaviour:
   children:
   - {fileID: -3707205459360130002}
   - {fileID: 4355037925672009581}
+--- !u!114 &-4958990418866684870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c8b8d651b4fb004f9e69895a1eb9fdd, type: 3}
+  m_Name: GotoHearingLocation
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 6610366e9fa6bd34fadc7993b19f4825
+  position: {x: -714, y: 477}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
+    playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
+    initialPos: {x: 0, y: 0, z: 0}
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+    seePlayer: 0
+    finalizedShearch: 1
+    doSlerp: 0
+    waitTime: 0.5
+    distanceToUseWeapon: 10
+    distanceToUseMelee: 1.5
+    timeToStartShooting: 1
+    returnToInitialPos: 1
+    isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
+    waypoints: []
+    searchTimes: 3
+  description: 
+  drawGizmos: 0
 --- !u!114 &-4618985241182373246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +220,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -212,6 +261,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -250,6 +301,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -288,6 +341,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -330,6 +385,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -367,6 +424,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -407,6 +466,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -426,6 +487,7 @@ MonoBehaviour:
   drawGizmos: 0
   children:
   - {fileID: -5715794855966951915}
+  - {fileID: 1333020275581853352}
   - {fileID: -3750841371633188628}
   - {fileID: 5178274741259517980}
   - {fileID: -4223474538306020012}
@@ -466,10 +528,14 @@ MonoBehaviour:
   - {fileID: 4887444683586557037}
   - {fileID: -5715794855966951915}
   - {fileID: 8840422715588192871}
+  - {fileID: 1333020275581853352}
+  - {fileID: -4958990418866684870}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -505,6 +571,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -524,6 +592,46 @@ MonoBehaviour:
   drawGizmos: 0
   stoppingDistance: 0.1
   tolerance: 1
+--- !u!114 &1333020275581853352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a279614446dec1f4c823e33b157a676d, type: 3}
+  m_Name: HearingDecorator
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 1b99e5ba5fe476343817b21792c3e147
+  position: {x: -714, y: 347}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToRotation: {x: 0, y: 0, z: 0, w: 0}
+    playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
+    initialPos: {x: 0, y: 0, z: 0}
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+    seePlayer: 0
+    finalizedShearch: 1
+    doSlerp: 0
+    waitTime: 0.5
+    distanceToUseWeapon: 10
+    distanceToUseMelee: 1.5
+    timeToStartShooting: 1
+    returnToInitialPos: 1
+    isStatic: 1
+    chaseSpeed: 8
+    idleSpeed: 2.5
+    waypoints: []
+    searchTimes: 3
+  description: 
+  drawGizmos: 0
+  child: {fileID: -4958990418866684870}
 --- !u!114 &2946057099227109268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +652,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -582,6 +692,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -625,6 +737,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -665,6 +779,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -703,6 +819,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -742,6 +860,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -781,6 +901,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -820,6 +942,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -862,6 +986,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -900,6 +1026,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0
@@ -933,11 +1061,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 2e3cfa8ce93790f4ba378c73dd85e3a3
-  position: {x: -717.9502, y: 486}
+  position: {x: -954.44, y: 487}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToRotation: {x: 0, y: 0, z: 0, w: 0}
     playerPos: {x: 0, y: 0, z: 0}
+    heardPlayer: 0
+    heardPos: {x: 0, y: 0, z: 0}
     initialPos: {x: 0, y: 0, z: 0}
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
     seePlayer: 0

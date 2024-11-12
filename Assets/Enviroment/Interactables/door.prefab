@@ -33,7 +33,7 @@ Transform:
   - {fileID: 6604679212751552568}
   - {fileID: 3392522763329336188}
   m_Father: {fileID: 0}
-  m_RootOrder: 42
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1863692391347380763
 Rigidbody2D:
@@ -71,22 +71,22 @@ HingeJoint2D:
   m_GameObject: {fileID: 2559219585922871367}
   m_Enabled: 1
   serializedVersion: 4
-  m_EnableCollision: 1
+  m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 5968238505968295872}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 0
+  m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.4972992, y: -0.022856848}
+  m_ConnectedAnchor: {x: 0.49730015, y: -0.022856848}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -110
-    m_UpperAngle: 110
+    m_LowerAngle: -90
+    m_UpperAngle: 90
 --- !u!1 &5067482727151158614
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,8 +179,9 @@ GameObject:
   - component: {fileID: 6604679212751552568}
   - component: {fileID: 1652786589157304750}
   - component: {fileID: 5968238505968295872}
-  - component: {fileID: 2031640760182766643}
   - component: {fileID: 1528746775133460155}
+  - component: {fileID: 5893222785546650373}
+  - component: {fileID: 7009041236813523531}
   m_Layer: 13
   m_Name: DoorSpr
   m_TagString: Untagged
@@ -282,8 +283,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &2031640760182766643
-BoxCollider2D:
+--- !u!114 &1528746775133460155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5751631301114467884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a16ad51fa0d93d49a0e7d645e820800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  hitForce: 100
+--- !u!70 &5893222785546650373
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -314,20 +329,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &1528746775133460155
+  m_Offset: {x: -0.0054644947, y: 0.007022835}
+  m_Size: {x: 0.9890789, y: 0.68652344}
+  m_Direction: 1
+--- !u!114 &7009041236813523531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -336,8 +341,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 5751631301114467884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a16ad51fa0d93d49a0e7d645e820800, type: 3}
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  hitForce: 100
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 0000000083464968c1785e0dc33cbfe7833785b7
+  m_ShapePath:
+  - {x: -0.5, y: -0.5000019, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: 0.5, y: -0.5000019, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -396170
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.0000009536743, z: 0}
+    m_Extent: {x: 0.5, y: 0.50000095, z: 0}

@@ -31,6 +31,7 @@ public class ResourceManager : MonoBehaviour
     private static ObjectPool<TrailRenderer> _bulletTrailPool;
     private static ObjectPool<GameObject> _bloodPool;
     private static ObjectPool<GameObject> _corpsePool;
+    private static ObjectPool<GameObject> _civilianCorpsePool;
 
     /// <summary>
     /// Gets the object pool for blood instances.
@@ -57,6 +58,11 @@ public class ResourceManager : MonoBehaviour
     public static ObjectPool<GameObject> GetCorpsePool()
     {
         return _corpsePool;
+    }
+    
+    public static ObjectPool<GameObject> GetCivilianCorpsePool()
+    {
+        return _civilianCorpsePool;
     }
 
     /// <summary>
@@ -90,6 +96,7 @@ public class ResourceManager : MonoBehaviour
         _bulletTrailPool = new ObjectPool<TrailRenderer>(CreateTrail);
         _bloodPool = new ObjectPool<GameObject>(CreateBlood);
         _corpsePool = new ObjectPool<GameObject>(CreateCorpse);
+        _civilianCorpsePool = new ObjectPool<GameObject>(CreateCorpseCivilian);
     }
 
     /// <summary>
@@ -102,8 +109,25 @@ public class ResourceManager : MonoBehaviour
         instance.transform.parent = transform;
         instance.tag = "Corpse";
 
+        instance.layer = 10;
+
         SpriteRenderer spr = instance.AddComponent<SpriteRenderer>();
         spr.sprite = corpseConfig.Sprites[UnityEngine.Random.Range(0, corpseConfig.Sprites.Count - 1)];
+        spr.material = corpseConfig.Material;
+        spr.sortingOrder = -1;
+        return instance;
+    }
+    
+    private GameObject CreateCorpseCivilian()
+    {
+        GameObject instance = new GameObject("Corpse");
+        instance.transform.parent = transform;
+        instance.tag = "Corpse";
+
+        instance.layer = 10;
+
+        SpriteRenderer spr = instance.AddComponent<SpriteRenderer>();
+        spr.sprite = corpseConfig.CivilianSprites[UnityEngine.Random.Range(0, corpseConfig.CivilianSprites.Count - 1)];
         spr.material = corpseConfig.Material;
         spr.sortingOrder = -1;
         return instance;

@@ -12,6 +12,9 @@ public class AISensor : MonoBehaviour
 
     public GameObject detectedPlayer;
     
+    public Vector2 heardPosition;
+    
+    public bool heardPlayer;
     public bool isDetecting;
     
 #if UNITY_EDITOR
@@ -48,6 +51,12 @@ public class AISensor : MonoBehaviour
             _scanTimer += _scanInterval;
             Scan();
         }
+    }
+    
+    public void HeardPlayer(Vector3 transformPosition)
+    {
+        heardPlayer = true;
+        heardPosition = transformPosition;
     }
 
     private void Scan()

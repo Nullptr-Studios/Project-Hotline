@@ -21,6 +21,10 @@ public interface IWeapon
     /// Returns the type of the weapon.
     /// </summary>
     public EWeaponType GetWeaponType();
+    
+    public float GetHearingRange();
+
+    public void SetIsPlayer(bool isPlayer);
 
     /// <summary>
     /// Returns the sprite ID of the weapon.
@@ -113,6 +117,11 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         return _isClaimed;
     }
+    
+    public virtual float GetHearingRange()
+    {
+        return 0;
+    }
 
     /// <summary>
     /// Sets the claimed status of the weapon.
@@ -136,6 +145,13 @@ public class Weapon : MonoBehaviour, IWeapon
 
     private bool _held;
     private Rigidbody2D _rb;
+    
+    public bool isPlayer;
+    
+    public virtual void SetIsPlayer(bool isPlayer)
+    {
+        this.isPlayer = isPlayer;
+    }
 
     /// <summary>
     /// Returns the amount of uses (bullets left), -1 if this weapon has no Uses functionality.

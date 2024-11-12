@@ -353,6 +353,8 @@ public class PlayerWeaponManager : MonoBehaviour
                                 _heldWeaponGameObject[_currentIndex] = hitArr[index].transform.gameObject;
 
                                 _heldWeaponInterface.Pickup(weaponHolder);
+                                
+                                _heldWeaponInterface.SetIsPlayer(true);
 
                                 if (_heldWeaponInterface.MaxUses() != -1)
                                 {
@@ -483,7 +485,14 @@ public class PlayerWeaponManager : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (drawGizmos)
+        {
+            Gizmos.color = Color.white;
             Gizmos.DrawWireSphere(transform.position, pickupRange / 2);
+            
+            Gizmos.color = Color.red;
+            if(_heldWeaponInterface != null)
+                Gizmos.DrawWireSphere(transform.position, _heldWeaponInterface.GetHearingRange() / 2);
+        }
     }
 #endif
 }

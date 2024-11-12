@@ -124,6 +124,9 @@ public class FireWeaponData : ScriptableObject
     public int SpriteAnimID = 0; //default is pistol
     
     [Header("Audio")]
+    
+    public float enemyHearingDistance = 20.0f;
+    
     /// <summary>
     /// The sound event for firing the weapon.
     /// </summary>

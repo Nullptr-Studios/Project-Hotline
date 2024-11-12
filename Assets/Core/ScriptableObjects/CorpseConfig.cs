@@ -18,7 +18,12 @@ public class CorpseConfig : ScriptableObject
     /// </summary>
     public List<Sprite> Sprites;
 
-    [Header("Corpse Behaviour")] 
+    /// <summary>
+    /// List of sprites used for civilian corpses.
+    /// </summary>
+    public List<Sprite> CivilianSprites;
+
+    [Header("Corpse Behaviour")]
     /// <summary>
     /// The force applied to the corpse.
     /// </summary>

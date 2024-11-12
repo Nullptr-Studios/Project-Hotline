@@ -20,7 +20,7 @@ public class IdleLogicDecorator : DecoratorNode
     {
         if (overrider.isActive)
         {
-            if (!blackboard.seePlayer && blackboard.finalizedShearch)
+            if (!blackboard.seePlayer && blackboard.finalizedShearch && !blackboard.heardPlayer)
             {
                 child.Update();
                 abortOnce = false;

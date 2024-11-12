@@ -393,9 +393,39 @@ public class FireWeapon : Weapon
         
         // Play fire sound
         FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.fireSound, transform.position);
+        
+        //Emmit enemy heard event
+        if(isPlayer)
+            HearEnemy();
 
         // Subtract current ammo
         _currentAmmo--;
+    }
+    
+    public override float GetHearingRange()
+    {
+        return fireWeaponData.enemyHearingDistance;
+    }
+    
+    private void HearEnemy()
+    {
+        // Call enemy heard 
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.useLayerMask = true;
+        filter.layerMask = LayerMask.GetMask("Enemy");
+        
+        List<RaycastHit2D> hits = new List<RaycastHit2D>();
+        if(Physics2D.CapsuleCast(transform.position, new Vector2(fireWeaponData.enemyHearingDistance, 
+               fireWeaponData.enemyHearingDistance), CapsuleDirection2D.Vertical, 0, Vector2.zero, filter, hits) > 0)
+        {
+            foreach (var hit in hits)
+            {
+                if (hit.collider.gameObject.TryGetComponent(out AISensor aiSensor))
+                {
+                    aiSensor.HeardPlayer(transform.position);
+                }
+            }
+        }
     }
 
     /// <summary>

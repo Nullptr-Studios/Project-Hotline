@@ -70,25 +70,26 @@ public class PerformanceManager : MonoBehaviour
     /// Checks the number of corpses and triggers cleanup if necessary.
     /// </summary>
     /// <returns>True if cleanup was performed, otherwise false.</returns>
-    public bool CheckCorpses()
-    {
-        GameObject[] arr = GameObject.FindGameObjectsWithTag("Corpse");
+public bool CheckCorpses()
+{
+    GameObject[] arr = GameObject.FindGameObjectsWithTag("Corpse");
 
-        if (arr.Length > maxCorpses + corpseThreshold)
+    if (arr.Length > maxCorpses + corpseThreshold)
+    {
+        int difference = arr.Length - maxCorpses; // threshold
+        for (int i = 0; i < difference - 1; i++)
         {
-            int diference = arr.Length - maxCorpses; // threshold
-            for (int i = 0; i < diference - 1; i++)
-            {
-                ResourceManager.GetCorpsePool().Release(arr[i]);
-            }
-#if UNITY_EDITOR
-            if (log)
-                Debug.LogWarning("PerformanceManager: Vanishing " + diference + " blood instances");
-#endif
-            return true;
+            ResourceManager.GetCorpsePool().Release(arr[i]);
+            ResourceManager.GetCivilianCorpsePool().Release(arr[i]);
         }
-        return false;
+#if UNITY_EDITOR
+        if (log)
+            Debug.LogWarning("PerformanceManager: Vanishing " + difference + " corpse instances");
+#endif
+        return true;
     }
+    return false;
+}
 
     /// <summary>
     /// Checks the current FPS and logs a warning if it drops below the starting FPS.
@@ -113,10 +114,10 @@ public class PerformanceManager : MonoBehaviour
     /// </summary>
     public void Cleanup()
     {
+        CheckFPS();
+        
         bool blood = CheckBlood();
         bool corpses = CheckCorpses();
-
-        CheckFPS();
     }
 
     /// <summary>
