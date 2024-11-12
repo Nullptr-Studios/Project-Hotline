@@ -14,6 +14,9 @@ namespace TheKiwiCoder {
         public Quaternion moveToRotation;
         public Vector3 playerPos;
 
+        public bool heardPlayer;
+        public Vector3 heardPos;
+
         public Vector3 initialPos;
         public Quaternion initialRotation;
 
