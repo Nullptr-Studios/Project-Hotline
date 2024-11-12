@@ -44,6 +44,7 @@ public class SensePlayer : ActionNode
                     blackboard.playerPos = _sensor.detectedPlayer.transform.position;
 
                 blackboard.seePlayer = true;
+                _sensor.heardPlayer = false;
                 _hasSensedPlayerBefore = true;
 
                 context.agent.speed = blackboard.chaseSpeed;
