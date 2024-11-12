@@ -15,6 +15,19 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
     public EnemyBehaviourData behaviourData;
 
     /// <summary>
+    /// Specifies if the enemy is initially moving or not.
+    /// </summary>
+    public bool isActive = true;
+
+    /// <summary>
+    /// Toggles the active state of the enemy.
+    /// </summary>
+    public void ToggleActive()
+    {
+        isActive = !isActive;
+    }
+
+    /// <summary>
     /// Indicates if the enemy was just stunned.
     /// </summary>
     public bool justStunned = false;
@@ -51,8 +64,7 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        // Animation stuff
-
+        // Animation logic based on the enemy's velocity
         if (_rb.velocity.magnitude > 0.1f)
         {
             float angle = Mathf.Atan2(_rb.velocity.y, _rb.velocity.x) * Mathf.Rad2Deg;
@@ -82,7 +94,8 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
     public void OnDrawGizmos()
     {
         if(DrawGizmos)
-            // Added visual help for waypoints
+        {
+            // Visual aid for waypoints
             if (behaviourData.waypoints.Count > 0)
             {
                 Vector2 lastPos = transform.position;
@@ -100,9 +113,10 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
 
                     lastPos = waypoint.waypointPos;
                 }
-                // Last line
+                // Draw the last line
                 Gizmos.DrawLine(lastPos, behaviourData.waypoints[0].waypointPos);
             }
+        }
     }
 
 #endif

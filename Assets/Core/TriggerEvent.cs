@@ -15,8 +15,8 @@ public class TriggerEvent : MonoBehaviour
     /// <summary>
     /// Called when another collider enters the trigger collider attached to this GameObject.
     /// </summary>
-    /// <param name="other">The collider that entered the trigger.</param>
-    private void OnTriggerEnter(Collider other)
+    /// <param name="other">The collider that entered the trigger.</param>s
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the collider belongs to a GameObject tagged "Player"
         if(other.CompareTag("Player"))
@@ -33,6 +33,9 @@ public class TriggerEvent : MonoBehaviour
     /// </summary>
     private void OnDrawGizmos()
     {
+        if (!drawGizmos)
+            return;
+        
         Gizmos.color = Color.green;
         Gizmos.DrawCube(transform.position, transform.localScale);
     }

@@ -118,7 +118,7 @@ public class CameraController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(_cameraVariables.Origin, new Vector3(_cameraVariables.maxDistance*2, 1, 1));
         
-        Gizmos.DrawCube(playerLookPos, new Vector3(1, 1, 1));
+        Gizmos.DrawWireCube(playerLookPos, new Vector3(1, 1, 1));
     }
 
 #endif
