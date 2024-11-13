@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour
     /// <summary>
     /// Initializes the camera controller.
     /// </summary>
-    void Start()
+    void Awake()
     {
         _vcamera = GetComponent<CinemachineVirtualCamera>();
         _baseRotation = _vcamera.transform.eulerAngles.z;
@@ -61,6 +61,7 @@ public class CameraController : MonoBehaviour
         _currentPlayerCameraDistance = defaultPlayerCameraDistance;
 
         _lookGameObject = Instantiate(new GameObject());
+        _lookGameObject.transform.position = _player.transform.position;
         _vcamera.Follow = _lookGameObject.transform;
     }
 
