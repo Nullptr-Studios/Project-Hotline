@@ -62,6 +62,11 @@ public class LevelManager : MonoBehaviour
     /// Exit to main menu
     /// </summary>
     public static void EndLevel() => SceneManager.LoadScene("MainMenu"); // TODO: This should call the loading screen
+    
+    /// <summary>
+    /// Most reliable debug method
+    /// </summary>
+    public static void PrintUwU() => Debug.Log("UwU");
 
     /// <summary>
     /// Make the player restart the current level
