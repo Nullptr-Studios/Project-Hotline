@@ -49,6 +49,7 @@ public class MuzzleLightController : MonoBehaviour
     /// <param name="curve">The animation curve to control the light intensity.</param>
     public void ActivateLight(AnimationCurve curve)
     {
+        this.enabled = true;
         _light2D.enabled = true;
         _curve = curve;
         _time = 0;
@@ -60,16 +61,17 @@ public class MuzzleLightController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (!_finished)
+        if (_finished) return;
+
+        if (_curve.GetDuration() < _time)
         {
-            if(_curve.GetDuration() < _time)
-            {
-                _finished = true;
-                _light2D.enabled = false;
-                return;
-            }
-            _light2D.intensity = _curve.Evaluate(_time) * _initialIntensity;
-            _time += Time.deltaTime;
+            _finished = true;
+            _light2D.enabled = false;
+            this.enabled = false;
+            return;
         }
+
+        _light2D.intensity = _curve.Evaluate(_time) * _initialIntensity;
+        _time += Time.deltaTime;
     }
 }
