@@ -155,7 +155,9 @@ public class EnemyDamageable : Damageable
             Stun(shootDir);
         }
 
-        GameObject BManager = Instantiate(bloodEffectManager, hitPoint, new Quaternion());
+        GameObject BManager = ResourceManager.GetBloodManagerPool().Get();
+        BManager.SetActive(true);
+        BManager.transform.position = hitPoint;
         BManager.transform.right = shootDir;
     }
 }

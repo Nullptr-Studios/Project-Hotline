@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Manages the blood splatter effects in the game.
@@ -10,110 +12,110 @@ public class BloodManager : MonoBehaviour
     public Transform splatterTransform;
 
     public float splatterAngle = 20;
-
     public float bloodTravelDistance = 3;
-
-    private float currentMaxTravelDistance;
-
     public int ammountOfFloorBlood = 4;
     public int ammountOfWallBlood = 2;
+    public float destroyTime = .5f;
 
-    public float destroyTime = 1.0f;
+    private float _currentMaxTravelDistance;
+    private List<RaycastHit2D> _rayHitList = new List<RaycastHit2D>();
 
     /// <summary>
     /// Removes the blood manager object from the scene.
     /// </summary>
     private void Remove()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        ResourceManager.GetBloodManagerPool().Release(gameObject);
     }
 
     /// <summary>
-    /// Start is called before the first frame update.
-    /// Initializes the blood manager and creates blood splatter effects.
+    /// Called when the object becomes enabled and active.
+    /// Initializes the blood manager and schedules its removal.
     /// </summary>
-    void Start()
+    private void OnEnable()
     {
-        currentMaxTravelDistance = bloodTravelDistance;
+        _currentMaxTravelDistance = bloodTravelDistance;
+        Invoke(nameof(Remove), destroyTime);
 
-        Invoke("Remove", destroyTime);
+        Invoke(nameof(Blood), 0);
+    }
 
-        // Wall raycasts
+    /// <summary>
+    /// Creates blood splatter effects on the floor and wall.
+    /// </summary>
+    private void Blood()
+    {
+        CreateFloorBlood();
+        CreateWallBlood();
+    }
+
+    /// <summary>
+    /// Creates blood splatter effects on the wall.
+    /// </summary>
+    private void CreateWallBlood()
+    {
         for (int i = 0; i < ammountOfWallBlood; i++)
         {
             float randAngle = Random.Range(-splatterAngle, splatterAngle);
-
             splatterTransform.localEulerAngles = new Vector3(0, 0, randAngle);
 
-            List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
-            int amountHits = Physics2D.Raycast(splatterTransform.position, splatterTransform.right, new ContactFilter2D(), rayHitList, bloodTravelDistance);
+            _rayHitList.Clear();
+            int amountHits = Physics2D.Raycast(splatterTransform.position, splatterTransform.right, new ContactFilter2D(), _rayHitList, bloodTravelDistance);
 
-            // This foreach will ignore the player and enemy layer
-            foreach (var hit in rayHitList)
+            foreach (var hit in _rayHitList)
             {
                 int layer = hit.transform.gameObject.layer;
-
-                // Ignore
-                if (layer == 9 || layer == 10 || layer == 3)
-                    continue;
+                if (layer == 9 || layer == 10 || layer == 3) continue;
 
                 GameObject wallB = ResourceManager.GetBloodPool().Get();
-
                 wallB.SetActive(true);
-
                 wallB.transform.position = hit.point;
 
-                // Sprite settings
                 SpriteRenderer sprW = wallB.GetComponent<SpriteRenderer>();
                 sprW.sortingOrder = 20;
                 sprW.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
 
-                // Script
                 wallB.AddComponent<FloorSplatter>();
-
-                // Avoid further progression in loop
                 break;
             }
         }
+    }
 
-        // Floor blood logic
+    /// <summary>
+    /// Creates blood splatter effects on the floor.
+    /// </summary>
+    private void CreateFloorBlood()
+    {
         for (int k = 0; k < ammountOfFloorBlood; k++)
         {
             float randAngle = Random.Range(-splatterAngle, splatterAngle);
-
             splatterTransform.localEulerAngles = new Vector3(0, 0, randAngle);
 
-            List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
-            int amountHits = Physics2D.Raycast(splatterTransform.position, splatterTransform.right, new ContactFilter2D(), rayHitList, bloodTravelDistance);
+            _rayHitList.Clear();
+            int amountHits = Physics2D.Raycast(splatterTransform.position, splatterTransform.right, new ContactFilter2D(), _rayHitList, bloodTravelDistance);
 
-            // This foreach will ignore the player and enemy layer
-            foreach (var hit in rayHitList)
+            foreach (var hit in _rayHitList)
             {
                 int layer = hit.transform.gameObject.layer;
+                if (layer == 9 || layer == 10 || layer == 3) continue;
 
-                // Ignore
-                if (layer == 9 || layer == 10 || layer == 3)
-                    continue;
-
-                currentMaxTravelDistance = hit.distance;
+                _currentMaxTravelDistance = hit.distance;
                 break;
             }
 
-            Vector3 randLocInRange = splatterTransform.right * Random.Range(0, currentMaxTravelDistance);
-
+            Vector3 randLocInRange = splatterTransform.right * Random.Range(0, _currentMaxTravelDistance);
             GameObject floorB = ResourceManager.GetBloodPool().Get();
-
             floorB.SetActive(true);
-
             floorB.transform.position = randLocInRange + splatterTransform.position;
 
-            // Sprite settings
             SpriteRenderer sprW = floorB.GetComponent<SpriteRenderer>();
             sprW.sortingOrder = -2;
             sprW.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
 
-            // Script
             floorB.AddComponent<FloorSplatter>();
+
+            _currentMaxTravelDistance = bloodTravelDistance;
         }
     }
 }

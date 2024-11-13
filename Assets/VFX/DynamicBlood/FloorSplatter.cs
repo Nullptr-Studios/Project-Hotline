@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -36,7 +34,7 @@ public class FloorSplatter : MonoBehaviour
     {
         _finalLerpMagnitude = UnityEngine.Random.Range(lerpMagnitudeMin, lerpMagnitudeMax);
         _trans = transform;
-        _trans.localScale = new Vector3(0, 0, 0);
+        _trans.localScale = Vector3.zero;
     }
 
     /// <summary>
@@ -46,19 +44,15 @@ public class FloorSplatter : MonoBehaviour
     {
         Vector3 scale = _trans.localScale;
 
-        if (scale.x > .95f)
+        if (scale.x > 0.95f)
         {
             Destroy(this);
             return;
         }
 
         float finalLerpMagnitudeCached = _finalLerpMagnitude * Time.deltaTime;
-
-        // Since scale is linear, we can do this optimization and save 1 lerp
         float lerpVal = math.lerp(scale.x, 1, finalLerpMagnitudeCached);
 
-        scale = new Vector3(lerpVal, lerpVal, 1);
-
-        _trans.localScale = scale;
+        _trans.localScale = new Vector3(lerpVal, lerpVal, 1);
     }
 }

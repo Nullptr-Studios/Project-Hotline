@@ -210,6 +210,8 @@ public class PlayerWeaponManager : MonoBehaviour
             if (_heldWeaponInterface.MaxUses() != -1 && _heldWeaponInterface.UsesLeft() != 0)
             {
                 ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+         
+                
                 ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
 
                 if (_heldWeaponInterface.UsesLeft() == 0)

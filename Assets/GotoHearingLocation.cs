@@ -26,7 +26,7 @@ public class GotoHearingLocation : ActionNode
             return State.Running;
         }
 
-        if (context.agent.remainingDistance <= context.agent.stoppingDistance)
+        if (context.agent.remainingDistance <= 2)
         {
             blackboard.finalizedShearch = false;
             return State.Success;

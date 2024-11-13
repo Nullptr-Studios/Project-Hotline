@@ -19,11 +19,24 @@ public class CivilianController : MonoBehaviour
         SceneMng.CivilianPanicDelegate += CivilianPanic;
     }
 
+    private void OnDisable()
+    {
+        frames = 0;
+    }
+
+    private void OnEnable()
+    {
+        frames = 0;
+        if(_navMeshAgent != null)
+            _navMeshAgent.SetDestination(_exitNodePos);
+    }
+
     void CivilianPanic()
     {
         _panic = true;
         _exitNodePos = SceneMng.ExitNodes[UnityEngine.Random.Range(0, SceneMng.ExitNodes.Count)].transform.position;
-        _navMeshAgent.SetDestination(_exitNodePos);
+        if(_navMeshAgent.enabled)
+            _navMeshAgent.SetDestination(_exitNodePos);
     }
 
     private void OnDestroy()

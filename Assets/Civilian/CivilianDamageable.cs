@@ -84,6 +84,8 @@ public class CivilianDamageable : Damageable
 
         _navMeshAgent.enabled = true;
 
+        GetComponent<CivilianController>().enabled = true;
+
         Destroy(_rb);
     }
 
@@ -123,6 +125,8 @@ public class CivilianDamageable : Damageable
 
         _onStun = true;
 
+        GetComponent<CivilianController>().enabled = false;
+
         Invoke("StunRecover", stunCooldown);
     }
 
@@ -144,7 +148,9 @@ public class CivilianDamageable : Damageable
             Stun(shootDir);
         }
 
-        GameObject BManager = Instantiate(bloodEffectManager, hitPoint, new Quaternion());
+        GameObject BManager = ResourceManager.GetBloodManagerPool().Get();
+        BManager.SetActive(true);
+        BManager.transform.position = hitPoint;
         BManager.transform.right = shootDir;
     }
 }
