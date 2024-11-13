@@ -84,6 +84,8 @@ public class CivilianDamageable : Damageable
 
         _navMeshAgent.enabled = true;
 
+        GetComponent<CivilianController>().enabled = true;
+
         Destroy(_rb);
     }
 
@@ -122,6 +124,8 @@ public class CivilianDamageable : Damageable
         _rb.AddForce(dir * 200);
 
         _onStun = true;
+
+        GetComponent<CivilianController>().enabled = false;
 
         Invoke("StunRecover", stunCooldown);
     }
