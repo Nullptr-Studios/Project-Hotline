@@ -170,13 +170,25 @@ public class FireWeapon : Weapon
     /// </summary>
     /// <param name="VFX">The visual effect to instantiate.</param>
     /// <param name="hit">The hit information from the raycast.</param>
-    private void DoBulletVFX(GameObject VFX, RaycastHit2D hit)
+    private void DoBulletVFX(int l, RaycastHit2D hit)
     {
-        // Do bulletHitVFX Wall
-        GameObject hitVFX = Instantiate(VFX, hit.point, new Quaternion());
-        hitVFX.transform.LookAt(hit.point + hit.normal);
+        GameObject obj = null;
+        switch (l)
+        {
+            case 6:
+                obj = ResourceManager.GetWallHitPool().Get();
+                break;
+            case 7:
+                obj = ResourceManager.GetGlassHitPool().Get();
+                break;
+            case 8:
+                obj = ResourceManager.GetWallBangHitPool().Get();
+                break;
+        }
 
-        Destroy(hitVFX, 1);
+        obj.SetActive(true);
+        obj.transform.position = hit.point;
+        obj.transform.LookAt(hit.point + hit.normal);
     }
 
     /// <summary>
@@ -266,7 +278,7 @@ public class FireWeapon : Weapon
                 StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
 
                 // Bullet hit VFX
-                DoBulletVFX(bulletHitWallVFX, hit2D);
+                DoBulletVFX(layer, hit2D);
 
                 break;
             }
@@ -285,10 +297,10 @@ public class FireWeapon : Weapon
 
                 if (layer == 7) // Glass
                 {
-                    DoBulletVFX(bulletHitGlassVFX, hit2D);
+                    DoBulletVFX(layer, hit2D);
                 }else // wallbang
                 {
-                    DoBulletVFX(bulletHitWallBangVFX, hit2D);
+                    DoBulletVFX(8, hit2D);
                 }
 
                 currentPenetration++;
@@ -312,7 +324,7 @@ public class FireWeapon : Weapon
             // Do trail
             StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
 
-            DoBulletVFX(bulletHitWallVFX, hit2D);
+            DoBulletVFX(6, hit2D);
 
             // We treat default objects as walls
             break;
@@ -384,9 +396,11 @@ public class FireWeapon : Weapon
             SceneMng.CivilianPanicDelegate();
 
         // Muzzle VFX
-        GameObject mVFX = Instantiate(muzzleVFX, gunMuzzle.transform);
+        GameObject mVFX = ResourceManager.GetMuzzlePool().Get();
+
+        mVFX.SetActive(true);
+        mVFX.transform.position = gunMuzzle.transform.position;
         mVFX.transform.forward = gunMuzzle.transform.right;
-        Destroy(mVFX, 1);
         
         //light flash sfx
         muzzleLightController.ActivateLight(fireWeaponData.sfxMuzzleFlashCurve);

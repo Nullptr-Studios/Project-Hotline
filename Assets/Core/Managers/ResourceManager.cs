@@ -23,6 +23,11 @@ public class ResourceManager : MonoBehaviour
     /// </summary>
     public CorpseConfig corpseConfig;
 
+    public GameObject _WallHit;
+    public GameObject _GlassHit;
+    public GameObject _WallbangHit;
+
+    public GameObject _MuzzleVFX;
     // Static fields for shared configurations and pools
     private static BulletTrailConfig _bulletTrailConfig;
     private static CorpseConfig _corpseConfig;
@@ -32,6 +37,32 @@ public class ResourceManager : MonoBehaviour
     private static ObjectPool<GameObject> _bloodPool;
     private static ObjectPool<GameObject> _corpsePool;
     private static ObjectPool<GameObject> _civilianCorpsePool;
+
+    private static ObjectPool<GameObject> _WallHitPool;
+    private static ObjectPool<GameObject> _GlassHitPool;
+    private static ObjectPool<GameObject> _WallbangHitPool;
+
+    private static ObjectPool<GameObject> _MuzzleVFXPool;
+
+    public static ObjectPool<GameObject> GetMuzzlePool()
+    {
+        return _MuzzleVFXPool;
+    }
+
+    public static ObjectPool<GameObject> GetWallBangHitPool()
+    {
+        return _WallbangHitPool;
+    }
+
+    public static ObjectPool<GameObject> GetWallHitPool()
+    {
+        return _WallHitPool;
+    }
+
+    public static ObjectPool<GameObject> GetGlassHitPool()
+    {
+        return _GlassHitPool;
+    }
 
     /// <summary>
     /// Gets the object pool for blood instances.
@@ -97,6 +128,40 @@ public class ResourceManager : MonoBehaviour
         _bloodPool = new ObjectPool<GameObject>(CreateBlood);
         _corpsePool = new ObjectPool<GameObject>(CreateCorpse);
         _civilianCorpsePool = new ObjectPool<GameObject>(CreateCorpseCivilian);
+
+        _WallHitPool = new ObjectPool<GameObject>(CreateWallHit);
+        _GlassHitPool = new ObjectPool<GameObject>(CreateWallHit);
+        _WallbangHitPool = new ObjectPool<GameObject>(CreateWallbangHit);
+
+        _MuzzleVFXPool = new ObjectPool<GameObject>(CreateMuzzleVFX);
+    }
+
+    private GameObject CreateWallHit()
+    {
+        GameObject obj = Instantiate(_WallHit);
+        obj.transform.parent = transform;
+        return obj;
+    }
+
+    private GameObject CreateGlassHit() 
+    {
+        GameObject obj = Instantiate(_GlassHit);
+        obj.transform.parent = transform;
+        return obj;
+    }
+
+    private GameObject CreateWallbangHit()
+    {
+        GameObject obj = Instantiate(_WallbangHit);
+        obj.transform.parent = transform;
+        return obj;
+    }
+
+    private GameObject CreateMuzzleVFX()
+    {
+        GameObject obj = Instantiate(_MuzzleVFX);
+        obj.transform.parent = transform;
+        return obj;
     }
 
     /// <summary>

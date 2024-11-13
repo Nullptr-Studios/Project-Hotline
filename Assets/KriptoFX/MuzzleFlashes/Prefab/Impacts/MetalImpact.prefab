@@ -4772,6 +4772,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 480772}
+  - component: {fileID: 7817970402812021811}
   m_Layer: 0
   m_Name: MetalImpact
   m_TagString: Untagged
@@ -4795,6 +4796,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7817970402812021811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31000deeb420b74ea524a75f5a44d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 1
+  emmiterIndex: 6
+  particles:
+  - {fileID: 198446526883529300}
+  - {fileID: 19880772}
 --- !u!1 &1290481542409568
 GameObject:
   m_ObjectHideFlags: 0
