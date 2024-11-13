@@ -66,7 +66,7 @@ public class EnemyDamageable : Damageable
         _enemyWeaponManager.DropWeapon();
 
         //Send kill message
-        ScoreManager.AddKill();
+        ScoreManager.AddKill(transform.parent.name);
         killEvent.Invoke();
 
         Destroy(gameObject);

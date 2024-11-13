@@ -15,7 +15,7 @@ public class MissionEnd : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-        
+
         // TODO: Go to score screen
         Debug.Log($"[MissionEnd] {this.name}: Level Ended");
         onLevelFinished.Invoke();

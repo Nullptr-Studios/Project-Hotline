@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using GD.MinMaxSlider;
+using ToolBox.Serialization;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -14,14 +17,18 @@ public class ScoreManager : MonoBehaviour
     private static MathFormula _minFormula;
     private static MathFormula _maxFormula;
     // Don't change this variable, it's only to show text on inspector
-    [TextArea] public string text = "Power formula is calculated sign * (x * factor/100) ^ pow. " + 
+    [TextArea]
+    public string text = "Power formula is calculated sign * (x * factor/100) ^ pow. " +
                                            "Log formula is calculated Log{100pow} (sign * x + 100pow)";
+
+    // Array kills por cada piso
 
     [Header("Values")]
     [SerializeField] private float killXP;
     [SerializeField] private float deathXP;
-    
-    [Header("Timer")] [MinMaxSlider(0f,900f)] 
+
+    [Header("Timer")]
+    [MinMaxSlider(0f, 900f)]
     [SerializeField] private Vector2 timeThreshold = new Vector2(120f, 240f);
     [SerializeField] private MathFormula minFormula;
     [SerializeField] private MathFormula maxFormula;
@@ -44,35 +51,35 @@ public class ScoreManager : MonoBehaviour
         _maxTime = timeThreshold.y;
         _minFormula = minFormula;
         _maxFormula = maxFormula;
-        
+
         // Setup formulas
         _minFormula.xOffset = _minTime;
         _maxFormula.xOffset = _maxTime;
-        
+
         _playerKills = 0;
     }
 
-    public static void AddKill()
-    {
-        _playerKills++;
-    }
+    public static void AddKill(string group) => _playerKills++;
+    // 1. detectar en q piso est'a el enemigo
+    //     parent -> separar la string del nombre por [adsfhasdfl_]Level[1] string.Split('v', '.'); look in doc
+    // 2. guardas las kills en el array kills[piso]
 
-    public static void AddDeath()
-    {
-        _playerDeaths++; 
-    }
+    public static void AddDeath() => _playerDeaths++;
 
     public static Score CalculateScore()
     {
         var finalScore = new Score
         {
             Time = Time.time - _startTime,
+
+            // foreach kill[] 
+            // kills += kill[level]
             Kills = _playerKills,
             Deaths = _playerDeaths,
-            
+            InnocentKills = 0,
+
             Value = _playerKills * _killXP - _playerDeaths * _deathXP
         };
-
         if (finalScore.Time < _minTime)
         {
             finalScore.Value = _minFormula.Calculate(finalScore.Value);
@@ -81,6 +88,55 @@ public class ScoreManager : MonoBehaviour
         {
             finalScore.Value = _maxFormula.Calculate(finalScore.Value);
         }
+        if (DataSerializer.Load<List<float>>(SaveKeywords.LevelScore) == null)
+        {
+            var initLevelScore = new List<float>(new float[10]);
+            DataSerializer.Save(SaveKeywords.LevelScore, initLevelScore);
+        }
+        var _ls = DataSerializer.Load<List<float>>(SaveKeywords.LevelScore);
+
+        if (_ls[SceneManager.GetActiveScene().buildIndex - 1] < finalScore.Value)
+        {
+            _ls[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Value;
+            DataSerializer.Save(SaveKeywords.LevelScore, _ls);
+        }
+        if (DataSerializer.Load<List<float>>(SaveKeywords.TimeTaken) == null)
+        {
+            var initTimeTaken = new List<float>(new float[10]);
+            DataSerializer.Save(SaveKeywords.TimeTaken, initTimeTaken);
+        }
+        var _ts = DataSerializer.Load<List<float>>(SaveKeywords.TimeTaken);
+
+        if (_ts[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Time)
+        {
+            _ts[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Time;
+            DataSerializer.Save(SaveKeywords.TimeTaken, _ts);
+        }
+        if (DataSerializer.Load<List<int>>(SaveKeywords.EnemyKills) == null)
+        {
+            var initKills = new List<int>(new int[10]);
+            DataSerializer.Save(SaveKeywords.EnemyKills, initKills);
+        }
+        var _kills = DataSerializer.Load<List<int>>(SaveKeywords.EnemyKills);
+
+        if (_kills[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Kills)
+        {
+            _kills[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Kills;
+            DataSerializer.Save(SaveKeywords.EnemyKills, _kills);
+        }
+
+        if (DataSerializer.Load<List<int>>(SaveKeywords.EnemyKills) == null)
+        {
+            var initKills = new List<int>(new int[10]);
+            DataSerializer.Save(SaveKeywords.EnemyKills, initKills);
+        }
+        var _civkills = DataSerializer.Load<List<int>>(SaveKeywords.InnocentKills);
+
+        if (_civkills[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Kills)
+        {
+            _civkills[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Kills;
+            DataSerializer.Save(SaveKeywords.InnocentKills, _civkills);
+        }
 
         return finalScore;
     }
@@ -88,22 +144,24 @@ public class ScoreManager : MonoBehaviour
     /// <summary>
     /// Struct in charge of calculating the formula
     /// </summary>
-    [Serializable] private struct MathFormula
+    [Serializable]
+    private struct MathFormula
     {
         public FormulaType type;
         public int sign;
         [Tooltip("This value is multiplied by 100 on power formulas")] public float factor;
         [Tooltip("This value is divided by 100 on Log formulas")] public float pow;
         [NonSerialized] public float xOffset;
-        
+
         public float Calculate(float x)
         {
             return type switch
             {
-                FormulaType.Power => (sign * Mathf.Pow(((x - xOffset) * factor/100), pow)) + 1,
-                FormulaType.Log => Mathf.Log((sign * x + pow*100 + xOffset), pow*100),
+                FormulaType.Power => (sign * Mathf.Pow(((x - xOffset) * factor / 100), pow)) + 1,
+                FormulaType.Log => Mathf.Log((sign * x + pow * 100 + xOffset), pow * 100),
                 _ => -1
             };
+
         }
     }
 

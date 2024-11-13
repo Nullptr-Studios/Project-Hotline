@@ -12,6 +12,8 @@ public class SceneTrigger : MonoBehaviour
     /// </summary>
     public UnityEvent EntranceTriggerEvent;
 
+
+
     private Vector2 _exitPos;
 
     // Start is called before the first frame update
