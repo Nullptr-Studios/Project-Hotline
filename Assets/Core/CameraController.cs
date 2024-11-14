@@ -60,7 +60,7 @@ public class CameraController : MonoBehaviour
         
         _currentPlayerCameraDistance = defaultPlayerCameraDistance;
 
-        _lookGameObject = Instantiate(new GameObject());
+        _lookGameObject = new GameObject("CameraLook");
         _lookGameObject.transform.position = _player.transform.position;
         _vcamera.Follow = _lookGameObject.transform;
     }
@@ -91,7 +91,7 @@ public class CameraController : MonoBehaviour
         // Retrieve the active scene camera variables
         _cameraVariables = SceneMng.ActiveSceneCameraVars;
 
-        var distance = _player.transform.position.x - _cameraVariables.Origin.x;
+        var distance = playerLookPos.x - _cameraVariables.Origin.x;
         var rotation = _cameraVariables.maxRotation * Mathf.Clamp((distance / _cameraVariables.maxDistance), -1, 1) + _baseRotation;
         _vcamera.transform.eulerAngles = new Vector3(0f, 0f, rotation);
     }
