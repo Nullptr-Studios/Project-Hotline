@@ -169,7 +169,7 @@ public class SceneMng : MonoBehaviour
     {
         foreach (var scene in SceneData.sceneObjects)
         {
-            if (scene.sceneObject == levelName && scene.isLoaded)
+            if (scene.sceneObject == levelName /*&& scene.isLoaded*/)
             {
                 UnloadScenePrivateAsync(scene.sceneObject);
                 return;

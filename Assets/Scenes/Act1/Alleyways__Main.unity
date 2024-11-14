@@ -4575,15 +4575,15 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.0009107468
-    y: 0.001618123
-    width: 0.9981785
-    height: 0.99676377
+    x: 0.00095510983
+    y: 0
+    width: 0.9971347
+    height: 0.9983022
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 4.8125
+  orthographic size: 4.59375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -5322,14 +5322,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2325153471056053108, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
-      insertIndex: -1
+      insertIndex: 5
       addedObject: {fileID: 664327010405238822}
     - targetCorrespondingSourceObject: {fileID: 2325153471056053108, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
-      insertIndex: -1
+      insertIndex: 6
       addedObject: {fileID: 664327010405238821}
-    - targetCorrespondingSourceObject: {fileID: 2325153471056053108, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 664327010405238825}
   m_SourcePrefab: {fileID: 100100000, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
 --- !u!114 &664327010405238819 stripped
 MonoBehaviour:
@@ -5379,18 +5376,4 @@ MonoBehaviour:
   maxCorpses: 100
   corpseThreshold: 10
   startingFPS: 60
-  log: 1
---- !u!114 &664327010405238825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 664327010405238820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4319b3d5bb6b59c4ab84423fc27955f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneData: {fileID: 11400000, guid: fdbd50ba9d96198428a5fffcc57c157b, type: 2}
   log: 1

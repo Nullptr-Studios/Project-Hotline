@@ -22,7 +22,7 @@ public class CivilianController : MonoBehaviour
     void CivilianPanic()
     {
         _panic = true;
-        _exitNodePos = SceneMng.ExitNodes[UnityEngine.Random.Range(0, SceneMng.ExitNodes.Count)].transform.position;
+        _exitNodePos = SceneMng.ExitNodes[UnityEngine.Random.Range(0, SceneMng.ExitNodes.Count - 1)].transform.position;
         _navMeshAgent.SetDestination(_exitNodePos);
     }
 
