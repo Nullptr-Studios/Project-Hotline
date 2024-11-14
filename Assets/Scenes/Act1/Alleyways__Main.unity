@@ -1525,8 +1525,8 @@ MonoBehaviour:
   m_LookaheadTime: 0.25
   m_LookaheadSmoothing: 1
   m_LookaheadIgnoreY: 0
-  m_XDamping: 0.6
-  m_YDamping: 0.6
+  m_XDamping: 1.2
+  m_YDamping: 1.2
   m_ZDamping: 0
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
@@ -2871,18 +2871,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -643019316, guid: a2dc1e1e849bc974d8eb105f8b5c4d56, type: 3}
-    - target: {fileID: 3158707501288005643, guid: 68b4cf0cf8edca24191081e456ff3557, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3158707501288005643, guid: 68b4cf0cf8edca24191081e456ff3557, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3158707501288005643, guid: 68b4cf0cf8edca24191081e456ff3557, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4497584390578593603, guid: 68b4cf0cf8edca24191081e456ff3557, type: 3}
       propertyPath: m_Name
       value: PA_MissionObjective
@@ -4587,15 +4575,15 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.0009107468
+    y: 0.001618123
+    width: 0.9981785
+    height: 0.99676377
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 6.75
+  orthographic size: 4.8125
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
