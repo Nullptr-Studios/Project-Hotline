@@ -171,8 +171,11 @@ public class EnemyDamageable : Damageable
     public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
     {
         //ignore damage if already stunned
-        if(_onStun)
+        if(_onStun && weaponType == EWeaponType.Fire)
+        {
             return;
+        }
+
         
         _lastShootDir = shootDir;
         base.DoDamage(amount);
