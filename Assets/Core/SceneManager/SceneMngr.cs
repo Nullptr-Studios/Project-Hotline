@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +28,8 @@ public class SceneMng : MonoBehaviour
     /// </summary>
     public SceneData SceneData;
 
+    private Dictionary<string, bool> loadedScene;
+
     #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool log = false;
@@ -44,14 +47,19 @@ public class SceneMng : MonoBehaviour
             //return;
         }
 
+        loadedScene = new Dictionary<string, bool>();
+
         ExitNodes = new List<GameObject>(GameObject.FindGameObjectsWithTag("ExitNode"));
 
         foreach(var scene in SceneData.sceneObjects)
         {
+
+            loadedScene.Add(scene.sceneObject, false);
+
             if(scene.isInitialyLoaded)
             {
                 LoadScenePrivateAsync(scene.sceneObject);
-                
+
                 if(scene.isInitialyActive)
                     ActiveSceneCameraVars = scene.cameraBehaviour;
             }
@@ -81,6 +89,9 @@ public class SceneMng : MonoBehaviour
         AsyncOperation asyncOper = SceneManager.UnloadSceneAsync(sceneName);
         if (asyncOper != null) 
             asyncOper.completed += AsyncOperUnloading_completed;
+
+        loadedScene[sceneName] = false;
+    
     }
 
     /// <summary>
@@ -97,16 +108,6 @@ public class SceneMng : MonoBehaviour
 #endif
         obj.completed -= AsyncOperUnloading_completed;
         
-        for (int i = 0; i < SceneData.sceneObjects.Count; i++)
-        {
-            if (SceneData.sceneObjects[i].sceneObject == obj.ToString())
-            {
-                var sScene = SceneData.sceneObjects[i];
-                sScene.isLoaded = false;
-                SceneData.sceneObjects[i] = sScene;
-                break;
-            }
-        }
     }
 
     /// <summary>
@@ -116,7 +117,12 @@ public class SceneMng : MonoBehaviour
     private void LoadScenePrivateAsync(string sceneName)
     {
         AsyncOperation asyncOper = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        asyncOper!.completed += AsyncOperLoading_completed;
+
+        if (asyncOper != null)
+            asyncOper.completed += AsyncOperLoading_completed;
+
+        loadedScene[sceneName] = true;
+
     }
 
     /// <summary>
@@ -132,17 +138,6 @@ public class SceneMng : MonoBehaviour
         }
 #endif
         obj.completed -= AsyncOperLoading_completed;
-
-        for (int i = 0; i < SceneData.sceneObjects.Count; i++)
-        {
-            if (SceneData.sceneObjects[i].sceneObject == obj.ToString())
-            {
-                var sScene = SceneData.sceneObjects[i];
-                sScene.isLoaded = true;
-                SceneData.sceneObjects[i] = sScene;
-                break;
-            }
-        }
     }
 
     /// <summary>
@@ -169,7 +164,7 @@ public class SceneMng : MonoBehaviour
     {
         foreach (var scene in SceneData.sceneObjects)
         {
-            if (scene.sceneObject == levelName && scene.isLoaded)
+            if (scene.sceneObject == levelName && loadedScene[scene.sceneObject])
             {
                 UnloadScenePrivateAsync(scene.sceneObject);
                 return;
@@ -198,7 +193,7 @@ public class SceneMng : MonoBehaviour
         {
             if (scene.isInitialyLoaded)
                 continue;
-            if(scene.isLoaded)
+            if (loadedScene[scene.sceneObject])
                 UnloadScenePrivateAsync(scene.sceneObject);
         }
     }

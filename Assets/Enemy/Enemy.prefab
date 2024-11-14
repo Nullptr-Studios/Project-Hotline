@@ -178,7 +178,7 @@ Transform:
   - {fileID: 620825279225639238}
   - {fileID: 5296668497393563518}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &4320165183307307060
 NavMeshAgent:
@@ -201,7 +201,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0.43
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &6114627427478298440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +332,9 @@ MonoBehaviour:
   bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
   weaponHandler: {fileID: 620825279225639238}
   stunCooldown: 1
+  animatorPlayer: {fileID: 1586720700333565052}
+  legsSpr: {fileID: 608427877355183717}
+  bodySpr: {fileID: 1725766725762290060}
   killEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -357,6 +360,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8567
   detectedPlayer: {fileID: 0}
+  heardPosition: {x: 0, y: 0}
+  heardPlayer: 0
   isDetecting: 0
   drawGizmos: 1
   meshColor: {r: 1, g: 1, b: 0, a: 0.25490198}

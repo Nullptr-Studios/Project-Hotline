@@ -224,7 +224,7 @@ public class Weapon : MonoBehaviour, IWeapon
         _rb = gameObject.AddComponent<Rigidbody2D>();
         _rb.mass = 0.1f;
         _rb.gravityScale = 0;
-        _rb.drag = 1;
+        _rb.drag = 2;
         _rb.angularDrag = 1;
     }
 

@@ -17,8 +17,6 @@ public struct SScene
     public SceneObject sceneObject;
     public bool isInitialyLoaded;
     public bool isInitialyActive;
-
-    public bool isLoaded;
     
     public SCameraVariables cameraBehaviour;
 }

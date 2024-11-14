@@ -54,8 +54,9 @@ public class SensePlayer : ActionNode
                 
                 context.agent.stoppingDistance = _weaponManager.IsMelee() ? blackboard.distanceToUseMelee : blackboard.distanceToUseWeapon;
 
-
-                if (context.agent.remainingDistance <= context.agent.stoppingDistance && _detectingFrames != 0)
+                float distance = Vector3.Distance(blackboard.playerPos, context.transform.position);
+                /*context.agent.remainingDistance*/
+                if (distance <= context.agent.stoppingDistance && _detectingFrames != 0)
                 {
 
                     Vector3 targetPos = blackboard.playerPos;
