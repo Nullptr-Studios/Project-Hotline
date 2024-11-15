@@ -15,9 +15,19 @@ MonoBehaviour:
   sceneObjects:
   - sceneObject:
       m_SceneName: Metro_Floor1
-    isInitialyLoaded: 1
+    isInitialyLoaded: 0
+    isInitialyActive: 0
     isLoaded: 0
+    cameraBehaviour:
+      maxRotation: 0
+      maxDistance: 0
+      Origin: {x: 0, y: 0}
   - sceneObject:
       m_SceneName: Metro_Floor2
-    isInitialyLoaded: 0
+    isInitialyLoaded: 1
+    isInitialyActive: 0
     isLoaded: 0
+    cameraBehaviour:
+      maxRotation: 0
+      maxDistance: 0
+      Origin: {x: 0, y: 0}
