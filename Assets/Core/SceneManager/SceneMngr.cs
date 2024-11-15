@@ -76,7 +76,8 @@ public class SceneMng : MonoBehaviour
 
         foreach (var scene in SceneData.sceneObjects)
         {
-            UnloadScenePrivateAsync(scene.sceneObject);
+            if(loadedScene[scene.sceneObject])
+                UnloadScenePrivateAsync(scene.sceneObject);
         }
     }
 

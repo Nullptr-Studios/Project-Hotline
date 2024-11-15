@@ -97,6 +97,14 @@ public class FireWeapon : Weapon
     /// <param name="pressed">True if the use action is pressed, false otherwise.</param>
     public override void Use(bool pressed)
     {
+        if (_currentAmmo < 0 && isPlayer)
+        {
+            _wantsToFire = false;
+            return;
+        }
+        
+        
+            
         _wantsToFire = pressed;
         if (pressed)
         {
@@ -326,9 +334,11 @@ public class FireWeapon : Weapon
         FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.fireSound, _transform.position);
 
         if (isPlayer)
-            HearEnemy();
-
-        _currentAmmo--;
+        {
+           HearEnemy();
+           _currentAmmo--; 
+        }
+            
     }
 
     /// <summary>
@@ -426,88 +436,76 @@ public class FireWeapon : Weapon
 
         if (_wantsToFire)
         {
-            if (_currentAmmo > 0)
+            if (_currentAmmo > 0 && isPlayer)
             {
-                if (fireWeaponData.automatic)
+                FireLogic();
+                return;
+            } 
+            
+            if (!isPlayer)
+            {
+                FireLogic();
+            }
+        }
+    }
+
+    private void FireLogic()
+    {
+        if (fireWeaponData.automatic)
+        {
+            if (fireWeaponData.useFireRateCurve)
+            {
+                _currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
+
+                if (_fireRateTimer >= _currentTimeToFire)
                 {
-                    if (fireWeaponData.useFireRateCurve)
-                    {
-                        _currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
-
-                        if (_fireRateTimer >= _currentTimeToFire)
-                        {
-                            _fireRateTimer = 0;
-                            UpdateCanFire();
-                        }
-
-                        _fireRateTimer += Time.deltaTime;
-
-                        if (_fireRateCurveTimer < fireWeaponData.fireRateCurve.GetDuration())
-                            _fireRateCurveTimer += Time.deltaTime;
-                    }
-
-                    if (fireWeaponData.useDispersionCurve)
-                    {
-                        _currentDispersion = fireWeaponData.bulletDispersionCurve.Evaluate(_dispersionCurveTimer);
-
-                        if (_dispersionCurveTimer < fireWeaponData.bulletDispersionCurve.GetDuration())
-                            _dispersionCurveTimer += Time.deltaTime;
-                    }
-                    else
-                    {
-                        _currentDispersion = fireWeaponData.maxDispersionAngle;
-                    }
-
-                    if (_canFire)
-                    {
-                        _canFire = false;
-                        FireImplementation();
-
-                        if (!fireWeaponData.useFireRateCurve)
-                        {
-                            _fireRateCurveTimer = fireWeaponData.finalFireRate;
-                            Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
-                        }
-                    }
+                    _fireRateTimer = 0;
+                    UpdateCanFire();
                 }
-                else
-                {
-                    if (_canFire)
-                    {
-                        _currentDispersion = fireWeaponData.maxDispersionAngle;
-                        _currentTimeToFire = fireWeaponData.finalFireRate;
 
-                        Invoke(nameof(UpdateCanFire), _currentTimeToFire);
-                        FireImplementation();
+                _fireRateTimer += Time.deltaTime;
 
-                        _canFire = false;
-                        _wantsToFire = false;
-                    }
-                }
+                if (_fireRateCurveTimer < fireWeaponData.fireRateCurve.GetDuration())
+                    _fireRateCurveTimer += Time.deltaTime;
+            }
+
+            if (fireWeaponData.useDispersionCurve)
+            {
+                _currentDispersion = fireWeaponData.bulletDispersionCurve.Evaluate(_dispersionCurveTimer);
+
+                if (_dispersionCurveTimer < fireWeaponData.bulletDispersionCurve.GetDuration())
+                    _dispersionCurveTimer += Time.deltaTime;
             }
             else
             {
-                if (!_isReloading)
+                _currentDispersion = fireWeaponData.maxDispersionAngle;
+            }
+
+            if (_canFire)
+            {
+                _canFire = false;
+                FireImplementation();
+
+                if (!fireWeaponData.useFireRateCurve)
                 {
-#if UNITY_EDITOR
-                    if (log)
-                        Debug.Log("Reloading");
-#endif
-                    FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.reloadSound, _transform.position);
-                    _isReloading = true;
-                    Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
+                    _fireRateCurveTimer = fireWeaponData.finalFireRate;
+                    Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
                 }
             }
         }
-
-        if (_currentAmmo <= 0 && !_isReloading)
+        else
         {
-#if UNITY_EDITOR
-            if (log)
-                Debug.Log("Reloading");
-#endif
-            _isReloading = true;
-            Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
+            if (_canFire)
+            {
+                _currentDispersion = fireWeaponData.maxDispersionAngle;
+                _currentTimeToFire = fireWeaponData.finalFireRate;
+
+                Invoke(nameof(UpdateCanFire), _currentTimeToFire);
+                FireImplementation();
+
+                _canFire = false;
+                _wantsToFire = false;
+            }
         }
     }
 }

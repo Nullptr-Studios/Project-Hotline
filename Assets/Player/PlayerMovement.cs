@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
             case "Dualsense":
                 Controller = EController.Dualsense;
                 break;
-            case "Controller":
+            case "Xbox":
                 Controller = EController.Xbox;
                 break;
             default:
