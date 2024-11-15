@@ -12,7 +12,12 @@ public class PasueMenu : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _playerinput = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         _input = new PlayerIA();
-        _input.UI.Cancel.performed += OnContinue;
+        _input.UI.Cancel.performed += OnContinueButton;
+    }
+
+    private void OnContinueButton(InputAction.CallbackContext obj)
+    {
+        OnContinue();
     }
 
     private void OnDisable() => Time.timeScale = 1f;
@@ -31,7 +36,7 @@ public class PasueMenu : MonoBehaviour
     }
 
     // Continue button
-    public void OnContinue(InputAction.CallbackContext context)
+    public void OnContinue()
     {
         Time.timeScale = 1f;
         _playerinput.OnEnable();

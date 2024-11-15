@@ -78,6 +78,11 @@ public class SceneMng : MonoBehaviour
     /// <param name="sceneName">The name of the scene to unload.</param>
     private void UnloadScenePrivateAsync(string sceneName)
     {
+        if (!SceneManager.GetSceneByName(sceneName).IsValid())
+        {
+            if (log) Debug.Log($"Scene {sceneName} is not loaded, aborting unload");
+            return;
+        }
         AsyncOperation asyncOper = SceneManager.UnloadSceneAsync(sceneName);
         if (asyncOper != null) 
             asyncOper.completed += AsyncOperUnloading_completed;

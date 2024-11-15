@@ -23,6 +23,8 @@ public class PlayerCorpse : MonoBehaviour
     private Canvas deathScreenUI;
     private PixelPerfectCamera camera;
     private PlayerIA _input;
+    
+    [SerializeField] private float screenDeathTimer = .5f;
 
     /// <summary>
     /// Adds force to the player's corpse in a specified direction and initializes the death screen UI and camera.
@@ -87,7 +89,7 @@ public class PlayerCorpse : MonoBehaviour
     {
         if (_rb)
         {
-            if (_timer >= 2)
+            if (_timer >= screenDeathTimer)
             {
                 Destroy(_rb);
                 Destroy(_collider2D);
