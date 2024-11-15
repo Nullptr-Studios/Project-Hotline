@@ -12,9 +12,9 @@ public class MainMenu : MonoBehaviour
         version.text = Application.version;
     }
 
-    public void OnTutorial() => SceneManager.LoadScene("Tutorial");
+    public void OnTutorial() => SceneManager.LoadScene("Tutorial__Main");
     
-    public void OnDemo() => SceneManager.LoadScene("DemoScene");
+    public void OnLevel(string name) => SceneManager.LoadScene(name);
     
     public void OnExit() => Application.Quit();
 }
