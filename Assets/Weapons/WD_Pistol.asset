@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.1
+      value: 0.2
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0.1
+      value: 0.2
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -43,8 +43,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timeToReachFinalFireRate: 1
-  initialFireRate: 0.1
-  finalFireRate: 0.1
+  initialFireRate: 0.2
+  finalFireRate: 0.2
   maxAmmo: 8
   reloadTime: 6
   useDispersion: 1
@@ -77,3 +77,50 @@ MonoBehaviour:
   timeToReachMaxDispersion: 1
   minDispersionAngle: 3
   maxDispersionAngle: 3
+  SpriteAnimID: 0
+  enemyHearingDistance: 20
+  fireSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  reloadSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  finishReloadSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  sfxMuzzleFlashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
