@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using GD.MinMaxSlider;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -21,7 +20,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private float killXP;
     [SerializeField] private float deathXP;
     
-    [Header("Timer")] [MinMaxSlider(0f,900f)] 
+    [Header("Timer")] 
     [SerializeField] private Vector2 timeThreshold = new Vector2(120f, 240f);
     [SerializeField] private MathFormula minFormula;
     [SerializeField] private MathFormula maxFormula;
