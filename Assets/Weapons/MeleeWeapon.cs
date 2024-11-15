@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 /// <summary>
@@ -12,6 +13,10 @@ public class MeleeWeapon : Weapon
     public float offset;
     private bool _wantsToAttack;
     private bool _canAttack = true;
+
+    [Header("Events")]
+    [Tooltip("Please don't ever use this shit")]
+    public UnityEvent OnPick;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -112,6 +117,7 @@ public class MeleeWeapon : Weapon
     public override void Pickup(Transform weaponHolder)
     {
         GetComponent<SpriteRenderer>().enabled = false;
+        OnPick.Invoke();
         base.Pickup(weaponHolder);
     }
 

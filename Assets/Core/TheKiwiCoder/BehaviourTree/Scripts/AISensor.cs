@@ -1,5 +1,6 @@
 using TheKiwiCoder;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AISensor : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class AISensor : MonoBehaviour
     public GameObject detectedPlayer;
     
     public Vector2 heardPosition;
-    
+
+    public bool isDeaf;
     public bool heardPlayer;
     public bool isDetecting;
     
@@ -55,6 +57,8 @@ public class AISensor : MonoBehaviour
     
     public void HeardPlayer(Vector3 transformPosition)
     {
+        if (isDeaf) return;
+        
         heardPlayer = true;
         heardPosition = transformPosition;
     }

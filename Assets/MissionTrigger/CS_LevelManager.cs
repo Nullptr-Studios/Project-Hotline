@@ -56,12 +56,20 @@ public class LevelManager : MonoBehaviour
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Mission paused");
 #endif
         
-    } 
-    
+    }
+
     /// <summary>
     /// Exit to main menu
     /// </summary>
+    [System.Obsolete("Use Send Message instead")]
     public static void EndLevel() => SceneManager.LoadScene("MainMenu"); // TODO: This should call the loading screen
+    // Fucking copilot shit
+
+    /// <summary>
+    /// Exit to main menu
+    /// </summary>
+    public void EndLevelMessage() => SceneManager.LoadScene("MainMenu"); // TODO: This should call the loading screen
+    // TODO: Change this (we wont)
 
     /// <summary>
     /// Make the player restart the current level
