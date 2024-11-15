@@ -42,15 +42,14 @@ public class PlayerWeaponManager : MonoBehaviour
 
     private bool _isWeaponHeld;
     private bool _wantsToThrowOrGet;
-    [SerializeField] ProgressBar progressBar;
-    [SerializeField] ProgressBar progressBar2;
+    /*[SerializeField] ProgressBar progressBar;
+    [SerializeField] ProgressBar progressBar2;*/
     [SerializeField] AmmoPrompt ammoPrompt;
 
     private PlayerIA _playerInput;
 
     private IWeapon _heldWeaponInterface;
     private readonly List<GameObject> _heldWeaponGameObject = new List<GameObject>();
-    private List<bool> _reloadingCurrentWeapon = new List<bool>();
 
     private int _currentIndex;
 
@@ -105,7 +104,6 @@ public class PlayerWeaponManager : MonoBehaviour
         for (int i = 0; i < maxWeaponsEquipped; i++)
         {
             _heldWeaponGameObject.Add(null);
-            _reloadingCurrentWeapon.Add(false);
         }
 
         // Placeholder for spawning weapon
@@ -136,7 +134,7 @@ public class PlayerWeaponManager : MonoBehaviour
     /// <param name="context">The input action context.</param>
     private void OnFire(InputAction.CallbackContext context)
     {
-        if (context.performed && !_reloadingCurrentWeapon[_currentIndex] && _canShootAgain)
+        if (context.performed && _canShootAgain)
         {
             _wantsToFire = true;
             ammoPrompt.SubtractBullet();
@@ -213,11 +211,7 @@ public class PlayerWeaponManager : MonoBehaviour
          
                 
                 ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
-
-                if (_heldWeaponInterface.UsesLeft() == 0)
-                    _reloadingCurrentWeapon[_currentIndex] = true;
-                else
-                    _reloadingCurrentWeapon[_currentIndex] = false;
+                
             }
             else
                 ammoPrompt.DoHide();
@@ -255,30 +249,9 @@ public class PlayerWeaponManager : MonoBehaviour
 
         if (_isWeaponHeld)
         {
-            if (_heldWeaponInterface.UsesLeft() == 0 && !_reloadingCurrentWeapon[_currentIndex])
-            {
-                if (_currentIndex == 0)
-                    progressBar.BeginTimer(_heldWeaponInterface.ReloadTime());
-                else
-                    progressBar2.BeginTimer(_heldWeaponInterface.ReloadTime());
-
-                _reloadingCurrentWeapon[_currentIndex] = true;
-
-                if (_heldWeaponInterface.IsAutomatic())
-                    ammoPrompt.SubtractBullet();
-
-                ammoPrompt.DoHide();
-
-                _lastReloadingWeaponIndex = _currentIndex;
-                _lastReloadingWeaponGO = _heldWeaponGameObject[_currentIndex];
-
-                Invoke("FinishReload", _heldWeaponInterface.ReloadTime());
-
-            }
-
             if (_wantsToFire && _heldWeaponInterface.IsAutomatic())
             {
-                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses() && !_reloadingCurrentWeapon[_currentIndex])
+                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses())
                 {
                     _bulletsUITimer = 0;
                     ammoPrompt.SubtractBullet();
@@ -317,9 +290,10 @@ public class PlayerWeaponManager : MonoBehaviour
 
             FMODUnity.RuntimeManager.PlayOneShot(throwSound, transform.position);
 
-            _reloadingCurrentWeapon[_currentIndex] = false;
-
             _isWeaponHeld = false;
+            
+            //temporal fix :)
+            _canShootAgain = true;
 
             ammoPrompt.DoHide();
 
@@ -399,21 +373,6 @@ public class PlayerWeaponManager : MonoBehaviour
 
             _wantsToThrowOrGet = false;
         }
-    }
-
-    /// <summary>
-    /// Finishes the reloading process.
-    /// </summary>
-    private void FinishReload()
-    {
-        _reloadingCurrentWeapon[_lastReloadingWeaponIndex] = false;
-
-        if (_isWeaponHeld && _lastReloadingWeaponIndex == _currentIndex && _lastReloadingWeaponGO == _heldWeaponGameObject[_currentIndex])
-            _heldWeaponInterface.Use(_wantsToFire);
-
-        if (_heldWeaponGameObject[_currentIndex] != null)
-            if (_heldWeaponInterface.MaxUses() != -1 && _lastReloadingWeaponIndex == _currentIndex && _lastReloadingWeaponGO == _heldWeaponGameObject[_currentIndex])
-                ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
     }
 
     /// <summary>

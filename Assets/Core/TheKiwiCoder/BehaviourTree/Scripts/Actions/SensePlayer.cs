@@ -65,7 +65,7 @@ public class SensePlayer : ActionNode
                     targetPos.y -= thisPos.y;
                     float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
                     Quaternion look = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                    context.transform.rotation = Quaternion.Slerp(context.transform.rotation, look, 3 * Time.deltaTime);
+                    context.transform.rotation = Quaternion.Slerp(context.transform.rotation, look, 5 * Time.deltaTime);
 
                     if (_shootTimer > blackboard.timeToStartShooting)
                     {
