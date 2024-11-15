@@ -6,27 +6,22 @@ using Unity.Mathematics;
 
 public class SensePlayer : ActionNode
 {
-
     private EnemyBehaviourDataOverrider _ov;
-    
     private AISensor _sensor;
     private EnemyWeaponManager _weaponManager;
-
     private bool _usingWeapon = false;
-    
     private bool _hasSensedPlayerBefore = false;
-
     private long _detectingFrames = 0;
-
     private float _shootTimer = 0.0f;
+    private float rotationSpeed = 5.0f;
     
-    protected override void OnStart() 
+    private Vector3 _currentDir = Vector3.up;
+
+    protected override void OnStart()
     {
         _sensor = context.gameObject.GetComponent<AISensor>();
         _weaponManager = context.gameObject.GetComponent<EnemyWeaponManager>();
-
         _ov = context.gameObject.GetComponent<EnemyBehaviourDataOverrider>();
-        
         _hasSensedPlayerBefore = false;
         _detectingFrames = 0;
     }
@@ -39,7 +34,6 @@ public class SensePlayer : ActionNode
         {
             if (_sensor.isDetecting)
             {
-
                 if (_sensor.detectedPlayer)
                     blackboard.playerPos = _sensor.detectedPlayer.transform.position;
 
@@ -48,24 +42,22 @@ public class SensePlayer : ActionNode
                 _hasSensedPlayerBefore = true;
 
                 context.agent.speed = blackboard.chaseSpeed;
-
                 context.agent.SetDestination(blackboard.playerPos);
-
-                
                 context.agent.stoppingDistance = _weaponManager.IsMelee() ? blackboard.distanceToUseMelee : blackboard.distanceToUseWeapon;
 
                 float distance = Vector3.Distance(blackboard.playerPos, context.transform.position);
-                /*context.agent.remainingDistance*/
                 if (distance <= context.agent.stoppingDistance && _detectingFrames != 0)
                 {
-
-                    Vector3 targetPos = blackboard.playerPos;
-                    Vector3 thisPos = context.transform.position;
-                    targetPos.x -= thisPos.x;
-                    targetPos.y -= thisPos.y;
-                    float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-                    Quaternion look = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                    context.transform.rotation = Quaternion.Slerp(context.transform.rotation, look, 5 * Time.deltaTime);
+                    // Calculate the direction from the enemy to the player
+                    Vector3 directionToPlayer = (blackboard.playerPos - context.transform.position).normalized;
+                    
+                    _currentDir = Vector3.Slerp(_currentDir, directionToPlayer, Time.deltaTime * 3f); 
+                    
+                    float angle = Mathf.Atan2 (_currentDir.y, _currentDir.x) * Mathf.Rad2Deg;
+                    
+                    Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+                    
+                    context.transform.rotation = rotation;
 
                     if (_shootTimer > blackboard.timeToStartShooting)
                     {
@@ -79,8 +71,6 @@ public class SensePlayer : ActionNode
                     {
                         _shootTimer += Time.deltaTime;
                     }
-
-
                 }
                 else
                 {
@@ -89,16 +79,15 @@ public class SensePlayer : ActionNode
                         _weaponManager.useWeapon(false);
                         _usingWeapon = false;
                     }
-
                     _shootTimer = 0;
+                    
+                    _currentDir = context.transform.up;
                 }
-
                 _detectingFrames++;
             }
             else if (_hasSensedPlayerBefore)
             {
                 context.agent.stoppingDistance = 2f;
-
                 _shootTimer = 0;
 
                 if (_usingWeapon)
@@ -113,11 +102,9 @@ public class SensePlayer : ActionNode
                     blackboard.finalizedShearch = false;
                     return State.Success;
                 }
-
                 _detectingFrames = 0;
             }
         }
-
         return State.Running;
     }
 }
