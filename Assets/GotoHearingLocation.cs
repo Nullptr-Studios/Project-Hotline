@@ -10,6 +10,9 @@ public class GotoHearingLocation : ActionNode
     protected override void OnStart() 
     {
         context.agent.speed = blackboard.idleSpeed;
+        
+        blackboard.heardPos.x = Random.Range(0, 2) + blackboard.heardPos.x;
+        blackboard.heardPos.y = Random.Range(0, 2) + blackboard.heardPos.y;
         context.agent.SetDestination(blackboard.heardPos);
         
         _justStarted = true;
@@ -26,7 +29,7 @@ public class GotoHearingLocation : ActionNode
             return State.Running;
         }
 
-        if (context.agent.remainingDistance <= context.agent.stoppingDistance)
+        if (context.agent.remainingDistance <= 2)
         {
             blackboard.finalizedShearch = false;
             return State.Success;

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -22,7 +20,7 @@ public class FloorSplatterDisapear : MonoBehaviour
     /// <summary>
     /// The final magnitude used for lerping.
     /// </summary>
-    private float finalLerpMagnitude;
+    private float _finalLerpMagnitude;
 
     /// <summary>
     /// The transform component of the GameObject.
@@ -34,30 +32,28 @@ public class FloorSplatterDisapear : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        finalLerpMagnitude = UnityEngine.Random.Range(lerpMagnitudeMin, lerpMagnitudeMax);
+        _finalLerpMagnitude = UnityEngine.Random.Range(lerpMagnitudeMin, lerpMagnitudeMax);
         _trans = transform;
     }
 
     /// <summary>
     /// Updates the scale of the blood splatter over time, causing it to disappear.
     /// </summary>
-    void Update()
+    private void Update()
     {
         Vector3 scale = _trans.localScale;
 
-        if (scale.x < .05f)
+        if (scale.x < 0.05f)
         {
             gameObject.SetActive(false);
-            Destroy(this);
             ResourceManager.GetBloodPool().Release(gameObject);
+            Destroy(this);
             return;
         }
 
-        float finalLerpMagnitudeCached = finalLerpMagnitude * Time.deltaTime;
+        float finalLerpMagnitudeCached = _finalLerpMagnitude * Time.deltaTime;
         float lerpVal = math.lerp(scale.x, 0, finalLerpMagnitudeCached);
 
-        scale = new Vector3(lerpVal, lerpVal, 1);
-
-        _trans.localScale = scale;
+        _trans.localScale = new Vector3(lerpVal, lerpVal, 1);
     }
 }

@@ -48,8 +48,11 @@ public class PlayerHealth : Damageable
     public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
     {
         _lastShootDir = shootDir;
-        GameObject bulletManager = Instantiate(bloodEffectManager, hitPoint, new Quaternion());
-        bulletManager.transform.right = _lastShootDir;
+        
+        GameObject BManager = ResourceManager.GetBloodManagerPool().Get();
+        BManager.SetActive(true);
+        BManager.transform.position = hitPoint;
+        BManager.transform.right = shootDir;
         
         base.DoDamage(amount, shootDir, hitPoint);
     }

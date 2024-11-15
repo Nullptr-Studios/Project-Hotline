@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 using TheKiwiCoder;
+using Unity.VisualScripting;
 
 public class LookForNearestWeapon : ActionNode
 {
@@ -16,9 +18,9 @@ public class LookForNearestWeapon : ActionNode
         GameObject[] weapons = GameObject.FindGameObjectsWithTag("Weapon");
         
         //get all
-        for (int i = 0; i < weapons.Length - 1; i++)
+        for (int i = 0; i < weapons.Length; i++)
         {
-            if(weapons[i] == null)
+            if(!weapons[i])
                 continue;
             
             weapons[i].TryGetComponent(out IWeapon w);
@@ -29,13 +31,8 @@ public class LookForNearestWeapon : ActionNode
             if (w.isClaimed())
                 weapons[i] = null;
         }
-        
-        float smallestDistance = float.MaxValue;
-        int smallestIndex = 0;
-
-        int j = 0;
             
-        //check for the closest gun from the w
+        /*//check for the closest gun from the w
         foreach (var h in weapons)
         {
             //null check
@@ -53,17 +50,36 @@ public class LookForNearestWeapon : ActionNode
                 smallestIndex = j;
                 j++;
             }
-        }
+        }*/
 
-        _weapon = weapons[smallestIndex];
+        //_weapon = weapons[smallestIndex];
+        
+        _weapon = GetClosestPaths(context.gameObject, weapons)[0];
 
         context.agent.speed = blackboard.chaseSpeed;
         
         if (_weapon is not null)
             context.agent.SetDestination(_weapon.transform.position);
 
-        context.agent.stoppingDistance = .3f;
+        context.agent.stoppingDistance = .5f;
 
+    }
+    
+    private GameObject[] GetClosestPaths (GameObject go,GameObject[] weapons)
+    {
+        // just cache the position once
+        var positionToTest = go.transform.position;
+        
+        // Go through the paths
+        return weapons
+            // Skip the "pathToTest"
+            .Where(p => p != go && p)
+            // Order them by distance to "pathToTest"
+            .OrderBy(p => (p.transform.position - positionToTest).sqrMagnitude)
+            // Take only up to 2 items
+            .Take(1)
+            // finally store the results in an array
+            .ToArray();
     }
 
     protected override void OnStop() {

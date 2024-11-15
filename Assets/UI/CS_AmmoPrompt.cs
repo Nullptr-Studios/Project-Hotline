@@ -118,12 +118,12 @@ public class AmmoPrompt : MonoBehaviour
                 _ammoIcons[i].sprite = emptyAmmo;
         }
             
-        if (_currentAmmo == 0)
+        /*if (_currentAmmo == 0)
         {
             //_ammoIcons[0].sprite = emptyAmmo;
             Hide();
             return;
-        }
+        }*/
         
         _timer = Time.time;
     }
