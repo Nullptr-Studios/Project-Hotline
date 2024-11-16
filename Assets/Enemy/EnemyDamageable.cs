@@ -4,8 +4,15 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
+/// <summary>
+/// Represents an enemy that can take damage and react accordingly.
+/// Inherits from the Damageable class.
+/// </summary>
 public class EnemyDamageable : Damageable
 {
+    private static readonly int Stunned = Animator.StringToHash("Stunned");
+    private static readonly int WeaponEquipped = Animator.StringToHash("WeaponEquipped");
+
     public GameObject bloodEffectManager;
 
     //FUCK UNITY I DONT KNOW BUT CHILDREN DOES NOT MOVE RELATIVELY TO PARENT IF THE PARENT HAS A RIGIDBODY
@@ -15,12 +22,16 @@ public class EnemyDamageable : Damageable
 
     private Vector3 _lastShootDir;
 
-    public float stunCooldown = 1.0f;
+    public float stunCooldown = 2f;
 
-    [Header("Event")] 
+    public Animator animatorPlayer;
+
+    public SpriteRenderer legsSpr;
+    public SpriteRenderer bodySpr;
+
+    [Header("Event")]
     [SerializeField] private UnityEvent killEvent;
-    
-    
+
     //Components to disable
     private NavMeshAgent _navMeshAgent;
     private AISensor _aiSensor;
@@ -30,10 +41,12 @@ public class EnemyDamageable : Damageable
 
     //Fuck unity
     private Vector3 _relativePos;
-    
+
     private bool _onStun = false;
-    
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// Initializes the EnemyDamageable instance.
+    /// </summary>
     public override void Start()
     {
         base.Start();
@@ -44,37 +57,51 @@ public class EnemyDamageable : Damageable
         _enemyWeaponManager = gameObject.GetComponent<EnemyWeaponManager>();
     }
 
+    /// <summary>
+    /// Handles the logic when the enemy is destroyed.
+    /// </summary>
     public override void OnDead()
     {
         GameObject Corpse = ResourceManager.GetCorpsePool().Get();
         Corpse.transform.position = transform.position;
-        
+
         Corpse.SetActive(true);
 
         Corpse com = Corpse.AddComponent<Corpse>();
-        
+
         com.CorpseAddForceInDir(_lastShootDir);
-        
+
         _enemyWeaponManager.DropWeapon();
 
         //Send kill message
         ScoreManager.AddKill();
         killEvent.Invoke();
-        
+
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Recovers the enemy from stun.
+    /// </summary>
     private void StunRecover()
     {
         _onStun = false;
-        
+
         _aiSensor.enabled = true;
         _behaviourTreeRunner.enabled = true;
         _navMeshAgent.enabled = true;
         
+        animatorPlayer.SetBool(Stunned, false);
+        bodySpr.sortingOrder = 1;
+        
+        legsSpr.enabled = true;
+        
         Destroy(_rb);
     }
 
+    /// <summary>
+    /// Updates the enemy state.
+    /// </summary>
     private void Update()
     {
         //@TODO: fix fucking unity
@@ -86,11 +113,15 @@ public class EnemyDamageable : Damageable
         }*/
     }
 
+    /// <summary>
+    /// Stuns the enemy in a specified direction.
+    /// </summary>
+    /// <param name="dir">The direction of the stun</param>
     public override void Stun(Vector3 dir)
     {
         if (_onStun)
             return;
-        
+
         if (!_aiSensor)
             _aiSensor = gameObject.GetComponent<AISensor>();
 
@@ -106,21 +137,46 @@ public class EnemyDamageable : Damageable
 
         _rb = gameObject.AddComponent<Rigidbody2D>();
         
+        _rb.freezeRotation = true;
+
         _rb.drag = 3;
         _rb.gravityScale = 0;
         _rb.AddForce(dir * 200);
+        
+        transform.up = dir;
 
         _onStun = true;
 
         GetComponent<EnemyBehaviourDataOverrider>().justStunned = true;
-        
+
         _enemyWeaponManager.DropWeapon();
         
+        animatorPlayer.SetBool(Stunned, true);
+        animatorPlayer.SetBool(WeaponEquipped, false);
+        
+        legsSpr.enabled = false;
+        
+        bodySpr.sortingOrder = 0;
+
         Invoke("StunRecover", stunCooldown);
     }
 
+    /// <summary>
+    /// Applies damage to the enemy and handles additional logic such as stunning and blood effects.
+    /// </summary>
+    /// <param name="amount">The amount of damage to apply.</param>
+    /// <param name="shootDir">The direction of the shot.</param>
+    /// <param name="hitPoint">The point where the shot hit.</param>
+    /// <param name="weaponType">The type of weapon used.</param>
     public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
     {
+        //ignore damage if already stunned
+        if(_onStun && weaponType == EWeaponType.Fire)
+        {
+            return;
+        }
+
+        
         _lastShootDir = shootDir;
         base.DoDamage(amount);
 
@@ -130,7 +186,9 @@ public class EnemyDamageable : Damageable
             Stun(shootDir);
         }
 
-        GameObject BManager = Instantiate(bloodEffectManager, hitPoint, new Quaternion());
+        GameObject BManager = ResourceManager.GetBloodManagerPool().Get();
+        BManager.SetActive(true);
+        BManager.transform.position = hitPoint;
         BManager.transform.right = shootDir;
     }
 }

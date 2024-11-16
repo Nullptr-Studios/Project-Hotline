@@ -9,6 +9,7 @@ public class MissionEnd : MonoBehaviour
     private void Start()
     {
         _endCollider = GetComponent<BoxCollider2D>();
+        _endCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

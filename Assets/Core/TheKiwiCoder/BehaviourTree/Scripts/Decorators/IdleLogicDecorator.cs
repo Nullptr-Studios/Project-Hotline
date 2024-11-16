@@ -6,7 +6,11 @@ using TheKiwiCoder;
 public class IdleLogicDecorator : DecoratorNode
 {
     private bool abortOnce = true;
-    protected override void OnStart() {
+
+    private EnemyBehaviourDataOverrider overrider;
+    protected override void OnStart()
+    {
+        overrider = context.gameObject.GetComponent<EnemyBehaviourDataOverrider>();
     }
 
     protected override void OnStop() {
@@ -14,17 +18,20 @@ public class IdleLogicDecorator : DecoratorNode
 
     protected override State OnUpdate() 
     {
-        if (!blackboard.seePlayer && blackboard.finalizedShearch)
+        if (overrider.isActive)
         {
-            child.Update();
-            abortOnce = false;
+            if (!blackboard.seePlayer && blackboard.finalizedShearch && !blackboard.heardPlayer)
+            {
+                child.Update();
+                abortOnce = false;
+            }
+            else if (!abortOnce)
+            {
+                child.Abort();
+                abortOnce = true;
+            }
         }
-        else if(!abortOnce)
-        {
-            child.Abort();
-            abortOnce = true;
-        }
-        
+
         return State.Running;
     }
 }

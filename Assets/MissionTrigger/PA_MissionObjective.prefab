@@ -74,9 +74,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 9
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.91858053, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -137,3 +137,8 @@ MonoBehaviour:
   throwForce: 15
   rotationForce: 1000
   gfxCollider2D: {fileID: 7898835972549929773}
+  canStun: 1
+  maskToStun:
+    serializedVersion: 2
+    m_Bits: 0
+  isPlayer: 0

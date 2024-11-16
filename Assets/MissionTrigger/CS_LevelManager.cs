@@ -1,3 +1,5 @@
+using CC.DialogueSystem;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D missionTrigger;
     [SerializeField] private BoxCollider2D endTrigger;
-    [SerializeField] private MissionObjective objective;
+    [SerializeField] [CanBeNull] private MissionObjective objective;
     [SerializeField] private ScoreUI score;
 
 #if UNITY_EDITOR
@@ -28,8 +30,11 @@ public class LevelManager : MonoBehaviour
             Debug.LogError($"[LevelManager] {name}: Objective mot found. Level unwinnable.");
             this.enabled = false;
         }
+        else
+        {
+            missionTrigger.GetComponent<MissionTrigger>().Objective = objective.gameObject;
+        }
         
-        missionTrigger.GetComponent<MissionTrigger>().Objective = objective.gameObject;
     }
 
     public void CompleteMission()
@@ -51,10 +56,31 @@ public class LevelManager : MonoBehaviour
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Mission paused");
 #endif
         
-    } 
-    
-    [System.Obsolete("This method is obsolete. Please use OpenScore instead")]
-    public void EndLevel() => SceneManager.LoadScene("MainMenu");
+    }
+
+    /// <summary>
+    /// Exit to main menu
+    /// </summary>
+    [System.Obsolete("Use Send Message instead")]
+    public static void EndLevel() => SceneManager.LoadScene("MainMenu"); // TODO: This should call the loading screen
+    // Fucking copilot shit
+
+    /// <summary>
+    /// Exit to main menu
+    /// </summary>
+    public void EndLevelMessage() => SceneManager.LoadScene("MainMenu"); // TODO: This should call the loading screen
+    // TODO: Change this (we wont)
+
+    /// <summary>
+    /// Make the player restart the current level
+    /// </summary>
+    public static void RestartLevel()
+    {
+        VariableRepo.Instance.RemoveAll();
+
+        // TODO: this should be fixed after prototype to not have the player read the VN every time
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void OpenScore()
     {

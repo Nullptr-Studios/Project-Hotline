@@ -2,22 +2,30 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+/// <summary>
+/// ScriptableObject that holds motion curves for acceleration and deceleration.
+/// </summary>
 [CreateAssetMenu(fileName = "MC_UnnamedCurve", menuName = "ProjectHotline/Create MotionCurve")]
 public class MotionCurve : ScriptableObject
 {
-    // Animation curve variables
-    public AnimationCurve 
-        accelerationCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1,1));
+    /// <summary>
+    /// The animation curve for acceleration.
+    /// </summary>
+    public AnimationCurve accelerationCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
 
-    public AnimationCurve 
-        decelerationCurve = new AnimationCurve(new Keyframe(0, 1), new Keyframe(1,0));
+    /// <summary>
+    /// The animation curve for deceleration.
+    /// </summary>
+    public AnimationCurve decelerationCurve = new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 0));
 
     [SerializeField] private AnimationCurve timeline;
 
 #if UNITY_EDITOR
-    
-    // Updates _timeline when acceleration and deceleration curves are changed
-    // This DOESN'T run at runtime, only when values are changed in a MotionCurve at the editor
+
+    /// <summary>
+    /// Updates the timeline when acceleration and deceleration curves are changed.
+    /// This does not run at runtime, only when values are changed in a MotionCurve in the editor.
+    /// </summary>
     private void OnValidate()
     {
         timeline = new AnimationCurve();
@@ -34,23 +42,23 @@ public class MotionCurve : ScriptableObject
             decelerationKeys[i].time += decelerationStartTime;
             timeline.AddKey(decelerationKeys[i]);
         }
-        
-        // Fix _timeline curve going >1 after accelerationCurve
+
+        // Fix timeline curve going >1 after accelerationCurve
         AnimationUtility.SetKeyRightTangentMode(
-            timeline, 
-            accelerationCurve.length - 1, 
+            timeline,
+            accelerationCurve.length - 1,
             AnimationUtility.TangentMode.Constant
         );
     }
-    
+
 #endif
 }
 
-
 /// <summary>
-/// Handles the output from MotionCurve and makes the logic on when should the accelerationCurve and decelerationCurve be played.
+/// Handles the output from MotionCurve and makes the logic on when the accelerationCurve and decelerationCurve should be played.
 /// </summary>
-[System.Serializable] public struct MotionController
+[System.Serializable]
+public struct MotionController
 {
     [FormerlySerializedAs("_curve")] [SerializeField] private MotionCurve curve;
     [FormerlySerializedAs("_speedMax")] [SerializeField] private float speedMax;
@@ -60,14 +68,14 @@ public class MotionCurve : ScriptableObject
     private bool _wasMoving;
 
     /// <summary>
-    /// Acceleration and deceleration logic based on if the GameObject is moving or not.
+    /// Acceleration and deceleration logic based on whether the GameObject is moving or not.
     /// </summary>
-    /// <param name="isMoving">Specify if the player is inputting something on the controller</param>
+    /// <param name="isMoving">Specifies if the player is inputting something on the controller.</param>
     public void Update(bool isMoving)
     {
         AnimationCurve currentCurve = isMoving ? curve.accelerationCurve : curve.decelerationCurve;
-        // Make so transition between acceleration and deceleration is smooth even if
-        // movement is stopped before accelerationCurve is finished (value != 1){
+        // Make the transition between acceleration and deceleration smooth even if
+        // movement is stopped before accelerationCurve is finished (value != 1)
 
         if (isMoving != _wasMoving)
         {
@@ -75,14 +83,15 @@ public class MotionCurve : ScriptableObject
         }
 
         _time += Time.deltaTime;
-        // Clamp is needed so we don't go further than m_Timeline's length
+        // Clamp is needed so we don't go further than the timeline's length
         _time = Mathf.Clamp(_time, 0f, currentCurve.GetDuration());
         _speedPercentage = currentCurve.Evaluate(_time);
-        
+
         _wasMoving = isMoving;
     }
+
     /// <summary>
-    /// disable variables
+    /// Resets variables when disabled.
     /// </summary>
     public void OnDisable()
     {
@@ -91,4 +100,3 @@ public class MotionCurve : ScriptableObject
         _wasMoving = false;
     }
 }
-

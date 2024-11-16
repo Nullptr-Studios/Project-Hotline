@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b9978e3e3bebd4aa14f231ecef4ef6, type: 3}
+  m_Name: Mansion_SceneData
+  m_EditorClassIdentifier: 
+  sceneObjects:
+  - sceneObject:
+      m_SceneName: Mansion_Floor1
+    isInitialyLoaded: 1
+    isInitialyActive: 1
+    isLoaded: 0
+    cameraBehaviour:
+      maxRotation: 10
+      maxDistance: 9
+      Origin: {x: 4, y: 0}
+  - sceneObject:
+      m_SceneName: Mansion_Floor2
+    isInitialyLoaded: 0
+    isInitialyActive: 0
+    isLoaded: 0
+    cameraBehaviour:
+      maxRotation: 10
+      maxDistance: 9
+      Origin: {x: 64, y: 1}
+  - sceneObject:
+      m_SceneName: Mansion_Floor3
+    isInitialyLoaded: 0
+    isInitialyActive: 0
+    isLoaded: 0
+    cameraBehaviour:
+      maxRotation: 6
+      maxDistance: 6
+      Origin: {x: 36, y: -36}

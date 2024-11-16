@@ -1,10 +1,11 @@
-"Alright, kid. Time to prove yourself. End of this hallway? There’s a guy who needs to disappear. <speed=3><color=#FA2A2A>Take him out<speed=1><color=white>."
-"Move with <sprite=6>, get in close, and press <sprite=5> to stick 'em with your knife. Don't make me regret bringing you in. We’ll talk when it’s done. <registerbool=meleeTutorial>true</registerbool>"
+"Alright, kid, time to show what you’re made of. See that bat in front of you? Move your ass with <sprite=6>, get close, and pick it up with <sprite=4>. Capisce? <registerint=tutorialPhase>1</registerint>."
 
-"Good. Now, grab the gun with <sprite=4> and head to the room above. There's another guy. Make sure he <speed=3><color=#FA2A2A>eats lead<speed=1><color=white>."
-"Once he's down, scoop up the briefcase with <sprite=2> and meet me back at the car. <speed=3>No<speed=1> loose ends. <registerbool=gunTutorial>true</registerbool>"
+"Good. Now, look to your right, 3 o'clock. You see that poor sap? Make sure he regrets it. Swing hard with <sprite=5> and <speed=3><color=#FA2A2A>finish the job<speed=1><color=white>. <registerint=tutorialPhase>2</registerint>."
 
-"Not bad, kid. You handled yourself. We’re gonna do some big things together, you and me. <action=endTutorial>"
+"Nice work. Now grab his gun and head up. There’s another guy waiting for you. Don't be shy — make him <speed=3><color=#FA2A2A>eat lead<speed=1><color=white>."
+"When he’s down, scoop up the briefcase with <sprite=2> and meet me back at the car. And remember—<speed=3>no witnesses<speed=1>. Got it? <registerint=tutorialPhase>3</registerint>."
+
+"Not bad, kid. You got guts. We’re gonna make a real name for ourselves, you and me. <action=endTutorial>"
 
 {
     "name": "endTutorial",

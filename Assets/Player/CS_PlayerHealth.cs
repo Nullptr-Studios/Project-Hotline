@@ -11,6 +11,8 @@ public class PlayerHealth : Damageable
 {
     public GameObject bloodEffectManager;
 
+    public GameObject PlayerCorpsePrefab;
+    
     [Header("PlayerHealth")]
     [SerializeField] private Canvas deathScreenUI;
     [SerializeField] [CanBeNull] private GameObject mainCamera;
@@ -46,8 +48,11 @@ public class PlayerHealth : Damageable
     public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
     {
         _lastShootDir = shootDir;
-        GameObject bulletManager = Instantiate(bloodEffectManager, hitPoint, new Quaternion());
-        bulletManager.transform.right = _lastShootDir;
+        
+        GameObject BManager = ResourceManager.GetBloodManagerPool().Get();
+        BManager.SetActive(true);
+        BManager.transform.position = hitPoint;
+        BManager.transform.right = shootDir;
         
         base.DoDamage(amount, shootDir, hitPoint);
     }
@@ -58,7 +63,12 @@ public class PlayerHealth : Damageable
         ScoreManager.AddDeath();
         _player.OnDisable(); // Deactivates all inputs from the game
         
-        Invoke("OpenDeathScreen", deathScreenDelay);
+        GameObject c = Instantiate(PlayerCorpsePrefab, transform.position, Quaternion.identity);
+        c.GetComponent<PlayerCorpse>().CorpseAddForceInDir(_lastShootDir, deathScreenUI, mainCamera?.GetComponent<PixelPerfectCamera>());
+        
+        gameObject.SetActive(false);
+        
+        //Invoke("OpenDeathScreen", deathScreenDelay);
     }
 
     /// <summary>
@@ -86,9 +96,6 @@ public class PlayerHealth : Damageable
 
         _input.UI.Accept.performed -= RestartGame;
         _input.UI.Accept.Disable();
-        VariableRepo.Instance.RemoveAll();
-        
-        // TODO: this should be fixed after prototype to not have the player read the VN every time
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 }
