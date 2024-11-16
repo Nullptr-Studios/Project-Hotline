@@ -5,15 +5,16 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     
-    public List<string> CheckpointScenes;
-    public string CheckpointActiveScene;
+    public List<SceneObject> CheckpointScenes;
+    public SceneObject CheckpointActiveScene;
 
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SceneMng.AddCurrentCheckpoint(transform.position, CheckpointScenes, CheckpointActiveScene);
+            PlayerWeaponManager playerWeaponManager = other.GetComponent<PlayerWeaponManager>();
+            SceneMng.AddCurrentCheckpoint(transform.position, CheckpointScenes, CheckpointActiveScene, playerWeaponManager._heldWeaponGameObject);
             this.enabled = false;
         }
     }

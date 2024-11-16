@@ -19,6 +19,8 @@ public class SceneMng : MonoBehaviour
     private static GameObject _player;
     private static PlayerHealth _playerHealth;
 
+    public static List<string> CheckpointWeapons;
+
     void Awake()
     {
         if (SceneData == null)
@@ -26,6 +28,12 @@ public class SceneMng : MonoBehaviour
             Debug.LogError("SceneData is not assigned in " + gameObject.name);
             return;
         }
+        
+        CheckpointWeapons = new List<string>();
+        CheckpointWeapons.Add(null);
+        CheckpointWeapons.Add(null);
+        
+        CheckpointWeapons[0] = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerWeaponManager>().spawningWeapon.name;
 
         _sceneData = SceneData;
         loadedScene = new Dictionary<string, bool>();
@@ -140,12 +148,22 @@ public class SceneMng : MonoBehaviour
         }
     }
 
-    public static void AddCurrentCheckpoint(Vector2 checkpointPos, List<string> loadedScenes, string activeScene)
+    public static void AddCurrentCheckpoint(Vector2 checkpointPos, List<SceneObject> loadedScenes, SceneObject activeScene, List<GameObject> currWeapons)
     {
         _restartPos = checkpointPos;
-        _checkpointScenes = loadedScenes;
+        _checkpointScenes = new List<string>();
+        foreach (var s in loadedScenes)
+        {
+            _checkpointScenes.Add(s);
+        }
         _checkpointActiveScene = activeScene;
         _checkpointIndex++;
+        
+        if(currWeapons[0] != null)
+            CheckpointWeapons[0] = currWeapons[0].name;
+        if(currWeapons[1] != null)
+            CheckpointWeapons[1] = currWeapons[1].name;
+
     }
 
     public static void Reload()
@@ -179,7 +197,7 @@ public class SceneMng : MonoBehaviour
                         LoadScenePrivateAsync(scene.sceneObject);
 
                     if (!string.IsNullOrEmpty(scene.EnemyScene) && _checkpointScenes.Contains(_checkpointActiveScene))
-                        SetActiveScene(scene.EnemyScene);
+                        SetActiveScene(scene.sceneObject);
                 }
                 else
                 {

@@ -96,15 +96,50 @@ public class PlayerWeaponManager : MonoBehaviour
         _playerInput.Gameplay.SwitchWeapons.Disable();
 
     }
-
-    private void OnEnable()
+    
+    public void SpawnWeapons(List<string> weaponsNames)
     {
-        //throw new NotImplementedException();
-    }
+        for (int i = 0; i < _heldWeaponGameObject.Count; i++)
+        {
+            if (_heldWeaponGameObject[i] != null)
+            {
+                Destroy(_heldWeaponGameObject[i]);
+                _heldWeaponGameObject[i] = null;
+            }
+        }
+        
+        _isWeaponHeld = false;
+        _heldWeaponInterface = null;
+        
+        for (int i = 0; i < weaponsNames.Count; i++)
+        {
+            if(weaponsNames[i] == null)
+                continue;
+            
+            foreach (var w in weaponDictionary.weapons)
+            {
+                if (weaponsNames[i].Contains(w.name))
+                {
+                    GameObject weaponToEquip = Instantiate(w);
+                    _heldWeaponGameObject[i] = weaponToEquip;
+                    _heldWeaponInterface = weaponToEquip.GetComponent<IWeapon>();
+                    _heldWeaponInterface.Pickup(weaponHolder);
+                    _heldWeaponInterface.SetIsPlayer(true);
+                    
 
-    private void OnDisable()
-    {
-        //_heldWeaponInterface.Drop();
+                    //FMODUnity.RuntimeManager.PlayOneShot(pickupSound, transform.position);
+
+                    _heldWeaponInterface.setClaimed(true);
+                    break;
+                }
+            }
+        }
+        
+        _currentIndex = 0;
+        _heldWeaponInterface = _heldWeaponGameObject[_currentIndex].GetComponent<IWeapon>();
+        _isWeaponHeld = true;
+        
+        anim.ResetTrigger(Use);
     }
 
     /// <summary>
@@ -121,62 +156,38 @@ public class PlayerWeaponManager : MonoBehaviour
         // Placeholder for spawning weapon
         if (spawningWeapon)
         {
-            Instantiate(spawningWeapon, transform.position, new Quaternion());
-            _wantsToThrowOrGet = true;
+            /*Instantiate(spawningWeapon, transform.position, new Quaternion());
+            _wantsToThrowOrGet = true;*/
+            
+            SpawnWeapons( new List<string> { spawningWeapon.name });
         }
         //###############################################
     }
 
-    public void SpawnWeapons(List<string> weaponsNames)
+
+    public void Restart()
     {
-        for (int i = 0; i < weaponsNames.Count; i++)
-        {
-            foreach (var w in weaponDictionary.weapons)
-            {
-                if (w.name == weaponsNames[i])
-                {
-                    GameObject weaponToEquip = Instantiate(w);
-                    _heldWeaponGameObject[i] = weaponToEquip;
-                    _heldWeaponInterface = weaponToEquip.GetComponent<IWeapon>();
-                    _heldWeaponInterface.Pickup(weaponHolder);
-                    _heldWeaponInterface.SetIsPlayer(true);
-                    
-                    if (_heldWeaponInterface.MaxUses() != -1)
-                    {
-                        ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
-                        ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
-                    }
-                    else
-                        ammoPrompt.DoHide();
-
-                    FMODUnity.RuntimeManager.PlayOneShot(pickupSound, transform.position);
-
-                    _heldWeaponInterface.setClaimed(true);
-                    
-                    _isWeaponHeld = true;
-                    continue;
-                }
-            }
-        }
+        SpawnWeapons(SceneMng.CheckpointWeapons);
+        SetAmmoPrompt();
     }
 
-    /// <summary>
-    /// Initializes the player weapon manager.
-    /// </summary>
-    void Start()
-    {
-        // Initialize input
-        InitializeInput();
-        _playerInput.Gameplay.ThrowOrGet.Enable();
-        _playerInput.Gameplay.Fire.Enable();
-        _playerInput.Gameplay.SwitchWeapons.Enable();
 
-        // Placeholder for spawning weapon
-        if (spawningWeapon)
+    public void SetAmmoPrompt()
+    {
+        if(!_isWeaponHeld)
+            return;
+        if (_heldWeaponInterface.MaxUses() != -1)
         {
-            Instantiate(spawningWeapon, transform.position, new Quaternion());
-            _wantsToThrowOrGet = true;
+            ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+            ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
         }
+        else
+            ammoPrompt.DoHide();
+    }
+
+    private void Start()
+    {
+        SetAmmoPrompt();
     }
 
     /// <summary>
@@ -302,8 +313,13 @@ public class PlayerWeaponManager : MonoBehaviour
 
     // Throw and get logic
     // I dont like this implementation on the fucking update cuz i cant call it  -x
+    /// <summary>
+    /// WHYYYYYYYYYYYY IS THE FUCKING UPDATE METHOD NOT BEING CALLED -D
+    /// </summary>
     private void Update()
     {
+        Debug.Log("FUCKUNITY");
+        
         anim.SetBool(WeaponEquipped, _isWeaponHeld);
         if (_isWeaponHeld)
         {

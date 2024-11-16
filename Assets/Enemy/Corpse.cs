@@ -19,13 +19,15 @@ public class Corpse : MonoBehaviour
         gameObject.layer = 9;
 
         _corpseConfig = ResourceManager.GetCorpseConfig();
+        if (_rb)
+        {
+            _rb.drag = _corpseConfig.Drag;
+            _rb.gravityScale = 0;
 
-        _rb.drag = _corpseConfig.Drag;
-        _rb.gravityScale = 0;
-        
-        _rb.freezeRotation = true;
-        
-        _rb.AddForce(dir * _corpseConfig.Force);
+            _rb.freezeRotation = true;
+
+            _rb.AddForce(dir * _corpseConfig.Force);
+        }
 
         transform.right = dir;
     }
