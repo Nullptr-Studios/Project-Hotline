@@ -122,7 +122,7 @@ public class Weapon : MonoBehaviour, IWeapon
     private ContactFilter2D _contactFilter;
     private RaycastHit2D[] _hitArr = new RaycastHit2D[10];
 
-    public float throwForce = 15;
+    //public float throwForce = 30;
     public float rotationForce = 1000;
     public Collider2D gfxCollider2D;
     public bool canStun = true;
@@ -254,7 +254,7 @@ public class Weapon : MonoBehaviour, IWeapon
         if (!_held) return;
 
         AddRb();
-        _rb.velocity = forwardVector * throwForce;
+        _rb.velocity = forwardVector * 30.0f;
         _rb.angularVelocity = Random.Range(-rotationForce, rotationForce);
         _stun = true;
         transform.SetParent(null);

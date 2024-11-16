@@ -1,4 +1,5 @@
 using System.Collections;
+using NavMeshPlus.Extensions;
 using TheKiwiCoder;
 using UnityEngine;
 using UnityEngine.AI;
@@ -43,6 +44,12 @@ public class EnemyDamageable : Damageable
     private Vector3 _relativePos;
 
     private bool _onStun = false;
+    
+    RotateAgentSmoothly rotateSmooth2D;
+    
+    private AgentOverride2d override2D;
+
+    private GameObject _player;
 
     /// <summary>
     /// Initializes the EnemyDamageable instance.
@@ -51,6 +58,12 @@ public class EnemyDamageable : Damageable
     {
         base.Start();
 
+        _player = GameObject.FindGameObjectWithTag("Player");
+
+        override2D = GetComponent<AgentOverride2d>();
+        
+        rotateSmooth2D = new RotateAgentSmoothly(override2D.Agent, override2D, 180);
+        
         if(weaponHandler)
             _relativePos = weaponHandler.localPosition;
 
@@ -85,6 +98,9 @@ public class EnemyDamageable : Damageable
     /// </summary>
     private void StunRecover()
     {
+        override2D.agentOverride = rotateSmooth2D;
+
+        
         _onStun = false;
 
         _aiSensor.enabled = true;
@@ -119,6 +135,8 @@ public class EnemyDamageable : Damageable
     /// <param name="dir">The direction of the stun</param>
     public override void Stun(Vector3 dir)
     {
+        override2D.agentOverride = null;
+        
         if (_onStun)
             return;
 
@@ -143,7 +161,7 @@ public class EnemyDamageable : Damageable
         _rb.gravityScale = 0;
         _rb.AddForce(dir * 200);
         
-        transform.up = dir;
+        transform.up = new Vector3(transform.position.x - _player.transform.position.x, transform.position.y - _player.transform.position.y, 0).normalized;
 
         _onStun = true;
 

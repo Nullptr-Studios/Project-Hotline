@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
@@ -49,7 +50,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private PlayerIA _playerInput;
 
     private IWeapon _heldWeaponInterface;
-    private readonly List<GameObject> _heldWeaponGameObject = new List<GameObject>();
+    public readonly List<GameObject> _heldWeaponGameObject = new List<GameObject>();
 
     private int _currentIndex;
 
@@ -93,6 +94,16 @@ public class PlayerWeaponManager : MonoBehaviour
         _playerInput.Gameplay.Fire.Disable();
         _playerInput.Gameplay.SwitchWeapons.Disable();
 
+    }
+
+    private void OnEnable()
+    {
+        //throw new NotImplementedException();
+    }
+
+    private void OnDisable()
+    {
+        //_heldWeaponInterface.Drop();
     }
 
     /// <summary>

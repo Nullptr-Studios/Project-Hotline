@@ -470,8 +470,6 @@ MonoBehaviour:
   anim: {fileID: 8566547389374578288}
   log: 0
   drawGizmos: 0
-  progressBar: {fileID: 0}
-  progressBar2: {fileID: 0}
   ammoPrompt: {fileID: 0}
 --- !u!114 &8219012985781061561
 MonoBehaviour:
@@ -555,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90afd25672b2ad4dae0d47786cbe7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 0.5
   bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
   PlayerCorpsePrefab: {fileID: 7440868465861970397, guid: fd30fa95fe942e449bac51de500564f1, type: 3}
   deathScreenUI: {fileID: 0}

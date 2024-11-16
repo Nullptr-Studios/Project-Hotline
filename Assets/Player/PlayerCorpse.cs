@@ -67,7 +67,7 @@ public class PlayerCorpse : MonoBehaviour
         VariableRepo.Instance.RemoveAll();
 
         // TODO: this should be fixed after prototype to not have the player read the VN every time
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneMng.Reload();
     }
 
     /// <summary>

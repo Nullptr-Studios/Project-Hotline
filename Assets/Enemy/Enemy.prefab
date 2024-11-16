@@ -74,8 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2729283819422813558, guid: 156d9602094ad344e9143816ac57d4ce,
-    type: 3}
+  m_Sprite: {fileID: -2729283819422813558, guid: 156d9602094ad344e9143816ac57d4ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,7 +148,6 @@ GameObject:
   - component: {fileID: 975079144875247305}
   - component: {fileID: 4320165183307307060}
   - component: {fileID: 6114627427478298440}
-  - component: {fileID: 4441475060996046577}
   - component: {fileID: 2337270951896560456}
   - component: {fileID: 4929575349862732123}
   - component: {fileID: 5774344439103843990}
@@ -179,7 +177,7 @@ Transform:
   - {fileID: 620825279225639238}
   - {fileID: 5296668497393563518}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &4320165183307307060
 NavMeshAgent:
@@ -215,19 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e39f6090724e4a4a8aadeb042afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4441475060996046577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2975961158892791207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c7f4db162bab4443818dd13bed4b1dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularSpeed: 180
 --- !u!114 &2337270951896560456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,10 +297,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   weaponHolder: {fileID: 620825279225639238}
-  weaponGO: {fileID: 4223289585622608669, guid: 1f3a110296d5acf4e9997829d9ff0271,
-    type: 3}
+  weaponGO: {fileID: 4223289585622608669, guid: 1f3a110296d5acf4e9997829d9ff0271, type: 3}
   log: 0
   drawGizmos: 0
+  _isWeaponHeld: 0
   _wantsToThrowOrGet: 0
   anim: {fileID: 1586720700333565052}
 --- !u!114 &1155971598429141389
@@ -331,8 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9,
-    type: 3}
+  bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
   weaponHandler: {fileID: 620825279225639238}
   stunCooldown: 1
   animatorPlayer: {fileID: 1586720700333565052}
@@ -354,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 7
+  nearDetectionRange: 1
   angle: 60
   scanFrequency: 15
   layerToSee:
@@ -363,9 +348,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8567
   detectedPlayer: {fileID: 0}
+  fallbackPosition: {x: 0, y: 0, z: 0}
   heardPosition: {x: 0, y: 0}
-  heardPlayer: 0
   isDeaf: 0
+  heardPlayer: 0
   isDetecting: 0
   drawGizmos: 0
   meshColor: {r: 1, g: 1, b: 0, a: 0.25490198}
@@ -458,8 +444,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1026207259909828271, guid: 54d573fa38b9c8f439073dcff6640012,
-    type: 3}
+  m_Sprite: {fileID: 1026207259909828271, guid: 54d573fa38b9c8f439073dcff6640012, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -480,8 +465,7 @@ Animator:
   m_GameObject: {fileID: 3229305270992216113}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: -2615115623224510231, guid: 54d573fa38b9c8f439073dcff6640012,
-    type: 3}
+  m_Controller: {fileID: -2615115623224510231, guid: 54d573fa38b9c8f439073dcff6640012, type: 3}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

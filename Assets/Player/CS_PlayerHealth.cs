@@ -23,7 +23,7 @@ public class PlayerHealth : Damageable
 
     private Vector3 _lastShootDir;
 
-    public bool IsDead { get; private set; }
+    public bool IsDead { get; set; }
 
 #if UNITY_EDITOR
         [Header("Debug")] [SerializeField] private bool logReload;
@@ -40,9 +40,7 @@ public class PlayerHealth : Damageable
             _disableFX = true;
             Debug.LogWarning($"[PlayerHealth] {name}: Camera not found, disabling death shader.");
         }
-
-        _input = new PlayerIA();
-        _input.UI.Accept.performed += RestartGame;
+        
     }
 
     public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
@@ -61,7 +59,7 @@ public class PlayerHealth : Damageable
     {
         IsDead = true;  
         ScoreManager.AddDeath();
-        _player.OnDisable(); // Deactivates all inputs from the game
+        //_player.OnDisable(); // Deactivates all inputs from the game
         
         GameObject c = Instantiate(PlayerCorpsePrefab, transform.position, Quaternion.identity);
         c.GetComponent<PlayerCorpse>().CorpseAddForceInDir(_lastShootDir, deathScreenUI, mainCamera?.GetComponent<PixelPerfectCamera>());
@@ -87,15 +85,19 @@ public class PlayerHealth : Damageable
     /// Reloads the scene when called
     /// </summary>
     /// <param name="context">Input context shit that doesnt work</param>
-    private void RestartGame(InputAction.CallbackContext context)
+    public void RestartGame()
     {
 
 #if UNITY_EDITOR
-        if (logReload) Debug.LogWarning($"[PlayerHealth] {name}: Reloading game");
+        if (logReload) Debug.LogWarning($"[PlayerHealth] {name}: Reloading player");
 #endif
 
-        _input.UI.Accept.performed -= RestartGame;
-        _input.UI.Accept.Disable();
+        IsDead = false;
+
+        _currentHealth = maxHealth;
+        
+        deathScreenUI.gameObject.SetActive(false);
+        mainCamera!.GetComponent<PixelPerfectCamera>().enabled = true;
 
     }
 }
