@@ -1782,8 +1782,8 @@ MonoBehaviour:
   m_LookaheadTime: 0.25
   m_LookaheadSmoothing: 1
   m_LookaheadIgnoreY: 0
-  m_XDamping: 0.6
-  m_YDamping: 0.6
+  m_XDamping: 1.2
+  m_YDamping: 1.2
   m_ZDamping: 0
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
@@ -5445,7 +5445,7 @@ MonoBehaviour:
   m_AssetsPPU: 16
   m_RefResolutionX: 384
   m_RefResolutionY: 216
-  m_CropFrame: 0
+  m_CropFrame: 4
   m_GridSnapping: 2
   m_FilterMode: 0
   m_UpscaleRT: 0
@@ -5566,15 +5566,15 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: -0.029166669
     y: 0
-    width: 1
-    height: 1
+    width: 0.20000002
+    height: 0.86851853
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 6.75
+  orthographic size: 4.8854165
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
