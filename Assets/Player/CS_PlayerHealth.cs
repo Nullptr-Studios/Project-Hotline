@@ -99,6 +99,8 @@ public class PlayerHealth : Damageable
         deathScreenUI.gameObject.SetActive(false);
         mainCamera!.GetComponent<PixelPerfectCamera>().enabled = true;
         
+        ScoreManager.Restart();
+        
         GetComponent<PlayerWeaponManager>().Restart();
 
     }

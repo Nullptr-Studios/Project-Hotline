@@ -15,6 +15,8 @@ public class ScoreManager : MonoBehaviour
     // Don't change this variable, it's only to show text on inspector
     [TextArea] public string text = "Power formula is calculated sign * (x * factor/100) ^ pow. " + 
                                            "Log formula is calculated Log{100pow} (sign * x + 100pow)";
+    
+    private static int _playerKillsInCheckpoint = 0;
 
     [Header("Values")]
     [SerializeField] private float killXP;
@@ -49,6 +51,16 @@ public class ScoreManager : MonoBehaviour
         _maxFormula.xOffset = _maxTime;
         
         _playerKills = 0;
+    }
+
+    public static void Checkpoint()
+    {
+        _playerKillsInCheckpoint = _playerKills;
+    }
+    
+    public static void Restart()
+    {
+        _playerKills = _playerKillsInCheckpoint;
     }
 
     public static void AddKill()

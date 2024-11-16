@@ -15,6 +15,9 @@ public class Checkpoint : MonoBehaviour
         {
             PlayerWeaponManager playerWeaponManager = other.GetComponent<PlayerWeaponManager>();
             SceneMng.AddCurrentCheckpoint(transform.position, CheckpointScenes, CheckpointActiveScene, playerWeaponManager._heldWeaponGameObject);
+            
+            ScoreManager.Checkpoint();
+            
             this.enabled = false;
         }
     }
