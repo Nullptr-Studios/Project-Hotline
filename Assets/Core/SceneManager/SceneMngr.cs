@@ -150,8 +150,6 @@ public class SceneMng : MonoBehaviour
 
     public static void Reload()
     {
-        ResourceManager.GetCorpsePool().Dispose();
-        ResourceManager.GetCivilianCorpsePool().Dispose();
         
         _player.SetActive(true);
         _player.transform.position = _restartPos;
@@ -189,6 +187,22 @@ public class SceneMng : MonoBehaviour
                         UnloadScenePrivateAsync(scene.sceneObject);
                 }
             }
+        }
+        
+        GameObject[] corpse = GameObject.FindGameObjectsWithTag("Corpse");
+        
+        foreach (var c in corpse)
+        {
+            ResourceManager.GetCorpsePool().Release(c);
+            c.SetActive(false);
+        }
+        
+        GameObject[] civilianCorpse = GameObject.FindGameObjectsWithTag("CivilianCorpse");
+        
+        foreach (var c in civilianCorpse)
+        {
+            ResourceManager.GetCivilianCorpsePool().Release(c);
+            c.SetActive(false);
         }
         
     }

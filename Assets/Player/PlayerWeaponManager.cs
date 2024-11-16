@@ -17,6 +17,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private static readonly int Use = Animator.StringToHash("Use");
 
     public GameObject spawningWeapon;
+    public WeaponDictionary weaponDictionary;
 
     [Header("Pickup")]
     public float pickupRange = 2.0f;
@@ -124,6 +125,58 @@ public class PlayerWeaponManager : MonoBehaviour
             _wantsToThrowOrGet = true;
         }
         //###############################################
+    }
+
+    public void SpawnWeapons(List<string> weaponsNames)
+    {
+        for (int i = 0; i < weaponsNames.Count; i++)
+        {
+            foreach (var w in weaponDictionary.weapons)
+            {
+                if (w.name == weaponsNames[i])
+                {
+                    GameObject weaponToEquip = Instantiate(w);
+                    _heldWeaponGameObject[i] = weaponToEquip;
+                    _heldWeaponInterface = weaponToEquip.GetComponent<IWeapon>();
+                    _heldWeaponInterface.Pickup(weaponHolder);
+                    _heldWeaponInterface.SetIsPlayer(true);
+                    
+                    if (_heldWeaponInterface.MaxUses() != -1)
+                    {
+                        ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+                        ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
+                    }
+                    else
+                        ammoPrompt.DoHide();
+
+                    FMODUnity.RuntimeManager.PlayOneShot(pickupSound, transform.position);
+
+                    _heldWeaponInterface.setClaimed(true);
+                    
+                    _isWeaponHeld = true;
+                    continue;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Initializes the player weapon manager.
+    /// </summary>
+    void Start()
+    {
+        // Initialize input
+        InitializeInput();
+        _playerInput.Gameplay.ThrowOrGet.Enable();
+        _playerInput.Gameplay.Fire.Enable();
+        _playerInput.Gameplay.SwitchWeapons.Enable();
+
+        // Placeholder for spawning weapon
+        if (spawningWeapon)
+        {
+            Instantiate(spawningWeapon, transform.position, new Quaternion());
+            _wantsToThrowOrGet = true;
+        }
     }
 
     /// <summary>

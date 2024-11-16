@@ -424,7 +424,6 @@ MonoBehaviour:
   pivotRotation: 0
   sprite: {fileID: 1296727842978240662}
   playerCollider: {fileID: 0}
-  pauseMenu: {fileID: 0}
   debugSpeed: 0
   debugInput: 0
 --- !u!114 &8330505946157900613
@@ -440,6 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawningWeapon: {fileID: 4223289585622608669, guid: 3473ee2e2ea9c974aa9fc5981d891b87, type: 3}
+  weaponDictionary: {fileID: 11400000, guid: 2e7eccf80c58eb94c83812ca32c9dbe1, type: 2}
   pickupRange: 3
   weaponLm:
     serializedVersion: 2
