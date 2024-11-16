@@ -139,7 +139,7 @@ public class ScoreUI : MonoBehaviour
         _input.UI.Accept.performed -= ExitScreen;
         _input.Gameplay.Interact.performed -= ChangeSpeed;
         _input.Gameplay.Interact.canceled -= ChangeSpeed;
-        LevelManager.EndLevel();
+        GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
     }
 
     public void Activate()

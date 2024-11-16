@@ -7,8 +7,8 @@ public class TrainSpawner : MonoBehaviour
     private Train[] _trains = new Train[2];
     
     // I'm hardcoding this as this system is not going to be reused
-    private const float START_POSITION_Y = -17;
-    private const float MAX_POSITION_Y = 45;
+    private const float START_POSITION_Y = 45;
+    private const float MAX_POSITION_Y = -17;
     
     // Start is called before the first frame update
     void Start()
@@ -35,7 +35,7 @@ public class TrainSpawner : MonoBehaviour
                     new Vector3(_trains[i].@object.transform.position.x, START_POSITION_Y, 0f);
                 _trains[i].timer = Time.time;
             }
-            else if (_trains[i].@object.transform.position.y < MAX_POSITION_Y)
+            else if (_trains[i].@object.transform.position.y > MAX_POSITION_Y)
             {   // Update train movement -x
                 _trains[i].@object.transform.position = new Vector3(_trains[i].@object.transform.position.x,
                     _trains[i].@object.transform.position.y + _trains[i].speed * Time.deltaTime,

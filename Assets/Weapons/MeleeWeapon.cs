@@ -17,6 +17,7 @@ public class MeleeWeapon : Weapon
     [Header("Events")]
     [Tooltip("Please don't ever use this shit")]
     public UnityEvent OnPick;
+    private bool _hasBeenPicked;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -117,7 +118,11 @@ public class MeleeWeapon : Weapon
     public override void Pickup(Transform weaponHolder)
     {
         GetComponent<SpriteRenderer>().enabled = false;
-        OnPick.Invoke();
+        if (!_hasBeenPicked)
+        {
+            _hasBeenPicked = true;
+            OnPick.Invoke();
+        }
         base.Pickup(weaponHolder);
     }
 

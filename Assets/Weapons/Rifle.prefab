@@ -166,7 +166,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 6144
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -216,11 +216,8 @@ MonoBehaviour:
   maskToStun:
     serializedVersion: 2
     m_Bits: 512
+  isPlayer: 0
   fireWeaponData: {fileID: 11400000, guid: 17874524032a97e4ca6ec2b3e03f2e92, type: 2}
-  bulletHitWallVFX: {fileID: 180772, guid: 697d9a1e52bb99d468a5d727e5a4b435, type: 3}
-  bulletHitGlassVFX: {fileID: 168394, guid: 93983eaa39ee5d4408c0b10200e234b4, type: 3}
-  bulletHitWallBangVFX: {fileID: 138412, guid: c75e5a4fa5c842546a553399e24eb22d, type: 3}
-  muzzleVFX: {fileID: 146992, guid: 4e20780f83b08084f9f9435e4b48bac4, type: 3}
   gunMuzzle: {fileID: 6706905818999419598}
   muzzleLightController: {fileID: 763806682019522438}
   dispersionTransform: {fileID: 6900966375679216604}

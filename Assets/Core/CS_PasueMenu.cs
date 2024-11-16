@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PasueMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
     private PlayerMovement _playerinput;
     private PlayerIA _input;
@@ -45,7 +45,7 @@ public class PasueMenu : MonoBehaviour
     }
 
     // Exit to main menu button
-    public void OnExit() => LevelManager.EndLevel();
+    public void OnExit() => GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
 
     // Restart level button
     public void OnRestart() => LevelManager.RestartLevel();

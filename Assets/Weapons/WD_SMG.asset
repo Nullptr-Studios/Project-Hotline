@@ -23,15 +23,6 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.2
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1.4
       value: 0.1
       inSlope: 0
       outSlope: 0
@@ -39,23 +30,32 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.04
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timeToReachFinalFireRate: 1.4
-  initialFireRate: 0.2
-  finalFireRate: 0.1
+  timeToReachFinalFireRate: 1
+  initialFireRate: 0.1
+  finalFireRate: 0.04
   maxAmmo: 24
   reloadTime: 10
   useDispersion: 1
   useDispersionCurve: 1
-  overrideBulletDispersionCurve: 1
+  overrideBulletDispersionCurve: 0
   bulletDispersionCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 4
+      value: 8
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -63,66 +63,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.435
-      value: 5.077566
-      inSlope: 8.36084
-      outSlope: 8.36084
+      time: 0.6
+      value: 24
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.0307645
-    - serializedVersion: 3
-      time: 0.44142476
-      value: 5.131815
-      inSlope: 30.23078
-      outSlope: 30.23078
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 10
-      inSlope: 0.7499116
-      outSlope: 0.7499116
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.7201888
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.2
-      value: 12
-      inSlope: 4.6685796
-      outSlope: 4.6685796
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.2025352
-      value: 12
-      inSlope: 2.2522495
-      outSlope: 2.2522495
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.4
-      value: 12
-      inSlope: -3.8176873
-      outSlope: -3.8176873
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.24123976
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timeToReachMaxDispersion: 1.4
-  minDispersionAngle: 1
-  maxDispersionAngle: 10
+  timeToReachMaxDispersion: 0.6
+  minDispersionAngle: 8
+  maxDispersionAngle: 24
   SpriteAnimID: 1
+  enemyHearingDistance: 20
   fireSound:
     Guid:
       Data1: 0
@@ -144,3 +100,27 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  sfxMuzzleFlashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

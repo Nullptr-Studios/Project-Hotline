@@ -165,7 +165,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 6144
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -215,7 +215,11 @@ MonoBehaviour:
   maskToStun:
     serializedVersion: 2
     m_Bits: 512
+  isPlayer: 0
   meleeWeaponData: {fileID: 11400000, guid: 0dd44528de1f1654fa9451933a21fc6b, type: 2}
   offset: 1
+  OnPick:
+    m_PersistentCalls:
+      m_Calls: []
   log: 0
   drawGizmos: 1

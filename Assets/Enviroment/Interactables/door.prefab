@@ -78,7 +78,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.49730015, y: -0.022856848}
+  m_ConnectedAnchor: {x: 0.4972992, y: -0.022856848}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -295,8 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a16ad51fa0d93d49a0e7d645e820800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  hitForce: 100
+  maxHealth: 7
+  hitForce: 400
 --- !u!70 &5893222785546650373
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -358,7 +358,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5000019, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -396170
+  m_InstanceId: 162144
   m_LocalBounds:
     m_Center: {x: 0, y: -0.0000009536743, z: 0}
     m_Extent: {x: 0.5, y: 0.50000095, z: 0}

@@ -33,11 +33,12 @@ public class UIButtonController : MonoBehaviour
         }
         
         MaxIndex = Buttons.Count;
-        CurrentFocus = 0;
+        CurrentFocus = -1;
     }
 
     protected virtual void PerformAction(InputAction.CallbackContext context)
     {
+        if (CurrentFocus < 0 || CurrentFocus >= MaxIndex) return;
         Buttons[CurrentFocus].Perform();
     }
 
