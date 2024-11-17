@@ -173,6 +173,11 @@ public class SceneMng : MonoBehaviour
 
     public static void Reload()
     {
+        if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
+        {
+            SceneManager.LoadScene("Tutorial__Main");
+            return;
+        }
         
         _player.SetActive(true);
         _player.transform.position = _restartPos;
