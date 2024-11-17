@@ -15,27 +15,30 @@ MonoBehaviour:
   sceneObjects:
   - sceneObject:
       m_SceneName: Mansion_Floor1
+    EnemyScene:
+      m_SceneName: Mansion_Floor1_Enemies
     isInitialyLoaded: 1
     isInitialyActive: 1
-    isLoaded: 0
     cameraBehaviour:
       maxRotation: 10
       maxDistance: 9
       Origin: {x: 4, y: 0}
   - sceneObject:
       m_SceneName: Mansion_Floor2
+    EnemyScene:
+      m_SceneName: Mansion_Floor2_Enemies
     isInitialyLoaded: 0
     isInitialyActive: 0
-    isLoaded: 0
     cameraBehaviour:
       maxRotation: 10
       maxDistance: 9
       Origin: {x: 64, y: 1}
   - sceneObject:
       m_SceneName: Mansion_Floor3
+    EnemyScene:
+      m_SceneName: Mansion_Floor3_Enemies
     isInitialyLoaded: 0
     isInitialyActive: 0
-    isLoaded: 0
     cameraBehaviour:
       maxRotation: 6
       maxDistance: 6

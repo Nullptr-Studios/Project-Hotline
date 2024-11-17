@@ -32,8 +32,13 @@ public class SceneMng : MonoBehaviour
         CheckpointWeapons = new List<string>();
         CheckpointWeapons.Add(null);
         CheckpointWeapons.Add(null);
+
+        GameObject SW = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerWeaponManager>().spawningWeapon;
         
-        CheckpointWeapons[0] = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerWeaponManager>().spawningWeapon.name;
+        if (SW != null)
+            CheckpointWeapons[0] = SW.name;
+        else
+            CheckpointWeapons[0] = null;
 
         _sceneData = SceneData;
         loadedScene = new Dictionary<string, bool>();
