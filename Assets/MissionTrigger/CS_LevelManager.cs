@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
         
         if (objective == null)
         {
-            Debug.LogError($"[LevelManager] {name}: Objective mot found. Level unwinnable.");
+            Debug.LogError($"[LevelManager] {name}: Objective not found. Level unwinnable.");
             this.enabled = false;
         }
         else
