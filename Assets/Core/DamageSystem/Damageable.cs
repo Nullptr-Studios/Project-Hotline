@@ -47,7 +47,7 @@ public class Damageable : MonoBehaviour, IDamageable
     [Header("Base Damageable")]
     public float maxHealth = 1;
 
-    private float _currentHealth;
+    protected float _currentHealth;
 
     /// <summary>
     /// Sets the max health as the current health.

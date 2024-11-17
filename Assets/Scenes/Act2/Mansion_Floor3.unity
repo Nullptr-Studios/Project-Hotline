@@ -540,6 +540,7 @@ GameObject:
   - component: {fileID: 870127192}
   - component: {fileID: 870127194}
   - component: {fileID: 870127193}
+  - component: {fileID: 870127195}
   m_Layer: 0
   m_Name: Ground (3)
   m_TagString: Untagged
@@ -1706,11 +1707,15 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 74f90b8461ea9ab40a815119c4d7af42, type: 2}
   - m_RefCount: 50
     m_Data: {fileID: 11400000, guid: 72d668e7413c20a47b9fe26bdcf52869, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 58
     m_Data: {fileID: 2000178954, guid: 534855105a15cf14f8ddf9ed0fd9742e, type: 3}
   - m_RefCount: 50
     m_Data: {fileID: 1326223407, guid: 534855105a15cf14f8ddf9ed0fd9742e, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 108
     m_Data:
@@ -1736,8 +1741,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: -41, z: 0}
-  m_Size: {x: 43, y: 41, z: 1}
+  m_Origin: {x: -4, y: -41, z: 0}
+  m_Size: {x: 47, y: 41, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -1757,6 +1762,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &870127195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870127191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1048234805
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,6 +2096,7 @@ GameObject:
   - component: {fileID: 1262458193}
   - component: {fileID: 1262458192}
   - component: {fileID: 1262458191}
+  - component: {fileID: 1262458194}
   m_Layer: 0
   m_Name: Walls (3)
   m_TagString: Untagged
@@ -3256,6 +3278,22 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &1262458194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262458187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1509793951
 GameObject:
   m_ObjectHideFlags: 0

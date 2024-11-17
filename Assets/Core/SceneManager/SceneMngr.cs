@@ -4,148 +4,113 @@ using UnityEngine.SceneManagement;
 
 public class SceneMng : MonoBehaviour
 {
-    /// <summary>
-    /// Delegate for handling civilian panic events.
-    /// </summary>
     public delegate void CivilianPanic();
-
-    /// <summary>
-    /// Static delegate instance for civilian panic events.
-    /// </summary>
     public static CivilianPanic CivilianPanicDelegate;
-
-    /// <summary>
-    /// List of exit nodes in the scene.
-    /// </summary>
     public static List<GameObject> ExitNodes;
-
     public static SCameraVariables ActiveSceneCameraVars;
-
-    /// <summary>
-    /// Data for the scene.
-    /// </summary>
     public SceneData SceneData;
 
-    private Dictionary<string, bool> loadedScene;
+    private static string _checkpointActiveScene;
+    private static List<string> _checkpointScenes;
+    private static SceneData _sceneData;
+    private static Dictionary<string, bool> loadedScene;
+    private static Vector2 _restartPos;
+    private static int _checkpointIndex = 0;
+    private static GameObject _player;
+    private static PlayerHealth _playerHealth;
 
-    #if UNITY_EDITOR
-    [Header("Debug")]
-    [SerializeField] private bool log = false;
-    #endif
+    public static List<string> CheckpointWeapons;
 
-    /// <summary>
-    /// Initializes the scene manager and loads initial scenes.
-    /// </summary>
     void Awake()
     {
-        if(SceneData == null)
+        if (SceneData == null)
         {
             Debug.LogError("SceneData is not assigned in " + gameObject.name);
-            //Destroy(this);
-            //return;
+            return;
         }
+        
+        CheckpointWeapons = new List<string>();
+        CheckpointWeapons.Add(null);
+        CheckpointWeapons.Add(null);
+        
+        CheckpointWeapons[0] = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerWeaponManager>().spawningWeapon.name;
 
+        _sceneData = SceneData;
         loadedScene = new Dictionary<string, bool>();
-
         ExitNodes = new List<GameObject>(GameObject.FindGameObjectsWithTag("ExitNode"));
 
-        foreach(var scene in SceneData.sceneObjects)
+        foreach (var scene in _sceneData.sceneObjects)
         {
-
             loadedScene.Add(scene.sceneObject, false);
-
-            if(scene.isInitialyLoaded)
+            loadedScene.Add(scene.EnemyScene, false);
+            if (scene.isInitialyLoaded)
             {
                 LoadScenePrivateAsync(scene.sceneObject);
-
-                if(scene.isInitialyActive)
+                if (scene.isInitialyActive)
+                {
                     ActiveSceneCameraVars = scene.cameraBehaviour;
+                    if (!string.IsNullOrEmpty(scene.EnemyScene))
+                        LoadScenePrivateAsync(scene.EnemyScene);
+                }
             }
         }
     }
 
-    /// <summary>
-    /// Unloads all scenes when the object is destroyed.
-    /// </summary>
+    private void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _restartPos = _player.transform.position;
+        _playerHealth = _player.GetComponent<PlayerHealth>();
+    }
+
     private void OnDestroy()
     {
-        if(SceneData == null)
-            return;
+        if (_sceneData == null) return;
 
-        foreach (var scene in SceneData.sceneObjects)
+        foreach (var scene in _sceneData.sceneObjects)
         {
-            if(loadedScene[scene.sceneObject])
+            if (loadedScene[scene.sceneObject])
                 UnloadScenePrivateAsync(scene.sceneObject);
         }
     }
 
-    /// <summary>
-    /// Unloads a scene asynchronously.
-    /// </summary>
-    /// <param name="sceneName">The name of the scene to unload.</param>
-    private void UnloadScenePrivateAsync(string sceneName)
+    private static void UnloadScenePrivateAsync(string sceneName)
     {
-        AsyncOperation asyncOper = SceneManager.UnloadSceneAsync(sceneName);
-        if (asyncOper != null) 
+        var asyncOper = SceneManager.UnloadSceneAsync(sceneName);
+        if (asyncOper != null)
             asyncOper.completed += AsyncOperUnloading_completed;
 
         loadedScene[sceneName] = false;
-    
     }
 
-    /// <summary>
-    /// Callback for when a scene has finished unloading.
-    /// </summary>
-    /// <param name="obj">The async operation.</param>
-    private void AsyncOperUnloading_completed(AsyncOperation obj)
+    private static void AsyncOperUnloading_completed(AsyncOperation obj)
     {
 #if UNITY_EDITOR
-        if (log)
-        {
-            Debug.Log("Scene " + obj.ToString() + " finished unloading");
-        }
+        Debug.Log("Scene " + obj.ToString() + " finished unloading");
 #endif
         obj.completed -= AsyncOperUnloading_completed;
-        
     }
 
-    /// <summary>
-    /// Loads a scene asynchronously.
-    /// </summary>
-    /// <param name="sceneName">The name of the scene to load.</param>
-    private void LoadScenePrivateAsync(string sceneName)
+    private static void LoadScenePrivateAsync(string sceneName)
     {
-        AsyncOperation asyncOper = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-
+        var asyncOper = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         if (asyncOper != null)
             asyncOper.completed += AsyncOperLoading_completed;
 
         loadedScene[sceneName] = true;
-
     }
 
-    /// <summary>
-    /// Callback for when a scene has finished loading.
-    /// </summary>
-    /// <param name="obj">The async operation.</param>
-    private void AsyncOperLoading_completed(AsyncOperation obj)
+    private static void AsyncOperLoading_completed(AsyncOperation obj)
     {
 #if UNITY_EDITOR
-        if (log)
-        {
-            Debug.Log("Scene " + obj.ToString() + " finished loading");
-        }
+        Debug.Log("Scene " + obj.ToString() + " finished loading");
 #endif
         obj.completed -= AsyncOperLoading_completed;
     }
 
-    /// <summary>
-    /// Loads a scene by name.
-    /// </summary>
-    /// <param name="levelName">The name of the scene to load.</param>
-    public void LoadScene(string levelName)
+    public static void LoadScene(string levelName)
     {
-        foreach (var scene in SceneData.sceneObjects)
+        foreach (var scene in _sceneData.sceneObjects)
         {
             if (scene.sceneObject == levelName)
             {
@@ -155,45 +120,108 @@ public class SceneMng : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Unloads a scene by name.
-    /// </summary>
-    /// <param name="levelName">The name of the scene to unload.</param>
-    public void UnloadScene(string levelName)
+    public static void UnloadScene(string levelName)
     {
-        foreach (var scene in SceneData.sceneObjects)
+        foreach (var scene in _sceneData.sceneObjects)
         {
             if (scene.sceneObject == levelName && loadedScene[scene.sceneObject])
             {
                 UnloadScenePrivateAsync(scene.sceneObject);
-                return;
-            }
-        }
-    }
-    
-    public void SetCameraActiveScene(string sceneName)
-    {
-        foreach (var scene in SceneData.sceneObjects)
-        {
-            if (scene.sceneObject == sceneName)
-            {
-                ActiveSceneCameraVars = scene.cameraBehaviour;
+                if (!string.IsNullOrEmpty(scene.EnemyScene))
+                    UnloadScenePrivateAsync(scene.EnemyScene);
                 return;
             }
         }
     }
 
-    /// <summary>
-    /// reloads the scenes as they were initially loaded.
-    /// </summary>
-    public void ReloadScenes()
+    public static void SetActiveScene(string sceneName)
     {
-        foreach (var scene in SceneData.sceneObjects)
+        foreach (var scene in _sceneData.sceneObjects)
         {
-            if (scene.isInitialyLoaded)
-                continue;
-            if (loadedScene[scene.sceneObject])
-                UnloadScenePrivateAsync(scene.sceneObject);
+            if (scene.sceneObject == sceneName)
+            {
+                ActiveSceneCameraVars = scene.cameraBehaviour;
+                if (!string.IsNullOrEmpty(scene.EnemyScene))
+                    LoadScenePrivateAsync(scene.EnemyScene);
+                return;
+            }
         }
+    }
+
+    public static void AddCurrentCheckpoint(Vector2 checkpointPos, List<SceneObject> loadedScenes, SceneObject activeScene, List<GameObject> currWeapons)
+    {
+        _restartPos = checkpointPos;
+        _checkpointScenes = new List<string>();
+        foreach (var s in loadedScenes)
+        {
+            _checkpointScenes.Add(s);
+        }
+        _checkpointActiveScene = activeScene;
+        _checkpointIndex++;
+        
+        if(currWeapons[0] != null)
+            CheckpointWeapons[0] = currWeapons[0].name;
+        if(currWeapons[1] != null)
+            CheckpointWeapons[1] = currWeapons[1].name;
+
+    }
+
+    public static void Reload()
+    {
+        
+        _player.SetActive(true);
+        _player.transform.position = _restartPos;
+        _playerHealth.RestartGame();
+
+        foreach (var scene in _sceneData.sceneObjects)
+        {
+            if (!string.IsNullOrEmpty(scene.EnemyScene) && loadedScene[scene.EnemyScene])
+                UnloadScenePrivateAsync(scene.EnemyScene);
+
+            if (_checkpointIndex == 0)
+            {
+                if (scene.isInitialyLoaded && !loadedScene[scene.sceneObject])
+                    LoadScenePrivateAsync(scene.sceneObject);
+
+                if (loadedScene[scene.sceneObject] && !scene.isInitialyLoaded)
+                    UnloadScenePrivateAsync(scene.sceneObject);
+
+                if (scene.isInitialyActive)
+                    SetActiveScene(scene.sceneObject);
+            }
+            else
+            {
+                if (_checkpointScenes.Contains(scene.sceneObject))
+                {
+                    if (!loadedScene[scene.sceneObject])
+                        LoadScenePrivateAsync(scene.sceneObject);
+
+                    if (!string.IsNullOrEmpty(scene.EnemyScene) && _checkpointScenes.Contains(_checkpointActiveScene))
+                        SetActiveScene(scene.sceneObject);
+                }
+                else
+                {
+                    if (loadedScene[scene.sceneObject])
+                        UnloadScenePrivateAsync(scene.sceneObject);
+                }
+            }
+        }
+        
+        GameObject[] corpse = GameObject.FindGameObjectsWithTag("Corpse");
+        
+        foreach (var c in corpse)
+        {
+            ResourceManager.GetCorpsePool().Release(c);
+            c.SetActive(false);
+        }
+        
+        GameObject[] civilianCorpse = GameObject.FindGameObjectsWithTag("CivilianCorpse");
+        
+        foreach (var c in civilianCorpse)
+        {
+            ResourceManager.GetCivilianCorpsePool().Release(c);
+            c.SetActive(false);
+        }
+        
     }
 }

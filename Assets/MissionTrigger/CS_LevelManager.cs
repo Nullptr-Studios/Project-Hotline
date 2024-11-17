@@ -1,5 +1,6 @@
 using CC.DialogueSystem;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -61,15 +62,11 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Exit to main menu
     /// </summary>
-    [System.Obsolete("Use Send Message instead")]
-    public static void EndLevel() => SceneManager.LoadScene("MainMenu"); // TODO: This should call the loading screen
-    // Fucking copilot shit
-
-    /// <summary>
-    /// Exit to main menu
-    /// </summary>
-    public void EndLevelMessage() => SceneManager.LoadScene("MainMenu"); // TODO: This should call the loading screen
-    // TODO: Change this (we wont)
+    public void EndLevelMessage() {
+        VariableRepo.Instance.RemoveAll();
+        Destroy(GetComponent<ScoreManager>());
+        SceneManager.LoadScene("MainMenu");
+    } // TODO: This should call the loading screen
 
     /// <summary>
     /// Make the player restart the current level

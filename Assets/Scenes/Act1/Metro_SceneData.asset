@@ -15,16 +15,20 @@ MonoBehaviour:
   sceneObjects:
   - sceneObject:
       m_SceneName: Metro_Floor1
-    isInitialyLoaded: 0
-    isInitialyActive: 0
+    EnemyScene:
+      m_SceneName: Metro_Floor1_Enemies
+    isInitialyLoaded: 1
+    isInitialyActive: 1
     cameraBehaviour:
       maxRotation: 3
       maxDistance: 4
       Origin: {x: 0, y: 0}
   - sceneObject:
       m_SceneName: Metro_Floor2
-    isInitialyLoaded: 1
-    isInitialyActive: 1
+    EnemyScene:
+      m_SceneName: Metro_Floor2_Enemies
+    isInitialyLoaded: 0
+    isInitialyActive: 0
     cameraBehaviour:
       maxRotation: 3
       maxDistance: 4

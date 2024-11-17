@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private static readonly int Use = Animator.StringToHash("Use");
 
     public GameObject spawningWeapon;
+    public WeaponDictionary weaponDictionary;
 
     [Header("Pickup")]
     public float pickupRange = 2.0f;
@@ -49,7 +51,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private PlayerIA _playerInput;
 
     private IWeapon _heldWeaponInterface;
-    private readonly List<GameObject> _heldWeaponGameObject = new List<GameObject>();
+    public readonly List<GameObject> _heldWeaponGameObject = new List<GameObject>();
 
     private int _currentIndex;
 
@@ -94,6 +96,51 @@ public class PlayerWeaponManager : MonoBehaviour
         _playerInput.Gameplay.SwitchWeapons.Disable();
 
     }
+    
+    public void SpawnWeapons(List<string> weaponsNames)
+    {
+        for (int i = 0; i < _heldWeaponGameObject.Count; i++)
+        {
+            if (_heldWeaponGameObject[i] != null)
+            {
+                Destroy(_heldWeaponGameObject[i]);
+                _heldWeaponGameObject[i] = null;
+            }
+        }
+        
+        _isWeaponHeld = false;
+        _heldWeaponInterface = null;
+        
+        for (int i = 0; i < weaponsNames.Count; i++)
+        {
+            if(weaponsNames[i] == null)
+                continue;
+            
+            foreach (var w in weaponDictionary.weapons)
+            {
+                if (weaponsNames[i].Contains(w.name))
+                {
+                    GameObject weaponToEquip = Instantiate(w);
+                    _heldWeaponGameObject[i] = weaponToEquip;
+                    _heldWeaponInterface = weaponToEquip.GetComponent<IWeapon>();
+                    _heldWeaponInterface.Pickup(weaponHolder);
+                    _heldWeaponInterface.SetIsPlayer(true);
+                    
+
+                    //FMODUnity.RuntimeManager.PlayOneShot(pickupSound, transform.position);
+
+                    _heldWeaponInterface.setClaimed(true);
+                    break;
+                }
+            }
+        }
+        
+        _currentIndex = 0;
+        _heldWeaponInterface = _heldWeaponGameObject[_currentIndex].GetComponent<IWeapon>();
+        _isWeaponHeld = true;
+        
+        anim.ResetTrigger(Use);
+    }
 
     /// <summary>
     /// Initializes the player weapon manager.
@@ -109,10 +156,38 @@ public class PlayerWeaponManager : MonoBehaviour
         // Placeholder for spawning weapon
         if (spawningWeapon)
         {
-            Instantiate(spawningWeapon, transform.position, new Quaternion());
-            _wantsToThrowOrGet = true;
+            /*Instantiate(spawningWeapon, transform.position, new Quaternion());
+            _wantsToThrowOrGet = true;*/
+            
+            SpawnWeapons( new List<string> { spawningWeapon.name });
         }
         //###############################################
+    }
+
+
+    public void Restart()
+    {
+        SpawnWeapons(SceneMng.CheckpointWeapons);
+        SetAmmoPrompt();
+    }
+
+
+    public void SetAmmoPrompt()
+    {
+        if(!_isWeaponHeld)
+            return;
+        if (_heldWeaponInterface.MaxUses() != -1)
+        {
+            ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+            ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
+        }
+        else
+            ammoPrompt.DoHide();
+    }
+
+    private void Start()
+    {
+        SetAmmoPrompt();
     }
 
     /// <summary>
@@ -238,8 +313,13 @@ public class PlayerWeaponManager : MonoBehaviour
 
     // Throw and get logic
     // I dont like this implementation on the fucking update cuz i cant call it  -x
+    /// <summary>
+    /// WHYYYYYYYYYYYY IS THE FUCKING UPDATE METHOD NOT BEING CALLED -D
+    /// </summary>
     private void Update()
     {
+        Debug.Log("FUCKUNITY");
+        
         anim.SetBool(WeaponEquipped, _isWeaponHeld);
         if (_isWeaponHeld)
         {

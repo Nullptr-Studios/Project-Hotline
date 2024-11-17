@@ -10,7 +10,6 @@ public class CivilianController : MonoBehaviour
     private Vector2 _exitNodePos;
 
     private bool _panic = false;
-    private int frames = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -21,22 +20,21 @@ public class CivilianController : MonoBehaviour
 
     private void OnDisable()
     {
-        frames = 0;
     }
 
     private void OnEnable()
     {
-        frames = 0;
-        if(_navMeshAgent != null && _navMeshAgent.enabled)
+        if (_navMeshAgent != null && _navMeshAgent.enabled)
             _navMeshAgent.SetDestination(_exitNodePos);
     }
 
     void CivilianPanic()
     {
         _panic = true;
-        _exitNodePos = SceneMng.ExitNodes[UnityEngine.Random.Range(0, SceneMng.ExitNodes.Count)].transform.position;
-        if(_navMeshAgent != null && _navMeshAgent.enabled)
+        _exitNodePos = SceneMng.ExitNodes[UnityEngine.Random.Range(0, SceneMng.ExitNodes.Count - 1)].transform.position;
+        if (_navMeshAgent != null && _navMeshAgent.enabled)
             _navMeshAgent.SetDestination(_exitNodePos);
+        _navMeshAgent.stoppingDistance = 0;
     }
 
     private void OnDestroy()
@@ -45,17 +43,15 @@ public class CivilianController : MonoBehaviour
             SceneMng.CivilianPanicDelegate -= CivilianPanic;
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    private void Update()
     {
-        if (_panic && frames < 2)
+        if (_panic)
         {
-            frames++;
-            return;
-        }
-
-        if (_panic && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance) {
-            Destroy(gameObject);
+            float distance = Vector3.Distance(transform.position, _exitNodePos);
+            if(distance < 1)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

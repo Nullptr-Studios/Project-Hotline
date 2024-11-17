@@ -13,6 +13,8 @@ namespace TheKiwiCoder {
         public Vector3 moveToPosition;
         public Quaternion moveToRotation;
         public Vector3 playerPos;
+        
+        public bool fallBack = false;
 
         public bool heardPlayer;
         public Vector3 heardPos;
@@ -41,5 +43,6 @@ namespace TheKiwiCoder {
         public List<SWaypoints> waypoints;
 
         public int searchTimes = 3;
+        
     }
 }

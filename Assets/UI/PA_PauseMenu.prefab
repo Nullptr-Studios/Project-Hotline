@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 58, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 8}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &6370832433246294091
@@ -171,7 +171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3585270578961927577
 RectTransform:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ RectTransform:
   m_Children:
   - {fileID: 3585270578961927577}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -549,7 +549,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7668961118784229147, guid: f88aeecece8baea4d81982024e6623e6, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 6354413034996761649}
   m_SourcePrefab: {fileID: 100100000, guid: f88aeecece8baea4d81982024e6623e6, type: 3}
 --- !u!114 &5690825796225478240 stripped
@@ -642,6 +642,10 @@ PrefabInstance:
       propertyPath: perform.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4692816149464337188, guid: f88aeecece8baea4d81982024e6623e6, type: 3}
+      propertyPath: perform.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8125513876396441671}
     - target: {fileID: 4692816149464337188, guid: f88aeecece8baea4d81982024e6623e6, type: 3}
       propertyPath: perform.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -751,7 +755,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7668961118784229147, guid: f88aeecece8baea4d81982024e6623e6, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 5251057043729671155}
   m_SourcePrefab: {fileID: 100100000, guid: f88aeecece8baea4d81982024e6623e6, type: 3}
 --- !u!1 &5984794261465375269 stripped
@@ -844,6 +848,10 @@ PrefabInstance:
       propertyPath: perform.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4692816149464337188, guid: f88aeecece8baea4d81982024e6623e6, type: 3}
+      propertyPath: perform.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8125513876396441671}
     - target: {fileID: 4692816149464337188, guid: f88aeecece8baea4d81982024e6623e6, type: 3}
       propertyPath: perform.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -953,7 +961,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7668961118784229147, guid: f88aeecece8baea4d81982024e6623e6, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 3951318414531544222}
   m_SourcePrefab: {fileID: 100100000, guid: f88aeecece8baea4d81982024e6623e6, type: 3}
 --- !u!114 &231965707761115123 stripped

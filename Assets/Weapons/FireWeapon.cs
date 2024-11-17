@@ -53,6 +53,7 @@ public class FireWeapon : Weapon
     {
         weaponType = EWeaponType.Fire;
         _transform = transform;
+        _currentAmmo = fireWeaponData.maxAmmo;
     }
 
     /// <summary>

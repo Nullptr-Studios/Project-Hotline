@@ -61,6 +61,7 @@ public class CivilianDamageable : Damageable
         //@TODO: Change to civilian corpse
         GameObject Corpse = ResourceManager.GetCivilianCorpsePool().Get();
         Corpse.transform.position = transform.position;
+        Corpse.tag = "CivilianCorpse";
 
         Corpse.SetActive(true);
 
