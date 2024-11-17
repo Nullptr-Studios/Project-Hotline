@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4542050931511163609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/PistolShoot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/PistolShoot
+  Guid:
+    Data1: -191964275
+    Data2: 1251149855
+    Data3: 603922049
+    Data4: 1330499653
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2768057446997512794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,10 +42,84 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638648687265274301
+  lastModified: 638674812695194155
   FileSizes:
   - Name: Desktop
-    Value: 768
+    Value: 1162
+  Exists: 1
+--- !u!114 &-2104896428584185709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player/Throw
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Player/Throw
+  Guid:
+    Data1: 364572088
+    Data2: 1084151804
+    Data3: -159071102
+    Data4: -1548963024
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-806746853337521662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/SMGShoot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/SMGShoot
+  Guid:
+    Data1: 1278659444
+    Data2: 1094097255
+    Data3: -868075589
+    Data4: 197435056
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-25328840140603010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638674816159489855
+  FileSizes:
+  - Name: Desktop
+    Value: 44832
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -35,16 +136,24 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: -2768057446997512794}
   - {fileID: 7001593021806771270}
+  - {fileID: 79203417381432543}
+  - {fileID: -25328840140603010}
   EditorEvents:
-  - {fileID: 5473233621598740718}
+  - {fileID: 605526128096618634}
+  - {fileID: 616916783418122245}
+  - {fileID: -4542050931511163609}
+  - {fileID: 74393726703728265}
+  - {fileID: 3498804905421652681}
+  - {fileID: -2104896428584185709}
+  - {fileID: -806746853337521662}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7001593021806771270}
   StringsBanks:
   - {fileID: -2768057446997512794}
-  cacheTime: 638648687265274301
+  cacheTime: 638674820790925625
   cacheVersion: 131620
---- !u!114 &5473233621598740718
+--- !u!114 &74393726703728265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,17 +163,118 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/dubmood_-_last_step
+  m_Name: event:/SFX/Weapons/RifleShoot
   m_EditorClassIdentifier: 
-  Path: event:/dubmood_-_last_step
+  Path: event:/SFX/Weapons/RifleShoot
   Guid:
-    Data1: -274097151
-    Data2: 1165572013
-    Data3: 1395997369
-    Data4: -2022657501
+    Data1: -980815015
+    Data2: 1332460070
+    Data3: -1240866406
+    Data4: 1821171809
   Banks:
-  - {fileID: 7001593021806771270}
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &79203417381432543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638674820790925625
+  FileSizes:
+  - Name: Desktop
+    Value: 4823616
+  Exists: 1
+--- !u!114 &605526128096618634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/InGameMusic
+  m_EditorClassIdentifier: 
+  Path: event:/Music/InGameMusic
+  Guid:
+    Data1: 895259662
+    Data2: 1286989081
+    Data3: 1057358758
+    Data4: 1109300469
+  Banks:
+  - {fileID: 79203417381432543}
   IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &616916783418122245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/Swing
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/Swing
+  Guid:
+    Data1: 1671529748
+    Data2: 1282256082
+    Data3: -983172429
+    Data4: 1181611374
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3498804905421652681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/ShotgunShoot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/ShotgunShoot
+  Guid:
+    Data1: 1513665631
+    Data2: 1252613723
+    Data3: -1754559587
+    Data4: -1170039234
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
@@ -86,8 +296,8 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638648687265264329
+  lastModified: 638674812695183534
   FileSizes:
   - Name: Desktop
-    Value: 3257024
+    Value: 1036
   Exists: 1

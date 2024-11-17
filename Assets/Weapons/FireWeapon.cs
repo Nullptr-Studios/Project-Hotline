@@ -392,8 +392,6 @@ public class FireWeapon : Weapon
         _fireRateTimer = 0;
         _fireRateCurveTimer = 0;
         _dispersionCurveTimer = 0;
-
-        FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.finishReloadSound, _transform.position);
     }
 
     /// <summary>

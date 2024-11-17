@@ -209,7 +209,7 @@ public class PlayerWeaponManager : MonoBehaviour
     /// <param name="context">The input action context.</param>
     private void OnFire(InputAction.CallbackContext context)
     {
-        if (context.performed && _canShootAgain)
+        if (context.performed)
         {
             _wantsToFire = true;
             ammoPrompt.SubtractBullet();
@@ -318,7 +318,6 @@ public class PlayerWeaponManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        Debug.Log("FUCKUNITY");
         
         anim.SetBool(WeaponEquipped, _isWeaponHeld);
         if (_isWeaponHeld)
