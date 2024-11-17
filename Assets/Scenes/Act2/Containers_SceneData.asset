@@ -15,18 +15,20 @@ MonoBehaviour:
   sceneObjects:
   - sceneObject:
       m_SceneName: Containers_Floor1
+    EnemyScene:
+      m_SceneName: Containers_Floor1_Enemies
     isInitialyLoaded: 1
     isInitialyActive: 1
-    isLoaded: 0
     cameraBehaviour:
       maxRotation: 18
       maxDistance: 20
       Origin: {x: -5, y: -3}
   - sceneObject:
       m_SceneName: Containers_Floor2
+    EnemyScene:
+      m_SceneName: Containers_Floor2_Enemies
     isInitialyLoaded: 0
     isInitialyActive: 0
-    isLoaded: 0
     cameraBehaviour:
       maxRotation: 6
       maxDistance: 5
