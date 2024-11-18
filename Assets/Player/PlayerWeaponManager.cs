@@ -160,6 +160,7 @@ public class PlayerWeaponManager : MonoBehaviour
             _wantsToThrowOrGet = true;*/
             
             SpawnWeapons( new List<string> { spawningWeapon.name });
+            ammoPrompt.SetSlot(0, spawningWeapon.name);
         }
         //###############################################
     }
@@ -296,6 +297,7 @@ public class PlayerWeaponManager : MonoBehaviour
             ammoPrompt.DoHide();
         }
 
+        ammoPrompt.ChangeActiveSlot(_currentIndex);
         anim.ResetTrigger(Use);
     }
 
@@ -367,6 +369,7 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponInterface.Throw(transform.right);
             _heldWeaponInterface = null;
             _heldWeaponGameObject[_currentIndex] = null;
+            ammoPrompt.SetSlotEmpty(_currentIndex);
 
             FMODUnity.RuntimeManager.PlayOneShot(throwSound, transform.position);
 
