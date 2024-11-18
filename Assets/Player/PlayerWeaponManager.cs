@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 /// <summary>
 /// This class acts as the manager for equipped weapons, including input.
@@ -81,6 +79,7 @@ public class PlayerWeaponManager : MonoBehaviour
         if (_isWeaponHeld)
         {
             _heldWeaponInterface.Drop();
+            ammoPrompt.SetSlotEmpty(_currentIndex);
         }
     }
 
@@ -126,6 +125,9 @@ public class PlayerWeaponManager : MonoBehaviour
             if(weaponsNames[i] == null)
                 continue;
             
+            ammoPrompt.SetSlotEmpty(0);
+            ammoPrompt.SetSlotEmpty(1);
+            
             foreach (var w in weaponDictionary.weapons)
             {
                 if (weaponsNames[i].Contains(w.name))
@@ -149,6 +151,9 @@ public class PlayerWeaponManager : MonoBehaviour
         _heldWeaponInterface = _heldWeaponGameObject[_currentIndex].GetComponent<IWeapon>();
         _isWeaponHeld = true;
         
+        ammoPrompt.ChangeActiveSlot(_currentIndex);
+        ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
+        
         anim.ResetTrigger(Use);
     }
 
@@ -170,7 +175,7 @@ public class PlayerWeaponManager : MonoBehaviour
             _wantsToThrowOrGet = true;*/
             
             SpawnWeapons( new List<string> { spawningWeapon.name });
-            ammoPrompt.SetSlot(0, spawningWeapon.name);
+            ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
         }
         //###############################################
     }
@@ -445,6 +450,8 @@ public class PlayerWeaponManager : MonoBehaviour
                                 FMODUnity.RuntimeManager.PlayOneShot(pickupSound, transform.position);
 
                                 _heldWeaponInterface.setClaimed(true);
+                                
+                                ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
                             }
                             //This won't ever happen as if you have a weapon already equipped it will throw it, but just in case
                             else
