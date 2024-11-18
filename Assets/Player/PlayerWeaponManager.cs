@@ -175,7 +175,6 @@ public class PlayerWeaponManager : MonoBehaviour
             _wantsToThrowOrGet = true;*/
             
             SpawnWeapons( new List<string> { spawningWeapon.name });
-            ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
         }
         //###############################################
     }
@@ -199,6 +198,8 @@ public class PlayerWeaponManager : MonoBehaviour
         }
         else
             ammoPrompt.DoHide();
+        
+        ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
     }
 
     private void Start()
@@ -521,20 +522,31 @@ public class PlayerWeaponManager : MonoBehaviour
             float smallestDistance = float.MaxValue;
             int smallestIndex = 0;
 
+            int mostAmmo = -69;
+            
             int i = 0;
 
             foreach (var h in hitArr)
             {
                 if (!h)
                     continue;
-
-                float currentDist = Vector2.Distance(h.transform.position, weaponHolder.position);
+                
+                //smallest distance
+                /*float currentDist = Vector2.Distance(h.transform.position, weaponHolder.position);
                 if (currentDist < smallestDistance)
                 {
                     smallestDistance = currentDist;
                     smallestIndex = i;
-                    i++;
+                }*/
+                
+                h.transform.gameObject.TryGetComponent(out IWeapon w);
+                if(w.UsesLeft() > mostAmmo)
+                {
+                    mostAmmo = w.UsesLeft();
+                    smallestIndex = i;
                 }
+                
+                i++;
             }
 
             return smallestIndex;

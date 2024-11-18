@@ -31,7 +31,7 @@ public class UIButton : MonoBehaviour
     [SerializeField] private Image background;
     
     // Start is called before the first frame update
-    private void Start()
+    private void OnEnable()
     {
         // why whas this here tf -x
         //RemoveFocus();

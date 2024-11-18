@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &7093551 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1920450810564798699, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
-  m_PrefabInstance: {fileID: 50071536}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c6d4a143d29d84c905e5c0aa753020, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &42943298
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +162,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1247557824}
     m_Modifications:
+    - target: {fileID: 635165499999530345, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635165499999530345, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635165499999530345, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635165499999530345, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635165499999530345, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 643078274617378990, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 735707080538999747, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -386,6 +399,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3850443372297517411, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018950130373934171, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018950130373934171, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018950130373934171, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018950130373934171, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018950130373934171, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -883,6 +916,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9173788709013111005, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
   m_PrefabInstance: {fileID: 50071536}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &50071538 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5031259059378636890, guid: efb5b27d08a333643a9f5b55a937d313, type: 3}
+  m_PrefabInstance: {fileID: 50071536}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c6d4a143d29d84c905e5c0aa753020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &99227663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3617,7 +3661,7 @@ PrefabInstance:
     - target: {fileID: 8330505946157900613, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
       propertyPath: ammoPrompt
       value: 
-      objectReference: {fileID: 7093551}
+      objectReference: {fileID: 50071538}
     - target: {fileID: 8330505946157900613, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
       propertyPath: progressBar
       value: 
@@ -4840,9 +4884,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0787037
-    width: 0.4166667
-    height: 0.41666666
+    y: 0.19722222
+    width: 0.15208334
+    height: 0.15208334
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
