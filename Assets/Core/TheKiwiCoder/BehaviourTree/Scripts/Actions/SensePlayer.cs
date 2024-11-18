@@ -73,6 +73,7 @@ public class SensePlayer : ActionNode
     private void HandleDetection()
     {
         override2D.agentOverride = null;
+        _currentDir = context.transform.up;
         
         if (_sensor.fallbackPosition != Vector3.zero && !_weaponManager.IsMelee())
         {

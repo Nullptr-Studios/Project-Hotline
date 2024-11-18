@@ -23,6 +23,8 @@ public class SceneMng : MonoBehaviour
 
     void Awake()
     {
+        _checkpointIndex = 0;
+
         if (SceneData == null)
         {
             Debug.LogError("SceneData is not assigned in " + gameObject.name);
@@ -178,7 +180,16 @@ public class SceneMng : MonoBehaviour
             SceneManager.LoadScene("Tutorial__Main");
             return;
         }
-        
+
+        GameObject[] weapons = GameObject.FindGameObjectsWithTag("Weapon");
+
+        foreach (GameObject weapon in weapons)
+        {
+            IWeapon weaponcomp = weapon.GetComponent<IWeapon>();
+            if (!weaponcomp.isClaimed())
+                Destroy(weapon);
+        }
+
         _player.SetActive(true);
         _player.transform.position = _restartPos;
         _playerHealth.RestartGame();
@@ -215,6 +226,16 @@ public class SceneMng : MonoBehaviour
                         UnloadScenePrivateAsync(scene.sceneObject);
                 }
             }
+        }
+
+        Destroy(GameObject.FindGameObjectWithTag("PlayerCorpse"));
+
+        GameObject[] blood = GameObject.FindGameObjectsWithTag("Blood");
+
+        foreach (var bloodItem in blood)
+        {
+            ResourceManager.GetBloodPool().Release(bloodItem);
+            bloodItem.SetActive(false);
         }
         
         GameObject[] corpse = GameObject.FindGameObjectsWithTag("Corpse");

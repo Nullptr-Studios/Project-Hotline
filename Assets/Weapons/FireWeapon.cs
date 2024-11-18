@@ -324,8 +324,6 @@ public class FireWeapon : Weapon
             }
         }
 
-        SceneMng.CivilianPanicDelegate?.Invoke();
-
         GameObject mVFX = ResourceManager.GetMuzzlePool().Get();
         mVFX.SetActive(true);
         mVFX.transform.position = gunMuzzle.position;
