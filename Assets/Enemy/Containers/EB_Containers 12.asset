@@ -10,20 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aee424af42d0cb4386688b8fec2bf02, type: 3}
-  m_Name: EB_Containers 1
+  m_Name: EB_Containers 12
   m_EditorClassIdentifier: 
   isStatic: 0
   returnToInitialSpot: 1
   waypoints:
-  - waypointPos: {x: -12.6, y: -0.5}
+  - waypointPos: {x: -18, y: -0.5}
     letItRotate: 1
-    wait: 1.2
-  - waypointPos: {x: -27.8, y: -3.5}
+    wait: 4
+  - waypointPos: {x: -21.5, y: 5.5}
     letItRotate: 1
-    wait: 1.2
-  - waypointPos: {x: -17.6, y: -15}
-    letItRotate: 1
-    wait: 1.2
+    wait: 0.8
   idleSpeed: 2
   chasingSpeed: 8
   distanceToShoot: 10
