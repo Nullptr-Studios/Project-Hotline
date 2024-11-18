@@ -19,7 +19,11 @@ public class UIButton : MonoBehaviour
     [NonSerialized] public int ID;
     [SerializeField] private int maxLabelLength = 12;
     [SerializeField] private UnityEvent perform;
-
+    
+    /// <summary>
+    /// Make this true to ignore mouse input, used for UI that isn't buttons
+    /// </summary>
+    [NonSerialized] public bool ignoreMouse = false;
     private bool _disableMouse;
 
     [Header("Components")]
@@ -29,12 +33,13 @@ public class UIButton : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        RemoveFocus();
+        // why whas this here tf -x
+        //RemoveFocus();
     }
 
     public void OnMouseOver()
     {
-        if (_disableMouse) return;
+        if (_disableMouse || ignoreMouse) return;
         
         transform.parent.GetComponent<UIButtonController>().SetFocusByMouse(ID);
         _disableMouse = true;
@@ -42,6 +47,7 @@ public class UIButton : MonoBehaviour
 
     public void OnMouseExit()
     {
+        if (ignoreMouse) return;
         _disableMouse = false;
     }
 
