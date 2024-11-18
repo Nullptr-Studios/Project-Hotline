@@ -18,6 +18,8 @@ public class Checkpoint : MonoBehaviour
             
             ScoreManager.Checkpoint();
             
+            Destroy(this.gameObject);
+            
             this.enabled = false;
         }
     }

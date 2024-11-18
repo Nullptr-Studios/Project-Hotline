@@ -76,6 +76,14 @@ public class PlayerWeaponManager : MonoBehaviour
         return _heldWeaponInterface.GetWeaponType();
     }
 
+    public void DropWeapon()
+    {
+        if (_isWeaponHeld)
+        {
+            _heldWeaponInterface.Drop();
+        }
+    }
+
     /// <summary>
     /// Enables the player input.
     /// </summary>
@@ -103,7 +111,9 @@ public class PlayerWeaponManager : MonoBehaviour
         {
             if (_heldWeaponGameObject[i] != null)
             {
-                Destroy(_heldWeaponGameObject[i]);
+                _heldWeaponGameObject[i].SetActive(true);
+                if(_heldWeaponGameObject[i].TryGetComponent(out IWeapon w))
+                    w.Reload();
                 _heldWeaponGameObject[i] = null;
             }
         }
@@ -323,7 +333,14 @@ public class PlayerWeaponManager : MonoBehaviour
         if (_isWeaponHeld)
         {
             anim.SetBool(FireOrMelee, _heldWeaponInterface.GetWeaponType() == EWeaponType.Fire);
-            anim.SetInteger(Type, _heldWeaponInterface.GetWeaponSpriteID());
+            if (_heldWeaponInterface.GetWeaponSpriteID() >= 0)
+            {
+                anim.SetInteger(Type, _heldWeaponInterface.GetWeaponSpriteID());
+            }
+            else
+            {
+                anim.SetBool(WeaponEquipped, false);
+            }
         }
 
         if (_isWeaponHeld)

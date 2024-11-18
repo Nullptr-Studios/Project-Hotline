@@ -43,6 +43,7 @@ public class SensePlayer : ActionNode
 
     protected override State OnUpdate()
     {
+        _currentDir = context.transform.up;
         if (_ov == null || _ov.justStunned) return State.Running;
 
         if (_sensor != null)

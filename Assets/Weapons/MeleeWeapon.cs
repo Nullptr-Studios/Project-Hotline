@@ -106,6 +106,8 @@ public class MeleeWeapon : Weapon
 
         // Play sound
         FMODUnity.RuntimeManager.PlayOneShot(meleeWeaponData.useSound, transform.position);
+        
+        _wantsToAttack = false;
     }
 
     /// <summary>

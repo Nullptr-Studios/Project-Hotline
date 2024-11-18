@@ -35,6 +35,9 @@ public class ScoreManager : MonoBehaviour
 
     public void Awake()
     {
+        _playerKills = 0;
+        _playerCivilianKills = 0;
+        _playerDeaths = 0;
         // Sets timer when scene begins
         _startTime = Time.time;
     }
