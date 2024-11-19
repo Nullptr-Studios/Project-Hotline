@@ -1,0 +1,121 @@
+{
+  "conversation": 
+  [
+    {
+      "id": 1,
+      "nextId": 3,
+      "speakersName": "Santoro",
+      "characterSpritesName": "Santoro",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Please let me go. You already sent your message."
+      ],
+      "options":
+      [
+        {
+          "nextId": 2,
+          "text": "Following orders"
+        },
+        {
+          "nextId": 3,
+          "text": "You fucked up"
+        }
+      ]
+    },
+    
+    {
+      "id": 2,
+      "nextId": 4,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "This isn’t about sending a message, Santoro. I’m not here to scare you or make you a warning. I came here to kill you. Orders from the higher-ups.",
+        "You know how this game works. You fuck around with the wrong people, you get dealt with. It’s simple."
+      ]
+    },
+    
+    {
+      "id": 3,
+      "nextId": 4,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Orders, just like yours, right? Well, let me tell you something. The people who sent me don’t leave loose ends. They don’t give second chances.",
+        "You fucked up, Santoro, and now I’m the last face you get to see. Maybe it’s poetic, maybe it’s just business. Either way, this is where it ends for you."
+      ]
+    },
+    
+    {
+      "id": 4,
+      "nextId": 6,
+      "speakersName": "Santoro",
+      "characterSpritesName": "Santoro",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "It was… it was an order, like the one you got. I didn’t have a choice! I had to do it!"
+      ],
+      "options":
+      [
+        {
+          "nextId": 6,
+          "text": "Nothing personal"
+        },
+        {
+          "nextId": 7,
+          "text": "You made a choice"
+        }
+      ]
+    },
+    
+    {
+      "id": 6,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Then they’ll learn the consequences of fucking around. Nothing personal."
+      ]
+    },
+    
+    {
+      "id": 7,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Orders or not, you still made a choice. And this is where it got you.",
+        "<action=santoroFigth><action=endConversation>"
+      ]
+    }
+  ],
+  "actions":
+  [
+    // Stop the conversation
+    {
+      "name": "endConversation",
+      "type": "close conversation"
+    },
+    
+    // Start Santoro fight
+    {
+      "name": "santoroFight",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "SantoroFight"
+    }
+  ]
+}
