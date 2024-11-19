@@ -424,6 +424,21 @@ MonoBehaviour:
   pivotRotation: 0
   sprite: {fileID: 1296727842978240662}
   playerCollider: {fileID: 0}
+  footstepSound:
+    Guid:
+      Data1: -1017361114
+      Data2: 1130245974
+      Data3: 249290894
+      Data4: -1447486384
+    Path: event:/SFX/Footsteps/ConcreteFootsteps2
+  bloodFootstepSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  timeBetweenFootsteps: 0.3
   debugSpeed: 0
   debugInput: 0
 --- !u!114 &8330505946157900613
@@ -462,11 +477,11 @@ MonoBehaviour:
     Path: event:/SFX/Player/Throw
   switchSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -911606085
+      Data2: 1110403421
+      Data3: -1832189531
+      Data4: -1364843617
+    Path: event:/SFX/Player/WeaponSwitch
   anim: {fileID: 8566547389374578288}
   log: 0
   drawGizmos: 0

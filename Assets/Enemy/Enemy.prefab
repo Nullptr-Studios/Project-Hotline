@@ -231,6 +231,14 @@ MonoBehaviour:
   animatorEnemy: {fileID: 1586720700333565052}
   animatorEnemyFoot: {fileID: 2898076770262181485}
   footTransform: {fileID: 5296668497393563518}
+  footstepSound:
+    Guid:
+      Data1: -1017361114
+      Data2: 1130245974
+      Data3: 249290894
+      Data4: -1447486384
+    Path: event:/SFX/Footsteps/ConcreteFootsteps2
+  timeBetweenFootsteps: 0.3
   DrawGizmos: 1
   ColorSphere: {r: 1, g: 0, b: 1, a: 1}
   ColorSphereTurn: {r: 0, g: 1, b: 0, a: 1}
@@ -325,6 +333,13 @@ MonoBehaviour:
   killEvent:
     m_PersistentCalls:
       m_Calls: []
+  BatHitSound:
+    Guid:
+      Data1: -719709937
+      Data2: 1274931417
+      Data3: -1169581944
+      Data4: 1083678516
+    Path: event:/SFX/Weapons/BatHit
 --- !u!114 &8546987331332865949
 MonoBehaviour:
   m_ObjectHideFlags: 0

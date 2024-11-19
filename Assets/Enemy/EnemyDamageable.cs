@@ -1,4 +1,5 @@
 using System.Collections;
+using FMODUnity;
 using NavMeshPlus.Extensions;
 using TheKiwiCoder;
 using UnityEngine;
@@ -50,6 +51,9 @@ public class EnemyDamageable : Damageable
     private AgentOverride2d override2D;
 
     private GameObject _player;
+
+    [Header("Sound")] 
+    public EventReference BatHitSound;
 
     /// <summary>
     /// Initializes the EnemyDamageable instance.
@@ -193,13 +197,17 @@ public class EnemyDamageable : Damageable
         {
             return;
         }
-
+        
+        if(weaponType == EWeaponType.Melee)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(BatHitSound, transform.position);
+        }
         
         _lastShootDir = shootDir;
         base.DoDamage(amount);
 
         //temporal stun
-        if (weaponType == EWeaponType.Melee && !_onStun)
+        if (weaponType == EWeaponType.Melee)
         {
             Stun(shootDir);
         }

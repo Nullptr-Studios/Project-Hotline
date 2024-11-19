@@ -5,7 +5,7 @@
 			<value>ShotgunShoot</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{9292a15e-7d16-4db8-815a-cb681337c723}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{87fe8cc7-2e45-40e4-bc36-ae9f65837cd3}">
 		<relationship name="effects">
 			<destination>{0d0daf04-e6df-4585-bd7c-91dceab6a2f2}</destination>
+			<destination>{25d3a008-344b-48f2-bbc3-7f59f6813653}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{8f06b16d-6a66-45d2-8df8-5677502aeb7b}" />
@@ -112,6 +113,7 @@
 	</object>
 	<object class="MixerBusFader" id="{7211e420-0d12-4e25-8d8d-2f32b706a400}" />
 	<object class="MixerBusFader" id="{0d0daf04-e6df-4585-bd7c-91dceab6a2f2}" />
+	<object class="SpatialiserEffect" id="{25d3a008-344b-48f2-bbc3-7f59f6813653}" />
 	<object class="RandomizerModulator" id="{2618d757-8d37-4bed-99b4-67c9a5b936f4}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>pitch</value>

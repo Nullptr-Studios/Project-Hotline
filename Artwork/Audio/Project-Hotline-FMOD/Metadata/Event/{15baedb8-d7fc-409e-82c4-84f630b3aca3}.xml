@@ -5,7 +5,7 @@
 			<value>Throw</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{1bc59f39-3066-4f7d-a759-fccae3d9ac3a}</destination>
@@ -100,14 +100,11 @@
 	</object>
 	<object class="MixerBusPanner" id="{990af419-1695-4e5c-a6c4-84b47ef2a672}" />
 	<object class="SingleSound" id="{033a9c55-85cd-4d22-ba74-6f50e20f7b54}">
-		<property name="volume">
-			<value>-12</value>
-		</property>
 		<relationship name="modulators">
 			<destination>{98ff8960-b532-48bc-8fe9-52d1eebacca3}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{1d5d4663-7ae0-4e47-807d-f3aeed6e988c}</destination>
+			<destination>{384bffdf-4495-4235-be6d-5c7a128fa2a4}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{6cd51bf4-7c27-44f6-a838-8ba8e23fa7e8}" />

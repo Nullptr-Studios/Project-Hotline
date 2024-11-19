@@ -21,7 +21,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -25328840140603010}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638676231236019612
+  lastModified: 638676355377219429
   FileSizes:
   - Name: Desktop
-    Value: 1162
+    Value: 1434
   Exists: 1
 --- !u!114 &-2104896428584185709
 MonoBehaviour:
@@ -65,6 +65,33 @@ MonoBehaviour:
     Data2: 1084151804
     Data3: -159071102
     Data4: -1548963024
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1176420639656677226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/BatHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/BatHit
+  Guid:
+    Data1: -719709937
+    Data2: 1274931417
+    Data3: -1169581944
+    Data4: 1083678516
   Banks:
   - {fileID: -25328840140603010}
   IsStream: 0
@@ -95,7 +122,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -25328840140603010}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -116,10 +143,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638676231237259344
+  lastModified: 638676375126982081
   FileSizes:
   - Name: Desktop
-    Value: 44832
+    Value: 122656
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -146,12 +173,18 @@ MonoBehaviour:
   - {fileID: 3498804905421652681}
   - {fileID: -2104896428584185709}
   - {fileID: -806746853337521662}
+  - {fileID: 3621234198063788532}
+  - {fileID: 555981079655538307}
+  - {fileID: 5574018317114101947}
+  - {fileID: -1176420639656677226}
+  - {fileID: 1911453412134316959}
+  - {fileID: 5254327337411921126}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7001593021806771270}
   StringsBanks:
   - {fileID: -2768057446997512794}
-  cacheTime: 638676231237259344
+  cacheTime: 638676375126982081
   cacheVersion: 131620
 --- !u!114 &74393726703728265
 MonoBehaviour:
@@ -174,7 +207,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -25328840140603010}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -195,11 +228,38 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638676231237244826
+  lastModified: 638676371741861699
   FileSizes:
   - Name: Desktop
     Value: 13943136
   Exists: 1
+--- !u!114 &555981079655538307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Blood/Blood
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Blood/Blood
+  Guid:
+    Data1: 40838112
+    Data2: 1105585753
+    Data3: -736400994
+    Data4: 433993528
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &605526128096618634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +314,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &1911453412134316959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player/Pickup
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Player/Pickup
+  Guid:
+    Data1: 1747644978
+    Data2: 1329971122
+    Data3: -594094149
+    Data4: 1209385613
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &3498804905421652681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +359,87 @@ MonoBehaviour:
     Data2: 1252613723
     Data3: -1754559587
     Data4: -1170039234
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3621234198063788532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player/WeaponSwitch
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Player/WeaponSwitch
+  Guid:
+    Data1: -911606085
+    Data2: 1110403421
+    Data3: -1832189531
+    Data4: -1364843617
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5254327337411921126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Footsteps/ConcreteFootsteps2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Footsteps/ConcreteFootsteps2
+  Guid:
+    Data1: -1017361114
+    Data2: 1130245974
+    Data3: 249290894
+    Data4: -1447486384
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5574018317114101947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Footsteps/ConcreteFootsteps
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Footsteps/ConcreteFootsteps
+  Guid:
+    Data1: 659339939
+    Data2: 1143370548
+    Data3: 93692582
+    Data4: 447822170
   Banks:
   - {fileID: -25328840140603010}
   IsStream: 0
@@ -296,7 +464,7 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638676231236014595
+  lastModified: 638676355377209237
   FileSizes:
   - Name: Desktop
     Value: 1036

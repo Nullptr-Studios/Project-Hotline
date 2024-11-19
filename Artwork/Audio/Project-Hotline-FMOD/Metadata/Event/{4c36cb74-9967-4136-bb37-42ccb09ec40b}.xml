@@ -5,7 +5,7 @@
 			<value>SMGShoot</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{9292a15e-7d16-4db8-815a-cb681337c723}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{1162fab5-45b2-41a0-8449-3104a7ef0a19}">
 		<relationship name="effects">
 			<destination>{5797aa9e-e91a-4b25-822b-34b2d4b52bc5}</destination>
+			<destination>{e6572ae1-18ca-457d-9b6d-77f998701f3e}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{99dbef9d-ed3d-4550-97cc-da41f6d12180}" />
@@ -107,11 +108,12 @@
 			<destination>{6ca15688-5968-453b-9aa0-d485fcaf7e9a}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{33e25885-3eff-4b8c-a242-83c18e038f37}</destination>
+			<destination>{80010fc0-ba83-4882-9c08-90f66680bb18}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{b9df4e5c-8f95-4589-9f2e-8024b631fc83}" />
 	<object class="MixerBusFader" id="{5797aa9e-e91a-4b25-822b-34b2d4b52bc5}" />
+	<object class="SpatialiserEffect" id="{e6572ae1-18ca-457d-9b6d-77f998701f3e}" />
 	<object class="RandomizerModulator" id="{6ca15688-5968-453b-9aa0-d485fcaf7e9a}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>pitch</value>
