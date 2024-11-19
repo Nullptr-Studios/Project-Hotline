@@ -18,32 +18,35 @@
     {
       "id": 2,
       "nextId": 3,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
       "theme": "VNT_Default",
       "sentences":
       [
-        "Uh… Bathroom, I think. Door’s stuck, lights are dead. Tried ‘em a couple times…<wait=1> Who… who is this?"
+        "Uh… Bathroom, I think. Door’s stuck, lights are dead. Tried ‘em a couple times… Who… who is this?"
       ]
     },
     
     {
       "id": 3,
       "nextId": 4,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
       "theme": "VNT_Default",
       "sentences":
       [
-        "Wait, you—you don’t recognize me?<wait=1> Maybe you hit your head on something, huh? That would explain why I haven’t heard from you… You had me worried sick, kid."
+        "Wait, you—you don’t recognize me? Maybe you hit your head on something, huh? That would explain why I haven’t heard from you… You had me worried sick, kid."
       ]
     },
     
     {
       "id": 4,
       "nextId": 5,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
@@ -58,6 +61,7 @@
     {
       "id": 5,
       "nextId": 6,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
@@ -71,6 +75,7 @@
     {
       "id": 6,
       "nextId": 7,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
@@ -84,32 +89,35 @@
     {
       "id": 7,
       "nextId": 8,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
       "theme": "VNT_Default",
       "sentences":
       [
-        "Trust me, you’re not the first person to feel that way.<wait=0.6> It’s been… a while, Blake. A rough road. But look—don’t try to force it. Just… trust me. You’ve done that before."
+        "Trust me, you’re not the first person to feel that way. It’s been… a while, Blake. A rough road. But look—don’t try to force it. Just… trust me. You’ve done that before."
       ]
     },
     
     {
       "id": 8,
       "nextId": 9,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
       "theme": "VNT_Default",
       "sentences":
       [
-        "Yeah…<wait=1> If you say so."
+        "Yeah… If you say so."
       ]
     },
     
     {
       "id": 9,
       "nextId": 10,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
@@ -123,6 +131,7 @@
     {
       "id": 10,
       "nextId": 11,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
@@ -136,32 +145,35 @@
     {
       "id": 11,
       "nextId": 12,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
       "theme": "VNT_Default",
       "sentences":
       [
-        "Locked? Maybe it’s jammed or something.<wait=0.5> Sit tight—I’ll have that fixed. You’re safe, Blake. That’s what matters right now."
+        "Locked? Maybe it’s jammed or something. Sit tight—I’ll have that fixed. You’re safe, Blake. That’s what matters right now."
       ]
     },
     
     {
       "id": 12,
       "nextId": 13,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
       "theme": "VNT_Default",
       "sentences":
       [
-        "Safe… from what?<wait=1> Was something… did something happen to me?"
+        "Safe… from what? Was something… did something happen to me?"
       ]
     },
     
     {
       "id": 13,
       "nextId": 14,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
@@ -174,7 +186,7 @@
     
     {
       "id": 14,
-      "nextId": 15,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
@@ -182,7 +194,7 @@
       "sentences":
       [
         "Delta… How did we even met?",
-        "<action=actPopup><action=endConversation>"
+        "<action=actPopup> <action=endConversation> "
       ]
     }
   ],
@@ -199,7 +211,7 @@
     // Stop the conversation
     {
       "name": "endConversation",
-      "type": "close conversation",
+      "type": "close conversation"
     }
   ]
 }

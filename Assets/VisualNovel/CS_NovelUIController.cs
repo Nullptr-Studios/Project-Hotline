@@ -16,7 +16,8 @@ public class NovelUIController : BaseDialogueUIController
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private NovelUICharacter speaker;
-    [SerializeField] private NovelUISprite sprite;
+    [SerializeField] private NovelUISprite spriteBlake;
+    [SerializeField] private NovelUISprite spriteOther;
     [SerializeField] private Image continueButton;
     private NovelOptionsController _optionsController;
     [CanBeNull] private PlayerMovement _player;
@@ -66,11 +67,16 @@ public class NovelUIController : BaseDialogueUIController
         if (!sameSpeakerAsLastDialogue)
         {
             speaker.SetName(speakerName);
-            sprite.SetSprite(characterSprite, speakerName);
             if (speakerName == "Blake")
+            {
+                spriteBlake.SetSprite(characterSprite, speakerName);
                 _animator.SetTrigger(Blake);
+            }
             else
+            {
                 _animator.SetTrigger(Other);
+                spriteOther.SetSprite(characterSprite, speakerName);
+            }
         }
         
         for (var i = 0; i < length; i++)
