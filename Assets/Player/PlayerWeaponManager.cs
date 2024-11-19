@@ -228,9 +228,21 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         if (context.performed)
         {
-            _wantsToFire = true;
-            ammoPrompt.SubtractBullet();
+            if(_heldWeaponInterface.GetWeaponType() == EWeaponType.Melee && !_canShootAgain)
+                _wantsToFire = false;
+            else
+                _wantsToFire = true;
+            
+            
             _bulletsUITimer = 0;
+            if (_isWeaponHeld)
+            {
+                if (_heldWeaponInterface.UsesLeft() == 0 && _heldWeaponInterface.GetWeaponType() == EWeaponType.Fire)
+                {
+                    FireWeapon fireWeapon = (FireWeapon) _heldWeaponInterface;
+                    FMODUnity.RuntimeManager.PlayOneShot(fireWeapon.fireWeaponData.emptyClipSound, transform.position);
+                }
+            }
         }
         else if (context.canceled)
         {
@@ -252,6 +264,8 @@ public class PlayerWeaponManager : MonoBehaviour
 
         if (context.performed)
             anim.SetTrigger(Use);
+        
+        ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
     }
 
     /// <summary>

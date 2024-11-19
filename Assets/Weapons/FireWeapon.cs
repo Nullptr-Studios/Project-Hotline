@@ -101,6 +101,7 @@ public class FireWeapon : Weapon
         if (_currentAmmo < 0 && isPlayer)
         {
             _wantsToFire = false;
+            FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.emptyClipSound, _transform.position);
             return;
         }
         

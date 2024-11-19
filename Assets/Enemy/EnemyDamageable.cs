@@ -54,6 +54,7 @@ public class EnemyDamageable : Damageable
 
     [Header("Sound")] 
     public EventReference BatHitSound;
+    public EventReference BatKillSound;
 
     /// <summary>
     /// Initializes the EnemyDamageable instance.
@@ -198,9 +199,9 @@ public class EnemyDamageable : Damageable
             return;
         }
         
-        if(weaponType == EWeaponType.Melee)
+        if(_currentHealth - amount <= 0)
         {
-            FMODUnity.RuntimeManager.PlayOneShot(BatHitSound, transform.position);
+            FMODUnity.RuntimeManager.PlayOneShot(BatKillSound, transform.position);
         }
         
         _lastShootDir = shootDir;
@@ -209,6 +210,7 @@ public class EnemyDamageable : Damageable
         //temporal stun
         if (weaponType == EWeaponType.Melee)
         {
+            FMODUnity.RuntimeManager.PlayOneShot(BatHitSound, transform.position);
             Stun(shootDir);
         }
 

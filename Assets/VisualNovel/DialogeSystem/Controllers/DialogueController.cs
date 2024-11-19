@@ -172,6 +172,10 @@ namespace CC.DialogueSystem
         // An option was selected
         public void OptionSelected(int index)
         {
+            /*//null check, cuz it fucking fills the log with errors
+            if(_currentDialogue == null)
+                return;*/
+            
             // Perform any selected action
             foreach (var actionName in _currentDialogue.Options[index].SelectedActionNames)
                 ActionController.PerformAction(_currentConversation, actionName);

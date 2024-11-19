@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5000670955350599950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/BatHitKill
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/BatHitKill
+  Guid:
+    Data1: -719709937
+    Data2: 1274931417
+    Data3: -1169581944
+    Data4: 1083678516
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-4542050931511163609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,11 +69,38 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638676413901226039
+  lastModified: 638676435787941108
   FileSizes:
   - Name: Desktop
-    Value: 1486
+    Value: 1574
   Exists: 1
+--- !u!114 &-2194847663887729687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/BatHit2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/BatHit2
+  Guid:
+    Data1: 1290632407
+    Data2: 1319305624
+    Data3: 1039821470
+    Data4: -515941669
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2104896428584185709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,33 +119,6 @@ MonoBehaviour:
     Data2: 1084151804
     Data3: -159071102
     Data4: -1548963024
-  Banks:
-  - {fileID: -25328840140603010}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-1176420639656677226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Weapons/BatHit
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Weapons/BatHit
-  Guid:
-    Data1: -719709937
-    Data2: 1274931417
-    Data3: -1169581944
-    Data4: 1083678516
   Banks:
   - {fileID: -25328840140603010}
   IsStream: 0
@@ -128,6 +155,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-264865363222759887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/EmptyClip
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/EmptyClip
+  Guid:
+    Data1: 937674837
+    Data2: 1176114317
+    Data3: -1870304871
+    Data4: 155768341
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-25328840140603010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,10 +197,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638676413901614019
+  lastModified: 638676435788220668
   FileSizes:
   - Name: Desktop
-    Value: 152288
+    Value: 164864
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -175,17 +229,19 @@ MonoBehaviour:
   - {fileID: -806746853337521662}
   - {fileID: 3621234198063788532}
   - {fileID: 555981079655538307}
-  - {fileID: -1176420639656677226}
   - {fileID: 1911453412134316959}
   - {fileID: 5254327337411921126}
   - {fileID: 1033707558055676969}
   - {fileID: 7930494510980102789}
+  - {fileID: -5000670955350599950}
+  - {fileID: -264865363222759887}
+  - {fileID: -2194847663887729687}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7001593021806771270}
   StringsBanks:
   - {fileID: -2768057446997512794}
-  cacheTime: 638676413901614019
+  cacheTime: 638676435788220668
   cacheVersion: 131620
 --- !u!114 &74393726703728265
 MonoBehaviour:
@@ -465,7 +521,7 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638676413901210907
+  lastModified: 638676435787931083
   FileSizes:
   - Name: Desktop
     Value: 1036
