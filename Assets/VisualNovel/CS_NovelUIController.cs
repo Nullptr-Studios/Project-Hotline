@@ -74,8 +74,8 @@ public class NovelUIController : BaseDialogueUIController
             }
             else
             {
-                _animator.SetTrigger(Other);
                 spriteOther.SetSprite(characterSprite, speakerName);
+                _animator.SetTrigger(Other);
             }
         }
         
