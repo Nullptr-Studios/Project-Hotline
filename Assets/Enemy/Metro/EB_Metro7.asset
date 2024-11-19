@@ -10,23 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aee424af42d0cb4386688b8fec2bf02, type: 3}
-  m_Name: EB_Containers 4
+  m_Name: EB_Metro7
   m_EditorClassIdentifier: 
-  isStatic: 1
+  isStatic: 0
   returnToInitialSpot: 1
   waypoints:
-  - waypointPos: {x: 7.53, y: 9.75}
+  - waypointPos: {x: 50, y: 9}
     letItRotate: 1
-    wait: 0.6
-  - waypointPos: {x: 3.35, y: 9.75}
+    wait: 0.9
+  - waypointPos: {x: 38, y: 9}
     letItRotate: 1
-    wait: 0.2
-  - waypointPos: {x: 3, y: 6.25}
-    letItRotate: 0
-    wait: 0.8
-  idleSpeed: 2.5
+    wait: 0.9
+  idleSpeed: 3
   chasingSpeed: 8
   distanceToShoot: 10
-  timeToStartShooting: 0.5
-  meleeDistance: 3
+  timeToStartShooting: 0.7
+  meleeDistance: 2
   searchTimes: 3

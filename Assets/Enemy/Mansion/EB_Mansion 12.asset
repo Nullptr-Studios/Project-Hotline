@@ -10,23 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aee424af42d0cb4386688b8fec2bf02, type: 3}
-  m_Name: EB_Containers 4
+  m_Name: EB_Mansion 12
   m_EditorClassIdentifier: 
-  isStatic: 1
+  isStatic: 0
   returnToInitialSpot: 1
   waypoints:
-  - waypointPos: {x: 7.53, y: 9.75}
+  - waypointPos: {x: -5, y: -4}
     letItRotate: 1
-    wait: 0.6
-  - waypointPos: {x: 3.35, y: 9.75}
+    wait: 1.1
+  - waypointPos: {x: -1, y: -8}
     letItRotate: 1
-    wait: 0.2
-  - waypointPos: {x: 3, y: 6.25}
-    letItRotate: 0
-    wait: 0.8
-  idleSpeed: 2.5
+    wait: 1.2
+  idleSpeed: 2
   chasingSpeed: 8
   distanceToShoot: 10
   timeToStartShooting: 0.5
-  meleeDistance: 3
+  meleeDistance: 2
   searchTimes: 3
