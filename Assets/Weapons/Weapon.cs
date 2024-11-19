@@ -83,6 +83,8 @@ public interface IWeapon
     /// <param name="weaponHolder">The transform of the weapon holder.</param>
     public void Pickup(Transform weaponHolder);
 
+    public void Reload();
+
     /// <summary>
     /// Throws the weapon.
     /// </summary>
@@ -128,6 +130,14 @@ public class Weapon : MonoBehaviour, IWeapon
     public bool canStun = true;
     public LayerMask maskToStun;
     public bool isPlayer;
+    
+    public virtual void Reload()
+    {
+        if (!_isClaimed)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     /// <summary>
     /// Initializes the contact filter.

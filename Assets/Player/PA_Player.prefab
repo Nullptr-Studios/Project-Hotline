@@ -68,10 +68,10 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 95
-  m_PointLightOuterAngle: 130
-  m_PointLightInnerRadius: 8
-  m_PointLightOuterRadius: 11.5
+  m_PointLightInnerAngle: 100
+  m_PointLightOuterAngle: 160
+  m_PointLightInnerRadius: 10
+  m_PointLightOuterRadius: 16
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -334,7 +334,7 @@ Transform:
   - {fileID: 6914766930394450923}
   - {fileID: 8987711264224740855}
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &8018001871774116870
 CircleCollider2D:
@@ -455,11 +455,11 @@ MonoBehaviour:
     Path: 
   throwSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 364572088
+      Data2: 1084151804
+      Data3: -159071102
+      Data4: -1548963024
+    Path: event:/SFX/Player/Throw
   switchSound:
     Guid:
       Data1: 0
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0.5
   bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
-  PlayerCorpsePrefab: {fileID: 7440868465861970397, guid: fd30fa95fe942e449bac51de500564f1, type: 3}
+  PlayerCorpsePrefab: {fileID: 45819439862360194, guid: fd30fa95fe942e449bac51de500564f1, type: 3}
   deathScreenUI: {fileID: 0}
   mainCamera: {fileID: 0}
   deathScreenDelay: 0.1

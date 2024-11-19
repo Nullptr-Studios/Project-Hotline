@@ -15,15 +15,18 @@ MonoBehaviour:
   isStatic: 0
   returnToInitialSpot: 1
   waypoints:
-  - waypointPos: {x: 66, y: -5}
+  - waypointPos: {x: 62, y: -2}
     letItRotate: 1
+    wait: 0.4
+  - waypointPos: {x: 60, y: -6}
+    letItRotate: 0
     wait: 1.2
   - waypointPos: {x: 73, y: -5}
     letItRotate: 1
-    wait: 0.9
+    wait: 2
   idleSpeed: 3
   chasingSpeed: 8
   distanceToShoot: 10
   timeToStartShooting: 0.7
-  meleeDistance: 2
+  meleeDistance: 3
   searchTimes: 3

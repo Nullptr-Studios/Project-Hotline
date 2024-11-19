@@ -37,7 +37,7 @@ public class BloodManager : MonoBehaviour
     {
         _currentMaxTravelDistance = bloodTravelDistance;
         Invoke(nameof(Remove), destroyTime);
-
+        
         Invoke(nameof(Blood), 0);
     }
 

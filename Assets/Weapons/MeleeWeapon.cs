@@ -80,9 +80,6 @@ public class MeleeWeapon : Weapon
     /// </summary>
     private void Attack()
     {
-        //Call civilian panic delegate
-        if(SceneMng.CivilianPanicDelegate != null)
-            SceneMng.CivilianPanicDelegate();
         
         var hitArr = new RaycastHit2D[32];
         var cf2D = new ContactFilter2D();
@@ -109,6 +106,8 @@ public class MeleeWeapon : Weapon
 
         // Play sound
         FMODUnity.RuntimeManager.PlayOneShot(meleeWeaponData.useSound, transform.position);
+        
+        _wantsToAttack = false;
     }
 
     /// <summary>
