@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireType: 0
   fireCastsAmount: 1
-  penetrationAmount: 1
+  penetrationAmount: 3
   automatic: 1
   useFireRateCurve: 1
   overrideFireRateCurve: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.4
+      value: 0.3
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 0.5
-      value: 0.3
+      value: 0.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -43,9 +43,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timeToReachFinalFireRate: 0.5
-  initialFireRate: 0.4
-  finalFireRate: 0.3
-  maxAmmo: 12
+  initialFireRate: 0.3
+  finalFireRate: 0.1
+  maxAmmo: 16
   reloadTime: 10
   useDispersion: 1
   useDispersionCurve: 1
@@ -94,4 +94,44 @@ MonoBehaviour:
     m_RotationOrder: 4
   timeToReachMaxDispersion: 1.5
   minDispersionAngle: 0.5
-  maxDispersionAngle: 3
+  maxDispersionAngle: 10
+  SpriteAnimID: 2
+  enemyHearingDistance: 20
+  fireSound:
+    Guid:
+      Data1: -980815015
+      Data2: 1332460070
+      Data3: -1240866406
+      Data4: 1821171809
+    Path: event:/SFX/Weapons/RifleShoot
+  emptyClipSound:
+    Guid:
+      Data1: 937674837
+      Data2: 1176114317
+      Data3: -1870304871
+      Data4: 155768341
+    Path: event:/SFX/Weapons/EmptyClip
+  sfxMuzzleFlashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

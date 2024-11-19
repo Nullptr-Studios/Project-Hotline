@@ -2,37 +2,36 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Represents a fire weapon with various functionalities such as firing, reloading, and applying effects.
+/// Inherits from the Weapon class.
+/// </summary>
 public class FireWeapon : Weapon
 {
-
-    [Header("Fire Weapon")] 
+    [Header("Fire Weapon")]
     public FireWeaponData fireWeaponData;
 
-    public GameObject bulletHitWallVFX;
-    public GameObject bulletHitGlassVFX;
-    public GameObject bulletHitWallBangVFX;
-
-    public GameObject muzzleVFX;
-    
-    //Gun muzzle wil be used for FX
+    // Gun muzzle will be used for FX
     public Transform gunMuzzle;
-    //The transform where the ray casts will be emitted
+    public MuzzleLightController muzzleLightController;
+    // The transform where the ray casts will be emitted
     public Transform dispersionTransform;
 
     private int _currentAmmo;
     private bool _isReloading;
 
-    //Fire rate global variables
+    // Fire rate global variables
     private float _fireRateTimer;
     private float _fireRateCurveTimer;
-    
+
     private bool _wantsToFire;
     private bool _canFire = true;
 
-    //Dispersion global variables
+    // Dispersion global variables
     private float _currentDispersion;
     private float _dispersionCurveTimer;
 
@@ -44,48 +43,75 @@ public class FireWeapon : Weapon
     [SerializeField] private bool drawGizmos;
     [SerializeField] private float gizmosDuration = .5f;
 #endif
-    
-    public override int UsesLeft()
-    {
-        return _currentAmmo;
-    }
-    
+
+    private Transform _transform;
+
+    /// <summary>
+    /// Initializes the FireWeapon instance.
+    /// </summary>
     private void Awake()
     {
         weaponType = EWeaponType.Fire;
-    }
-
-    public override bool IsAutomatic()
-    {
-        return fireWeaponData.automatic;
-    }
-
-    public override float ReloadTime()
-    {
-        return fireWeaponData.reloadTime;
-    }
-
-    public override float TimeBetweenUses()
-    {
-        return _currentTimeToFire;
-    }
-
-    public override int MaxUses()
-    {
-        return fireWeaponData.maxAmmo;
+        _transform = transform;
+        _currentAmmo = fireWeaponData.maxAmmo;
     }
 
     /// <summary>
-    /// Use Functionality
+    /// Gets the weapon sprite ID.
     /// </summary>
+    /// <returns>The weapon sprite ID.</returns>
+    public override int GetWeaponSpriteID() => fireWeaponData.SpriteAnimID;
+
+    /// <summary>
+    /// Gets the number of uses left for the weapon.
+    /// </summary>
+    /// <returns>The number of uses left.</returns>
+    public override int UsesLeft() => _currentAmmo;
+
+    /// <summary>
+    /// Checks if the weapon is automatic.
+    /// </summary>
+    /// <returns>True if automatic, false otherwise.</returns>
+    public override bool IsAutomatic() => fireWeaponData.automatic;
+
+    /// <summary>
+    /// Gets the reload time of the weapon.
+    /// </summary>
+    /// <returns>The reload time.</returns>
+    public override float ReloadTime() => fireWeaponData.reloadTime;
+
+    /// <summary>
+    /// Gets the time between uses of the weapon.
+    /// </summary>
+    /// <returns>The time between uses.</returns>
+    public override float TimeBetweenUses() => _currentTimeToFire;
+
+    /// <summary>
+    /// Gets the maximum number of uses for the weapon.
+    /// </summary>
+    /// <returns>The maximum number of uses.</returns>
+    public override int MaxUses() => fireWeaponData.maxAmmo;
+
+    /// <summary>
+    /// Handles the use action of the weapon.
+    /// </summary>
+    /// <param name="pressed">True if the use action is pressed, false otherwise.</param>
     public override void Use(bool pressed)
     {
+        if (_currentAmmo < 0 && isPlayer)
+        {
+            _wantsToFire = false;
+            FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.emptyClipSound, _transform.position);
+            return;
+        }
+        
+        
+            
         _wantsToFire = pressed;
         if (pressed)
         {
             if (fireWeaponData.useFireRateCurve)
             {
-                //so it fires as soon as it´s pressed
                 _fireRateTimer = fireWeaponData.fireRateCurve.Evaluate(0);
                 _currentTimeToFire = _fireRateTimer;
             }
@@ -94,17 +120,16 @@ public class FireWeapon : Weapon
         {
             _fireRateTimer = 0;
             _fireRateCurveTimer = 0;
-
             _dispersionCurveTimer = 0;
         }
     }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Initializes the FireWeapon instance.
+    /// </summary>
     protected override void Start()
     {
-        //Implement Base class functionality
         base.Start();
-
         if (fireWeaponData)
         {
             _currentAmmo = fireWeaponData.maxAmmo;
@@ -112,181 +137,177 @@ public class FireWeapon : Weapon
         else
         {
 #if UNITY_EDITOR
-            if(log)
-                Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have fireWeaponData assigned!!!!!!!!");
-#endif              
+            if (log)
+                Debug.LogError($"FireWeapon Error: {gameObject.name} does not have fireWeaponData assigned!");
+#endif
         }
         if (!gunMuzzle)
         {
 #if UNITY_EDITOR
-            if(log)
-                Debug.LogError("FireWeapon Error: " + gameObject.name + "does not have gunMuzzle assigned!!!!!!!!");
+            if (log)
+                Debug.LogError($"FireWeapon Error: {gameObject.name} does not have gunMuzzle assigned!");
 #endif
         }
     }
 
-    private void DoBulletVFX(GameObject VFX, RaycastHit2D hit)
+    /// <summary>
+    /// Performs bullet visual effects based on the hit layer.
+    /// </summary>
+    /// <param name="layer">The layer of the hit object.</param>
+    /// <param name="hit">The RaycastHit2D object containing hit information.</param>
+    private void DoBulletVFX(int layer, RaycastHit2D hit)
     {
-        //Do bulletHitVFX Wall
-        GameObject hitVFX = Instantiate(VFX, hit.point, new Quaternion());
-        hitVFX.transform.LookAt(hit.point + hit.normal);
-                
-        Destroy(hitVFX, 1);    
+        GameObject obj = layer switch
+        {
+            6 => ResourceManager.GetWallHitPool().Get(),
+            7 => ResourceManager.GetGlassHitPool().Get(),
+            8 => ResourceManager.GetWallBangHitPool().Get(),
+            _ => null
+        };
+
+        if (obj != null)
+        {
+            obj.SetActive(true);
+            obj.transform.position = hit.point;
+            obj.transform.LookAt(hit.point + hit.normal);
+        }
     }
 
+    /// <summary>
+    /// Picks up the weapon.
+    /// </summary>
+    /// <param name="weaponHolder">The transform of the weapon holder.</param>
+    public override void Pickup(Transform weaponHolder)
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        base.Pickup(weaponHolder);
+    }
+
+    /// <summary>
+    /// Throws the weapon.
+    /// </summary>
+    /// <param name="forwardVector">The forward vector for the throw.</param>
+    public override void Throw(Vector2 forwardVector)
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        base.Throw(forwardVector);
+    }
+
+    /// <summary>
+    /// Drops the weapon.
+    /// </summary>
+    public override void Drop()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        base.Drop();
+    }
+
+    /// <summary>
+    /// Fires the weapon in the specified direction.
+    /// </summary>
+    /// <param name="fireDir">The transform representing the fire direction.</param>
     private void Fire(Transform fireDir)
     {
-        // I don't like that this is hardcoded but we don't need to ignore any other layer so ig it's ok -x
-        var contactFilter = new ContactFilter2D();
-        contactFilter.SetLayerMask(~LayerMask.GetMask("HalfHeight"));
-        contactFilter.useLayerMask = true;
-        
-        //Ray-cast2D list
+        var contactFilter = new ContactFilter2D
+        {
+            useLayerMask = true,
+            layerMask = ~LayerMask.GetMask("HalfHeight")
+        };
+
         List<RaycastHit2D> rayHitList = new List<RaycastHit2D>();
         int amountHits = Physics2D.Raycast(fireDir.position, fireDir.right, contactFilter, rayHitList);
 
         if (amountHits == 0)
         {
-            //Do trail even if we aren't hitting anything
             StartCoroutine(PlayTrail(fireDir.position, fireDir.position + fireDir.right * ResourceManager.GetBulletTrailConfig().MissDistance, new RaycastHit2D()));
             return;
         }
-        
-        //Initial Position
-        Vector2 lastHitPos = fireDir.position;
 
-        //Amount of penetrated enemies
+        Vector2 lastHitPos = fireDir.position;
         int currentPenetration = 0;
-        
+
         foreach (var hit2D in rayHitList)
         {
             int layer = hit2D.transform.gameObject.layer;
-            
-            //Gizmos shit
+
 #if UNITY_EDITOR
             if (drawGizmos)
             {
                 float segmentDistance = Vector3.Distance(lastHitPos, hit2D.point);
-                Debug.DrawRay(lastHitPos, fireDir.right * segmentDistance, GetRayColorDebug(hit2D.transform.gameObject.layer), gizmosDuration);
-                
+                Debug.DrawRay(lastHitPos, fireDir.right * segmentDistance, GetRayColorDebug(layer), gizmosDuration);
                 lastHitPos = hit2D.point;
             }
 #endif
-            //Do damage to all surfaces
             if (hit2D.transform.TryGetComponent(out IDamageable damageableInterface))
                 damageableInterface.DoDamage(1, fireDir.right, hit2D.point, weaponType);
-            
-            //Ignore weapon layer
-            if (layer == 3)
-                continue;
 
-            if (layer == 6) //wall
-            {  
-                //If it's a wall we want to return, no more looping
-                
-                //Do trail
+            if (layer == 3) continue;
+
+            if (layer == 6)
+            {
                 StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
-
-                //Bullet hit VFX
-                DoBulletVFX(bulletHitWallVFX, hit2D);
-                
+                DoBulletVFX(layer, hit2D);
                 break;
             }
 
-            if (layer == 7 || layer == 8)   //wall-bang
+            if (layer == 7 || layer == 8 || layer == 13)
             {
-                //if bullets can penetrate continue loop
-
-                //Calculate penetration
                 if (currentPenetration == fireWeaponData.penetrationAmount)
                 {
-                    //Do trail
                     StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
                     break;
                 }
 
-                if (layer == 7) //Glass
-                {
-                    DoBulletVFX(bulletHitGlassVFX, hit2D);
-                }else // wallbang
-                {
-                    DoBulletVFX(bulletHitWallBangVFX, hit2D);
-                }
-
+                DoBulletVFX(layer == 7 ? layer : 8, hit2D);
                 currentPenetration++;
                 continue;
             }
 
-            if (layer == 9) //enemies
+            if (layer == 9)
             {
-
-                //Calculate penetration
                 if (currentPenetration == fireWeaponData.penetrationAmount)
                 {
-                    //Do trail
                     StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
                     break;
                 }
 
                 currentPenetration++;
                 continue;
-
-
             }
-            
-            //Do trail
+
             StartCoroutine(PlayTrail(fireDir.position, hit2D.point, hit2D));
-            
-            DoBulletVFX(bulletHitWallVFX, hit2D);
-            
-            //We treat default objects as walls
+            DoBulletVFX(6, hit2D);
             break;
         }
-
-        /* There is a bug that does not render trails if there is no more colliders, won't fix since the game will take place indoors */
-        
-
     }
-    
+
 #if UNITY_EDITOR
-    // Function to determine ray color based on layer
-    Color GetRayColorDebug(int layer)
+    /// <summary>
+    /// Gets the debug color for the ray based on the layer.
+    /// </summary>
+    /// <param name="layer">The layer of the hit object.</param>
+    /// <returns>The color for the debug ray.</returns>
+    private Color GetRayColorDebug(int layer) => layer switch
     {
-        switch (layer)
-        {
-            case 6: return Color.red; // Wall
-            
-            case 7:
-            case 8: return Color.yellow; // Wall-bang things
-            
-            case 9: 
-                return Color.green; // Enemies
-            
-            default: return Color.white; // Default color
-        }
-    }
+        6 => Color.red,
+        7 or 8 => Color.yellow,
+        9 => Color.green,
+        _ => Color.white
+    };
 #endif
 
     /// <summary>
-    /// Calculate random dispersion
+    /// Applies random dispersion to the weapon's fire direction.
     /// </summary>
     private void RandomDispersion()
     {
-        if (fireWeaponData.useDispersion)
-        {
-            float randAngle = Random.Range(-_currentDispersion,
-                _currentDispersion);
-
-            dispersionTransform.localEulerAngles = new Vector3(0, 0, randAngle);
-        }
-        else
-        {
-            dispersionTransform.localEulerAngles = new Vector3(0, 0, 0);
-        }
+        dispersionTransform.localEulerAngles = fireWeaponData.useDispersion
+            ? new Vector3(0, 0, Random.Range(-_currentDispersion, _currentDispersion))
+            : Vector3.zero;
     }
 
     /// <summary>
-    /// Logic between simple and multiple types of fires
+    /// Implements the firing logic of the weapon.
     /// </summary>
     private void FireImplementation()
     {
@@ -303,178 +324,185 @@ public class FireWeapon : Weapon
                 Fire(dispersionTransform);
             }
         }
-        
-        //Muzzle VFX
-        GameObject mVFX = Instantiate(muzzleVFX, gunMuzzle.transform);
-        mVFX.transform.forward = gunMuzzle.transform.right;
-        Destroy(mVFX, 1);
-        
-        //subtract current ammo
-        _currentAmmo--;
 
+        GameObject mVFX = ResourceManager.GetMuzzlePool().Get();
+        mVFX.SetActive(true);
+        mVFX.transform.position = gunMuzzle.position;
+        mVFX.transform.forward = gunMuzzle.right;
+
+        muzzleLightController.ActivateLight(fireWeaponData.sfxMuzzleFlashCurve);
+        FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.fireSound, _transform.position);
+
+        if (isPlayer)
+        {
+           HearEnemy();
+           _currentAmmo--; 
+        }
+            
     }
 
     /// <summary>
-    /// Called via Invoke
+    /// Gets the hearing range of the weapon.
     /// </summary>
-    private void UpdateCanFire()
+    /// <returns>The hearing range.</returns>
+    public override float GetHearingRange() => fireWeaponData.enemyHearingDistance;
+
+    /// <summary>
+    /// Notifies enemies within hearing range of the weapon's fire.
+    /// </summary>
+    private void HearEnemy()
     {
-        _canFire = true;
+        var filter = new ContactFilter2D
+        {
+            useLayerMask = true,
+            layerMask = LayerMask.GetMask("Enemy")
+        };
+
+        List<RaycastHit2D> hits = new List<RaycastHit2D>();
+        if (Physics2D.CapsuleCast(_transform.position, new Vector2(fireWeaponData.enemyHearingDistance, fireWeaponData.enemyHearingDistance), CapsuleDirection2D.Vertical, 0, Vector2.zero, filter, hits) > 0)
+        {
+            foreach (var hit in hits)
+            {
+                if (hit.collider.gameObject.TryGetComponent(out AISensor aiSensor))
+                {
+                    aiSensor.HeardPlayer(_transform.position);
+                }
+            }
+        }
     }
 
     /// <summary>
-    /// Finished reloading logic, called via Invoke
+    /// Updates the can fire status.
+    /// </summary>
+    private void UpdateCanFire() => _canFire = true;
+
+    /// <summary>
+    /// Finishes the reloading process.
     /// </summary>
     private void FinishReloading()
     {
 #if UNITY_EDITOR
-        if(log)
+        if (log)
             Debug.Log("Reloaded!!");
 #endif
         _isReloading = false;
         _currentAmmo = fireWeaponData.maxAmmo;
-        
-        //Reset variables to 0
+
         _fireRateTimer = 0;
         _fireRateCurveTimer = 0;
-
         _dispersionCurveTimer = 0;
     }
-    
-    //Trail
-    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit2D Hit)
+
+    /// <summary>
+    /// Plays the bullet trail effect.
+    /// </summary>
+    /// <param name="startPoint">The start point of the trail.</param>
+    /// <param name="endPoint">The end point of the trail.</param>
+    /// <param name="hit">The RaycastHit2D object containing hit information.</param>
+    /// <returns>An IEnumerator for the coroutine.</returns>
+    private IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit2D hit)
     {
         TrailRenderer instance = ResourceManager.GetBulletTrailPool().Get();
         instance.gameObject.SetActive(true);
-        instance.transform.position = StartPoint;
-        yield return null; // avoid position carry-over from last frame if reused
+        instance.transform.position = startPoint;
+        yield return null;
 
         instance.emitting = true;
 
-        float distance = Vector3.Distance(StartPoint, EndPoint);
+        float distance = Vector3.Distance(startPoint, endPoint);
         float remainingDistance = distance;
         while (remainingDistance > 0)
         {
-            instance.transform.position = Vector3.Lerp(
-                StartPoint,
-                EndPoint,
-                Mathf.Clamp01(1 - (remainingDistance / distance))
-            );
+            instance.transform.position = Vector3.Lerp(startPoint, endPoint, Mathf.Clamp01(1 - (remainingDistance / distance)));
             remainingDistance -= ResourceManager.GetBulletTrailConfig().SimulationSpeed * Time.deltaTime;
-
             yield return null;
         }
 
-        instance.transform.position = EndPoint;
-
+        instance.transform.position = endPoint;
         yield return new WaitForSeconds(ResourceManager.GetBulletTrailConfig().Duration);
-        yield return null;
         instance.emitting = false;
         instance.gameObject.SetActive(false);
         ResourceManager.GetBulletTrailPool().Release(instance);
     }
 
-    
     /// <summary>
-    /// Automatic, fire rate curve and dispersion curve logic
+    /// Updates the weapon state.
     /// </summary>
     public override void Update()
     {
         base.Update();
-        
+
         if (_wantsToFire)
         {
-            if(_currentAmmo > 0){
-                if (fireWeaponData.automatic)
+            if (_currentAmmo > 0 && isPlayer)
+            {
+                FireLogic();
+                return;
+            } 
+            
+            if (!isPlayer)
+            {
+                FireLogic();
+            }
+        }
+    }
+
+    private void FireLogic()
+    {
+        if (fireWeaponData.automatic)
+        {
+            if (fireWeaponData.useFireRateCurve)
+            {
+                _currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
+
+                if (_fireRateTimer >= _currentTimeToFire)
                 {
-
-                    //Fire rate
-                    if (fireWeaponData.useFireRateCurve)
-                    {
-                        _currentTimeToFire = fireWeaponData.fireRateCurve.Evaluate(_fireRateCurveTimer);
-
-                        //Debug.Log(currentTimeToFire);
-                        if (_fireRateTimer >= _currentTimeToFire)
-                        {
-                            _fireRateTimer = 0;
-                            UpdateCanFire();
-                        }
-
-                        _fireRateTimer += Time.deltaTime;
-
-                        if (_fireRateCurveTimer < fireWeaponData.fireRateCurve.GetDuration())
-                            _fireRateCurveTimer += Time.deltaTime;
-                    }
-
-                    //Dispersion
-                    if (fireWeaponData.useDispersionCurve)
-                    {
-                        _currentDispersion = fireWeaponData.bulletDispersionCurve.Evaluate(_dispersionCurveTimer);
-
-                        if (_dispersionCurveTimer < fireWeaponData.bulletDispersionCurve.GetDuration())
-                            _dispersionCurveTimer += Time.deltaTime;
-
-                    }
-                    else
-                    {
-                        _currentDispersion = fireWeaponData.maxDispersionAngle;
-                    }
-
-                    //Main fire logic
-                    if (_canFire)
-                    {
-                        _canFire = false;
-                        FireImplementation();
-
-                        if (!fireWeaponData.useFireRateCurve)
-                        {
-                            _fireRateCurveTimer = fireWeaponData.finalFireRate;
-                            Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
-                        }
-                    }
+                    _fireRateTimer = 0;
+                    UpdateCanFire();
                 }
-                else
-                {
-                    if (_canFire)
-                    {
-                        _currentDispersion = fireWeaponData.maxDispersionAngle;
-                        _currentTimeToFire = fireWeaponData.finalFireRate;
 
-                        Invoke(nameof(UpdateCanFire), _currentTimeToFire);
-                        FireImplementation();
-                        
-                        _canFire = false;
-                        _wantsToFire = false;
-                    }
-                }
+                _fireRateTimer += Time.deltaTime;
+
+                if (_fireRateCurveTimer < fireWeaponData.fireRateCurve.GetDuration())
+                    _fireRateCurveTimer += Time.deltaTime;
+            }
+
+            if (fireWeaponData.useDispersionCurve)
+            {
+                _currentDispersion = fireWeaponData.bulletDispersionCurve.Evaluate(_dispersionCurveTimer);
+
+                if (_dispersionCurveTimer < fireWeaponData.bulletDispersionCurve.GetDuration())
+                    _dispersionCurveTimer += Time.deltaTime;
             }
             else
             {
-                //Do semiautomatic reload
-                if (!_isReloading)
+                _currentDispersion = fireWeaponData.maxDispersionAngle;
+            }
+
+            if (_canFire)
+            {
+                _canFire = false;
+                FireImplementation();
+
+                if (!fireWeaponData.useFireRateCurve)
                 {
-#if UNITY_EDITOR
-                    if(log)
-                        Debug.Log("Reloading");
-#endif
-                    _isReloading = true;
-                    Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
+                    _fireRateCurveTimer = fireWeaponData.finalFireRate;
+                    Invoke(nameof(UpdateCanFire), fireWeaponData.finalFireRate);
                 }
             }
         }
-        
-        //Do automatic reload
-        if (_currentAmmo <= 0)
+        else
         {
-            
-            if (!_isReloading)
+            if (_canFire)
             {
-#if UNITY_EDITOR
-                if (log)
-                    Debug.Log("Reloading");
-#endif
-                _isReloading = true;
-                Invoke(nameof(FinishReloading), fireWeaponData.reloadTime);
+                _currentDispersion = fireWeaponData.maxDispersionAngle;
+                _currentTimeToFire = fireWeaponData.finalFireRate;
+
+                Invoke(nameof(UpdateCanFire), _currentTimeToFire);
+                FireImplementation();
+
+                _canFire = false;
+                _wantsToFire = false;
             }
         }
     }

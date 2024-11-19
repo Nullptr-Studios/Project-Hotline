@@ -1,3 +1,7 @@
+using CC.DialogueSystem;
+using JetBrains.Annotations;
+using TheKiwiCoder;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,8 +9,9 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D missionTrigger;
     [SerializeField] private BoxCollider2D endTrigger;
-    [SerializeField] private MissionObjective objective;
+    [SerializeField] [CanBeNull] private MissionObjective objective;
     [SerializeField] private ScoreUI score;
+    [CanBeNull] [SerializeField] private GameObject actPopup;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -28,8 +33,11 @@ public class LevelManager : MonoBehaviour
             Debug.LogError($"[LevelManager] {name}: Objective mot found. Level unwinnable.");
             this.enabled = false;
         }
+        else
+        {
+            missionTrigger.GetComponent<MissionTrigger>().Objective = objective.gameObject;
+        }
         
-        missionTrigger.GetComponent<MissionTrigger>().Objective = objective.gameObject;
     }
 
     public void CompleteMission()
@@ -51,13 +59,32 @@ public class LevelManager : MonoBehaviour
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Mission paused");
 #endif
         
-    } 
-    
-    [System.Obsolete("This method is obsolete. Please use OpenScore instead")]
-    public void EndLevel() => SceneManager.LoadScene("MainMenu");
+    }
+
+    /// <summary>
+    /// Exit to main menu
+    /// </summary>
+    public void EndLevelMessage() {
+        VariableRepo.Instance.RemoveAll();
+        Destroy(GetComponent<ScoreManager>());
+        SceneManager.LoadScene("MainMenu");
+    } // TODO: This should call the loading screen
+
+    /// <summary>
+    /// Make the player restart the current level
+    /// </summary>
+    public static void RestartLevel()
+    {
+        VariableRepo.Instance.RemoveAll();
+
+        // TODO: this should be fixed after prototype to not have the player read the VN every time
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void OpenScore()
     {
+        //disable player
+        GameObject.FindGameObjectWithTag("Player").SetActive(false);
         
 #if UNITY_EDITOR
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Opening Score...");
@@ -65,4 +92,10 @@ public class LevelManager : MonoBehaviour
 
         score.Activate();
     }
+    
+    public void OpenActPopup()
+    {
+        if (actPopup != null) actPopup.SetActive(true);
+        else Debug.LogError($"[LevelManager] {name}: Trying to open act popup but it doesn't exist.");
+    } 
 }

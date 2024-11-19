@@ -77,3 +77,43 @@ MonoBehaviour:
   timeToReachMaxDispersion: 1
   minDispersionAngle: 8
   maxDispersionAngle: 8
+  SpriteAnimID: 3
+  enemyHearingDistance: 20
+  fireSound:
+    Guid:
+      Data1: 1513665631
+      Data2: 1252613723
+      Data3: -1754559587
+      Data4: -1170039234
+    Path: event:/SFX/Weapons/ShotgunShoot
+  emptyClipSound:
+    Guid:
+      Data1: 937674837
+      Data2: 1176114317
+      Data3: -1870304871
+      Data4: 155768341
+    Path: event:/SFX/Weapons/EmptyClip
+  sfxMuzzleFlashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

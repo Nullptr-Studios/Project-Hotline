@@ -5,7 +5,7 @@ using UnityEngine;
 public class Corpse : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    private BoxCollider2D _collider2D;
+    //private BoxCollider2D _collider2D;
 
     private CorpseConfig _corpseConfig;
 
@@ -15,15 +15,19 @@ public class Corpse : MonoBehaviour
     public void CorpseAddForceInDir(Vector2 dir)
     {
         _rb = gameObject.AddComponent<Rigidbody2D>();
-        _collider2D = gameObject.AddComponent<BoxCollider2D>();
+        //_collider2D = gameObject.AddComponent<BoxCollider2D>();
         gameObject.layer = 9;
 
         _corpseConfig = ResourceManager.GetCorpseConfig();
+        if (_rb)
+        {
+            _rb.drag = _corpseConfig.Drag;
+            _rb.gravityScale = 0;
 
-        _rb.drag = _corpseConfig.Drag;
-        _rb.gravityScale = 0;
-        
-        _rb.AddForce(dir * _corpseConfig.Force);
+            _rb.freezeRotation = true;
+
+            _rb.AddForce(dir * _corpseConfig.Force);
+        }
 
         transform.right = dir;
     }
@@ -36,7 +40,7 @@ public class Corpse : MonoBehaviour
             if (_timer >= 2)
             {
                 Destroy(_rb);
-                Destroy(_collider2D);
+                //Destroy(_collider2D);
                 Destroy(this);
             }
             else

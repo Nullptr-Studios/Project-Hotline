@@ -12,6 +12,8 @@ public class ActPopup : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI dateText;
     [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private bool openConversationOnClose;
+    [SerializeField] private int conversationId;
     
     void Start()
     {
@@ -42,7 +44,8 @@ public class ActPopup : MonoBehaviour
     private void DestroySelf()
     {
         gameObject.SetActive(false);
-        GameObject.Find("NovelManager").SendMessage("StartVNConversation", value: 0);
+        if (openConversationOnClose)
+            GameObject.Find("NovelManager").SendMessage("StartVNConversation", value: conversationId);
         Destroy(gameObject);
     }
 

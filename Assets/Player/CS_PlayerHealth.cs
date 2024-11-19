@@ -11,6 +11,8 @@ public class PlayerHealth : Damageable
 {
     public GameObject bloodEffectManager;
 
+    public GameObject PlayerCorpsePrefab;
+    
     [Header("PlayerHealth")]
     [SerializeField] private Canvas deathScreenUI;
     [SerializeField] [CanBeNull] private GameObject mainCamera;
@@ -21,7 +23,7 @@ public class PlayerHealth : Damageable
 
     private Vector3 _lastShootDir;
 
-    public bool IsDead { get; private set; }
+    public bool IsDead { get; set; }
 
 #if UNITY_EDITOR
         [Header("Debug")] [SerializeField] private bool logReload;
@@ -38,27 +40,35 @@ public class PlayerHealth : Damageable
             _disableFX = true;
             Debug.LogWarning($"[PlayerHealth] {name}: Camera not found, disabling death shader.");
         }
-
-        _input = new PlayerIA();
-        _input.UI.Accept.performed += RestartGame;
+        
     }
 
     public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
     {
         _lastShootDir = shootDir;
-        GameObject bulletManager = Instantiate(bloodEffectManager, hitPoint, new Quaternion());
-        bulletManager.transform.right = _lastShootDir;
+        
+        GameObject BManager = ResourceManager.GetBloodManagerPool().Get();
+        BManager.SetActive(true);
+        BManager.transform.position = hitPoint;
+        BManager.transform.right = shootDir;
         
         base.DoDamage(amount, shootDir, hitPoint);
     }
 
     public override void OnDead()
     {
+        GetComponent<PlayerWeaponManager>().DropWeapon();
+        
         IsDead = true;  
         ScoreManager.AddDeath();
-        _player.OnDisable(); // Deactivates all inputs from the game
+        //_player.OnDisable(); // Deactivates all inputs from the game
         
-        Invoke("OpenDeathScreen", deathScreenDelay);
+        GameObject c = Instantiate(PlayerCorpsePrefab, transform.position, Quaternion.identity);
+        c.GetComponent<PlayerCorpse>().CorpseAddForceInDir(_lastShootDir, deathScreenUI, mainCamera?.GetComponent<PixelPerfectCamera>());
+        
+        gameObject.SetActive(false);
+        
+        //Invoke("OpenDeathScreen", deathScreenDelay);
     }
 
     /// <summary>
@@ -77,18 +87,23 @@ public class PlayerHealth : Damageable
     /// Reloads the scene when called
     /// </summary>
     /// <param name="context">Input context shit that doesnt work</param>
-    private void RestartGame(InputAction.CallbackContext context)
+    public void RestartGame()
     {
 
 #if UNITY_EDITOR
-        if (logReload) Debug.LogWarning($"[PlayerHealth] {name}: Reloading game");
+        if (logReload) Debug.LogWarning($"[PlayerHealth] {name}: Reloading player");
 #endif
 
-        _input.UI.Accept.performed -= RestartGame;
-        _input.UI.Accept.Disable();
-        VariableRepo.Instance.RemoveAll();
+        IsDead = false;
+
+        _currentHealth = maxHealth;
         
-        // TODO: this should be fixed after prototype to not have the player read the VN every time
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        deathScreenUI.gameObject.SetActive(false);
+        mainCamera!.GetComponent<PixelPerfectCamera>().enabled = true;
+        
+        ScoreManager.Restart();
+        
+        GetComponent<PlayerWeaponManager>().Restart();
+
     }
 }

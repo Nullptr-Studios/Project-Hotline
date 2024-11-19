@@ -68,10 +68,10 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 95
-  m_PointLightOuterAngle: 130
-  m_PointLightInnerRadius: 8
-  m_PointLightOuterRadius: 11.5
+  m_PointLightInnerAngle: 100
+  m_PointLightOuterAngle: 160
+  m_PointLightInnerRadius: 10
+  m_PointLightOuterRadius: 16
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6914766930394450923}
   - component: {fileID: 8712065174866991548}
+  - component: {fileID: 8566547389374578288}
   m_Layer: 10
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -107,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296727842978240662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -155,7 +156,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2bcf4cb0713718e4b80b991248c08f0c, type: 3}
+  m_Sprite: {fileID: 362182364071139911, guid: 946db52941014ee42b14e29c35e5e1bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -166,6 +167,133 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8566547389374578288
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296727842978240662}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b81d5eb1f7a673444a48a39a7b892ebd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &2882020264709713306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8987711264224740855}
+  - component: {fileID: 5709209269377042644}
+  - component: {fileID: 3046261570920437550}
+  m_Layer: 0
+  m_Name: Playerlegs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8987711264224740855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2882020264709713306}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7844238277263270493}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &5709209269377042644
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2882020264709713306}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9de0fdd37e4a63c459326cb9bfc943d9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 6335537516509214884, guid: b6e308807a09e9a4093e954b6628d1d3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.5, y: 0.5833333}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &3046261570920437550
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2882020264709713306}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 324e35b09b5ef8348ab97961bdf75148, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3136868407235776783
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +307,6 @@ GameObject:
   - component: {fileID: 2322629527365507291}
   - component: {fileID: 9219392232182884951}
   - component: {fileID: 8330505946157900613}
-  - component: {fileID: 5020110233994094047}
   - component: {fileID: 8219012985781061561}
   - component: {fileID: 6649251340098386191}
   m_Layer: 10
@@ -205,6 +332,7 @@ Transform:
   - {fileID: 3631742440223459523}
   - {fileID: 2076086834673616306}
   - {fileID: 6914766930394450923}
+  - {fileID: 8987711264224740855}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -288,11 +416,29 @@ MonoBehaviour:
     curve: {fileID: 11400000, guid: ddaf781850e4fb24595be3ea1743716c, type: 2}
     speedMax: 7
   inputSmoothTime: 0.2
+  playerAnimation: {fileID: 8566547389374578288}
+  footTransform: {fileID: 8987711264224740855}
+  footAnimation: {fileID: 3046261570920437550}
   aimSmoothTime: 9
   aimMinimumDistance: 0.45
   pivotRotation: 0
   sprite: {fileID: 1296727842978240662}
   playerCollider: {fileID: 0}
+  footstepSound:
+    Guid:
+      Data1: -1017361114
+      Data2: 1130245974
+      Data3: 249290894
+      Data4: -1447486384
+    Path: event:/SFX/Footsteps/ConcreteFootsteps2
+  bloodFootstepSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  timeBetweenFootsteps: 0.3
   debugSpeed: 0
   debugInput: 0
 --- !u!114 &8330505946157900613
@@ -308,34 +454,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawningWeapon: {fileID: 4223289585622608669, guid: 3473ee2e2ea9c974aa9fc5981d891b87, type: 3}
+  weaponDictionary: {fileID: 11400000, guid: 2e7eccf80c58eb94c83812ca32c9dbe1, type: 2}
   pickupRange: 3
   weaponLm:
     serializedVersion: 2
     m_Bits: 8
   weaponHolder: {fileID: 3631742440223459523}
   maxWeaponsEquipped: 2
+  pickupSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  throwSound:
+    Guid:
+      Data1: 364572088
+      Data2: 1084151804
+      Data3: -159071102
+      Data4: -1548963024
+    Path: event:/SFX/Player/Throw
+  switchSound:
+    Guid:
+      Data1: -911606085
+      Data2: 1110403421
+      Data3: -1832189531
+      Data4: -1364843617
+    Path: event:/SFX/Player/WeaponSwitch
+  anim: {fileID: 8566547389374578288}
   log: 0
-  drawGizmos: 1
-  progressBar: {fileID: 0}
-  progressBar2: {fileID: 0}
+  drawGizmos: 0
   ammoPrompt: {fileID: 0}
---- !u!114 &5020110233994094047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3136868407235776783}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6b08b4f733e47418acb1b5fb182912, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  currentValue: 0
-  coolDownTime: 1
-  coolDownSpeed: 0.5
-  barAdd: 0.2
 --- !u!114 &8219012985781061561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,11 +568,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90afd25672b2ad4dae0d47786cbe7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 0.5
   bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
+  PlayerCorpsePrefab: {fileID: 45819439862360194, guid: fd30fa95fe942e449bac51de500564f1, type: 3}
   deathScreenUI: {fileID: 0}
   mainCamera: {fileID: 0}
-  deathScreenDelay: 0.5
+  deathScreenDelay: 0.1
   logReload: 0
 --- !u!1 &4983506758001091974
 GameObject:
@@ -448,7 +599,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4983506758001091974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.661, y: -0.317, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

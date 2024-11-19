@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class PlayerMovement : MonoBehaviour
 {
+    
     private PlayerIA _input;
     [FormerlySerializedAs("_inputComponent")] [SerializeField] private PlayerInput inputComponent;
     private Rigidbody2D _rb;
@@ -26,7 +28,16 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _directionTarget;
     private Vector2 _directionSmooth;
     private Vector2 _velocity;
+
+    [Header("Animation")] 
+    public Animator playerAnimation;
     
+    public Transform footTransform;
+    public Animator footAnimation;
+    
+    private static readonly int AnimRate = Animator.StringToHash("AnimRate");
+    private static readonly int IsIdle = Animator.StringToHash("IsIdle");
+
     [Header("Player Aim")]
     [SerializeField] private float aimSmoothTime = 0.2f;
     [SerializeField] private float aimMinimumDistance = 0.2f;
@@ -38,6 +49,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _rawMousePosition;
     private Vector3 _currentDir;
     private Vector3 _dir;
+    
+    private GameObject _pauseMenu;
+    
+    private float _footstepTimer;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -51,6 +66,10 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _camera = GameObject.Find("Cinemachine Brain").GetComponent<Camera>();
         _weaponManager = GetComponent<PlayerWeaponManager>();
+        // Decided to do this here because it was causing issues on the weapon manager -x
+        // Unity decided to do this OnEnable before the Awake on the weapon manager so it crashed -x
+        // Don't know why it does that now, but it does -x
+        _weaponManager.InitializeInput();
         
         _input.Debug.Debug.performed += OnDebug;
         _input.Debug.Restart.performed += ForceRestart;
@@ -58,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
         _input.Gameplay.Movement.canceled += OnMove;
         _input.Gameplay.Aim.performed += OnAim;
         _input.Gameplay.AimMouse.performed += OnAimMouse;
+        _input.Gameplay.Pause.performed += OnOpenPause;
+        _input.Gameplay.ReturnToMainMenu.performed += OnRetMain;
         // _input.Gameplay.Aim.canceled += OnAim;
 
         // The fact that i have to use this class for a fucking controller change makes me mad -x
@@ -84,6 +105,17 @@ public class PlayerMovement : MonoBehaviour
                 Controller = EController.Xbox;
                 return;
         }
+        
+        // Pause menu shit
+        // Have to do this since i cant rescale the canvas -x
+        _pauseMenu = GameObject.Find("PA_PauseMenu").GetComponentInChildren<PauseMenu>().gameObject;
+        _pauseMenu.SetActive(false);
+    }
+
+    // TODO: THIS SHOULD ABSOFUCKINGLUTLY NOT BE ON PROD 
+    private void OnRetMain(InputAction.CallbackContext obj)
+    {
+        GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
     }
 
     /// <summary>
@@ -100,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
             case "Dualsense":
                 Controller = EController.Dualsense;
                 break;
-            case "Controller":
+            case "Xbox":
                 Controller = EController.Xbox;
                 break;
             default:
@@ -120,6 +152,8 @@ public class PlayerMovement : MonoBehaviour
         _input.Gameplay.Movement.Enable();
         _input.Gameplay.Aim.Enable();
         _input.Gameplay.AimMouse.Enable();
+        _input.Gameplay.Pause.Enable();
+        _input.Gameplay.ReturnToMainMenu.Enable();
 
         _weaponManager.EnableInput();
     }
@@ -134,6 +168,8 @@ public class PlayerMovement : MonoBehaviour
         _input.Gameplay.Movement.Disable();
         _input.Gameplay.Aim.Disable();
         _input.Gameplay.AimMouse.Disable();
+        _input.Gameplay.Pause.Disable();
+        _input.Gameplay.ReturnToMainMenu.Disable();
 
         _weaponManager.DisableInput();
 
@@ -179,6 +215,22 @@ public class PlayerMovement : MonoBehaviour
         
         if (debugInput) Debug.Log(_inputDir);
 #endif
+        
+        // Animation stuff
+
+        if (moveVelocity.magnitude > 0.1f)
+        {
+            angle = Mathf.Atan2(moveVelocity.y, moveVelocity.x) * Mathf.Rad2Deg;
+            footTransform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            footAnimation.SetFloat(AnimRate, 1);
+            playerAnimation.SetBool(IsIdle, false);
+        }
+        else
+        {
+            footAnimation.SetFloat(AnimRate, 0);
+            playerAnimation.SetBool(IsIdle, true);
+        }
 
     }
 
@@ -240,6 +292,11 @@ public class PlayerMovement : MonoBehaviour
         SendMessage("OnKill");
 #endif
         
+    }
+
+    private void OnOpenPause(InputAction.CallbackContext context)
+    {
+        _pauseMenu.SetActive(true);
     }
 
     private void ForceRestart(InputAction.CallbackContext ctx)

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aee424af42d0cb4386688b8fec2bf02, type: 3}
+  m_Name: EB_Club 4
+  m_EditorClassIdentifier: 
+  isStatic: 0
+  returnToInitialSpot: 1
+  waypoints:
+  - waypointPos: {x: -7, y: 5.5}
+    letItRotate: 1
+    wait: 1.1
+  - waypointPos: {x: 2, y: 5.5}
+    letItRotate: 1
+    wait: 1.1
+  - waypointPos: {x: -5.5, y: 10.5}
+    letItRotate: 1
+    wait: 1.1
+  idleSpeed: 2.5
+  chasingSpeed: 8
+  distanceToShoot: 10
+  timeToStartShooting: 0.6
+  meleeDistance: 3
+  searchTimes: 3

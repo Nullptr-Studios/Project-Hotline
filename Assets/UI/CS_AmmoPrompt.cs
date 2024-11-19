@@ -6,50 +6,50 @@
  */
 
 using System.Collections.Generic;
-using System.Linq; // .ToList() function
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AmmoPrompt : MonoBehaviour
 {
+    [Header("Ammo")] 
+    [SerializeField] private GameObject ammo;
     [SerializeField] private Sprite fullAmmo;
     [SerializeField] private Sprite emptyAmmo;
 
     private int _maxAmmo;
     private int _currentAmmo;
-    private float _timer;
-    private bool _isHidden;
+    private bool _ammoIsHidden;
     private RectTransform _transform;
     private List<Image> _ammoIcons;
-    private Animator _animator;
-    private static readonly int CloseAnim = Animator.StringToHash("CloseAnim");
-    private RectTransform _parentTransform;
+    //private Animator _animator;
+    //private static readonly int CloseAnim = Animator.StringToHash("CloseAnim");
+
+    [Header("Inventory")] 
+    [SerializeField] private GameObject[] slots;
 
     private void Awake()
     {
-        gameObject.SetActive(false);
-        _animator = GetComponent<Animator>();
-        _transform = GetComponent<RectTransform>();
-        _parentTransform = transform.parent.GetComponent<RectTransform>();
+        ammo.SetActive(false);
+        //_animator = ammo.GetComponent<Animator>();
+        _transform = ammo.GetComponent<RectTransform>();
         // Set all disabled at the beginning
-        _ammoIcons = gameObject.GetComponentsInChildren<Image>().ToList();
-        foreach (var spr in _ammoIcons)
+        _ammoIcons = ammo.GetComponentsInChildren<Image>().ToList();
+        foreach (var spr in _ammoIcons.ToList())
         {
+            if (spr.name != "B") _ammoIcons.Remove(spr);
             spr.gameObject.SetActive(false);
         }
-        
-        // Idk why but unity picks self in GetComponentsInChildren sometimes, so I just remove if that's the case -x
-        // Fucking Unity -x
-        if (_ammoIcons[0].name == gameObject.name) _ammoIcons.RemoveAt(0);
-    }
 
-    private void Update()
-    {
-        //tf is this, this makes the ui hidden, but the player could still be with a weapon!!!!!!!!!!
-        /*if (Time.time - _timer > timeToHide && !_isHidden)
+        foreach (var s in slots)
         {
-            Hide();
-        }*/
+            var button = s.GetComponent<UIButton>();
+            StartCoroutine(button.SetText("Empty"));
+            button.ignoreMouse = true;
+        }
+        
+        ChangeActiveSlot(0);
     }
 
     public void SetCurrentAmmo(int value)
@@ -68,6 +68,23 @@ public class AmmoPrompt : MonoBehaviour
         _currentAmmo = value;
     }
 
+    public void SetSlot(int id, string name) => 
+        StartCoroutine(slots[id].GetComponent<UIButton>().SetText(name));
+    
+    public void SetSlotEmpty(int id) =>
+        StartCoroutine(slots[id].GetComponent<UIButton>().SetText("Empty"));
+
+    public void ChangeActiveSlot(int id)
+    {
+        for (var i = 0; i < 2; i++)
+        {
+            if (i == id)
+                slots[i].GetComponent<UIButton>().SetFocus();
+            else
+                slots[i].GetComponent<UIButton>().RemoveFocus();
+        }
+    }
+
     /// <summary>
     /// Sets the maximum amount of bullets on the file
     /// </summary>
@@ -77,7 +94,7 @@ public class AmmoPrompt : MonoBehaviour
     {
         _maxAmmo = value;
         _transform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, rowSize * 4 + 3);
-        Show();
+        ShowBullets();
         foreach (var icons in _ammoIcons)
         {
             icons.gameObject.SetActive(false);
@@ -95,10 +112,10 @@ public class AmmoPrompt : MonoBehaviour
 
     public void DoHide()
     {
-        if(_isHidden)
+        if(_ammoIsHidden)
             return;
         
-        Hide();
+        HideBullets();
     }
 
     /// <summary>
@@ -118,27 +135,24 @@ public class AmmoPrompt : MonoBehaviour
                 _ammoIcons[i].sprite = emptyAmmo;
         }
             
-        if (_currentAmmo == 0)
+        /*if (_currentAmmo == 0)
         {
             //_ammoIcons[0].sprite = emptyAmmo;
-            Hide();
+            HideBullets();
             return;
-        }
-        
-        _timer = Time.time;
+        }*/
     }
 
-    private void Show()
+    private void ShowBullets()
     {
-        gameObject.SetActive(true);
-        _timer = Time.time;
-        _isHidden = false;
+        ammo.SetActive(true);
+        _ammoIsHidden = false;
     }
 
-    private void Hide()
+    private void HideBullets()
     {
         //  _animator.SetTrigger(CloseAnim);
-        gameObject.SetActive(false);
-        _isHidden = true;
+        ammo.SetActive(false);
+        _ammoIsHidden = true;
     }
 }

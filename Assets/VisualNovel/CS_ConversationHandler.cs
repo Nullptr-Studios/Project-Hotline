@@ -16,6 +16,9 @@ public class ConversationHandler : MonoBehaviour
     private readonly List<string> _conversations = new List<string>();
     private int ID;
     private ConversationRepo _conversationRepo;
+    
+    [Tooltip("Please i swear to god don't use this ever")]
+    [SerializeField] private bool startOnBegin;
 
     private void Start()
     {
@@ -24,6 +27,11 @@ public class ConversationHandler : MonoBehaviour
         foreach (var cnv in _conversationRepo.conversationsToLoad)
         {
             _conversations.Add(cnv.name);
+        }
+        
+        if (startOnBegin)
+        {
+            StartVNConversation(0);
         }
     }
 
