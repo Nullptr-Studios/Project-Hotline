@@ -437,6 +437,7 @@ GameObject:
   - component: {fileID: 4926713162240318043}
   - component: {fileID: 8393826718596758159}
   - component: {fileID: 2403437431126261358}
+  - component: {fileID: 4967617945217519635}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -502,6 +503,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4967617945217519635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737917706852606053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74825ee2d1a8214428b551b35a5aec96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboard: {fileID: 189640149, guid: 31f5d3a308b49f14491650019ce25f5b, type: 3}
+  dualsense: {fileID: 1193907956, guid: b9f599fe42ae125459ea192b2cc9daf4, type: 3}
+  xbox: {fileID: 837079777, guid: 84a5c2154d3010a49a36cc50cc36b0bb, type: 3}
 --- !u!1 &2830859425931392535
 GameObject:
   m_ObjectHideFlags: 0

@@ -226,7 +226,7 @@ public class PlayerWeaponManager : MonoBehaviour
     /// <param name="context">The input action context.</param>
     private void OnFire(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && _isWeaponHeld)
         {
             if(_heldWeaponInterface.GetWeaponType() == EWeaponType.Melee && !_canShootAgain)
                 _wantsToFire = false;
@@ -265,7 +265,8 @@ public class PlayerWeaponManager : MonoBehaviour
         if (context.performed)
             anim.SetTrigger(Use);
         
-        ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
+        if(_isWeaponHeld) 
+            ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
     }
 
     /// <summary>

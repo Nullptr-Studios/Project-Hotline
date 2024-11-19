@@ -48,7 +48,7 @@ public class NovelUIController : BaseDialogueUIController
         _input = new PlayerIA();
         
         _textSpeed = defaultTextSpeed;
-        continueButton.enabled = false;
+        continueButton.gameObject.SetActive(false);
     }
     
 
@@ -56,7 +56,7 @@ public class NovelUIController : BaseDialogueUIController
         bool sameSpeakerAsLastDialogue = true, bool autoProceed = false)
     {
         _isAnimatingText = true;
-        continueButton.enabled = false;
+        continueButton.gameObject.SetActive(false);
         Show();
         
         text.text = _currentTextMod?.Sentence;
@@ -88,7 +88,7 @@ public class NovelUIController : BaseDialogueUIController
         }
         
         _isAnimatingText = false;
-        continueButton.enabled = true;
+        continueButton.gameObject.SetActive(true);
     }
     
     /// <summary>
