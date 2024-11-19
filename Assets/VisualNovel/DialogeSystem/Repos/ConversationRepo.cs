@@ -204,6 +204,8 @@ namespace CC.DialogueSystem
                     }
                 }
 
+                if (diag.StartConditions.Count < 1) return true;
+                
                 // Check Conditions and Variables
                 foreach (var con in diag.StartConditions)
                 {
