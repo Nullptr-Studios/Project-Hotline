@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638676355377219429
+  lastModified: 638676413901226039
   FileSizes:
   - Name: Desktop
-    Value: 1434
+    Value: 1486
   Exists: 1
 --- !u!114 &-2104896428584185709
 MonoBehaviour:
@@ -143,10 +143,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638676375126982081
+  lastModified: 638676413901614019
   FileSizes:
   - Name: Desktop
-    Value: 122656
+    Value: 152288
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -175,16 +175,17 @@ MonoBehaviour:
   - {fileID: -806746853337521662}
   - {fileID: 3621234198063788532}
   - {fileID: 555981079655538307}
-  - {fileID: 5574018317114101947}
   - {fileID: -1176420639656677226}
   - {fileID: 1911453412134316959}
   - {fileID: 5254327337411921126}
+  - {fileID: 1033707558055676969}
+  - {fileID: 7930494510980102789}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7001593021806771270}
   StringsBanks:
   - {fileID: -2768057446997512794}
-  cacheTime: 638676375126982081
+  cacheTime: 638676413901614019
   cacheVersion: 131620
 --- !u!114 &74393726703728265
 MonoBehaviour:
@@ -228,7 +229,7 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638676371741861699
+  lastModified: 638676403741710548
   FileSizes:
   - Name: Desktop
     Value: 13943136
@@ -309,6 +310,33 @@ MonoBehaviour:
   - {fileID: -25328840140603010}
   IsStream: 0
   Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1033707558055676969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Enviroment/Glass
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Enviroment/Glass
+  Guid:
+    Data1: -1751070372
+    Data2: 1194591553
+    Data3: -1026718321
+    Data4: -1008123637
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -422,33 +450,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &5574018317114101947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Footsteps/ConcreteFootsteps
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Footsteps/ConcreteFootsteps
-  Guid:
-    Data1: 659339939
-    Data2: 1143370548
-    Data3: 93692582
-    Data4: 447822170
-  Banks:
-  - {fileID: -25328840140603010}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &7001593021806771270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,8 +465,35 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638676355377209237
+  lastModified: 638676413901210907
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
+--- !u!114 &7930494510980102789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Enviroment/Door
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Enviroment/Door
+  Guid:
+    Data1: -578984202
+    Data2: 1305068522
+    Data3: 1998976421
+    Data4: 842348927
+  Banks:
+  - {fileID: -25328840140603010}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0

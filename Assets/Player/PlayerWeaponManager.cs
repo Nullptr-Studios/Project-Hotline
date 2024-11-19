@@ -295,7 +295,7 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponGameObject[_currentIndex].gameObject.TryGetComponent(out _heldWeaponInterface);
             _isWeaponHeld = true;
 
-            FMODUnity.RuntimeManager.PlayOneShot(switchSound, transform.position);
+            //FMODUnity.RuntimeManager.PlayOneShot(switchSound, transform.position);
 
             if (_heldWeaponInterface.MaxUses() != -1 && _heldWeaponInterface.UsesLeft() != 0)
             {
