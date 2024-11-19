@@ -16,7 +16,8 @@ public class NovelUIController : BaseDialogueUIController
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private NovelUICharacter speaker;
-    [SerializeField] private NovelUISprite sprite;
+    [SerializeField] private NovelUISprite spriteBlake;
+    [SerializeField] private NovelUISprite spriteOther;
     [SerializeField] private Image continueButton;
     private NovelOptionsController _optionsController;
     [CanBeNull] private PlayerMovement _player;
@@ -47,7 +48,7 @@ public class NovelUIController : BaseDialogueUIController
         _input = new PlayerIA();
         
         _textSpeed = defaultTextSpeed;
-        continueButton.enabled = false;
+        continueButton.gameObject.SetActive(false);
     }
     
 
@@ -55,7 +56,7 @@ public class NovelUIController : BaseDialogueUIController
         bool sameSpeakerAsLastDialogue = true, bool autoProceed = false)
     {
         _isAnimatingText = true;
-        continueButton.enabled = false;
+        continueButton.gameObject.SetActive(false);
         Show();
         
         text.text = _currentTextMod?.Sentence;
@@ -66,11 +67,16 @@ public class NovelUIController : BaseDialogueUIController
         if (!sameSpeakerAsLastDialogue)
         {
             speaker.SetName(speakerName);
-            sprite.SetSprite(characterSprite, speakerName);
             if (speakerName == "Blake")
+            {
+                spriteBlake.SetSprite(characterSprite, speakerName);
                 _animator.SetTrigger(Blake);
+            }
             else
+            {
                 _animator.SetTrigger(Other);
+                spriteOther.SetSprite(characterSprite, speakerName);
+            }
         }
         
         for (var i = 0; i < length; i++)
@@ -82,7 +88,7 @@ public class NovelUIController : BaseDialogueUIController
         }
         
         _isAnimatingText = false;
-        continueButton.enabled = true;
+        continueButton.gameObject.SetActive(true);
     }
     
     /// <summary>
