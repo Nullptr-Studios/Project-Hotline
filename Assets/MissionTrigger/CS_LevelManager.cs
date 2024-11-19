@@ -81,6 +81,8 @@ public class LevelManager : MonoBehaviour
 
     public void OpenScore()
     {
+        //disable player
+        GameObject.FindGameObjectWithTag("Player").SetActive(false);
         
 #if UNITY_EDITOR
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Opening Score...");

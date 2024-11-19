@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,15 +15,22 @@ public class SceneMng : MonoBehaviour
     private static List<string> _checkpointScenes;
     private static SceneData _sceneData;
     private static Dictionary<string, bool> loadedScene;
+    private static Dictionary<string, bool> alreadyVisited;
     private static Vector2 _restartPos;
     private static int _checkpointIndex = 0;
     private static GameObject _player;
     private static PlayerHealth _playerHealth;
 
     public static List<string> CheckpointWeapons;
+    
+    private static string _currentActiveScene;
+    private static string _lastActiveScene;
 
     void Awake()
     {
+        _checkpointIndex = 0;
+        _currentActiveScene = "";
+        _lastActiveScene = "";
         if (SceneData == null)
         {
             Debug.LogError("SceneData is not assigned in " + gameObject.name);
@@ -42,17 +50,21 @@ public class SceneMng : MonoBehaviour
 
         _sceneData = SceneData;
         loadedScene = new Dictionary<string, bool>();
+        alreadyVisited = new Dictionary<string, bool>();
         ExitNodes = new List<GameObject>(GameObject.FindGameObjectsWithTag("ExitNode"));
 
         foreach (var scene in _sceneData.sceneObjects)
         {
             loadedScene.Add(scene.sceneObject, false);
             loadedScene.Add(scene.EnemyScene, false);
+            alreadyVisited.Add(scene.sceneObject, false);
             if (scene.isInitialyLoaded)
             {
                 LoadScenePrivateAsync(scene.sceneObject);
                 if (scene.isInitialyActive)
                 {
+                    _currentActiveScene = scene.sceneObject;
+                    _lastActiveScene = _currentActiveScene;
                     ActiveSceneCameraVars = scene.cameraBehaviour;
                     if (!string.IsNullOrEmpty(scene.EnemyScene))
                         LoadScenePrivateAsync(scene.EnemyScene);
@@ -132,8 +144,8 @@ public class SceneMng : MonoBehaviour
             if (scene.sceneObject == levelName && loadedScene[scene.sceneObject])
             {
                 UnloadScenePrivateAsync(scene.sceneObject);
-                if (!string.IsNullOrEmpty(scene.EnemyScene))
-                    UnloadScenePrivateAsync(scene.EnemyScene);
+                /*if (!string.IsNullOrEmpty(scene.EnemyScene))
+                    UnloadScenePrivateAsync(scene.EnemyScene);*/
                 return;
             }
         }
@@ -146,7 +158,7 @@ public class SceneMng : MonoBehaviour
             if (scene.sceneObject == sceneName)
             {
                 ActiveSceneCameraVars = scene.cameraBehaviour;
-                if (!string.IsNullOrEmpty(scene.EnemyScene))
+                if (!string.IsNullOrEmpty(scene.EnemyScene) && !alreadyVisited[scene.sceneObject])
                     LoadScenePrivateAsync(scene.EnemyScene);
                 return;
             }
@@ -164,23 +176,65 @@ public class SceneMng : MonoBehaviour
         _checkpointActiveScene = activeScene;
         _checkpointIndex++;
         
+        for (int i = 0; i < _checkpointIndex; i++)
+        {
+            if (i > CheckpointWeapons.Count-1)
+                break;
+            alreadyVisited[alreadyVisited.Keys.ElementAt(i)] = true;
+        }
+        
         if(currWeapons[0] != null)
             CheckpointWeapons[0] = currWeapons[0].name;
         if(currWeapons[1] != null)
             CheckpointWeapons[1] = currWeapons[1].name;
+        
+        GameObject[] blood = GameObject.FindGameObjectsWithTag("Blood");
+
+        foreach (var bloodItem in blood)
+        {
+            bloodItem.layer = 14;
+        }
+        
+        GameObject[] corpse = GameObject.FindGameObjectsWithTag("Corpse");
+        
+        foreach (var c in corpse)
+        {
+            c.layer = 14;
+        }
+        
+        GameObject[] civilianCorpse = GameObject.FindGameObjectsWithTag("CivilianCorpse");
+        
+        foreach (var c in civilianCorpse)
+        {
+            c.layer = 14;
+        }
 
     }
 
     public static void Reload()
     {
         
+        if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
+        {
+            SceneManager.LoadScene("Tutorial__Main");
+            return;
+        }
+
+        GameObject[] weapons = GameObject.FindGameObjectsWithTag("Weapon");
+
+        foreach (GameObject weapon in weapons)
+        {
+            IWeapon weaponComp = weapon.GetComponent<IWeapon>();
+            weaponComp.Reload();
+        }
+
         _player.SetActive(true);
         _player.transform.position = _restartPos;
         _playerHealth.RestartGame();
-
+        
         foreach (var scene in _sceneData.sceneObjects)
         {
-            if (!string.IsNullOrEmpty(scene.EnemyScene) && loadedScene[scene.EnemyScene])
+            if (!string.IsNullOrEmpty(scene.EnemyScene) && loadedScene[scene.EnemyScene] && !alreadyVisited[scene.sceneObject])
                 UnloadScenePrivateAsync(scene.EnemyScene);
 
             if (_checkpointIndex == 0)
@@ -196,12 +250,13 @@ public class SceneMng : MonoBehaviour
             }
             else
             {
+                
                 if (_checkpointScenes.Contains(scene.sceneObject))
                 {
                     if (!loadedScene[scene.sceneObject])
                         LoadScenePrivateAsync(scene.sceneObject);
 
-                    if (!string.IsNullOrEmpty(scene.EnemyScene) && _checkpointScenes.Contains(_checkpointActiveScene))
+                    if (!string.IsNullOrEmpty(scene.EnemyScene) && _checkpointScenes.Contains(_checkpointActiveScene) && !alreadyVisited[scene.sceneObject])
                         SetActiveScene(scene.sceneObject);
                 }
                 else
@@ -211,11 +266,27 @@ public class SceneMng : MonoBehaviour
                 }
             }
         }
+
+        Destroy(GameObject.FindGameObjectWithTag("PlayerCorpse"));
+
+        GameObject[] blood = GameObject.FindGameObjectsWithTag("Blood");
+
+        foreach (var bloodItem in blood)
+        {
+            //Locked blood
+            if (bloodItem.layer == 14)
+                return;
+            ResourceManager.GetBloodPool().Release(bloodItem);
+            bloodItem.SetActive(false);
+        }
         
         GameObject[] corpse = GameObject.FindGameObjectsWithTag("Corpse");
         
         foreach (var c in corpse)
         {
+            //Locked blood
+            if (c.layer == 14)
+                return;
             ResourceManager.GetCorpsePool().Release(c);
             c.SetActive(false);
         }
@@ -224,6 +295,8 @@ public class SceneMng : MonoBehaviour
         
         foreach (var c in civilianCorpse)
         {
+            if (c.layer == 14)
+                return;
             ResourceManager.GetCivilianCorpsePool().Release(c);
             c.SetActive(false);
         }

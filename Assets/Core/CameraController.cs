@@ -65,7 +65,7 @@ public class CameraController : MonoBehaviour
     /// <summary>
     /// Updates the camera position and rotation based on the player's weapon type and position.
     /// </summary>
-    void Update()
+    void FixedUpdate()
     {
         // Adjust the camera distance based on the current weapon type
         switch (_playerWeaponManager.GetCurrentWeaponType())

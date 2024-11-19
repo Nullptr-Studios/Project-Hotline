@@ -73,7 +73,7 @@ public class EnemyBehaviourData : ScriptableObject
     /// <summary>
     /// The distance at which the enemy performs melee attacks.
     /// </summary>
-    public float meleeDistance = 2;
+    public float meleeDistance = 3;
 
     [Header("Search")]
     /// <summary>
