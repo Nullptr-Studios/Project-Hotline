@@ -597,6 +597,7 @@ GameObject:
   - component: {fileID: 6655583620356825251}
   - component: {fileID: 1908885760747366814}
   - component: {fileID: 2654846220001139471}
+  - component: {fileID: 911164929648520789}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -652,7 +653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press <sprite=0> to reconect
+  m_text: Press <sprite=0>to reconect
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd062c0cea64fd241a61d21dbf1b5230, type: 2}
   m_sharedMaterial: {fileID: 128718551518401579, guid: fd062c0cea64fd241a61d21dbf1b5230, type: 2}
@@ -721,3 +722,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &911164929648520789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459502774279130754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ab00837b2fd294c8902b275cd4bf3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboard: {fileID: 11400000, guid: 749d1055be54e0d4cbff0c6f1f32caaa, type: 2}
+  dualsense: {fileID: 11400000, guid: 24fc17ce64f00b44b92cc6417f3ee573, type: 2}
+  xbox: {fileID: 11400000, guid: 29ea3b5c086a8f54c9449e2cc6e24620, type: 2}

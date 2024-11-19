@@ -19,9 +19,12 @@ public class NovelUIController : BaseDialogueUIController
     [SerializeField] private NovelUISprite sprite;
     [SerializeField] private Image continueButton;
     private NovelOptionsController _optionsController;
+    [CanBeNull] private PlayerMovement _player;
     private Canvas _canvas;
     private PlayerIA _input;
-    [CanBeNull] private PlayerMovement _player;
+    private Animator _animator;
+    private static readonly int Blake = Animator.StringToHash("Blake");
+    private static readonly int Other = Animator.StringToHash("Delta");
     
     private bool _isShowing;
     private bool _isAnimatingText;
@@ -37,6 +40,7 @@ public class NovelUIController : BaseDialogueUIController
     {
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
+        _animator = GetComponent<Animator>();
         
         if (GameObject.FindWithTag("Player") != null)
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
@@ -63,6 +67,10 @@ public class NovelUIController : BaseDialogueUIController
         {
             speaker.SetName(speakerName);
             sprite.SetSprite(characterSprite, speakerName);
+            if (speakerName == "Blake")
+                _animator.SetTrigger(Blake);
+            else
+                _animator.SetTrigger(Other);
         }
         
         for (var i = 0; i < length; i++)

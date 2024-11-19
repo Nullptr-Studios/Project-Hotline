@@ -1,0 +1,205 @@
+{
+  "conversation": 
+  [
+    {
+      "id": 1,
+      "nextId": 2,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Blake! Holy shit… You’re alive. You just up and disappeared on me, had me scared for a second there, kid.",
+        "Where are you right now? Just tell me—I’ll be there in no time."
+      ]
+    },
+    
+    {
+      "id": 2,
+      "nextId": 3,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Uh… Bathroom, I think. Door’s stuck, lights are dead. Tried ‘em a couple times…<wait=1> Who… who is this?"
+      ]
+    },
+    
+    {
+      "id": 3,
+      "nextId": 4,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Wait, you—you don’t recognize me?<wait=1> Maybe you hit your head on something, huh? That would explain why I haven’t heard from you… You had me worried sick, kid."
+      ]
+    },
+    
+    {
+      "id": 4,
+      "nextId": 5,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Yeah… I’m… sorry, I guess. I don’t know where I’ve been.",
+        "Look, it’s… weird, but I don’t remember anything. Not even… you."
+      ]
+    },
+    
+    {
+      "id": 5,
+      "nextId": 6,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Ah, well, memory can be a fickle thing, right? Don’t sweat it. Let’s just say I’m… an old friend. The one who always bails you out of the messes you get yourself into."
+      ]
+    },
+    
+    {
+      "id": 6,
+      "nextId": 7,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Right. So… we’re friends? Guess I should know that, but… it’s all just static. Like… I’ve been wiped clean or something."
+      ]
+    },
+    
+    {
+      "id": 7,
+      "nextId": 8,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Trust me, you’re not the first person to feel that way.<wait=0.6> It’s been… a while, Blake. A rough road. But look—don’t try to force it. Just… trust me. You’ve done that before."
+      ]
+    },
+    
+    {
+      "id": 8,
+      "nextId": 9,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Yeah…<wait=1> If you say so."
+      ]
+    },
+    
+    {
+      "id": 9,
+      "nextId": 10,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Stay put. I’ll get someone to check on you. No sense wandering off, alright? Just stay where you are."
+      ]
+    },
+    
+    {
+      "id": 10,
+      "nextId": 11,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Like I can go anywhere… Door’s locked from the outside."
+      ]
+    },
+    
+    {
+      "id": 11,
+      "nextId": 12,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Locked? Maybe it’s jammed or something.<wait=0.5> Sit tight—I’ll have that fixed. You’re safe, Blake. That’s what matters right now."
+      ]
+    },
+    
+    {
+      "id": 12,
+      "nextId": 13,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Safe… from what?<wait=1> Was something… did something happen to me?"
+      ]
+    },
+    
+    {
+      "id": 13,
+      "nextId": 14,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Nothing you need to worry about. Just focus on calming down. And hey—trust me when I say, some things are better left buried, yeah?  "
+      ]
+    },
+    
+    {
+      "id": 14,
+      "nextId": 15,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Delta… How did we even met?",
+        "<action=actPopup><action=endConversation>"
+      ]
+    }
+  ],
+  "actions":
+  [
+    // Act popup action
+    {
+      "name": "actPopup",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "OpenActPopup"
+    },
+
+    // Stop the conversation
+    {
+      "name": "endConversation",
+      "type": "close conversation"
+    }
+  ]
+}
