@@ -643,6 +643,7 @@ GameObject:
   - component: {fileID: 1630414350387618705}
   - component: {fileID: 3363941525027598529}
   - component: {fileID: 6829811326824413656}
+  - component: {fileID: 130489481028468036}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -720,7 +721,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 11400000, guid: 24fc17ce64f00b44b92cc6417f3ee573, type: 2}
+  m_spriteAsset: {fileID: 11400000, guid: 749d1055be54e0d4cbff0c6f1f32caaa, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -770,6 +771,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &130489481028468036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3411192640631017963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ab00837b2fd294c8902b275cd4bf3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboard: {fileID: 11400000, guid: 749d1055be54e0d4cbff0c6f1f32caaa, type: 2}
+  dualsense: {fileID: 11400000, guid: 24fc17ce64f00b44b92cc6417f3ee573, type: 2}
+  xbox: {fileID: 11400000, guid: 29ea3b5c086a8f54c9449e2cc6e24620, type: 2}
 --- !u!1 &3743688607219822270
 GameObject:
   m_ObjectHideFlags: 0
