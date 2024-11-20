@@ -32,6 +32,8 @@ public class NovelUIController : BaseDialogueUIController
     private bool _handledInput;
     private float _textSpeed;
 
+    private string _lastSpeaker = "";
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool logInput;
@@ -63,8 +65,17 @@ public class NovelUIController : BaseDialogueUIController
         text.ForceMeshUpdate();
         var length = text.GetParsedText().Length;
         text.maxVisibleCharacters = 0;
+
+        //I need to fucking do this cuz the fucking parser returns false some times, event tought is the same, fuck json -D
+        bool sameSpeakerAsLastDialogeMine = true;
+        if (speakerName != _lastSpeaker)
+        {
+            _lastSpeaker = speakerName;
+            sameSpeakerAsLastDialogeMine = false;
+        }
+
         
-        if (!sameSpeakerAsLastDialogue)
+        if (!sameSpeakerAsLastDialogeMine)
         {
             speaker.SetName(speakerName);
             if (speakerName == "Blake")

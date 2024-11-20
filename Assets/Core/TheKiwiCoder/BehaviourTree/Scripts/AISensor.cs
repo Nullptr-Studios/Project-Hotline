@@ -27,24 +27,25 @@ public class AISensor : MonoBehaviour
     [SerializeField] private Color meshColor = Color.red;
     [SerializeField] private Color detectColor = Color.white;
     [SerializeField] private bool logVisionHit;
+    private Mesh _mesh;
 #endif
-    
-    private Collider2D[] _colliders = new Collider2D[50];
+
+    private Collider2D[] _colliders = new Collider2D[5];
     private int _count;
     private float _scanInterval;
     private float _scanTimer;
-
-    private Transform _trans;
-    
     private Vector3 _pPos;
-    
-    private Mesh _mesh;
+    private Transform _trans;
+    private PlayerHealth ph;
+
+    private Vector3 origin;
+    private Vector3 dir;
+
     // Start is called before the first frame update
     void Start()
     {
         _scanInterval = 1.0f / scanFrequency;
         _trans = transform;
-        
     }
 
     // Update is called once per frame
@@ -65,7 +66,8 @@ public class AISensor : MonoBehaviour
     
     public void HeardPlayer(Vector3 transformPosition)
     {
-        if (isDeaf) return;
+        if (isDeaf) 
+            return;
         
         heardPlayer = true;
         heardPosition = transformPosition;
@@ -91,24 +93,23 @@ public class AISensor : MonoBehaviour
             _pPos = obj.transform.position;
             if (IsInSight(obj))
             {
-                Vector3 origin = _trans.position;
-                Vector3 dest = obj.transform.position;
-                Vector3 dir = dest - origin;
                 
                 if(dir.sqrMagnitude < nearDetectionRange)
                 {
                     //do fallback
-                    fallbackPosition = obj.transform.position + dir.normalized * (-1 * (nearDetectionRange + 2));
-                    #if UNITY_EDITOR
-                    Debug.DrawLine(transform.position, fallbackPosition, Color.blue, 1);
-                    #endif
+                    fallbackPosition = _pPos + dir.normalized * (-1 * (nearDetectionRange + 2));
+#if UNITY_EDITOR
+                    if(drawGizmos)
+                        Debug.DrawLine(transform.position, fallbackPosition, Color.blue, 1);
+#endif
                 }
                 else
                 {
                     fallbackPosition = Vector3.zero;
                 }
                 
-                PlayerHealth ph = obj.GetComponent<PlayerHealth>();
+                if(ph == null)
+                    ph = obj.GetComponent<PlayerHealth>();
                 if (ph && ph.IsDead)
                 {
                     detectedPlayer = null;
@@ -135,9 +136,8 @@ public class AISensor : MonoBehaviour
     public bool IsInSight(GameObject target)
     {
         
-        Vector3 origin = _trans.position;
-        Vector3 dest = target.transform.position;
-        Vector3 dir = dest - origin;
+        origin = _trans.position;
+        dir = _pPos - origin;
 
         if (dir.sqrMagnitude < nearDetectionRange)
         {
@@ -149,7 +149,7 @@ public class AISensor : MonoBehaviour
         if (deltaAngle > angle)
             return false;
 
-        if (Physics2D.Linecast(origin, dest, layerToOcclude))
+        if (Physics2D.Linecast(origin, _pPos, layerToOcclude))
             return false;
 
         return true;

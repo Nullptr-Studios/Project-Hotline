@@ -275,7 +275,7 @@ public class SceneMng : MonoBehaviour
         {
             //Locked blood
             if (bloodItem.layer == 14)
-                return;
+                continue;
             ResourceManager.GetBloodPool().Release(bloodItem);
             bloodItem.SetActive(false);
         }
@@ -286,7 +286,7 @@ public class SceneMng : MonoBehaviour
         {
             //Locked blood
             if (c.layer == 14)
-                return;
+                continue;
             ResourceManager.GetCorpsePool().Release(c);
             c.SetActive(false);
         }
@@ -296,7 +296,7 @@ public class SceneMng : MonoBehaviour
         foreach (var c in civilianCorpse)
         {
             if (c.layer == 14)
-                return;
+                continue;
             ResourceManager.GetCivilianCorpsePool().Release(c);
             c.SetActive(false);
         }
