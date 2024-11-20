@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -46,8 +47,15 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
     /// The transform for the enemy's foot.
     /// </summary>
     public Transform footTransform;
+    
+    [Header("Sound")]
+    public EventReference footstepSound;
+    public float timeBetweenFootsteps = 0.3f;
 
     private NavMeshAgent _rb;
+    
+    private AISensor _sensor;
+    private float _footstepTimer;
 
     private static readonly int IsIdle = Animator.StringToHash("IsIdle");
 
@@ -56,6 +64,7 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        _sensor = GetComponent<AISensor>();
         _rb = GetComponent<NavMeshAgent>();
     }
 
@@ -72,11 +81,29 @@ public class EnemyBehaviourDataOverrider : MonoBehaviour
 
             animatorEnemyFoot.enabled = true;
             animatorEnemy.SetBool(IsIdle, false);
+            
+            //sound stuff
+            if(_footstepTimer >= timeBetweenFootsteps)
+            { 
+                _footstepTimer = 0; 
+                FMODUnity.RuntimeManager.PlayOneShot(footstepSound, transform.position);
+            }
+            else
+            {
+                _footstepTimer += Time.deltaTime;
+            }
         }
         else
         {
+            //@TODO: Change the disabling of the foot animation
             animatorEnemyFoot.enabled = false;
             animatorEnemy.SetBool(IsIdle, true);
+            _footstepTimer = timeBetweenFootsteps;
+        }
+
+        if (_sensor.isDetecting)
+        {
+            animatorEnemy.SetBool(IsIdle, false);
         }
     }
 

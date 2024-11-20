@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class MusicManager : MonoBehaviour
 {
@@ -17,6 +19,11 @@ public class MusicManager : MonoBehaviour
     {
         _gameMusicInstance = FMODUnity.RuntimeManager.CreateInstance(sceneMusic);
         _gameMusicInstance.start();
+    }
+
+    private void OnDisable()
+    {
+        _gameMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
     }
 
     // Update is called once per frame

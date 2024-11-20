@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -50,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _dir;
     
     private GameObject _pauseMenu;
+    
+    private float _footstepTimer;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -228,7 +231,6 @@ public class PlayerMovement : MonoBehaviour
             footAnimation.SetFloat(AnimRate, 0);
             playerAnimation.SetBool(IsIdle, true);
         }
-
 
     }
 

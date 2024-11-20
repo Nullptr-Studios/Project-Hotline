@@ -297,6 +297,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 7
   hitForce: 400
+  doorSound:
+    Guid:
+      Data1: -578984202
+      Data2: 1305068522
+      Data3: 1998976421
+      Data4: 842348927
+    Path: event:/SFX/Enviroment/Door
+  soundWait: 0.5
 --- !u!70 &5893222785546650373
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -358,7 +366,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5000019, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 162144
+  m_InstanceId: 237230
   m_LocalBounds:
     m_Center: {x: 0, y: -0.0000009536743, z: 0}
     m_Extent: {x: 0.5, y: 0.50000095, z: 0}

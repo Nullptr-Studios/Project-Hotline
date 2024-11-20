@@ -70,7 +70,7 @@ public class CivilianDamageable : Damageable
         com.CorpseAddForceInDir(_lastShootDir);
 
         // Send kill message
-        // ScoreManager.AddCivilianKill();
+        ScoreManager.AddCivilianKill();
         killEvent.Invoke();
 
         Destroy(gameObject);

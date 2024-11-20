@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 /// <summary>
@@ -10,6 +12,14 @@ public class DoorDamageable : Damageable
 {
     public float hitForce = 100;
     private Rigidbody2D _doorRb;
+
+    [Header("Sound")] 
+    public EventReference doorSound;
+
+    public float soundWait = 1;
+
+    private bool delay = false;
+    private float _timer = 0.0f;
 
     /// <summary>
     /// Initializes the DoorDamageable instance.
@@ -32,6 +42,31 @@ public class DoorDamageable : Damageable
         // This is done so the door opens when hit
         _doorRb.AddForce(shootDir * hitForce);
         base.DoDamage(amount, shootDir, hitPoint, weaponType);
+    }
+
+    public void Update()
+    {
+        if(_doorRb.velocity.magnitude > 0.5f && !delay)
+        {
+            delay = true;
+            FMODUnity.RuntimeManager.PlayOneShot(doorSound, transform.position);
+        }
+        
+        if(delay)
+        {
+            if(_timer >= soundWait)
+            {
+                if (Mathf.Approximately(_doorRb.velocity.magnitude, 0))
+                {
+                    delay = false; 
+                    _timer = 0.0f;
+                }
+            }
+            else
+            {            
+                _timer += Time.deltaTime;
+            }
+        }
     }
 
     /// <summary>

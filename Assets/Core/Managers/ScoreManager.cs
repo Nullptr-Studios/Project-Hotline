@@ -4,9 +4,11 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     private static int _playerKills;
+    private static int _playerCivilianKills;
     private static int _playerDeaths;
 
     private static float _killXP = 100f;
+    private static float _killCivilianXP = 100f;
     private static float _deathXP = 50f;
     private static float _minTime = 120f;
     private static float _maxTime = 240f;
@@ -20,6 +22,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("Values")]
     [SerializeField] private float killXP;
+    [SerializeField] private float killCivilianXP;
     [SerializeField] private float deathXP;
     
     [Header("Timer")] 
@@ -32,6 +35,9 @@ public class ScoreManager : MonoBehaviour
 
     public void Awake()
     {
+        _playerKills = 0;
+        _playerCivilianKills = 0;
+        _playerDeaths = 0;
         // Sets timer when scene begins
         _startTime = Time.time;
     }
@@ -39,6 +45,7 @@ public class ScoreManager : MonoBehaviour
     public void Start()
     {
         // Set up variables because they're static
+        _killCivilianXP = killCivilianXP;
         _killXP = killXP;
         _deathXP = deathXP;
         _minTime = timeThreshold.x;
@@ -51,6 +58,11 @@ public class ScoreManager : MonoBehaviour
         _maxFormula.xOffset = _maxTime;
         
         _playerKills = 0;
+    }
+
+    public static void AddCivilianKill()
+    {
+        _playerCivilianKills++;
     }
 
     public static void Checkpoint()
@@ -81,7 +93,7 @@ public class ScoreManager : MonoBehaviour
             Kills = _playerKills,
             Deaths = _playerDeaths,
             
-            Value = _playerKills * _killXP - _playerDeaths * _deathXP
+            Value = (_playerKills * _killXP + _playerCivilianKills * _killCivilianXP) - _playerDeaths * _deathXP
         };
 
         if (finalScore.Time < _minTime)

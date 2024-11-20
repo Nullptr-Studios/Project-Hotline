@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,6 +18,9 @@ public class BloodManager : MonoBehaviour
     public int ammountOfFloorBlood = 4;
     public int ammountOfWallBlood = 2;
     public float destroyTime = .5f;
+    
+    [Header("Sound")]
+    public EventReference bloodSound;
 
     private float _currentMaxTravelDistance;
     private List<RaycastHit2D> _rayHitList = new List<RaycastHit2D>();
@@ -37,7 +42,7 @@ public class BloodManager : MonoBehaviour
     {
         _currentMaxTravelDistance = bloodTravelDistance;
         Invoke(nameof(Remove), destroyTime);
-
+        
         Invoke(nameof(Blood), 0);
     }
 
@@ -46,6 +51,7 @@ public class BloodManager : MonoBehaviour
     /// </summary>
     private void Blood()
     {
+        FMODUnity.RuntimeManager.PlayOneShot(bloodSound, transform.position);
         CreateFloorBlood();
         CreateWallBlood();
     }

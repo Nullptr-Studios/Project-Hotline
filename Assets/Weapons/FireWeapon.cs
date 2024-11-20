@@ -101,6 +101,7 @@ public class FireWeapon : Weapon
         if (_currentAmmo < 0 && isPlayer)
         {
             _wantsToFire = false;
+            FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.emptyClipSound, _transform.position);
             return;
         }
         
@@ -324,8 +325,6 @@ public class FireWeapon : Weapon
             }
         }
 
-        SceneMng.CivilianPanicDelegate?.Invoke();
-
         GameObject mVFX = ResourceManager.GetMuzzlePool().Get();
         mVFX.SetActive(true);
         mVFX.transform.position = gunMuzzle.position;
@@ -392,8 +391,6 @@ public class FireWeapon : Weapon
         _fireRateTimer = 0;
         _fireRateCurveTimer = 0;
         _dispersionCurveTimer = 0;
-
-        FMODUnity.RuntimeManager.PlayOneShot(fireWeaponData.finishReloadSound, _transform.position);
     }
 
     /// <summary>

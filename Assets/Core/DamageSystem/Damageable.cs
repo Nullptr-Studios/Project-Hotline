@@ -95,6 +95,8 @@ public class Damageable : MonoBehaviour, IDamageable
     /// <param name="amount">Amount to damage</param>
     public virtual void DoDamage(float amount)
     {
+        SceneMng.CivilianPanicDelegate?.Invoke();
+
         // Subtract health
         _currentHealth -= amount;
 

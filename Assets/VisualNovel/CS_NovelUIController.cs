@@ -16,12 +16,16 @@ public class NovelUIController : BaseDialogueUIController
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private NovelUICharacter speaker;
-    [SerializeField] private NovelUISprite sprite;
+    [SerializeField] private NovelUISprite spriteBlake;
+    [SerializeField] private NovelUISprite spriteOther;
     [SerializeField] private Image continueButton;
     private NovelOptionsController _optionsController;
+    [CanBeNull] private PlayerMovement _player;
     private Canvas _canvas;
     private PlayerIA _input;
-    [CanBeNull] private PlayerMovement _player;
+    private Animator _animator;
+    private static readonly int Blake = Animator.StringToHash("Blake");
+    private static readonly int Other = Animator.StringToHash("Delta");
     
     private bool _isShowing;
     private bool _isAnimatingText;
@@ -37,13 +41,14 @@ public class NovelUIController : BaseDialogueUIController
     {
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
+        _animator = GetComponent<Animator>();
         
         if (GameObject.FindWithTag("Player") != null)
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         _input = new PlayerIA();
         
         _textSpeed = defaultTextSpeed;
-        continueButton.enabled = false;
+        continueButton.gameObject.SetActive(false);
     }
     
 
@@ -51,7 +56,7 @@ public class NovelUIController : BaseDialogueUIController
         bool sameSpeakerAsLastDialogue = true, bool autoProceed = false)
     {
         _isAnimatingText = true;
-        continueButton.enabled = false;
+        continueButton.gameObject.SetActive(false);
         Show();
         
         text.text = _currentTextMod?.Sentence;
@@ -62,7 +67,16 @@ public class NovelUIController : BaseDialogueUIController
         if (!sameSpeakerAsLastDialogue)
         {
             speaker.SetName(speakerName);
-            sprite.SetSprite(characterSprite, speakerName);
+            if (speakerName == "Blake")
+            {
+                spriteBlake.SetSprite(characterSprite, speakerName);
+                _animator.SetTrigger(Blake);
+            }
+            else
+            {
+                _animator.SetTrigger(Other);
+                spriteOther.SetSprite(characterSprite, speakerName);
+            }
         }
         
         for (var i = 0; i < length; i++)
@@ -74,7 +88,7 @@ public class NovelUIController : BaseDialogueUIController
         }
         
         _isAnimatingText = false;
-        continueButton.enabled = true;
+        continueButton.gameObject.SetActive(true);
     }
     
     /// <summary>

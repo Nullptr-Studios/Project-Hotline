@@ -57,6 +57,8 @@ public class PlayerHealth : Damageable
 
     public override void OnDead()
     {
+        GetComponent<PlayerWeaponManager>().DropWeapon();
+        
         IsDead = true;  
         ScoreManager.AddDeath();
         //_player.OnDisable(); // Deactivates all inputs from the game
