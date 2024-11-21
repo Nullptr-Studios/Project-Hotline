@@ -538,7 +538,7 @@ public class PlayerWeaponManager : MonoBehaviour
             float smallestDistance = float.MaxValue;
             int smallestIndex = 0;
 
-            int mostAmmo = -69;
+            float mostAmmo = -69;
             
             int i = 0;
 
@@ -556,9 +556,9 @@ public class PlayerWeaponManager : MonoBehaviour
                 }*/
                 
                 h.transform.gameObject.TryGetComponent(out IWeapon w);
-                if(w.UsesLeft() > mostAmmo)
+                if((float)w.UsesLeft() / w.MaxUses() > mostAmmo)
                 {
-                    mostAmmo = w.UsesLeft();
+                    mostAmmo = (float)w.UsesLeft() / w.MaxUses();
                     smallestIndex = i;
                 }
                 

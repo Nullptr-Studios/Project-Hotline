@@ -14,7 +14,12 @@ public class Corpse : MonoBehaviour
 
     public void CorpseAddForceInDir(Vector2 dir)
     {
-        _rb = gameObject.AddComponent<Rigidbody2D>();
+        _rb = gameObject.GetComponent<Rigidbody2D>();
+        if(_rb == null)
+        {
+            _rb = gameObject.AddComponent<Rigidbody2D>();
+        }
+
         //_collider2D = gameObject.AddComponent<BoxCollider2D>();
         gameObject.layer = 9;
 

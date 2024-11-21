@@ -154,95 +154,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &59038427
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_RootOrder
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243997298664265848, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409702341901786396, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: m_Name
-      value: CheckpointTrigger (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806079777198162477, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: CheckpointActiveScene
-      value: Skyscraper_Floor1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806079777198162477, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: CheckpointScenes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806079777198162477, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: CheckpointScenes.Array.data[0]
-      value: Skyscraper_Floor1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806079777198162477, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: CheckpointActiveScene.m_SceneName
-      value: Skyscraper_Floor1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806079777198162477, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
-      propertyPath: CheckpointScenes.Array.data[0].m_SceneName
-      value: Skyscraper_Floor1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
 --- !u!1001 &99227663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -703,6 +614,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2806079777198162477, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
       propertyPath: CheckpointScenes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806079777198162477, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
+      propertyPath: DontSetAsLastVisitedLastScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2806079777198162477, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
@@ -1417,7 +1332,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 975079144875247305, guid: a2a468a3aa7425f45aada0fa9b6b66db, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 975079144875247305, guid: a2a468a3aa7425f45aada0fa9b6b66db, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1760,7 +1675,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &913794643
 GameObject:
@@ -3785,9 +3700,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.2074074
-    width: 0.13229167
-    height: 0.13229166
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
@@ -4355,11 +4270,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4188262033059992658, guid: 21bdaf7749577d54385791d1e53df83d, type: 3}
       propertyPath: EntranceTriggerEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: Skyscraper_Floor1
+      value: Skyscraper_Floor3_1
       objectReference: {fileID: 0}
     - target: {fileID: 4188262033059992658, guid: 21bdaf7749577d54385791d1e53df83d, type: 3}
       propertyPath: EntranceTriggerEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
-      value: Skyscraper_Floor1
+      value: Skyscraper_Floor3_1
       objectReference: {fileID: 0}
     - target: {fileID: 4188262033059992658, guid: 21bdaf7749577d54385791d1e53df83d, type: 3}
       propertyPath: EntranceTriggerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

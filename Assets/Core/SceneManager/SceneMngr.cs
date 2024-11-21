@@ -165,7 +165,7 @@ public class SceneMng : MonoBehaviour
         }
     }
 
-    public static void AddCurrentCheckpoint(Vector2 checkpointPos, List<SceneObject> loadedScenes, SceneObject activeScene, List<GameObject> currWeapons)
+    public static void AddCurrentCheckpoint(Vector2 checkpointPos, List<SceneObject> loadedScenes, SceneObject activeScene, List<GameObject> currWeapons, bool changevisited)
     {
         _restartPos = checkpointPos;
         _checkpointScenes = new List<string>();
@@ -175,13 +175,13 @@ public class SceneMng : MonoBehaviour
         }
         _checkpointActiveScene = activeScene;
         _checkpointIndex++;
-        
-        for (int i = 0; i < _checkpointIndex; i++)
-        {
-            if (i > CheckpointWeapons.Count-1)
-                break;
-            alreadyVisited[alreadyVisited.Keys.ElementAt(i)] = true;
-        }
+        if(!changevisited)
+            for (int i = 0; i < _checkpointIndex; i++)
+            {
+                if (i > CheckpointWeapons.Count-1)
+                    break;
+                alreadyVisited[alreadyVisited.Keys.ElementAt(i)] = true;
+            }
         
         if(currWeapons[0] != null)
             CheckpointWeapons[0] = currWeapons[0].name;
@@ -256,7 +256,7 @@ public class SceneMng : MonoBehaviour
                     if (!loadedScene[scene.sceneObject])
                         LoadScenePrivateAsync(scene.sceneObject);
 
-                    if (!string.IsNullOrEmpty(scene.EnemyScene) && _checkpointScenes.Contains(_checkpointActiveScene) && !alreadyVisited[scene.sceneObject])
+                    if (!string.IsNullOrEmpty(scene.EnemyScene) && _checkpointScenes.Contains(_checkpointActiveScene) /*&& !alreadyVisited[scene.sceneObject]*/)
                         SetActiveScene(scene.sceneObject);
                 }
                 else
