@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class NovelUIController : BaseDialogueUIController
 {
     [SerializeField] [Range(0.02f, 0.07f)] private float defaultTextSpeed = 0.04f;
-    [SerializeField] [Range(0.001f, 0.02f)] private float fastTextSpeed = 0.01f;
+    [SerializeField] [Range(0.001f, 0.02f)] private float fastTextSpeed = 0.001f;
     [SerializeField] private GameObject optionsPrefab;
     
     [Header("Components")]
@@ -94,7 +94,10 @@ public class NovelUIController : BaseDialogueUIController
         {
             yield return StartCoroutine(processTagsForPosition(i));
 
-            text.maxVisibleCharacters++;
+            if (Time.deltaTime > _textSpeed)
+                text.maxVisibleCharacters += 2; 
+            else 
+                text.maxVisibleCharacters++;
             yield return new WaitForSeconds(_textSpeed * _speedMultiplyer);
         }
         

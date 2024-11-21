@@ -4286,6 +4286,7 @@ GameObject:
   - component: {fileID: 1676373347}
   - component: {fileID: 1676373346}
   - component: {fileID: 1676373345}
+  - component: {fileID: 1676373352}
   m_Layer: 0
   m_Name: Cinemachine Brain
   m_TagString: Untagged
@@ -4483,6 +4484,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 4.852, y: 0, z: 0}
+--- !u!114 &1676373352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676373344}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d7d2d74278a0f4c813fb451fcdb4d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curShader: {fileID: 4800000, guid: c63d47dbf6ebe8e49aee63a9b39575fa, type: 3}
+  Distortion: 0.1
+  Gamma: 1
+  YExtra: 0.5
+  CurvatureSet1: 0.5
+  CurvatureSet2: 1
+  DotWeight: 1
+  scanSize: 512
+  rgb1: {r: 1, g: 1, b: 1, a: 1}
+  rgb2: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &1732984977
 PrefabInstance:
   m_ObjectHideFlags: 0
