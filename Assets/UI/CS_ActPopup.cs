@@ -70,6 +70,7 @@ public class ActPopup : MonoBehaviour
     {
         for (int k = 0; k < titleText.Count; k++)
         {
+            //Update mesh
             titleText[k].ForceMeshUpdate();
             Mesh mesh = titleText[k].mesh;
             Vector3[] vertices = mesh.vertices;
@@ -83,6 +84,9 @@ public class ActPopup : MonoBehaviour
 
             mesh.vertices = vertices;
             titleText[k].canvasRenderer.SetMesh(mesh);
+            
+            //Update rotation
+            titleText[k].transform.localEulerAngles = new Vector3(0, 0, Mathf.Sin((Time.time - k*.25f) * 2.5f) * 2.5f);
         }
     }
     

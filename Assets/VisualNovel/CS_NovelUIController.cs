@@ -156,12 +156,15 @@ public class NovelUIController : BaseDialogueUIController
 
     private void Show()
     {
+        //@TODO: Add animation
         _canvas.enabled = true;
         EnableInput();
     }
 
     public override void Close()
     {
+        //@TODO: Add animation
+        //@TODO: send delegate to start Game
         _canvas.enabled = false;
         DisableInput();
     }
