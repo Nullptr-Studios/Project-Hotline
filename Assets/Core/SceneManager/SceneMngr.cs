@@ -19,6 +19,7 @@ public class SceneMng : MonoBehaviour
     public static List<GameObject> ExitNodes;
     public static SCameraVariables ActiveSceneCameraVars;
     public SceneData SceneData;
+    private static Animator _animatorFade;
 
     private static string _checkpointActiveScene;
     private static List<string> _checkpointScenes;
@@ -34,6 +35,7 @@ public class SceneMng : MonoBehaviour
     
     private static string _currentActiveScene;
     private static string _lastActiveScene;
+    
     
     public static EDifficulty CurrentDifficulty = EDifficulty.Medium;
 
@@ -89,6 +91,7 @@ public class SceneMng : MonoBehaviour
 
     private void Start()
     {
+        _animatorFade = GameObject.Find("ScreenLevelTransition").GetComponent<Animator>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _restartPos = _player.transform.position;
         _playerHealth = _player.GetComponent<PlayerHealth>();
@@ -125,7 +128,7 @@ public class SceneMng : MonoBehaviour
     private static void LoadScenePrivateAsync(string sceneName)
     {
         var asyncOper = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        if (asyncOper != null)
+        if (asyncOper != null && !sceneName.Contains("Enemies"))
             asyncOper.completed += AsyncOperLoading_completed;
 
         loadedScene[sceneName] = true;
@@ -137,6 +140,9 @@ public class SceneMng : MonoBehaviour
         Debug.Log("Scene " + obj.ToString() + " finished loading");
 #endif
         obj.completed -= AsyncOperLoading_completed;
+        
+        if(_animatorFade)
+            _animatorFade.SetTrigger("Out");
     }
 
     public static void LoadScene(string levelName)
@@ -314,6 +320,10 @@ public class SceneMng : MonoBehaviour
             ResourceManager.GetCivilianCorpsePool().Release(c);
             c.SetActive(false);
         }
+        
+        _animatorFade.SetTrigger("In");
+
+        _animatorFade.SetTrigger("Out");
         
     }
 }
