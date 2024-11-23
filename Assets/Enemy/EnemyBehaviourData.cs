@@ -67,7 +67,12 @@ public class EnemyBehaviourData : ScriptableObject
     /// <summary>
     /// The time it takes for the enemy to start shooting.
     /// </summary>
-    public float timeToStartShooting = 1;
+    [System.Obsolete]
+    public float timeToStartShooting = .8f;
+    
+    public float timeToStartShootingMedium = .8f;
+    public float timeToStartShootingHard = .7f;
+    public float timeToStartShootingImpossible = .5f;
 
     [Header("Melee")]
     /// <summary>

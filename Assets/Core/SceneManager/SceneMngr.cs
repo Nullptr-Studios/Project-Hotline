@@ -1,7 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using ToolBox.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+[System.Serializable]
+public enum EDifficulty
+{
+    Medium,
+    Hard,
+    Impossible
+}
 
 public class SceneMng : MonoBehaviour
 {
@@ -25,9 +34,14 @@ public class SceneMng : MonoBehaviour
     
     private static string _currentActiveScene;
     private static string _lastActiveScene;
+    
+    public static EDifficulty CurrentDifficulty = EDifficulty.Medium;
 
     void Awake()
     {
+        //load difficulty only once and make enemies read this cached value
+        CurrentDifficulty = DataSerializer.Load<EDifficulty>(SaveKeywords.Difficulty);
+        
         _checkpointIndex = 0;
         _currentActiveScene = "";
         _lastActiveScene = "";

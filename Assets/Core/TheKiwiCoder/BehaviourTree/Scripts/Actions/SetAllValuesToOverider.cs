@@ -14,7 +14,7 @@ public class SetAllValuesToOverrider : ActionNode
         if (ov && ov.behaviourData != null)
         {
             blackboard.distanceToUseWeapon = ov.behaviourData.distanceToShoot;
-            blackboard.timeToStartShooting = ov.behaviourData.timeToStartShooting;
+            //blackboard.timeToStartShooting = ov.behaviourData.timeToStartShooting;
 
             blackboard.returnToInitialPos = ov.behaviourData.returnToInitialSpot;
             blackboard.isStatic = ov.behaviourData.isStatic;
@@ -26,6 +26,22 @@ public class SetAllValuesToOverrider : ActionNode
             blackboard.chaseSpeed = ov.behaviourData.chasingSpeed;
 
             blackboard.distanceToUseMelee = ov.behaviourData.meleeDistance;
+
+            switch (SceneMng.CurrentDifficulty)
+            {
+                case EDifficulty.Medium:
+                    blackboard.timeToStartShooting = ov.behaviourData.timeToStartShootingMedium;
+                    break;
+                case EDifficulty.Hard:
+                    blackboard.timeToStartShooting = ov.behaviourData.timeToStartShootingHard;
+                    break;
+                case EDifficulty.Impossible:
+                    blackboard.timeToStartShooting = ov.behaviourData.timeToStartShootingImpossible;
+                    break;
+                default:
+                    blackboard.timeToStartShooting = ov.behaviourData.timeToStartShootingMedium;
+                    break;
+            }
         }
         else
         {
