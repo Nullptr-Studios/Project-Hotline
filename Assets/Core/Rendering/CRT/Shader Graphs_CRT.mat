@@ -32,7 +32,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _ScanLineAmmount
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -55,6 +55,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Blur_offset: 0.00141
+    - _Line_Strenght: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ScanLineAmmount: 150.84
