@@ -14,8 +14,8 @@ public class EnemyDamageable : Damageable
 {
     private static readonly int Stunned = Animator.StringToHash("Stunned");
     private static readonly int WeaponEquipped = Animator.StringToHash("WeaponEquipped");
-
-    public GameObject bloodEffectManager;
+    
+    public GameObject ScorePopup;
 
     //FUCK UNITY I DONT KNOW BUT CHILDREN DOES NOT MOVE RELATIVELY TO PARENT IF THE PARENT HAS A RIGIDBODY
     public Transform weaponHandler;
@@ -94,6 +94,8 @@ public class EnemyDamageable : Damageable
         //Send kill message
         ScoreManager.AddKill();
         killEvent.Invoke();
+        
+        Instantiate(ScorePopup, transform.position + new Vector3(0,2,10), Quaternion.identity);
 
         Destroy(gameObject);
     }

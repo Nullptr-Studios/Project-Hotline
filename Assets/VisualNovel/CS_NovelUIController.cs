@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class NovelUIController : BaseDialogueUIController
 {
     [SerializeField] [Range(0.02f, 0.07f)] private float defaultTextSpeed = 0.04f;
-    [SerializeField] [Range(0.001f, 0.02f)] private float fastTextSpeed = 0.01f;
+    [SerializeField] [Range(0.001f, 0.02f)] private float fastTextSpeed = 0.001f;
     [SerializeField] private GameObject optionsPrefab;
     
     [Header("Components")]
@@ -31,6 +31,8 @@ public class NovelUIController : BaseDialogueUIController
     private bool _isAnimatingText;
     private bool _handledInput;
     private float _textSpeed;
+
+    private string _lastSpeaker = "";
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -63,8 +65,17 @@ public class NovelUIController : BaseDialogueUIController
         text.ForceMeshUpdate();
         var length = text.GetParsedText().Length;
         text.maxVisibleCharacters = 0;
+
+        //I need to fucking do this cuz the fucking parser returns false some times, event tought is the same, fuck json -D
+        bool sameSpeakerAsLastDialogeMine = true;
+        if (speakerName != _lastSpeaker)
+        {
+            _lastSpeaker = speakerName;
+            sameSpeakerAsLastDialogeMine = false;
+        }
+
         
-        if (!sameSpeakerAsLastDialogue)
+        if (!sameSpeakerAsLastDialogeMine)
         {
             speaker.SetName(speakerName);
             if (speakerName == "Blake")
@@ -74,8 +85,8 @@ public class NovelUIController : BaseDialogueUIController
             }
             else
             {
-                _animator.SetTrigger(Other);
                 spriteOther.SetSprite(characterSprite, speakerName);
+                _animator.SetTrigger(Other);
             }
         }
         
@@ -83,7 +94,10 @@ public class NovelUIController : BaseDialogueUIController
         {
             yield return StartCoroutine(processTagsForPosition(i));
 
-            text.maxVisibleCharacters++;
+            if (Time.deltaTime > _textSpeed)
+                text.maxVisibleCharacters += 2; 
+            else 
+                text.maxVisibleCharacters++;
             yield return new WaitForSeconds(_textSpeed * _speedMultiplyer);
         }
         
@@ -142,12 +156,15 @@ public class NovelUIController : BaseDialogueUIController
 
     private void Show()
     {
+        //@TODO: Add animation
         _canvas.enabled = true;
         EnableInput();
     }
 
     public override void Close()
     {
+        //@TODO: Add animation
+        //@TODO: send delegate to start Game
         _canvas.enabled = false;
         DisableInput();
     }

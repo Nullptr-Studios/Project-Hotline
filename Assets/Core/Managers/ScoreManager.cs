@@ -7,8 +7,8 @@ public class ScoreManager : MonoBehaviour
     private static int _playerCivilianKills;
     private static int _playerDeaths;
 
-    private static float _killXP = 100f;
-    private static float _killCivilianXP = 100f;
+    public static float _killXP = 100f;
+    public static float _killCivilianXP = 100f;
     private static float _deathXP = 50f;
     private static float _minTime = 120f;
     private static float _maxTime = 240f;

@@ -1,7 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using ToolBox.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+[System.Serializable]
+public enum EDifficulty
+{
+    Medium,
+    Hard,
+    Impossible
+}
 
 public class SceneMng : MonoBehaviour
 {
@@ -10,6 +19,7 @@ public class SceneMng : MonoBehaviour
     public static List<GameObject> ExitNodes;
     public static SCameraVariables ActiveSceneCameraVars;
     public SceneData SceneData;
+    private static Animator _animatorFade;
 
     private static string _checkpointActiveScene;
     private static List<string> _checkpointScenes;
@@ -25,9 +35,15 @@ public class SceneMng : MonoBehaviour
     
     private static string _currentActiveScene;
     private static string _lastActiveScene;
+    
+    
+    public static EDifficulty CurrentDifficulty = EDifficulty.Medium;
 
     void Awake()
     {
+        //load difficulty only once and make enemies read this cached value
+        CurrentDifficulty = DataSerializer.Load<EDifficulty>(SaveKeywords.Difficulty);
+        
         _checkpointIndex = 0;
         _currentActiveScene = "";
         _lastActiveScene = "";
@@ -75,6 +91,7 @@ public class SceneMng : MonoBehaviour
 
     private void Start()
     {
+        _animatorFade = GameObject.Find("ScreenLevelTransition").GetComponent<Animator>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _restartPos = _player.transform.position;
         _playerHealth = _player.GetComponent<PlayerHealth>();
@@ -111,7 +128,7 @@ public class SceneMng : MonoBehaviour
     private static void LoadScenePrivateAsync(string sceneName)
     {
         var asyncOper = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        if (asyncOper != null)
+        if (asyncOper != null && !sceneName.Contains("Enemies"))
             asyncOper.completed += AsyncOperLoading_completed;
 
         loadedScene[sceneName] = true;
@@ -123,6 +140,9 @@ public class SceneMng : MonoBehaviour
         Debug.Log("Scene " + obj.ToString() + " finished loading");
 #endif
         obj.completed -= AsyncOperLoading_completed;
+        
+        if(_animatorFade)
+            _animatorFade.SetTrigger("Out");
     }
 
     public static void LoadScene(string levelName)
@@ -165,7 +185,7 @@ public class SceneMng : MonoBehaviour
         }
     }
 
-    public static void AddCurrentCheckpoint(Vector2 checkpointPos, List<SceneObject> loadedScenes, SceneObject activeScene, List<GameObject> currWeapons)
+    public static void AddCurrentCheckpoint(Vector2 checkpointPos, List<SceneObject> loadedScenes, SceneObject activeScene, List<GameObject> currWeapons, bool changevisited)
     {
         _restartPos = checkpointPos;
         _checkpointScenes = new List<string>();
@@ -175,13 +195,13 @@ public class SceneMng : MonoBehaviour
         }
         _checkpointActiveScene = activeScene;
         _checkpointIndex++;
-        
-        for (int i = 0; i < _checkpointIndex; i++)
-        {
-            if (i > CheckpointWeapons.Count-1)
-                break;
-            alreadyVisited[alreadyVisited.Keys.ElementAt(i)] = true;
-        }
+        if(!changevisited)
+            for (int i = 0; i < _checkpointIndex; i++)
+            {
+                if (i > CheckpointWeapons.Count-1)
+                    break;
+                alreadyVisited[alreadyVisited.Keys.ElementAt(i)] = true;
+            }
         
         if(currWeapons[0] != null)
             CheckpointWeapons[0] = currWeapons[0].name;
@@ -256,7 +276,7 @@ public class SceneMng : MonoBehaviour
                     if (!loadedScene[scene.sceneObject])
                         LoadScenePrivateAsync(scene.sceneObject);
 
-                    if (!string.IsNullOrEmpty(scene.EnemyScene) && _checkpointScenes.Contains(_checkpointActiveScene) && !alreadyVisited[scene.sceneObject])
+                    if (!string.IsNullOrEmpty(scene.EnemyScene) && _checkpointScenes.Contains(_checkpointActiveScene) /*&& !alreadyVisited[scene.sceneObject]*/)
                         SetActiveScene(scene.sceneObject);
                 }
                 else
@@ -275,7 +295,7 @@ public class SceneMng : MonoBehaviour
         {
             //Locked blood
             if (bloodItem.layer == 14)
-                return;
+                continue;
             ResourceManager.GetBloodPool().Release(bloodItem);
             bloodItem.SetActive(false);
         }
@@ -286,7 +306,7 @@ public class SceneMng : MonoBehaviour
         {
             //Locked blood
             if (c.layer == 14)
-                return;
+                continue;
             ResourceManager.GetCorpsePool().Release(c);
             c.SetActive(false);
         }
@@ -296,10 +316,14 @@ public class SceneMng : MonoBehaviour
         foreach (var c in civilianCorpse)
         {
             if (c.layer == 14)
-                return;
+                continue;
             ResourceManager.GetCivilianCorpsePool().Release(c);
             c.SetActive(false);
         }
+        
+        _animatorFade.SetTrigger("In");
+
+        _animatorFade.SetTrigger("Out");
         
     }
 }
