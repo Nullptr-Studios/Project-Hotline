@@ -109,11 +109,12 @@ public class ScoreUI : MonoBehaviour
         
         int score = (int)_score.Value;
         scoreObject.SetActive(true);
-        for (int i = 0; i < score; i++)
+        for (int i = 0; i < score; i+=9)
         {
             scoreValue.text = (i+1).ToString();
             yield return new WaitForSeconds(scoreTime/score);
         }
+        scoreValue.text = ((int)_score.Value).ToString();
         
         yield return new WaitForSeconds(2);
         

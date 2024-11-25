@@ -232,11 +232,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2806079777198162477, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
       propertyPath: CheckpointActiveScene.m_SceneName
-      value: Skyscraper_Floor2
+      value: Skyscraper_Floor3_1
       objectReference: {fileID: 0}
     - target: {fileID: 2806079777198162477, guid: b8d75599348a2ea4799a81c839b52ca4, type: 3}
       propertyPath: CheckpointScenes.Array.data[0].m_SceneName
-      value: Skyscraper_Floor2
+      value: Skyscraper_Floor3_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2082,7 +2082,7 @@ MonoBehaviour:
   m_VoxelSize: 0.083333336
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: aa5488afd1402124fad573f0456c2280, type: 2}
 --- !u!114 &1032823163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2106,7 +2106,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032823161}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.70723015}
   m_LocalPosition: {x: -4.526182, y: 0.346183, z: 4.787614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2181,6 +2181,10 @@ PrefabInstance:
     - target: {fileID: 6720385625936758027, guid: 63b11b33d68a1ac41be5bd4876e2faa5, type: 3}
       propertyPath: m_Name
       value: ScreenLevelTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720385625936758027, guid: 63b11b33d68a1ac41be5bd4876e2faa5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
