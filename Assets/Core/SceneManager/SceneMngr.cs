@@ -37,12 +37,12 @@ public class SceneMng : MonoBehaviour
     private static string _lastActiveScene;
     
     
-    public static EDifficulty CurrentDifficulty = EDifficulty.Medium;
+    public static EDifficulty CurrentDifficulty = EDifficulty.Impossible;
 
     void Awake()
     {
         //load difficulty only once and make enemies read this cached value
-        CurrentDifficulty = DataSerializer.Load<EDifficulty>(SaveKeywords.Difficulty);
+        //CurrentDifficulty = DataSerializer.Load<EDifficulty>(SaveKeywords.Difficulty);
         
         _checkpointIndex = 0;
         _currentActiveScene = "";
