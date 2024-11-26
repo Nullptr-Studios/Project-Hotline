@@ -1871,6 +1871,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1893289298830076480, guid: 60a21f8bdec3f914188b3929754012c1, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1676373350}
+    - target: {fileID: 1893289298830076480, guid: 60a21f8bdec3f914188b3929754012c1, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893289298830076480, guid: 60a21f8bdec3f914188b3929754012c1, type: 3}
+      propertyPath: m_PixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893289298830076480, guid: 60a21f8bdec3f914188b3929754012c1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 32767
+      objectReference: {fileID: 0}
     - target: {fileID: 8735887077010777407, guid: 60a21f8bdec3f914188b3929754012c1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2917,6 +2933,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 270444948501270302, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
+      propertyPath: m_NormalMapQuality
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 270444948501270302, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 270444948501270302, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[1]
+      value: -1230817181
+      objectReference: {fileID: 0}
+    - target: {fileID: 3119479144156831153, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
+      propertyPath: m_NormalMapQuality
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3119479144156831153, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3119479144156831153, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[1]
+      value: -1230817181
+      objectReference: {fileID: 0}
     - target: {fileID: 3136868407235776783, guid: 9678de2004d5d86469d82ca6ca245cf8, type: 3}
       propertyPath: m_Name
       value: PA_Player
