@@ -92,7 +92,7 @@ public class EnemyDamageable : Damageable
         _enemyWeaponManager.DropWeapon();
 
         //Send kill message
-        ScoreManager.AddKill(transform.parent.name);
+        ScoreManager.AddKill();
         killEvent.Invoke();
         
         Instantiate(ScorePopup, transform.position + new Vector3(0,2,10), Quaternion.identity);

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using GD.MinMaxSlider;
 using ToolBox.Serialization;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
