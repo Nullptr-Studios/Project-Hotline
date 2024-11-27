@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638670283305443897
+  platformSettingsDirtyTick: 638670896469379648
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,7 +121,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Blood_Frame_4
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 4
       width: 16
       height: 16
-    spriteID: a137b61ecc7f3e4429883b40fbbcab06
+    spriteID: 265b845b86f0ff045b73c2cd4c89a43f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,7 +141,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: Blood_Frame_3
     originalName: 
-    pivot: {x: 0.5, y: -0.06666667}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 100
       width: 16
       height: 15
-    spriteID: 271d6229498c6fa499d7be8c7c1e97e6
+    spriteID: bc751f3f955238049aa0c1e641c8100d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -161,7 +161,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 100}
   - name: Blood_Frame_2
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 28
       width: 16
       height: 16
-    spriteID: d78201f8958f18547a7ca36767da3a80
+    spriteID: f522116747664744c84e8f7f64d15ae8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -181,7 +181,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 28}
   - name: Blood_Frame_1
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -190,7 +190,7 @@ ScriptedImporter:
       y: 52
       width: 16
       height: 16
-    spriteID: f87c52623fe0df042956ab1b7c2ad5c9
+    spriteID: f972a5e4c477aac4a95d50677d2ac758
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -201,7 +201,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 52}
   - name: Blood_Frame_0
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -210,7 +210,7 @@ ScriptedImporter:
       y: 76
       width: 16
       height: 16
-    spriteID: f061f42f57d5bdd429198dfa0ac431f4
+    spriteID: 92efaa9bbe959934f8b5885f4164bcdf
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -235,7 +235,7 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: a137b61ecc7f3e4429883b40fbbcab06
+      spriteId: 265b845b86f0ff045b73c2cd4c89a43f
     - name: Blood_Frame_3
       frameIndex: 3
       cellRect:
@@ -243,7 +243,7 @@ ScriptedImporter:
         y: 1
         width: 16
         height: 15
-      spriteId: 271d6229498c6fa499d7be8c7c1e97e6
+      spriteId: bc751f3f955238049aa0c1e641c8100d
     - name: Blood_Frame_2
       frameIndex: 2
       cellRect:
@@ -251,7 +251,7 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: d78201f8958f18547a7ca36767da3a80
+      spriteId: f522116747664744c84e8f7f64d15ae8
     - name: Blood_Frame_1
       frameIndex: 1
       cellRect:
@@ -259,7 +259,7 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: f87c52623fe0df042956ab1b7c2ad5c9
+      spriteId: f972a5e4c477aac4a95d50677d2ac758
     - name: Blood_Frame_0
       frameIndex: 0
       cellRect:
@@ -267,7 +267,7 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: f061f42f57d5bdd429198dfa0ac431f4
+      spriteId: 92efaa9bbe959934f8b5885f4164bcdf
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -296,6 +296,30 @@ ScriptedImporter:
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
   - name: Server
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Windows Store Apps
     overridden: 0
     ignorePlatformSupport: 0
     maxTextureSize: 2048

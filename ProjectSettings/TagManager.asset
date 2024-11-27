@@ -8,6 +8,8 @@ TagManager:
   - Corpse
   - Weapon
   - ExitNode
+  - CivilianCorpse
+  - PlayerCorpse
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - HalfHeight
   - Triggers
   - Door
-  - 
+  - Lock
   - 
   - 
   - 
@@ -56,4 +58,7 @@ TagManager:
     locked: 0
   - name: Walls
     uniqueID: 3078961027
+    locked: 0
+  - name: Effects
+    uniqueID: 3064150115
     locked: 0

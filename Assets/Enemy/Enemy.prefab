@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 975079144875247305}
   - component: {fileID: 4320165183307307060}
   - component: {fileID: 6114627427478298440}
-  - component: {fileID: 4441475060996046577}
   - component: {fileID: 2337270951896560456}
   - component: {fileID: 4929575349862732123}
   - component: {fileID: 5774344439103843990}
@@ -201,7 +200,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0.43
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &6114627427478298440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,19 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e39f6090724e4a4a8aadeb042afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4441475060996046577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2975961158892791207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c7f4db162bab4443818dd13bed4b1dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularSpeed: 360
 --- !u!114 &2337270951896560456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +231,14 @@ MonoBehaviour:
   animatorEnemy: {fileID: 1586720700333565052}
   animatorEnemyFoot: {fileID: 2898076770262181485}
   footTransform: {fileID: 5296668497393563518}
+  footstepSound:
+    Guid:
+      Data1: -1017361114
+      Data2: 1130245974
+      Data3: 249290894
+      Data4: -1447486384
+    Path: event:/SFX/Footsteps/ConcreteFootsteps2
+  timeBetweenFootsteps: 0.3
   DrawGizmos: 1
   ColorSphere: {r: 1, g: 0, b: 1, a: 1}
   ColorSphereTurn: {r: 0, g: 1, b: 0, a: 1}
@@ -314,6 +308,7 @@ MonoBehaviour:
   weaponGO: {fileID: 4223289585622608669, guid: 1f3a110296d5acf4e9997829d9ff0271, type: 3}
   log: 0
   drawGizmos: 0
+  _isWeaponHeld: 0
   _wantsToThrowOrGet: 0
   anim: {fileID: 1586720700333565052}
 --- !u!114 &1155971598429141389
@@ -329,12 +324,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
+  ScorePopup: {fileID: 1114611430449885655, guid: 17f8c024bd97050408c7bba2e1462cda, type: 3}
   weaponHandler: {fileID: 620825279225639238}
   stunCooldown: 1
+  animatorPlayer: {fileID: 1586720700333565052}
+  legsSpr: {fileID: 608427877355183717}
+  bodySpr: {fileID: 1725766725762290060}
   killEvent:
     m_PersistentCalls:
       m_Calls: []
+  BatHitSound:
+    Guid:
+      Data1: 1290632407
+      Data2: 1319305624
+      Data3: 1039821470
+      Data4: -515941669
+    Path: event:/SFX/Weapons/BatHit2
+  BatKillSound:
+    Guid:
+      Data1: -719709937
+      Data2: 1274931417
+      Data3: -1169581944
+      Data4: 1083678516
+    Path: event:/SFX/Weapons/BatHitKill
 --- !u!114 &8546987331332865949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,8 +360,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 7
+  nearDetectionRange: 1
   angle: 60
-  scanFrequency: 15
+  scanFrequency: 30
   layerToSee:
     serializedVersion: 2
     m_Bits: 1024
@@ -357,8 +370,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8567
   detectedPlayer: {fileID: 0}
+  fallbackPosition: {x: 0, y: 0, z: 0}
+  heardPosition: {x: 0, y: 0}
+  isDeaf: 0
+  heardPlayer: 0
   isDetecting: 0
-  drawGizmos: 1
+  drawGizmos: 0
   meshColor: {r: 1, g: 1, b: 0, a: 0.25490198}
   detectColor: {r: 1, g: 0.0252119, b: 0, a: 1}
   logVisionHit: 0

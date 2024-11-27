@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 /// <summary>
 /// Structure to hold camera variables such as max rotation and max distance.
@@ -50,7 +47,7 @@ public class CameraController : MonoBehaviour
     /// <summary>
     /// Initializes the camera controller.
     /// </summary>
-    void Start()
+    void Awake()
     {
         _vcamera = GetComponent<CinemachineVirtualCamera>();
         _baseRotation = _vcamera.transform.eulerAngles.z;
@@ -60,14 +57,15 @@ public class CameraController : MonoBehaviour
         
         _currentPlayerCameraDistance = defaultPlayerCameraDistance;
 
-        _lookGameObject = Instantiate(new GameObject());
+        _lookGameObject = new GameObject("CameraLook");
+        _lookGameObject.transform.position = _player.transform.position;
         _vcamera.Follow = _lookGameObject.transform;
     }
 
     /// <summary>
     /// Updates the camera position and rotation based on the player's weapon type and position.
     /// </summary>
-    void Update()
+    void FixedUpdate()
     {
         // Adjust the camera distance based on the current weapon type
         switch (_playerWeaponManager.GetCurrentWeaponType())
@@ -90,7 +88,7 @@ public class CameraController : MonoBehaviour
         // Retrieve the active scene camera variables
         _cameraVariables = SceneMng.ActiveSceneCameraVars;
 
-        var distance = _player.transform.position.x - _cameraVariables.Origin.x;
+        var distance = playerLookPos.x - _cameraVariables.Origin.x;
         var rotation = _cameraVariables.maxRotation * Mathf.Clamp((distance / _cameraVariables.maxDistance), -1, 1) + _baseRotation;
         _vcamera.transform.eulerAngles = new Vector3(0f, 0f, rotation);
     }

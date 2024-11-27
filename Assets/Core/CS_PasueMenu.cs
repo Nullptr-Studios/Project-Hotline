@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PasueMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
+    private static readonly int CloseAnim = Animator.StringToHash("CloseAnim");
+    
     private PlayerMovement _playerinput;
     private PlayerIA _input;
     private Animator _animator;
@@ -12,7 +14,12 @@ public class PasueMenu : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _playerinput = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         _input = new PlayerIA();
-        _input.UI.Cancel.performed += OnContinue;
+        _input.UI.Cancel.performed += OnContinueButton;
+    }
+
+    private void OnContinueButton(InputAction.CallbackContext obj)
+    {
+        OnContinue();
     }
 
     private void OnDisable() => Time.timeScale = 1f;
@@ -22,7 +29,7 @@ public class PasueMenu : MonoBehaviour
         _playerinput.OnDisable();
     }
 
-    // This happens when the open animations finishes
+    // This happens when the open animations finish
     public void OnOpen() 
     {
         Time.timeScale = 0f;
@@ -31,17 +38,17 @@ public class PasueMenu : MonoBehaviour
     }
 
     // Continue button
-    public void OnContinue(InputAction.CallbackContext context)
+    public void OnContinue()
     {
         Time.timeScale = 1f;
         _playerinput.OnEnable();
         _input.UI.Cancel.Disable();
-        _animator.SetTrigger("CloseAnim");
+        _animator.SetTrigger(CloseAnim);
     }
 
     // Exit to main menu button
-    public void OnExit() => LevelManager.EndLevel();
+    public void OnExit() => GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
 
     // Restart level button
-    public void OnRestart() => LevelManager.RestartLevel();
+    public void OnRestart() => SceneMng.Reload();
 }

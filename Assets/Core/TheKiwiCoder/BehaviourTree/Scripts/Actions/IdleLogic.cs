@@ -9,6 +9,8 @@ public class IdleLogic : ActionNode
     
     protected override void OnStart() 
     {
+        blackboard.fallBack = false;
+        
         if (blackboard.returnToInitialPos)
         {
             blackboard.moveToPosition = blackboard.initialPos;

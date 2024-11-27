@@ -1,6 +1,5 @@
 using System.Collections;
 using TMPro;
-using ToolBox.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -14,7 +13,7 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private float deathsTime = 1;
     [SerializeField] private float timeTime = 0.8f;
     [SerializeField] private float scoreTime = 2.5f;
-
+    
     [Header("Components")]
     [SerializeField] private GameObject scoreObject;
     [SerializeField] private TextMeshProUGUI scoreValue;
@@ -60,7 +59,7 @@ public class ScoreUI : MonoBehaviour
         killsObject.SetActive(false);
         deathsObject.SetActive(false);
         timeObject.SetActive(false);
-
+        
         _input.Gameplay.Interact.Enable();
 
         StartCoroutine(ShowText());
@@ -84,19 +83,19 @@ public class ScoreUI : MonoBehaviour
         killsObject.SetActive(true);
         for (int i = 0; i < kills; i++)
         {
-            killsValue.text = (i + 1).ToString();
-            yield return new WaitForSeconds(killsTime / kills);
+            killsValue.text = (i+1).ToString();
+            yield return new WaitForSeconds(killsTime/kills);
         }
-
+        
         if (kills == 0)
             yield return new WaitForSeconds(deathsTime);
-
+        
         int deaths = _score.Deaths;
         deathsObject.SetActive(true);
         for (int i = 0; i < deaths; i++)
         {
-            deathsValue.text = (i + 1).ToString();
-            yield return new WaitForSeconds(deathsTime / deaths);
+            deathsValue.text = (i+1).ToString();
+            yield return new WaitForSeconds(deathsTime/deaths);
         }
 
         if (deaths == 0)
@@ -107,19 +106,18 @@ public class ScoreUI : MonoBehaviour
         timeObject.SetActive(true);
         timeValue.text = $"{minutes:00}:{seconds:00}";
         yield return new WaitForSeconds(timeTime);
-
+        
         int score = (int)_score.Value;
         scoreObject.SetActive(true);
-        for (int i = 0; i < score; i++)
+        for (int i = 0; i < score; i+=9)
         {
-            scoreValue.text = (i + 1).ToString();
-            yield return new WaitForSeconds(scoreTime / score);
+            scoreValue.text = (i+1).ToString();
+            yield return new WaitForSeconds(scoreTime/score);
         }
-
-
-
+        scoreValue.text = ((int)_score.Value).ToString();
+        
         yield return new WaitForSeconds(2);
-
+        
         EnableExit();
     }
 
@@ -142,7 +140,7 @@ public class ScoreUI : MonoBehaviour
         _input.UI.Accept.performed -= ExitScreen;
         _input.Gameplay.Interact.performed -= ChangeSpeed;
         _input.Gameplay.Interact.canceled -= ChangeSpeed;
-        SceneManager.LoadScene("MainMenu");
+        GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
     }
 
     public void Activate()

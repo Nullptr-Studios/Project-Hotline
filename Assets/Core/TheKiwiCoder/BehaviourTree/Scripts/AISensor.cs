@@ -1,9 +1,11 @@
 using TheKiwiCoder;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AISensor : MonoBehaviour
 {
     public float range = 10;
+    public float nearDetectionRange = 1;
     public float angle = 45;
     public int scanFrequency = 15; // Frequency is with q uwu -x
     
@@ -11,9 +13,11 @@ public class AISensor : MonoBehaviour
     public LayerMask layerToOcclude;
 
     public GameObject detectedPlayer;
+    public Vector3 fallbackPosition = Vector3.zero;
     
     public Vector2 heardPosition;
-    
+
+    public bool isDeaf;
     public bool heardPlayer;
     public bool isDetecting;
     
@@ -23,23 +27,25 @@ public class AISensor : MonoBehaviour
     [SerializeField] private Color meshColor = Color.red;
     [SerializeField] private Color detectColor = Color.white;
     [SerializeField] private bool logVisionHit;
+    private Mesh _mesh;
 #endif
-    
-    private Collider2D[] _colliders = new Collider2D[50];
+
+    private Collider2D[] _colliders = new Collider2D[5];
     private int _count;
     private float _scanInterval;
     private float _scanTimer;
-
+    private Vector3 _pPos;
     private Transform _trans;
-    
-    
-    private Mesh _mesh;
+    private PlayerHealth ph;
+
+    private Vector3 origin;
+    private Vector3 dir;
+
     // Start is called before the first frame update
     void Start()
     {
         _scanInterval = 1.0f / scanFrequency;
         _trans = transform;
-        
     }
 
     // Update is called once per frame
@@ -52,9 +58,17 @@ public class AISensor : MonoBehaviour
             Scan();
         }
     }
+
+    public Vector3 GetPlayerPositionIfInBounds()
+    {
+        return _pPos;
+    }
     
     public void HeardPlayer(Vector3 transformPosition)
     {
+        if (isDeaf) 
+            return;
+        
         heardPlayer = true;
         heardPosition = transformPosition;
     }
@@ -62,17 +76,40 @@ public class AISensor : MonoBehaviour
     private void Scan()
     {
         _count = Physics2D.OverlapCircleNonAlloc(_trans.position, range, _colliders, layerToSee);
-
+        
         //This has been changed from a list to an array in order to optimize code
         isDetecting = false;
-        detectedPlayer = null;
+        detectedPlayer = null;       
+        
+        if(_count == 0)
+        {
+            _pPos = Vector3.zero;
+            return;
+        }
         
         for (int i = 0; i < _count; ++i)
         {
             GameObject obj = _colliders[i].gameObject;
+            _pPos = obj.transform.position;
             if (IsInSight(obj))
             {
-                PlayerHealth ph = obj.GetComponent<PlayerHealth>();
+                
+                if(dir.sqrMagnitude < nearDetectionRange)
+                {
+                    //do fallback
+                    fallbackPosition = _pPos + dir.normalized * (-1 * (nearDetectionRange + 2));
+#if UNITY_EDITOR
+                    if(drawGizmos)
+                        Debug.DrawLine(transform.position, fallbackPosition, Color.blue, 1);
+#endif
+                }
+                else
+                {
+                    fallbackPosition = Vector3.zero;
+                }
+                
+                if(ph == null)
+                    ph = obj.GetComponent<PlayerHealth>();
                 if (ph && ph.IsDead)
                 {
                     detectedPlayer = null;
@@ -98,38 +135,41 @@ public class AISensor : MonoBehaviour
 
     public bool IsInSight(GameObject target)
     {
-        bool result = true;
         
-        Vector3 origin = _trans.position;
-        Vector3 dest = target.transform.position;
-        Vector3 dir = dest - origin;
-        
-        float deltaAngle = Vector3.Angle(dir, _trans.up);
-        
-        if(deltaAngle > angle)
-            result = false;
-        
-        if (result)
-        {
-            if (Physics2D.Linecast(origin, dest, layerToOcclude))
-                result = false;
+        origin = _trans.position;
+        dir = _pPos - origin;
 
-#if UNITY_EDITOR
-            if (logVisionHit) 
-                Debug.Log(Physics2D.Linecast(origin, dest, layerToOcclude).collider?.gameObject.name);
-#endif
-            
+        if (dir.sqrMagnitude < nearDetectionRange)
+        {
+            return true;
         }
         
-#if UNITY_EDITOR
-        if(drawGizmos)
-            Debug.DrawRay(origin, dir, result ? Color.green : Color.red, .05f);
-#endif
+        float deltaAngle = Vector3.Angle(dir, _trans.up);
+
+        if (deltaAngle > angle)
+            return false;
+
+        if (Physics2D.Linecast(origin, _pPos, layerToOcclude))
+            return false;
+
+        return true;
         
-        return result;
     }
+    
+    
 
 #if UNITY_EDITOR
+        
+    //not used anymore
+    private void DrawLines(bool result, Vector3 origin, Vector3 dest, Vector3 dir)
+    { 
+        if (logVisionHit) 
+            Debug.Log(Physics2D.Linecast(origin, dest, layerToOcclude).collider?.gameObject.name);
+        
+        if(drawGizmos)
+            Debug.DrawRay(origin, dir, result ? Color.green : Color.red, .05f);
+    }
+    
     Mesh CreateMesh()
     {
         Mesh gizmoMesh = new Mesh(); // renamed to avoid occlude warning, was hard containing myself to use var -x
@@ -251,6 +291,8 @@ public class AISensor : MonoBehaviour
             {
                 Gizmos.DrawSphere(_colliders[i].transform.position, .4f);
             }
+            
+            Gizmos.DrawSphere(transform.position, nearDetectionRange);
 
             Gizmos.color = detectColor;
             if(detectedPlayer != null)

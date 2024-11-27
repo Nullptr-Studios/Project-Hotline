@@ -1,5 +1,7 @@
 using CC.DialogueSystem;
 using JetBrains.Annotations;
+using TheKiwiCoder;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +11,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private BoxCollider2D endTrigger;
     [SerializeField] [CanBeNull] private MissionObjective objective;
     [SerializeField] private ScoreUI score;
+    [CanBeNull] [SerializeField] private GameObject actPopup;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -27,7 +30,7 @@ public class LevelManager : MonoBehaviour
         
         if (objective == null)
         {
-            Debug.LogError($"[LevelManager] {name}: Objective mot found. Level unwinnable.");
+            Debug.LogError($"[LevelManager] {name}: Objective not found. Level unwinnable.");
             this.enabled = false;
         }
         else
@@ -56,12 +59,16 @@ public class LevelManager : MonoBehaviour
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Mission paused");
 #endif
         
-    } 
-    
+    }
+
     /// <summary>
     /// Exit to main menu
     /// </summary>
-    public static void EndLevel() => SceneManager.LoadScene("MainMenu"); // TODO: This should call the loading screen
+    public void EndLevelMessage() {
+        VariableRepo.Instance.RemoveAll();
+        Destroy(GetComponent<ScoreManager>());
+        SceneManager.LoadScene("MainMenu");
+    } // TODO: This should call the loading screen
 
     /// <summary>
     /// Make the player restart the current level
@@ -76,6 +83,8 @@ public class LevelManager : MonoBehaviour
 
     public void OpenScore()
     {
+        //disable player
+        GameObject.FindGameObjectWithTag("Player").SetActive(false);
         
 #if UNITY_EDITOR
         if (logMissionEnd) Debug.Log($"[LevelManager] {name}: Opening Score...");
@@ -83,4 +92,10 @@ public class LevelManager : MonoBehaviour
 
         score.Activate();
     }
+    
+    public void OpenActPopup()
+    {
+        if (actPopup != null) actPopup.SetActive(true);
+        else Debug.LogError($"[LevelManager] {name}: Trying to open act popup but it doesn't exist.");
+    } 
 }

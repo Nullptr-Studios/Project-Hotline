@@ -15,9 +15,31 @@ MonoBehaviour:
   sceneObjects:
   - sceneObject:
       m_SceneName: Skyscraper_Floor1
+    EnemyScene:
+      m_SceneName: Skyscraper_Floor1_Enemies
     isInitialyLoaded: 1
-    isLoaded: 0
+    isInitialyActive: 1
+    cameraBehaviour:
+      maxRotation: 9
+      maxDistance: 12
+      Origin: {x: 4, y: -6}
   - sceneObject:
       m_SceneName: Skyscraper_Floor2
+    EnemyScene:
+      m_SceneName: Skyscraper_Floor2_Enemies
     isInitialyLoaded: 0
-    isLoaded: 0
+    isInitialyActive: 0
+    cameraBehaviour:
+      maxRotation: 3
+      maxDistance: 1
+      Origin: {x: 64, y: -6}
+  - sceneObject:
+      m_SceneName: Skyscraper_Floor3_1
+    EnemyScene:
+      m_SceneName: Skyscraper_Floor3_Enemies
+    isInitialyLoaded: 1
+    isInitialyActive: 1
+    cameraBehaviour:
+      maxRotation: 9
+      maxDistance: 12
+      Origin: {x: 4, y: -6}

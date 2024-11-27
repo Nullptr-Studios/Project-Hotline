@@ -61,6 +61,7 @@ public class CivilianDamageable : Damageable
         //@TODO: Change to civilian corpse
         GameObject Corpse = ResourceManager.GetCivilianCorpsePool().Get();
         Corpse.transform.position = transform.position;
+        Corpse.tag = "CivilianCorpse";
 
         Corpse.SetActive(true);
 
@@ -69,7 +70,7 @@ public class CivilianDamageable : Damageable
         com.CorpseAddForceInDir(_lastShootDir);
 
         // Send kill message
-        // ScoreManager.AddCivilianKill();
+        ScoreManager.AddCivilianKill();
         killEvent.Invoke();
 
         Destroy(gameObject);
@@ -83,6 +84,8 @@ public class CivilianDamageable : Damageable
         _onStun = false;
 
         _navMeshAgent.enabled = true;
+
+        GetComponent<CivilianController>().enabled = true;
 
         Destroy(_rb);
     }
@@ -123,6 +126,8 @@ public class CivilianDamageable : Damageable
 
         _onStun = true;
 
+        GetComponent<CivilianController>().enabled = false;
+
         Invoke("StunRecover", stunCooldown);
     }
 
@@ -144,7 +149,9 @@ public class CivilianDamageable : Damageable
             Stun(shootDir);
         }
 
-        GameObject BManager = Instantiate(bloodEffectManager, hitPoint, new Quaternion());
+        GameObject BManager = ResourceManager.GetBloodManagerPool().Get();
+        BManager.SetActive(true);
+        BManager.transform.position = hitPoint;
         BManager.transform.right = shootDir;
     }
 }

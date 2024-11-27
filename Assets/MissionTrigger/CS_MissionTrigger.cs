@@ -13,7 +13,7 @@ public class MissionTrigger : MonoBehaviour
         //_objectiveCollider = Objective.GetComponent<CircleCollider2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (Objective == null) return;
         
@@ -21,7 +21,7 @@ public class MissionTrigger : MonoBehaviour
             Objective.GetComponent<Collider2D>().enabled = true;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         if (Objective == null) return;
         

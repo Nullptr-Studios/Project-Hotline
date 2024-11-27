@@ -86,7 +86,11 @@ public struct MotionController
         // Clamp is needed so we don't go further than the timeline's length
         _time = Mathf.Clamp(_time, 0f, currentCurve.GetDuration());
         _speedPercentage = currentCurve.Evaluate(_time);
-
+        if(Mathf.Approximately(_speedPercentage, 0f))
+        {
+            _speedPercentage = 0f;
+        }
+        
         _wasMoving = isMoving;
     }
 

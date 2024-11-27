@@ -98,6 +98,15 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReturnToMainMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""3034b170-6b7a-4ca4-866a-16d5f1bd214f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -318,6 +327,28 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b6e1b7e-f693-4a1f-9c1b-e52aea643543"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnToMainMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93ed7829-8431-4107-8792-4b01cc5c6d1d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnToMainMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -645,7 +676,12 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<DualShockGamepad>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<DualShock4GampadiOS>"",
+                    ""isOptional"": true,
                     ""isOR"": false
                 }
             ]
@@ -672,17 +708,17 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<XInputController>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
                     ""isOR"": false
                 },
                 {
                     ""devicePath"": ""<WebGLGamepad>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
                     ""isOR"": false
                 },
                 {
                     ""devicePath"": ""<SwitchProControllerHID>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
                     ""isOR"": false
                 }
             ]
@@ -699,6 +735,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
         m_Gameplay_SwitchWeapons = m_Gameplay.FindAction("SwitchWeapons", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_ReturnToMainMenu = m_Gameplay.FindAction("ReturnToMainMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
@@ -777,6 +814,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Fire;
     private readonly InputAction m_Gameplay_SwitchWeapons;
     private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_ReturnToMainMenu;
     public struct GameplayActions
     {
         private @PlayerIA m_Wrapper;
@@ -789,6 +827,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
         public InputAction @SwitchWeapons => m_Wrapper.m_Gameplay_SwitchWeapons;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @ReturnToMainMenu => m_Wrapper.m_Gameplay_ReturnToMainMenu;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -822,6 +861,9 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @ReturnToMainMenu.started += instance.OnReturnToMainMenu;
+            @ReturnToMainMenu.performed += instance.OnReturnToMainMenu;
+            @ReturnToMainMenu.canceled += instance.OnReturnToMainMenu;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -850,6 +892,9 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @ReturnToMainMenu.started -= instance.OnReturnToMainMenu;
+            @ReturnToMainMenu.performed -= instance.OnReturnToMainMenu;
+            @ReturnToMainMenu.canceled -= instance.OnReturnToMainMenu;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1020,6 +1065,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnSwitchWeapons(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnReturnToMainMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -15,5 +15,11 @@ MonoBehaviour:
   sceneObjects:
   - sceneObject:
       m_SceneName: Tutorial_Floor1
+    EnemyScene:
+      m_SceneName: Tutorial_Floor1_Enemies
     isInitialyLoaded: 1
-    isLoaded: 0
+    isInitialyActive: 1
+    cameraBehaviour:
+      maxRotation: 7
+      maxDistance: 10
+      Origin: {x: 7.5, y: 19.5}

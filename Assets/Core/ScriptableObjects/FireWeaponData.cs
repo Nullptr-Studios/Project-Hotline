@@ -132,15 +132,7 @@ public class FireWeaponData : ScriptableObject
     /// </summary>
     public EventReference fireSound;
 
-    /// <summary>
-    /// The sound event for reloading the weapon.
-    /// </summary>
-    public EventReference reloadSound;
-
-    /// <summary>
-    /// The sound event for finishing the reload.
-    /// </summary>
-    public EventReference finishReloadSound;
+    public EventReference emptyClipSound;
     
     [Header("SFX")]
     public AnimationCurve sfxMuzzleFlashCurve = new AnimationCurve(new Keyframe(0, 1), new Keyframe(.25f,0));

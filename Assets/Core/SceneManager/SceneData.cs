@@ -15,10 +15,9 @@ public class SceneData : ScriptableObject
 public struct SScene
 {
     public SceneObject sceneObject;
+    public SceneObject EnemyScene;
     public bool isInitialyLoaded;
     public bool isInitialyActive;
-
-    public bool isLoaded;
     
     public SCameraVariables cameraBehaviour;
 }

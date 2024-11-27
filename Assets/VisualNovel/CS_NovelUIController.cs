@@ -10,23 +10,29 @@ using UnityEngine.UI;
 public class NovelUIController : BaseDialogueUIController
 {
     [SerializeField] [Range(0.02f, 0.07f)] private float defaultTextSpeed = 0.04f;
-    [SerializeField] [Range(0.001f, 0.02f)] private float fastTextSpeed = 0.01f;
+    [SerializeField] [Range(0.001f, 0.02f)] private float fastTextSpeed = 0.001f;
     [SerializeField] private GameObject optionsPrefab;
     
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private NovelUICharacter speaker;
-    [SerializeField] private NovelUISprite sprite;
+    [SerializeField] private NovelUISprite spriteBlake;
+    [SerializeField] private NovelUISprite spriteOther;
     [SerializeField] private Image continueButton;
     private NovelOptionsController _optionsController;
+    [CanBeNull] private PlayerMovement _player;
     private Canvas _canvas;
     private PlayerIA _input;
-    [CanBeNull] private PlayerMovement _player;
+    private Animator _animator;
+    private static readonly int Blake = Animator.StringToHash("Blake");
+    private static readonly int Other = Animator.StringToHash("Delta");
     
     private bool _isShowing;
     private bool _isAnimatingText;
     private bool _handledInput;
     private float _textSpeed;
+
+    private string _lastSpeaker = "";
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -37,13 +43,14 @@ public class NovelUIController : BaseDialogueUIController
     {
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
+        _animator = GetComponent<Animator>();
         
         if (GameObject.FindWithTag("Player") != null)
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         _input = new PlayerIA();
         
         _textSpeed = defaultTextSpeed;
-        continueButton.enabled = false;
+        continueButton.gameObject.SetActive(false);
     }
     
 
@@ -51,30 +58,51 @@ public class NovelUIController : BaseDialogueUIController
         bool sameSpeakerAsLastDialogue = true, bool autoProceed = false)
     {
         _isAnimatingText = true;
-        continueButton.enabled = false;
+        continueButton.gameObject.SetActive(false);
         Show();
         
         text.text = _currentTextMod?.Sentence;
         text.ForceMeshUpdate();
         var length = text.GetParsedText().Length;
         text.maxVisibleCharacters = 0;
+
+        //I need to fucking do this cuz the fucking parser returns false some times, event tought is the same, fuck json -D
+        bool sameSpeakerAsLastDialogeMine = true;
+        if (speakerName != _lastSpeaker)
+        {
+            _lastSpeaker = speakerName;
+            sameSpeakerAsLastDialogeMine = false;
+        }
+
         
-        if (!sameSpeakerAsLastDialogue)
+        if (!sameSpeakerAsLastDialogeMine)
         {
             speaker.SetName(speakerName);
-            sprite.SetSprite(characterSprite, speakerName);
+            if (speakerName == "Blake")
+            {
+                spriteBlake.SetSprite(characterSprite, speakerName);
+                _animator.SetTrigger(Blake);
+            }
+            else
+            {
+                spriteOther.SetSprite(characterSprite, speakerName);
+                _animator.SetTrigger(Other);
+            }
         }
         
         for (var i = 0; i < length; i++)
         {
             yield return StartCoroutine(processTagsForPosition(i));
 
-            text.maxVisibleCharacters++;
+            if (Time.deltaTime > _textSpeed)
+                text.maxVisibleCharacters += 2; 
+            else 
+                text.maxVisibleCharacters++;
             yield return new WaitForSeconds(_textSpeed * _speedMultiplyer);
         }
         
         _isAnimatingText = false;
-        continueButton.enabled = true;
+        continueButton.gameObject.SetActive(true);
     }
     
     /// <summary>
@@ -128,12 +156,15 @@ public class NovelUIController : BaseDialogueUIController
 
     private void Show()
     {
+        //@TODO: Add animation
         _canvas.enabled = true;
         EnableInput();
     }
 
     public override void Close()
     {
+        //@TODO: Add animation
+        //@TODO: send delegate to start Game
         _canvas.enabled = false;
         DisableInput();
     }

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 /// <summary>
 /// This class acts as the manager for equipped weapons, including input.
@@ -16,6 +15,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private static readonly int Use = Animator.StringToHash("Use");
 
     public GameObject spawningWeapon;
+    public WeaponDictionary weaponDictionary;
 
     [Header("Pickup")]
     public float pickupRange = 2.0f;
@@ -42,15 +42,14 @@ public class PlayerWeaponManager : MonoBehaviour
 
     private bool _isWeaponHeld;
     private bool _wantsToThrowOrGet;
-    [SerializeField] ProgressBar progressBar;
-    [SerializeField] ProgressBar progressBar2;
+    /*[SerializeField] ProgressBar progressBar;
+    [SerializeField] ProgressBar progressBar2;*/
     [SerializeField] AmmoPrompt ammoPrompt;
 
     private PlayerIA _playerInput;
 
     private IWeapon _heldWeaponInterface;
-    private readonly List<GameObject> _heldWeaponGameObject = new List<GameObject>();
-    private List<bool> _reloadingCurrentWeapon = new List<bool>();
+    public readonly List<GameObject> _heldWeaponGameObject = new List<GameObject>();
 
     private int _currentIndex;
 
@@ -75,6 +74,15 @@ public class PlayerWeaponManager : MonoBehaviour
         return _heldWeaponInterface.GetWeaponType();
     }
 
+    public void DropWeapon()
+    {
+        if (_isWeaponHeld)
+        {
+            _heldWeaponInterface.Drop();
+            ammoPrompt.SetSlotEmpty(_currentIndex);
+        }
+    }
+
     /// <summary>
     /// Enables the player input.
     /// </summary>
@@ -95,6 +103,60 @@ public class PlayerWeaponManager : MonoBehaviour
         _playerInput.Gameplay.SwitchWeapons.Disable();
 
     }
+    
+    public void SpawnWeapons(List<string> weaponsNames)
+    {
+        for (int i = 0; i < _heldWeaponGameObject.Count; i++)
+        {
+            if (_heldWeaponGameObject[i] != null)
+            {
+                _heldWeaponGameObject[i].SetActive(true);
+                if(_heldWeaponGameObject[i].TryGetComponent(out IWeapon w))
+                    w.Reload();
+                _heldWeaponGameObject[i] = null;
+            }
+        }
+        
+        _isWeaponHeld = false;
+        _heldWeaponInterface = null;
+        
+        for (int i = 0; i < weaponsNames.Count; i++)
+        {
+            if(weaponsNames[i] == null)
+                continue;
+            
+            ammoPrompt.SetSlotEmpty(0);
+            ammoPrompt.SetSlotEmpty(1);
+            
+            foreach (var w in weaponDictionary.weapons)
+            {
+                if (weaponsNames[i].Contains(w.name))
+                {
+                    GameObject weaponToEquip = Instantiate(w);
+                    _heldWeaponGameObject[i] = weaponToEquip;
+                    _heldWeaponInterface = weaponToEquip.GetComponent<IWeapon>();
+                    _heldWeaponInterface.Pickup(weaponHolder);
+                    _heldWeaponInterface.SetIsPlayer(true);
+
+                    ammoPrompt.SetSlot(i, _heldWeaponGameObject[i].name.Split("(".ToCharArray())[0]);
+
+                    //FMODUnity.RuntimeManager.PlayOneShot(pickupSound, transform.position);
+
+                    _heldWeaponInterface.setClaimed(true);
+                    break;
+                }
+            }
+        }
+        
+        _currentIndex = 0;
+        _heldWeaponInterface = _heldWeaponGameObject[_currentIndex].GetComponent<IWeapon>();
+        _isWeaponHeld = true;
+        
+        ammoPrompt.ChangeActiveSlot(_currentIndex);
+        //ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
+        
+        anim.ResetTrigger(Use);
+    }
 
     /// <summary>
     /// Initializes the player weapon manager.
@@ -105,16 +167,45 @@ public class PlayerWeaponManager : MonoBehaviour
         for (int i = 0; i < maxWeaponsEquipped; i++)
         {
             _heldWeaponGameObject.Add(null);
-            _reloadingCurrentWeapon.Add(false);
         }
 
         // Placeholder for spawning weapon
         if (spawningWeapon)
         {
-            Instantiate(spawningWeapon, transform.position, new Quaternion());
-            _wantsToThrowOrGet = true;
+            /*Instantiate(spawningWeapon, transform.position, new Quaternion());
+            _wantsToThrowOrGet = true;*/
+            
+            SpawnWeapons( new List<string> { spawningWeapon.name });
         }
         //###############################################
+    }
+
+
+    public void Restart()
+    {
+        SpawnWeapons(SceneMng.CheckpointWeapons);
+        SetAmmoPrompt();
+    }
+
+
+    public void SetAmmoPrompt()
+    {
+        if(!_isWeaponHeld)
+            return;
+        if (_heldWeaponInterface.MaxUses() != -1)
+        {
+            ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+            ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
+        }
+        else
+            ammoPrompt.DoHide();
+        
+        ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
+    }
+
+    private void Start()
+    {
+        SetAmmoPrompt();
     }
 
     /// <summary>
@@ -136,11 +227,23 @@ public class PlayerWeaponManager : MonoBehaviour
     /// <param name="context">The input action context.</param>
     private void OnFire(InputAction.CallbackContext context)
     {
-        if (context.performed && !_reloadingCurrentWeapon[_currentIndex] && _canShootAgain)
+        if (context.performed && _isWeaponHeld)
         {
-            _wantsToFire = true;
-            ammoPrompt.SubtractBullet();
+            if(_heldWeaponInterface.GetWeaponType() == EWeaponType.Melee && !_canShootAgain)
+                _wantsToFire = false;
+            else
+                _wantsToFire = true;
+            
+            
             _bulletsUITimer = 0;
+            if (_isWeaponHeld)
+            {
+                if (_heldWeaponInterface.UsesLeft() == 0 && _heldWeaponInterface.GetWeaponType() == EWeaponType.Fire)
+                {
+                    FireWeapon fireWeapon = (FireWeapon) _heldWeaponInterface;
+                    FMODUnity.RuntimeManager.PlayOneShot(fireWeapon.fireWeaponData.emptyClipSound, transform.position);
+                }
+            }
         }
         else if (context.canceled)
         {
@@ -162,6 +265,9 @@ public class PlayerWeaponManager : MonoBehaviour
 
         if (context.performed)
             anim.SetTrigger(Use);
+        
+        if(_isWeaponHeld) 
+            ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
     }
 
     /// <summary>
@@ -205,17 +311,15 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponGameObject[_currentIndex].gameObject.TryGetComponent(out _heldWeaponInterface);
             _isWeaponHeld = true;
 
-            FMODUnity.RuntimeManager.PlayOneShot(switchSound, transform.position);
+            //FMODUnity.RuntimeManager.PlayOneShot(switchSound, transform.position);
 
             if (_heldWeaponInterface.MaxUses() != -1 && _heldWeaponInterface.UsesLeft() != 0)
             {
                 ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
+         
+                
                 ammoPrompt.SetCurrentAmmo(_heldWeaponInterface.UsesLeft());
-
-                if (_heldWeaponInterface.UsesLeft() == 0)
-                    _reloadingCurrentWeapon[_currentIndex] = true;
-                else
-                    _reloadingCurrentWeapon[_currentIndex] = false;
+                
             }
             else
                 ammoPrompt.DoHide();
@@ -225,6 +329,7 @@ public class PlayerWeaponManager : MonoBehaviour
             ammoPrompt.DoHide();
         }
 
+        ammoPrompt.ChangeActiveSlot(_currentIndex);
         anim.ResetTrigger(Use);
     }
 
@@ -242,41 +347,31 @@ public class PlayerWeaponManager : MonoBehaviour
 
     // Throw and get logic
     // I dont like this implementation on the fucking update cuz i cant call it  -x
+    /// <summary>
+    /// WHYYYYYYYYYYYY IS THE FUCKING UPDATE METHOD NOT BEING CALLED -D
+    /// </summary>
     private void Update()
     {
+        
         anim.SetBool(WeaponEquipped, _isWeaponHeld);
         if (_isWeaponHeld)
         {
             anim.SetBool(FireOrMelee, _heldWeaponInterface.GetWeaponType() == EWeaponType.Fire);
-            anim.SetInteger(Type, _heldWeaponInterface.GetWeaponSpriteID());
+            if (_heldWeaponInterface.GetWeaponSpriteID() >= 0)
+            {
+                anim.SetInteger(Type, _heldWeaponInterface.GetWeaponSpriteID());
+            }
+            else
+            {
+                anim.SetBool(WeaponEquipped, false);
+            }
         }
 
         if (_isWeaponHeld)
         {
-            if (_heldWeaponInterface.UsesLeft() == 0 && !_reloadingCurrentWeapon[_currentIndex])
-            {
-                if (_currentIndex == 0)
-                    progressBar.BeginTimer(_heldWeaponInterface.ReloadTime());
-                else
-                    progressBar2.BeginTimer(_heldWeaponInterface.ReloadTime());
-
-                _reloadingCurrentWeapon[_currentIndex] = true;
-
-                if (_heldWeaponInterface.IsAutomatic())
-                    ammoPrompt.SubtractBullet();
-
-                ammoPrompt.DoHide();
-
-                _lastReloadingWeaponIndex = _currentIndex;
-                _lastReloadingWeaponGO = _heldWeaponGameObject[_currentIndex];
-
-                Invoke("FinishReload", _heldWeaponInterface.ReloadTime());
-
-            }
-
             if (_wantsToFire && _heldWeaponInterface.IsAutomatic())
             {
-                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses() && !_reloadingCurrentWeapon[_currentIndex])
+                if (_bulletsUITimer >= _heldWeaponInterface.TimeBetweenUses())
                 {
                     _bulletsUITimer = 0;
                     ammoPrompt.SubtractBullet();
@@ -312,12 +407,14 @@ public class PlayerWeaponManager : MonoBehaviour
             _heldWeaponInterface.Throw(transform.right);
             _heldWeaponInterface = null;
             _heldWeaponGameObject[_currentIndex] = null;
+            ammoPrompt.SetSlotEmpty(_currentIndex);
 
             FMODUnity.RuntimeManager.PlayOneShot(throwSound, transform.position);
 
-            _reloadingCurrentWeapon[_currentIndex] = false;
-
             _isWeaponHeld = false;
+            
+            //temporal fix :)
+            _canShootAgain = true;
 
             ammoPrompt.DoHide();
 
@@ -370,6 +467,8 @@ public class PlayerWeaponManager : MonoBehaviour
                                 FMODUnity.RuntimeManager.PlayOneShot(pickupSound, transform.position);
 
                                 _heldWeaponInterface.setClaimed(true);
+                                
+                                ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
                             }
                             //This won't ever happen as if you have a weapon already equipped it will throw it, but just in case
                             else
@@ -397,21 +496,6 @@ public class PlayerWeaponManager : MonoBehaviour
 
             _wantsToThrowOrGet = false;
         }
-    }
-
-    /// <summary>
-    /// Finishes the reloading process.
-    /// </summary>
-    private void FinishReload()
-    {
-        _reloadingCurrentWeapon[_lastReloadingWeaponIndex] = false;
-
-        if (_isWeaponHeld && _lastReloadingWeaponIndex == _currentIndex && _lastReloadingWeaponGO == _heldWeaponGameObject[_currentIndex])
-            _heldWeaponInterface.Use(_wantsToFire);
-
-        if (_heldWeaponGameObject[_currentIndex] != null)
-            if (_heldWeaponInterface.MaxUses() != -1 && _lastReloadingWeaponIndex == _currentIndex && _lastReloadingWeaponGO == _heldWeaponGameObject[_currentIndex])
-                ammoPrompt.SetMaxAmmo(_heldWeaponInterface.MaxUses(), 8);
     }
 
     /// <summary>
@@ -454,20 +538,31 @@ public class PlayerWeaponManager : MonoBehaviour
             float smallestDistance = float.MaxValue;
             int smallestIndex = 0;
 
+            float mostAmmo = -69;
+            
             int i = 0;
 
             foreach (var h in hitArr)
             {
                 if (!h)
                     continue;
-
-                float currentDist = Vector2.Distance(h.transform.position, weaponHolder.position);
+                
+                //smallest distance
+                /*float currentDist = Vector2.Distance(h.transform.position, weaponHolder.position);
                 if (currentDist < smallestDistance)
                 {
                     smallestDistance = currentDist;
                     smallestIndex = i;
-                    i++;
+                }*/
+                
+                h.transform.gameObject.TryGetComponent(out IWeapon w);
+                if((float)w.UsesLeft() / w.MaxUses() > mostAmmo)
+                {
+                    mostAmmo = (float)w.UsesLeft() / w.MaxUses();
+                    smallestIndex = i;
                 }
+                
+                i++;
             }
 
             return smallestIndex;

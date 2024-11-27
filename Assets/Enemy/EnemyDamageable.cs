@@ -1,4 +1,6 @@
 using System.Collections;
+using FMODUnity;
+using NavMeshPlus.Extensions;
 using TheKiwiCoder;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,7 +12,10 @@ using UnityEngine.Events;
 /// </summary>
 public class EnemyDamageable : Damageable
 {
-    public GameObject bloodEffectManager;
+    private static readonly int Stunned = Animator.StringToHash("Stunned");
+    private static readonly int WeaponEquipped = Animator.StringToHash("WeaponEquipped");
+    
+    public GameObject ScorePopup;
 
     //FUCK UNITY I DONT KNOW BUT CHILDREN DOES NOT MOVE RELATIVELY TO PARENT IF THE PARENT HAS A RIGIDBODY
     public Transform weaponHandler;
@@ -19,7 +24,12 @@ public class EnemyDamageable : Damageable
 
     private Vector3 _lastShootDir;
 
-    public float stunCooldown = 1.0f;
+    public float stunCooldown = 2f;
+
+    public Animator animatorPlayer;
+
+    public SpriteRenderer legsSpr;
+    public SpriteRenderer bodySpr;
 
     [Header("Event")]
     [SerializeField] private UnityEvent killEvent;
@@ -35,6 +45,16 @@ public class EnemyDamageable : Damageable
     private Vector3 _relativePos;
 
     private bool _onStun = false;
+    
+    RotateAgentSmoothly rotateSmooth2D;
+    
+    private AgentOverride2d override2D;
+
+    private GameObject _player;
+
+    [Header("Sound")] 
+    public EventReference BatHitSound;
+    public EventReference BatKillSound;
 
     /// <summary>
     /// Initializes the EnemyDamageable instance.
@@ -43,6 +63,12 @@ public class EnemyDamageable : Damageable
     {
         base.Start();
 
+        _player = GameObject.FindGameObjectWithTag("Player");
+
+        override2D = GetComponent<AgentOverride2d>();
+        
+        rotateSmooth2D = new RotateAgentSmoothly(override2D.Agent, override2D, 180);
+        
         if(weaponHandler)
             _relativePos = weaponHandler.localPosition;
 
@@ -68,6 +94,8 @@ public class EnemyDamageable : Damageable
         //Send kill message
         ScoreManager.AddKill(transform.parent.name);
         killEvent.Invoke();
+        
+        Instantiate(ScorePopup, transform.position + new Vector3(0,2,10), Quaternion.identity);
 
         Destroy(gameObject);
     }
@@ -77,12 +105,20 @@ public class EnemyDamageable : Damageable
     /// </summary>
     private void StunRecover()
     {
+        override2D.agentOverride = rotateSmooth2D;
+
+        
         _onStun = false;
 
         _aiSensor.enabled = true;
         _behaviourTreeRunner.enabled = true;
         _navMeshAgent.enabled = true;
-
+        
+        animatorPlayer.SetBool(Stunned, false);
+        bodySpr.sortingOrder = 1;
+        
+        legsSpr.enabled = true;
+        
         Destroy(_rb);
     }
 
@@ -106,6 +142,8 @@ public class EnemyDamageable : Damageable
     /// <param name="dir">The direction of the stun</param>
     public override void Stun(Vector3 dir)
     {
+        override2D.agentOverride = null;
+        
         if (_onStun)
             return;
 
@@ -123,16 +161,27 @@ public class EnemyDamageable : Damageable
         _navMeshAgent.enabled = false;
 
         _rb = gameObject.AddComponent<Rigidbody2D>();
+        
+        _rb.freezeRotation = true;
 
         _rb.drag = 3;
         _rb.gravityScale = 0;
         _rb.AddForce(dir * 200);
+        
+        transform.up = new Vector3(transform.position.x - _player.transform.position.x, transform.position.y - _player.transform.position.y, 0).normalized;
 
         _onStun = true;
 
         GetComponent<EnemyBehaviourDataOverrider>().justStunned = true;
 
         _enemyWeaponManager.DropWeapon();
+        
+        animatorPlayer.SetBool(Stunned, true);
+        animatorPlayer.SetBool(WeaponEquipped, false);
+        
+        legsSpr.enabled = false;
+        
+        bodySpr.sortingOrder = 0;
 
         Invoke("StunRecover", stunCooldown);
     }
@@ -146,16 +195,30 @@ public class EnemyDamageable : Damageable
     /// <param name="weaponType">The type of weapon used.</param>
     public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
     {
+        //ignore damage if already stunned
+        if(_onStun && weaponType == EWeaponType.Fire)
+        {
+            return;
+        }
+        
+        if(_currentHealth - amount <= 0)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(BatKillSound, transform.position);
+        }
+        
         _lastShootDir = shootDir;
         base.DoDamage(amount);
 
         //temporal stun
-        if (weaponType == EWeaponType.Melee && !_onStun)
+        if (weaponType == EWeaponType.Melee)
         {
+            FMODUnity.RuntimeManager.PlayOneShot(BatHitSound, transform.position);
             Stun(shootDir);
         }
 
-        GameObject BManager = Instantiate(bloodEffectManager, hitPoint, new Quaternion());
+        GameObject BManager = ResourceManager.GetBloodManagerPool().Get();
+        BManager.SetActive(true);
+        BManager.transform.position = hitPoint;
         BManager.transform.right = shootDir;
     }
 }

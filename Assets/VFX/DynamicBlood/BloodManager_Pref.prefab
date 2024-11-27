@@ -131,9 +131,16 @@ MonoBehaviour:
   splatterTransform: {fileID: 1848148549172370336}
   splatterAngle: 30
   bloodTravelDistance: 5
-  ammountOfFloorBlood: 35
-  ammountOfWallBlood: 25
-  destroyTime: 1
+  ammountOfFloorBlood: 25
+  ammountOfWallBlood: 10
+  destroyTime: 0.5
+  bloodSound:
+    Guid:
+      Data1: 40838112
+      Data2: 1105585753
+      Data3: -736400994
+      Data4: 433993528
+    Path: event:/SFX/Blood/Blood
 --- !u!1 &7611431446465764222
 GameObject:
   m_ObjectHideFlags: 0

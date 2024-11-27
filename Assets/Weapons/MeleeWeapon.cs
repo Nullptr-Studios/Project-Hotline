@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 /// <summary>
@@ -12,6 +13,11 @@ public class MeleeWeapon : Weapon
     public float offset;
     private bool _wantsToAttack;
     private bool _canAttack = true;
+
+    [Header("Events")]
+    [Tooltip("Please don't ever use this shit")]
+    public UnityEvent OnPick;
+    private bool _hasBeenPicked;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -74,9 +80,6 @@ public class MeleeWeapon : Weapon
     /// </summary>
     private void Attack()
     {
-        //Call civilian panic delegate
-        if(SceneMng.CivilianPanicDelegate != null)
-            SceneMng.CivilianPanicDelegate();
         
         var hitArr = new RaycastHit2D[32];
         var cf2D = new ContactFilter2D();
@@ -103,6 +106,8 @@ public class MeleeWeapon : Weapon
 
         // Play sound
         FMODUnity.RuntimeManager.PlayOneShot(meleeWeaponData.useSound, transform.position);
+        
+        _wantsToAttack = false;
     }
 
     /// <summary>
@@ -112,6 +117,11 @@ public class MeleeWeapon : Weapon
     public override void Pickup(Transform weaponHolder)
     {
         GetComponent<SpriteRenderer>().enabled = false;
+        if (!_hasBeenPicked)
+        {
+            _hasBeenPicked = true;
+            OnPick.Invoke();
+        }
         base.Pickup(weaponHolder);
     }
 

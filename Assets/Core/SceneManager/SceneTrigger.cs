@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,10 +16,18 @@ public class SceneTrigger : MonoBehaviour
 
 
     private Vector2 _exitPos;
+    private Animator _animatorFade;
+    
+    private bool start = false;
+    
+    private GameObject other;
 
+    private float _timer = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
+        _animatorFade = GameObject.Find("ScreenLevelTransition").GetComponent<Animator>();
         _exitPos = ExitLoc.transform.position;
     }
     
@@ -26,8 +35,30 @@ public class SceneTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            EntranceTriggerEvent.Invoke();
-            other.transform.position = _exitPos;
+            _animatorFade.SetTrigger("In");
+            _animatorFade.ResetTrigger("Out");
+
+            this.other = other.gameObject;
+            start = true;
+        }
+    }
+
+    private void Update()
+    {
+        if (start)
+        {
+            if(_timer >= .333f)
+            {
+                EntranceTriggerEvent.Invoke();
+                other.transform.position = _exitPos;
+                start = false;
+                _timer = 0;
+                _animatorFade.ResetTrigger("In");
+            }
+            else
+            {
+                _timer += Time.deltaTime;
+            }
         }
     }
 
@@ -51,6 +82,8 @@ public class SceneTrigger : MonoBehaviour
     readonly Vector3 angleVectorDown=new Vector3(0f, -0.40f,-1f)*0.2f/*length*/;
     Vector2 _upTmp;
     Vector2 _downTmp;
+
+    
     private void DrawArrow(Vector2 startPos, Vector2 endPos)
     {
         _arrowDirection=endPos - startPos;

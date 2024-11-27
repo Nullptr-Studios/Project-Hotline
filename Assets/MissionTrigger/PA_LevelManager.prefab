@@ -11,6 +11,10 @@ GameObject:
   - component: {fileID: 4579865753492758048}
   - component: {fileID: 2913125032203985343}
   - component: {fileID: 2424098765982670923}
+  - component: {fileID: 1857523428027934010}
+  - component: {fileID: 7894619877164752788}
+  - component: {fileID: 1395920795979461163}
+  - component: {fileID: 8175690179811429484}
   m_Layer: 0
   m_Name: PA_LevelManager
   m_TagString: Untagged
@@ -31,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2913125032203985343
 MonoBehaviour:
@@ -49,6 +53,7 @@ MonoBehaviour:
   endTrigger: {fileID: 0}
   objective: {fileID: 0}
   score: {fileID: 0}
+  actPopup: {fileID: 0}
   logMissionEnd: 1
 --- !u!114 &2424098765982670923
 MonoBehaviour:
@@ -65,6 +70,7 @@ MonoBehaviour:
   text: Power formula is calculated sign * (x * factor/100) ^ pow. Log formula is
     calculated Log{100pow} (sign * x + 100pow)
   killXP: 99
+  killCivilianXP: 0
   deathXP: 51
   timeThreshold: {x: 0, y: 900}
   minFormula:
@@ -77,3 +83,73 @@ MonoBehaviour:
     sign: -1
     factor: 1
     pow: 2
+--- !u!114 &1857523428027934010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325153471056053108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76366ce1b042fbf4fb90471f8dd47323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxBlood: 1000
+  bloodThreshold: 10
+  maxCorpses: 100
+  corpseThreshold: 10
+  startingFPS: 60
+  log: 1
+--- !u!114 &7894619877164752788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325153471056053108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791b43a656949bc4fb7fa6a7bdf620fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletTrailConfig: {fileID: 11400000, guid: a2f53d2bf47e3b644999a984399e9ad1, type: 2}
+  bloodConfig: {fileID: 11400000, guid: 3cc10aa4972c9b440816c8a00e48e980, type: 2}
+  corpseConfig: {fileID: 11400000, guid: 4058c53b29980c0429deaa7a04adde3c, type: 2}
+  _WallHit: {fileID: 180772, guid: 697d9a1e52bb99d468a5d727e5a4b435, type: 3}
+  _GlassHit: {fileID: 168394, guid: 93983eaa39ee5d4408c0b10200e234b4, type: 3}
+  _WallbangHit: {fileID: 138412, guid: c75e5a4fa5c842546a553399e24eb22d, type: 3}
+  _MuzzleVFX: {fileID: 146992, guid: 4e20780f83b08084f9f9435e4b48bac4, type: 3}
+  _BloodManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
+--- !u!114 &1395920795979461163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325153471056053108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4319b3d5bb6b59c4ab84423fc27955f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneData: {fileID: 11400000, guid: fdbd50ba9d96198428a5fffcc57c157b, type: 2}
+--- !u!114 &8175690179811429484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325153471056053108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f0b6f5a1bbdf646a944e7a281e74a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneMusic:
+    Guid:
+      Data1: 895259662
+      Data2: 1286989081
+      Data3: 1057358758
+      Data4: 1109300469
+    Path: event:/Music/InGameMusic

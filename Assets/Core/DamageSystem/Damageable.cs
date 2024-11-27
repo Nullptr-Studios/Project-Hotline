@@ -47,7 +47,7 @@ public class Damageable : MonoBehaviour, IDamageable
     [Header("Base Damageable")]
     public float maxHealth = 1;
 
-    private float _currentHealth;
+    protected float _currentHealth;
 
     /// <summary>
     /// Sets the max health as the current health.
@@ -95,6 +95,8 @@ public class Damageable : MonoBehaviour, IDamageable
     /// <param name="amount">Amount to damage</param>
     public virtual void DoDamage(float amount)
     {
+        SceneMng.CivilianPanicDelegate?.Invoke();
+
         // Subtract health
         _currentHealth -= amount;
 

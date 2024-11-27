@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -48,9 +49,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _rawMousePosition;
     private Vector3 _currentDir;
     private Vector3 _dir;
-
-    [Header("Pause Menu")]
-    [SerializeField] private GameObject pauseMenu;
+    
+    private GameObject _pauseMenu;
+    
+    private float _footstepTimer;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -76,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
         _input.Gameplay.Aim.performed += OnAim;
         _input.Gameplay.AimMouse.performed += OnAimMouse;
         _input.Gameplay.Pause.performed += OnOpenPause;
+        _input.Gameplay.ReturnToMainMenu.performed += OnRetMain;
         // _input.Gameplay.Aim.canceled += OnAim;
 
         // The fact that i have to use this class for a fucking controller change makes me mad -x
@@ -102,6 +105,17 @@ public class PlayerMovement : MonoBehaviour
                 Controller = EController.Xbox;
                 return;
         }
+        
+        // Pause menu shit
+        // Have to do this since i cant rescale the canvas -x
+        _pauseMenu = GameObject.Find("PA_PauseMenu").GetComponentInChildren<PauseMenu>().gameObject;
+        _pauseMenu.SetActive(false);
+    }
+
+    // TODO: THIS SHOULD ABSOFUCKINGLUTLY NOT BE ON PROD 
+    private void OnRetMain(InputAction.CallbackContext obj)
+    {
+        GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
     }
 
     /// <summary>
@@ -118,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
             case "Dualsense":
                 Controller = EController.Dualsense;
                 break;
-            case "Controller":
+            case "Xbox":
                 Controller = EController.Xbox;
                 break;
             default:
@@ -133,12 +147,15 @@ public class PlayerMovement : MonoBehaviour
     // Please enable them individually to avoid errors
     public void OnEnable()
     {
+#if UNITY_EDITOR
         _input.Debug.Debug.Enable();
         _input.Debug.Restart.Enable();
+#endif
         _input.Gameplay.Movement.Enable();
         _input.Gameplay.Aim.Enable();
         _input.Gameplay.AimMouse.Enable();
         _input.Gameplay.Pause.Enable();
+        _input.Gameplay.ReturnToMainMenu.Enable();
 
         _weaponManager.EnableInput();
     }
@@ -147,13 +164,15 @@ public class PlayerMovement : MonoBehaviour
     {
         //Reset Movement curves variables
         movementController.OnDisable();
-
+#if UNITY_EDITOR
         _input.Debug.Debug.Disable();   
         _input.Debug.Restart.Disable();
+#endif
         _input.Gameplay.Movement.Disable();
         _input.Gameplay.Aim.Disable();
         _input.Gameplay.AimMouse.Disable();
         _input.Gameplay.Pause.Disable();
+        _input.Gameplay.ReturnToMainMenu.Disable();
 
         _weaponManager.DisableInput();
 
@@ -215,7 +234,6 @@ public class PlayerMovement : MonoBehaviour
             footAnimation.SetFloat(AnimRate, 0);
             playerAnimation.SetBool(IsIdle, true);
         }
-
 
     }
 
@@ -281,7 +299,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnOpenPause(InputAction.CallbackContext context)
     {
-        pauseMenu.SetActive(true);
+        _pauseMenu.SetActive(true);
     }
 
     private void ForceRestart(InputAction.CallbackContext ctx)

@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.guciodevs.simple-min-max-slider": {
-      "version": "https://github.com/augustdominik/SimpleMinMaxSlider.git#upm",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "46ff35d22982657d55f7861ddc01b115a2db1554"
-    },
     "com.h8man.2d.navmeshplus": {
       "version": "https://github.com/h8man/NavMeshPlus.git",
       "depth": 0,
@@ -189,7 +182,7 @@
       }
     },
     "com.unity.ide.rider": {
-      "version": "3.0.31",
+      "version": "3.0.34",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -283,6 +276,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.settings-manager": {
+      "version": "2.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.shadergraph": {
       "version": "14.0.8",
       "depth": 1,
@@ -291,6 +291,17 @@
         "com.unity.render-pipelines.core": "14.0.8",
         "com.unity.searcher": "4.9.2"
       }
+    },
+    "com.unity.splines": {
+      "version": "2.3.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.settings-manager": "1.0.3"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
       "version": "1.1.33",

@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ReturnToMainMenu",
+                    "type": "Button",
+                    "id": "3034b170-6b7a-4ca4-866a-16d5f1bd214f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -296,6 +305,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b6e1b7e-f693-4a1f-9c1b-e52aea643543",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReturnToMainMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93ed7829-8431-4107-8792-4b01cc5c6d1d",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReturnToMainMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -623,7 +654,12 @@
             "devices": [
                 {
                     "devicePath": "<DualShockGamepad>",
-                    "isOptional": false,
+                    "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<DualShock4GampadiOS>",
+                    "isOptional": true,
                     "isOR": false
                 }
             ]
@@ -650,17 +686,17 @@
             "devices": [
                 {
                     "devicePath": "<XInputController>",
-                    "isOptional": false,
+                    "isOptional": true,
                     "isOR": false
                 },
                 {
                     "devicePath": "<WebGLGamepad>",
-                    "isOptional": false,
+                    "isOptional": true,
                     "isOR": false
                 },
                 {
                     "devicePath": "<SwitchProControllerHID>",
-                    "isOptional": false,
+                    "isOptional": true,
                     "isOR": false
                 }
             ]

@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7391681749920517291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560e91fefeb902d41841d8985bb53e6f, type: 3}
+  m_Name: Blit
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    Event: 550
+    blitMaterial: {fileID: 2100000, guid: b82f25c9e79070647b8cc30024708380, type: 2}
+    blitMaterialPassIndex: 0
+    setInverseViewMatrix: 0
+    requireDepthNormals: 0
+    srcType: 0
+    srcTextureId: _CameraColorTexture
+    srcTextureObject: {fileID: 0}
+    dstType: 0
+    dstTextureId: _BlitPassTexture
+    dstTextureObject: {fileID: 0}
+    overrideGraphicsFormat: 0
+    graphicsFormat: 4
+    canShowInSceneView: 1
 --- !u!114 &-2828392747003253157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,10 +58,10 @@ MonoBehaviour:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
-  - {fileID: 2109559135705486387}
   - {fileID: -2828392747003253157}
   - {fileID: 295059263711756693}
-  m_RendererFeatureMap: 33d46764dba8461d5b6e9435c887bfd895413a49d6421804
+  - {fileID: -7391681749920517291}
+  m_RendererFeatureMap: 5b6e9435c887bfd895413a49d642180455f33f7b9c786b99
   m_UseNativeRenderPass: 0
   m_TransparencySortMode: 2
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}
@@ -92,20 +120,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   shader: {fileID: 4800000, guid: a8806b096c701424f865bdd5e4b76928, type: 3}
---- !u!114 &2109559135705486387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
-  m_Name: FullScreenPassRendererFeature
-  m_EditorClassIdentifier: 
-  m_Active: 0
-  passMaterial: {fileID: 2100000, guid: 78a08787ca30045abb69f6f7dd878e09, type: 2}
-  injectionPoint: 600
-  requirements: 4
-  passIndex: 0

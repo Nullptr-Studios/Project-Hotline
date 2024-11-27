@@ -1,8 +1,11 @@
+using FMODUnity;
 using UnityEngine;
 
 //@TODO: Maybe add FX option?
 public class GlassDamageable : Damageable
 {
+    [Header("Sound")]
+    public EventReference glassBreakSound;
     //Sets the max health as the current health
     public override void Start()
     {
@@ -14,6 +17,8 @@ public class GlassDamageable : Damageable
     /// </summary>
     public override void OnDead()
     {
+        //Play glass break sound
+        FMODUnity.RuntimeManager.PlayOneShot(glassBreakSound, transform.position);
         base.OnDead();
     }
     

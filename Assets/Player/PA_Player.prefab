@@ -68,10 +68,10 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 95
-  m_PointLightOuterAngle: 130
-  m_PointLightInnerRadius: 8
-  m_PointLightOuterRadius: 11.5
+  m_PointLightInnerAngle: 100
+  m_PointLightOuterAngle: 160
+  m_PointLightInnerRadius: 10
+  m_PointLightOuterRadius: 16
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -155,7 +155,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_Sprite: {fileID: 362182364071139911, guid: 946db52941014ee42b14e29c35e5e1bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -261,7 +261,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 6335537516509214884, guid: b6e308807a09e9a4093e954b6628d1d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -334,7 +334,7 @@ Transform:
   - {fileID: 6914766930394450923}
   - {fileID: 8987711264224740855}
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &8018001871774116870
 CircleCollider2D:
@@ -424,7 +424,6 @@ MonoBehaviour:
   pivotRotation: 0
   sprite: {fileID: 1296727842978240662}
   playerCollider: {fileID: 0}
-  pauseMenu: {fileID: 0}
   debugSpeed: 0
   debugInput: 0
 --- !u!114 &8330505946157900613
@@ -440,6 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawningWeapon: {fileID: 4223289585622608669, guid: 3473ee2e2ea9c974aa9fc5981d891b87, type: 3}
+  weaponDictionary: {fileID: 11400000, guid: 2e7eccf80c58eb94c83812ca32c9dbe1, type: 2}
   pickupRange: 3
   weaponLm:
     serializedVersion: 2
@@ -455,23 +455,21 @@ MonoBehaviour:
     Path: 
   throwSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 364572088
+      Data2: 1084151804
+      Data3: -159071102
+      Data4: -1548963024
+    Path: event:/SFX/Player/Throw
   switchSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -911606085
+      Data2: 1110403421
+      Data3: -1832189531
+      Data4: -1364843617
+    Path: event:/SFX/Player/WeaponSwitch
   anim: {fileID: 8566547389374578288}
   log: 0
   drawGizmos: 0
-  progressBar: {fileID: 0}
-  progressBar2: {fileID: 0}
   ammoPrompt: {fileID: 0}
 --- !u!114 &8219012985781061561
 MonoBehaviour:
@@ -555,12 +553,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90afd25672b2ad4dae0d47786cbe7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 0.5
   bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
-  PlayerCorpsePrefab: {fileID: 7440868465861970397, guid: fd30fa95fe942e449bac51de500564f1, type: 3}
+  PlayerCorpsePrefab: {fileID: 45819439862360194, guid: fd30fa95fe942e449bac51de500564f1, type: 3}
   deathScreenUI: {fileID: 0}
   mainCamera: {fileID: 0}
-  deathScreenDelay: 0.5
+  deathScreenDelay: 0.1
   logReload: 0
 --- !u!1 &4983506758001091974
 GameObject:
