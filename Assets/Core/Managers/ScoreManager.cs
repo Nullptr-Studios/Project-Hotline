@@ -95,7 +95,8 @@ public class ScoreManager : MonoBehaviour
             Time = Time.time - _startTime,
             Kills = _playerKills,
             Deaths = _playerDeaths,
-            
+            InnocentKills = _playerCivilianKills,
+
             Value = (_playerKills * _killXP + _playerCivilianKills * _killCivilianXP) - _playerDeaths * _deathXP
         };
 
@@ -107,6 +108,7 @@ public class ScoreManager : MonoBehaviour
         {
             finalScore.Value = _maxFormula.Calculate(finalScore.Value);
         }
+
         if (DataSerializer.Load<List<float>>(SaveKeywords.LevelScore) == null)
         {
             var initLevelScore = new List<float>(new float[10]);
@@ -126,7 +128,7 @@ public class ScoreManager : MonoBehaviour
         }
         var _ts = DataSerializer.Load<List<float>>(SaveKeywords.TimeTaken);
 
-        if (_ts[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Time)
+        if (_ts[SceneManager.GetActiveScene().buildIndex - 1] < finalScore.Time)
         {
             _ts[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Time;
             DataSerializer.Save(SaveKeywords.TimeTaken, _ts);
@@ -138,7 +140,7 @@ public class ScoreManager : MonoBehaviour
         }
         var _kills = DataSerializer.Load<List<int>>(SaveKeywords.EnemyKills);
 
-        if (_kills[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Kills)
+        if (_kills[SceneManager.GetActiveScene().buildIndex - 1] < finalScore.Kills)
         {
             _kills[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Kills;
             DataSerializer.Save(SaveKeywords.EnemyKills, _kills);
@@ -149,11 +151,18 @@ public class ScoreManager : MonoBehaviour
             var initKills = new List<int>(new int[10]);
             DataSerializer.Save(SaveKeywords.EnemyKills, initKills);
         }
-        var _civkills = DataSerializer.Load<List<int>>(SaveKeywords.InnocentKills);
 
-        if (_civkills[SceneManager.GetActiveScene().buildIndex - 1] > finalScore.Kills)
+        var _civkills = DataSerializer.Load<List<int>>(SaveKeywords.InnocentKills);
+        if (DataSerializer.Load<List<int>>(SaveKeywords.InnocentKills) == null)
         {
-            _civkills[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.Kills;
+            
+            _civkills = new List<int>(new int[10]);
+            DataSerializer.Save(SaveKeywords.InnocentKills, _civkills);
+        }
+
+        if (_civkills[SceneManager.GetActiveScene().buildIndex - 1] < finalScore.InnocentKills)
+        {
+            _civkills[SceneManager.GetActiveScene().buildIndex - 1] = finalScore.InnocentKills;
             DataSerializer.Save(SaveKeywords.InnocentKills, _civkills);
         }
 
@@ -209,7 +218,7 @@ public struct Score
     /// <summary>
     /// Innocents killed
     /// </summary>
-    public int InnocentKills; //TODO: Implement this
+    public int InnocentKills; 
     /// <summary>
     /// Times the player has died
     /// </summary>

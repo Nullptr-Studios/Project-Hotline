@@ -11,17 +11,18 @@ public class SaveSystem : MonoBehaviour
 {
 
 }
+
 /// <summary>
 /// Saves different parameters on the game as strings that will be assigned a value later on
 /// </summary>
-public class SaveKeywords
+public static class SaveKeywords
 {
     //Level
     public const string LevelScore = "LevelScore";
     public const string LevelPassed = "LevelPassed";
     public const string TimeTaken = "TimeTaken";
     public const string EnemyKills = "EnemyKills";
-    public const string InnocentKills = "InnocentKills";
+    public const string InnocentKills = "fUCKINGinocentKills";
     public const string PlayerPosition = "PlayerPosition";
     
     //Config
