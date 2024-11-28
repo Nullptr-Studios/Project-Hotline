@@ -1,20 +1,34 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI version;
     
+    public GameObject mainMenuCanvas;
+    private PlayerIA input;
+    
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         version.text = Application.version;
+        input = new PlayerIA();
+        input.UI.Accept.performed += Action;
+        input.UI.Accept.Enable();
     }
 
-    public void OnTutorial() => SceneManager.LoadScene("Tutorial__Main");
-    
-    public void OnLevel(string name) => SceneManager.LoadScene(name);
-    
-    public void OnExit() => Application.Quit();
+    private void OnDisable()
+    {
+        input.UI.Accept.Disable();
+        input.UI.Accept.performed -= Action;
+    }
+
+    private void Action(InputAction.CallbackContext obj)
+    {
+        mainMenuCanvas.SetActive(true);
+        gameObject.SetActive(false);
+    }
 }

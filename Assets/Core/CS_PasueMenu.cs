@@ -50,5 +50,9 @@ public class PauseMenu : MonoBehaviour
     public void OnExit() => GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
 
     // Restart level button
-    public void OnRestart() => SceneMng.Reload();
+    public void OnRestart()
+    {
+        SceneMng.Reload();
+        OnContinue();
+    }
 }

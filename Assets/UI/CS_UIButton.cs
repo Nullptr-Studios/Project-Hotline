@@ -40,8 +40,11 @@ public class UIButton : MonoBehaviour
     public void OnMouseOver()
     {
         if (_disableMouse || ignoreMouse) return;
+
+        UIButtonController controller = transform.parent.GetComponent<UIButtonController>();
         
-        transform.parent.GetComponent<UIButtonController>().SetFocusByMouse(ID);
+        if(controller)
+            controller.SetFocusByMouse(ID);
         _disableMouse = true;
     }
 
