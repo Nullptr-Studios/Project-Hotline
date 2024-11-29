@@ -97,7 +97,9 @@ public class UISlider : MonoBehaviour
         }
         
         MaxIndex = Buttons.Count;
-        CurrentFocus = -1;
+        CurrentFocus = 0;
+        
+        SetFocusmine();
         
         _input = new PlayerIA();
         _input.UI.Select.performed += Select;
