@@ -46,7 +46,10 @@ public class Corpse : MonoBehaviour
             {
                 Destroy(_rb);
                 //Destroy(_collider2D);
-                Destroy(this);
+                if(SceneMng.babyMode)
+                    Destroy(gameObject);
+                else
+                    Destroy(this);
             }
             else
             {

@@ -59,6 +59,7 @@ public class CivilianDamageable : Damageable
     public override void OnDead()
     {
         //@TODO: Change to civilian corpse
+        
         GameObject Corpse = ResourceManager.GetCivilianCorpsePool().Get();
         Corpse.transform.position = transform.position;
         Corpse.tag = "CivilianCorpse";
@@ -140,6 +141,10 @@ public class CivilianDamageable : Damageable
     /// <param name="weaponType">The type of weapon used.</param>
     public override void DoDamage(float amount, Vector3 shootDir, Vector3 hitPoint, EWeaponType weaponType)
     {
+        
+        if(SceneMng.babyMode)
+            return;
+        
         _lastShootDir = shootDir;
         base.DoDamage(amount);
 

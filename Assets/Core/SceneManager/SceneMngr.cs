@@ -23,7 +23,7 @@ public class SceneMng : MonoBehaviour
 
     private static string _checkpointActiveScene;
     private static List<string> _checkpointScenes;
-    private static SceneData _sceneData;
+    public static SceneData _sceneData;
     private static Dictionary<string, bool> loadedScene;
     private static Dictionary<string, bool> alreadyVisited;
     private static Vector2 _restartPos;
@@ -36,13 +36,15 @@ public class SceneMng : MonoBehaviour
     private static string _currentActiveScene;
     private static string _lastActiveScene;
     
+    public static bool babyMode = true;
     
     public static EDifficulty CurrentDifficulty = EDifficulty.Impossible;
 
     void Awake()
     {
         //load difficulty only once and make enemies read this cached value
-        //CurrentDifficulty = DataSerializer.Load<EDifficulty>(SaveKeywords.Difficulty);
+        CurrentDifficulty = DataSerializer.Load<EDifficulty>(SaveKeywords.Difficulty);
+        //babyMode = DataSerializer.Load<bool>(SaveKeywords.BabyMode);
         
         _checkpointIndex = 0;
         _currentActiveScene = "";
@@ -82,11 +84,33 @@ public class SceneMng : MonoBehaviour
                     _currentActiveScene = scene.sceneObject;
                     _lastActiveScene = _currentActiveScene;
                     ActiveSceneCameraVars = scene.cameraBehaviour;
-                    if (!string.IsNullOrEmpty(scene.EnemyScene))
-                        LoadScenePrivateAsync(scene.EnemyScene);
+                    /*if (!string.IsNullOrEmpty(scene.EnemyScene))
+                        LoadScenePrivateAsync(scene.EnemyScene);*/
                 }
             }
         }
+
+        LoadingScreen.OnFinalizedLoading += LoadFinalized;
+
+    }
+
+    
+    //TODO: Bind this
+    private void StartScene()
+    {
+        foreach (var s in SceneData.sceneObjects)
+        {
+            if (s.isInitialyActive)
+            {
+                if (!string.IsNullOrEmpty(s.EnemyScene))
+                    LoadScenePrivateAsync(s.EnemyScene);
+            }
+        }
+    }
+
+    private void LoadFinalized()
+    {
+        _player.SetActive(true);
     }
 
     private void Start()
@@ -95,6 +119,9 @@ public class SceneMng : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _restartPos = _player.transform.position;
         _playerHealth = _player.GetComponent<PlayerHealth>();
+        
+        //wait until the level is loaded
+        _player.SetActive(false);
     }
 
     private void OnDestroy()

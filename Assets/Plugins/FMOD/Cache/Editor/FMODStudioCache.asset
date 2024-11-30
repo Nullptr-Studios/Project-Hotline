@@ -204,10 +204,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638676464502434817
+  lastModified: 638685914237528251
   FileSizes:
   - Name: Desktop
-    Value: 1574
+    Value: 1660
   Exists: 1
 --- !u!114 &-2759376672584020181
 MonoBehaviour:
@@ -231,6 +231,33 @@ MonoBehaviour:
   - {fileID: 3825408704557764427}
   IsStream: 0
   Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2205312882532581306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Typewriter2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Typewriter2
+  Guid:
+    Data1: -241067926
+    Data2: 1276989152
+    Data3: -1755754092
+    Data4: -1311408732
+  Banks:
+  - {fileID: 3825408704557764427}
+  IsStream: 0
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -290,6 +317,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1132793839439312350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Typewriter
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Typewriter
+  Guid:
+    Data1: 143836721
+    Data2: 1247696686
+    Data3: -1491923540
+    Data4: 1884520203
+  Banks:
+  - {fileID: 3825408704557764427}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,12 +378,14 @@ MonoBehaviour:
   - {fileID: -3054252297864720662}
   - {fileID: 8278775530768000686}
   - {fileID: -7058086509047676219}
+  - {fileID: -1132793839439312350}
+  - {fileID: -2205312882532581306}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7001593021806771270}
   StringsBanks:
   - {fileID: -2768057446997512794}
-  cacheTime: 638676464503077925
+  cacheTime: 638685914237940930
   cacheVersion: 131620
 --- !u!114 &463882774227128545
 MonoBehaviour:
@@ -427,10 +483,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638676464503077925
+  lastModified: 638685914237940930
   FileSizes:
   - Name: Desktop
-    Value: 164864
+    Value: 178112
   Exists: 1
 --- !u!114 &5546247952361945997
 MonoBehaviour:
@@ -474,7 +530,7 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638676464502429808
+  lastModified: 638685914237518218
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -548,7 +604,7 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638676464503057130
+  lastModified: 638685910319032463
   FileSizes:
   - Name: Desktop
     Value: 13943136

@@ -69,9 +69,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Power formula is calculated sign * (x * factor/100) ^ pow. Log formula is
     calculated Log{100pow} (sign * x + 100pow)
-  killXP: 99
-  killCivilianXP: 0
-  deathXP: 51
+  killXP: 100
+  killCivilianXP: 50
+  deathXP: 25
   timeThreshold: {x: 0, y: 900}
   minFormula:
     type: 0

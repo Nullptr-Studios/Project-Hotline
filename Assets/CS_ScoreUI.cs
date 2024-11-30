@@ -53,7 +53,6 @@ public class ScoreUI : MonoBehaviour
 
     private void OnEnable()
     {
-        // TODO: Disable player input
         _score = ScoreManager.CalculateScore();
         scoreObject.SetActive(false);
         killsObject.SetActive(false);

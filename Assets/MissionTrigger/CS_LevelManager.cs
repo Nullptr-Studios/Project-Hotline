@@ -67,8 +67,18 @@ public class LevelManager : MonoBehaviour
     public void EndLevelMessage() {
         VariableRepo.Instance.RemoveAll();
         Destroy(GetComponent<ScoreManager>());
-        SceneManager.LoadScene("MainMenu");
-    } // TODO: This should call the loading screen
+        
+        GameObject.Find("ScreenLevelTransition").GetComponent<Animator>().SetTrigger("In");
+        
+        Invoke(nameof(LoadNextScene), 1f);
+        
+        //SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadNextScene()
+    {
+        //TODO: Load next scene
+    }
 
     /// <summary>
     /// Make the player restart the current level

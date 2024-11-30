@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using CC.MessagingCentre;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,10 @@ public class ActPopup : MonoBehaviour
     [SerializeField] private bool openConversationOnClose;
     [SerializeField] private int conversationId;
     
+    [Header("Sound")]
+    public EventReference typeWriterSound;
+    public EventReference typeWriterSound2;
+    
     void Start()
     {
         dateText.text = "";
@@ -27,6 +32,7 @@ public class ActPopup : MonoBehaviour
         for (var i = 0; i < date.Length; i++)
         {
             dateText.text = date.Substring(0, i+1);
+            FMODUnity.RuntimeManager.PlayOneShot(typeWriterSound2, transform.position);
             yield return new WaitForSeconds(dateSpeed/date.Length);
         }
     }
@@ -36,6 +42,8 @@ public class ActPopup : MonoBehaviour
         for (var i = 0; i < title.Length; i++)
         {
             titleText[Index].text = title.Substring(0, i+1);
+            if(Index == 0)
+                FMODUnity.RuntimeManager.PlayOneShot(typeWriterSound, transform.position);
             yield return new WaitForSeconds(titleSpeed/title.Length);
         }
     }

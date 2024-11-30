@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    private static int _playerKills;
-    private static int _playerCivilianKills;
-    private static int _playerDeaths;
+    public static int _playerKills;
+    public static int _playerCivilianKills;
+    public static int _playerDeaths;
 
     public static float _killXP = 100f;
     public static float _killCivilianXP = 100f;
@@ -19,10 +19,13 @@ public class ScoreManager : MonoBehaviour
                                            "Log formula is calculated Log{100pow} (sign * x + 100pow)";
     
     private static int _playerKillsInCheckpoint = 0;
+    
+    public delegate void addedScore();
+    public static addedScore AddedScoreDelegate;
 
     [Header("Values")]
-    [SerializeField] private float killXP;
-    [SerializeField] private float killCivilianXP;
+    [SerializeField] private float killXP = 100;
+    [SerializeField] private float killCivilianXP = 50;
     [SerializeField] private float deathXP;
     
     [Header("Timer")] 
@@ -63,6 +66,7 @@ public class ScoreManager : MonoBehaviour
     public static void AddCivilianKill()
     {
         _playerCivilianKills++;
+        AddedScoreDelegate?.Invoke();
     }
 
     public static void Checkpoint()
@@ -73,11 +77,13 @@ public class ScoreManager : MonoBehaviour
     public static void Restart()
     {
         _playerKills = _playerKillsInCheckpoint;
+        AddedScoreDelegate?.Invoke();
     }
 
     public static void AddKill()
     {
         _playerKills++;
+        AddedScoreDelegate?.Invoke();
     }
 
     public static void AddDeath()
