@@ -77,7 +77,8 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextScene()
     {
-        //TODO: Load next scene
+        //TODO: Add Mercy check!!!!!!!!!!
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     /// <summary>

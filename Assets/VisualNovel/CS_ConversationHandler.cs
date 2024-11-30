@@ -29,10 +29,21 @@ public class ConversationHandler : MonoBehaviour
             _conversations.Add(cnv.name);
         }
         
-        if (startOnBegin)
+        //This is removed in order to start the conversation from the loading screen
+        /*if (startOnBegin)
         {
             StartVNConversation(0);
-        }
+        }*/
+        
+        LoadingScreen.OnFinalizedLoading += () =>
+        {
+            if(_conversations.Count > 0)
+                StartVNConversation(0);
+            else
+            {
+                GameObject.Find("PA_Dialog").GetComponent<NovelUIController>().Close();
+            }
+        };
     }
 
     // private void Update()

@@ -25,9 +25,16 @@ public class LoadingScreen : MonoBehaviour
     
     private bool finished = false;
     
+    public GameObject activate;
+    
     
     private bool hasUnderscore = true;
-    
+
+    private void Awake()
+    {
+        activate.SetActive(true);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -42,7 +42,7 @@ public class ScoreManager : MonoBehaviour
         _playerCivilianKills = 0;
         _playerDeaths = 0;
         // Sets timer when scene begins
-        _startTime = Time.time;
+        //_startTime = Time.time;
     }
 
     public void Start()
@@ -61,6 +61,11 @@ public class ScoreManager : MonoBehaviour
         _maxFormula.xOffset = _maxTime;
         
         _playerKills = 0;
+        
+        NovelUIController.OnStartGame += () =>
+        {
+            _startTime = Time.time;
+        };
     }
 
     public static void AddCivilianKill()

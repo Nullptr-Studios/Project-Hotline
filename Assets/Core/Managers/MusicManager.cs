@@ -18,6 +18,12 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         _gameMusicInstance = FMODUnity.RuntimeManager.CreateInstance(sceneMusic);
+        
+        NovelUIController.OnStartGame += Startscene;
+    }
+
+    private void Startscene()
+    {
         _gameMusicInstance.start();
     }
 

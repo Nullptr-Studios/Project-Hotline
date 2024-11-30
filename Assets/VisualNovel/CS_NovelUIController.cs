@@ -34,6 +34,12 @@ public class NovelUIController : BaseDialogueUIController
 
     private string _lastSpeaker = "";
 
+    public delegate void StartGame();
+    public static StartGame OnStartGame;
+
+    public int timesItRestarts = 0;
+    private int _restarts = 0;
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool logInput;
@@ -51,6 +57,11 @@ public class NovelUIController : BaseDialogueUIController
         
         _textSpeed = defaultTextSpeed;
         continueButton.gameObject.SetActive(false);
+        
+        //activate.SetActive(false);
+        
+        //LoadingScreen.OnFinalizedLoading += () => activate.SetActive(true);
+        
     }
     
 
@@ -167,6 +178,12 @@ public class NovelUIController : BaseDialogueUIController
         //@TODO: send delegate to start Game
         _canvas.enabled = false;
         DisableInput();
+        
+        if(_restarts == timesItRestarts)
+            OnStartGame?.Invoke();
+        else
+            _restarts++;
+
     }
 
     #region INPUT_SYSTEM

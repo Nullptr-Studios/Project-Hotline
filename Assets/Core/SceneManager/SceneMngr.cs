@@ -91,6 +91,7 @@ public class SceneMng : MonoBehaviour
         }
 
         LoadingScreen.OnFinalizedLoading += LoadFinalized;
+        NovelUIController.OnStartGame += StartScene;
 
     }
 
@@ -106,11 +107,12 @@ public class SceneMng : MonoBehaviour
                     LoadScenePrivateAsync(s.EnemyScene);
             }
         }
+        
+        _player.SetActive(true);
     }
 
     private void LoadFinalized()
     {
-        _player.SetActive(true);
     }
 
     private void Start()
