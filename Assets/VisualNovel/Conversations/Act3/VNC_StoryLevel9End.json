@@ -10,7 +10,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Blake! Holy shit… You’re alive. You disappeared on me, had me scared. Where are you right now?"
+        "What a nice ending, don’t you think, Blake? Sure would have made a good family photo. I'm sad we couldn’t squeeze a little more use out of you before you... snapped."
       ]
     },
     
@@ -24,7 +24,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Bathroom, I think. Door’s stuck, lights are dead. Who… who is this?"
+        "Why... what do you mean by that?"
       ]
     },
     
@@ -38,7 +38,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Wait, you don’t recognize me? Maybe you hit your head or something. Had me worried sick, kid."
+        "Hang up then. Problem solved. You don’t have to hear my voice ever again."
       ]
     },
     
@@ -52,7 +52,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Sorry, I don’t know where I’ve been. I don’t remember anything… not even you."
+        "Oh, come on. You know exactly what I mean. You think this was all some accident? Some tragic story of a broken hitman losing their grip? You were useful until you weren’t. And now, well... here we are."
       ]
     },
     
@@ -66,7 +66,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Ah, memory can be fickle. Don’t sweat it. Let’s just say I’m an old friend—the one who bails you out."
+        "That's... okay. I never want to see you again."
       ]
     },
     
@@ -80,7 +80,9 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "So… we’re friends? It’s all static, like I’ve been wiped clean or something."
+        "Good. Makes this a hell of a lot easier.",
+        "You know, I actually thought you might reach the stars one day. Sad story. You had potential—real fucking potential. But there was one thing you lacked: courage."
+
       ]
     },
     
@@ -94,13 +96,12 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "It’s been a rough road, but don’t force it. Just trust me—you’ve done that before."
+        "No one should be good at this. No one should want this."
       ]
     },
     
     {
       "id": 8,
-      "nextId": 9,
       "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
@@ -108,76 +109,29 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Yeah… If you say so."
-      ]
-    },
-    
-    {
-      "id": 9,
-      "nextId": 10,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Delta",
-      "characterSpritesName": "Delta",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Stay put. I’ll get someone to check on you. Don’t wander off."
-      ]
-    },
-    
-    {
-      "id": 10,
-      "nextId": 11,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Blake",
-      "characterSpritesName": "Blake",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Like I can go anywhere… Door’s locked from the outside."
-      ]
-    },
-    
-    {
-      "id": 11,
-      "nextId": 12,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Delta",
-      "characterSpritesName": "Delta",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Locked? Maybe it’s jammed. Sit tight—you’re safe, Blake. That’s what matters."
-      ]
-    },
-    
-    {
-      "id": 12,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Blake",
-      "characterSpritesName": "Blake",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Safe… from what? Delta… How did we even meet?",
-        "<action=actPopup> <action=endConversation> "
+        "Maybe you’re right. Maybe we’re all fucking insane. But at least I’m not a coward. At least I’ve made my peace with it.",
+        "You couldn’t even keep it together long enough to be useful. You cracked, and you broke. You disgust me.",
+        "<action=doorNoise> You were so fucking pathetic you couldn't even kill yourself.",
+        "<action=openCredits> <action=endConversation> "
       ]
     }
   ],
   "actions":
   [
-    // Act popup action
+    // Opening the door noise
     {
-      "name": "actPopup",
+      "name": "doorNoise",
       "type": "sendMessage",
       "target": "PA_LevelManager",
-      "message": "OpenActPopup"
+      "message": "DoorNoise"
     },
-
+    // Act popup action
+    {
+      "name": "openCredits",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "OpenCredits"
+    },
     // Stop the conversation
     {
       "name": "endConversation",

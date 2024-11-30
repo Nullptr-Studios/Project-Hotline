@@ -28,6 +28,7 @@
     {
       "id": 2,
       "nextId": 4,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
@@ -42,6 +43,7 @@
     {
       "id": 3,
       "nextId": 4,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
@@ -56,6 +58,7 @@
     {
       "id": 4,
       "nextId": 6,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Santoro",
       "characterSpritesName": "Santoro",
       "startingSprite": "Default",
@@ -79,18 +82,21 @@
     
     {
       "id": 6,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Blake",
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
       "theme": "VNT_Default",
       "sentences":
       [
-        "Then they’ll learn the consequences of fucking around. Nothing personal."
+        "Then they’ll learn the consequences of fucking around. Nothing personal.",
+        "<action=santoroFigth> <action=endConversation> "
       ]
     },
     
     {
       "id": 7,
+      "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
@@ -98,7 +104,7 @@
       "sentences":
       [
         "Orders or not, you still made a choice. And this is where it got you.",
-        "<action=santoroFigth><action=endConversation>"
+        "<action=santoroFigth> <action=endConversation> "
       ]
     }
   ],

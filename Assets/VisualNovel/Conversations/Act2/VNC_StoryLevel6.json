@@ -1,5 +1,5 @@
 {
-  "conversation": 
+  "conversation":
   [
     {
       "id": 1,
@@ -10,10 +10,10 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "So… that was the first time we talked, huh? Guess that makes you my boss then. Talking with a mafia boss… weird."
+        "What were the weapons for, Delta? Who died because I went to get that fucking box?"
       ]
     },
-    
+
     {
       "id": 2,
       "nextId": 3,
@@ -24,10 +24,10 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Boss? Nah. Not really my style. We’re more like… rats in a maze, you know? I’d been there longer, taking care of the new kid. Just had to make sure we were okay."
+        "Oh, now is when you care about it, huh? You never asked before. Not once."
       ]
     },
-    
+
     {
       "id": 3,
       "nextId": 4,
@@ -38,11 +38,10 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "So… you weren’t the one in charge. Just some guy in the mix.",
-        "And… my family? Do they even know I’m still breathing?"
+        "I’m asking now. Answer me."
       ]
     },
-    
+
     {
       "id": 4,
       "nextId": 5,
@@ -53,12 +52,10 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Your family… That was something you didn’t talk about much.", 
-        "By the time we crossed paths, you… you didn’t have anyone left.",
-        "Music career was gone, people you thought were friends… weren’t. We met at your lowest, Blake."
+        "Why the hell would I know? I’m not the mastermind behind every goddamn thing. I did my job. You should’ve done yours."
       ]
     },
-    
+
     {
       "id": 5,
       "nextId": 6,
@@ -69,12 +66,10 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Right. So I was just… drifting. And you were there. Guess I owe you for sticking around when no one else did. ", 
-        "Thanks, I guess.",
-        "So… after that? What was next? Our first “mission” together?"
+        "And why do you do it, then?"
       ]
     },
-    
+
     {
       "id": 6,
       "nextId": 7,
@@ -85,11 +80,10 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Dogs only get trained once, kid. You didn’t need a partner after that. I set you loose, and you picked it up quick. Real quick.",
-        "You debuted solo not long after, near Glenwood Park."
+        "Protection."
       ]
     },
-    
+
     {
       "id": 7,
       "nextId": 8,
@@ -100,10 +94,10 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Glenwood Park… I remember something. It was… messy, right?"
+        "Protection against what?"
       ]
     },
-    
+
     {
       "id": 8,
       "nextId": 9,
@@ -114,10 +108,10 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Messy is one word for it. You went in like a hurricane, barely left a trace of them. Just you, the shadows, and… that package of crack you were after."
+        "For my daughter. Not like the people who come in for cocaine, heroin, and don’t give a damn about the aftermath."
       ]
     },
-    
+
     {
       "id": 9,
       "nextId": 10,
@@ -128,10 +122,10 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Crack... right. And that was it, huh? Just... another job."
+        "Fuck you, Delta. Don’t give me that bullshit. You’ve been at this too long to still be playing the family man card."
       ]
     },
-    
+
     {
       "id": 10,
       "nextId": 11,
@@ -142,10 +136,13 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "It was… never just another job, Blake. Not for you. You had something to prove back then. You had… you had something driving you that even I didn’t ask about."
+        "Killing isn’t really my thing. It’s inevitable. But if you don’t get pleasure from it, you can still tell yourself you're human, still pretend you're decent.",
+        "The real problem starts when it’s not just a job anymore. When you crave it. When you pull the trigger, not because you have to, but because you want to. You get what I’m saying, Blake?",
+        "You were perfect—too good. You followed orders, made clean kills. But then you slipped, just once. Westgate. Jacob Geller. You remember what happened?"
+
       ]
     },
-    
+
     {
       "id": 11,
       "nextId": 12,
@@ -156,13 +153,12 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Maybe I just wanted something to numb the silence."
+        "I remember the job. I was told to bring him in for interrogation. That was it."
       ]
     },
-    
+
     {
       "id": 12,
-      "nextId": 13,
       "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
@@ -170,48 +166,13 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "We all have our reasons, kid. You were… hungry for something. Glenwood was just the beginning. You’ve made a reputation out there since."
-      ]
-    },
-    
-    {
-      "id": 13,
-      "nextId": 14,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Blake",
-      "characterSpritesName": "Blake",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "And now… I’m here. In a locked bathroom, with no idea what happened. Doesn’t feel like much of a reputation."
-      ]
-    },
-    
-    {
-      "id": 14,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Delta",
-      "characterSpritesName": "Delta",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Reputation isn’t everything. Sometimes it’s more about the stories they don’t know. Stories that are buried, or… better left buried. Don’t overthink it. Just sit tight, okay?",
-        "<action=actPopup> <action=endConversation>"
+        "Oh, is that all you remember? You weren’t supposed to kill him. We needed him alive. But you couldn’t help yourself, could you?",
+        "<action=endConversation> "
       ]
     }
   ],
   "actions":
   [
-    // Act popup action
-    {
-      "name": "actPopup",
-      "type": "sendMessage",
-      "target": "PA_LevelManager",
-      "message": "OpenActPopup"
-    },
-    
     // Stop the conversation
     {
       "name": "endConversation",

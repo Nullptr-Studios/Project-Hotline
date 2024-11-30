@@ -1,0 +1,75 @@
+{
+  "conversation": 
+  [
+    {
+      "id": 1,
+      "nextId": 2,
+      "speakersName": "Man",
+      "characterSpritesName": "Civilian",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Please let us go, we haven’t done anything. We... we don’t even know who you are!"
+      ]
+    },
+    
+    {
+      "id": 2,
+      "nextId": 3,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "You haven’t done anything? That’s the beauty of it. It could have been anyone, but here you are. Wrong place, wrong fucking time.",
+        "Blood... The world is too quiet without it. Too still. Walls need to be painted red. It’s the only thing that makes sense anymore."
+      ]
+    },
+    
+    {
+      "id": 3,
+      "nextId": 4,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Man",
+      "characterSpritesName": "Civilian",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Please, we will do anything... anything you want. Just let the kids go. They’re innocent, please!"
+      ]
+    },
+    
+    {
+      "id": 4,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Innocent? There’s no such thing. We’re all rotten inside. Every single one of us. And tonight... you get to be the proof.",
+        "<action=openKillScreen> <action=endConversation> "
+      ]
+    }
+  ],
+  "actions":
+  [
+    // Kill screen
+    {
+      "name": "openKillScreen",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "KillScreen"
+    },
+    // End conversation
+    {
+      "name": "endConversation",
+      "type": "close conversation"
+    }
+  ]
+}

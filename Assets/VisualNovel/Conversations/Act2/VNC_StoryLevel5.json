@@ -10,7 +10,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Blake! Holy shit… You’re alive. You disappeared on me, had me scared. Where are you right now?"
+        "You know, I never wanted it to come to this. Us, at each other’s throats... It was never supposed to be this way. We were supposed to be on the same side, Blake."
       ]
     },
     
@@ -24,7 +24,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Bathroom, I think. Door’s stuck, lights are dead. Who… who is this?"
+        "I’m starting to think we never were on the same side. Maybe I was just too blind to notice."
       ]
     },
     
@@ -38,7 +38,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Wait, you don’t recognize me? Maybe you hit your head or something. Had me worried sick, kid."
+        "Hang up then. Problem solved. You don’t have to hear my voice ever again."
       ]
     },
     
@@ -52,7 +52,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Sorry, I don’t know where I’ve been. I don’t remember anything… not even you."
+        "Not until I get some answers. I’ve been sitting in this shithole long enough to realize I don’t even know what’s real anymore. Every memory feels like it’s been tampered with, twisted."
       ]
     },
     
@@ -66,7 +66,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Ah, memory can be fickle. Don’t sweat it. Let’s just say I’m an old friend—the one who bails you out."
+        "Why the hell would I lie to you now? It doesn’t make any sense. I’ve got nothing to gain from it."
       ]
     },
     
@@ -80,7 +80,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "So… we’re friends? It’s all static, like I’ve been wiped clean or something."
+        "Yeah, but maybe it’s not about what you gain anymore. You’ve played this game for so long, I wouldn’t even be surprised if you still have something planned."
       ]
     },
     
@@ -94,7 +94,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "It’s been a rough road, but don’t force it. Just trust me—you’ve done that before."
+        "I’m driving there. Shouldn’t be much longer. No lights still?"
       ]
     },
     
@@ -108,7 +108,8 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Yeah… If you say so."
+        "No. Still pitch dark. How ironic.",
+        "Who were the next ones we killed?"
       ]
     },
     
@@ -122,7 +123,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Stay put. I’ll get someone to check on you. Don’t wander off."
+        "It was the container yard job. We had to retrieve a stash of weapons."
       ]
     },
     
@@ -136,13 +137,12 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Like I can go anywhere… Door’s locked from the outside."
+        "The one near the interstate, right? Funny. It wasn’t nearly as empty as you told me it would be. Lots of guards. I remember the noise—gunfire, shouting. It was chaos."
       ]
     },
     
     {
       "id": 11,
-      "nextId": 12,
       "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
@@ -150,34 +150,13 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Locked? Maybe it’s jammed. Sit tight—you’re safe, Blake. That’s what matters."
-      ]
-    },
-    
-    {
-      "id": 12,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Blake",
-      "characterSpritesName": "Blake",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Safe… from what? Delta… How did we even meet?",
-        "<action=actPopup> <action=endConversation> "
+        "We adapted. You adapted. That’s what made you special. You could handle it. Most people would’ve run, but not you. You stayed and finished the job.",
+        "<action=endConversation> "
       ]
     }
   ],
   "actions":
   [
-    // Act popup action
-    {
-      "name": "actPopup",
-      "type": "sendMessage",
-      "target": "PA_LevelManager",
-      "message": "OpenActPopup"
-    },
-
     // Stop the conversation
     {
       "name": "endConversation",

@@ -1,0 +1,132 @@
+{
+  "conversation": 
+  [
+    {
+      "id": 1,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Alright, listen up. Fourth floor. Search for the briefcase, black, locked, no markings. Get it and head out. We need it for next week.",
+        "This is serious, Blake. If you fuck it up, we’re done. Got it?"
+      ],
+      "options":
+      [
+        {
+          "nextId": 2,
+          "text": "Got it"
+        },
+        {
+          "nextId": 3,
+          "text": "Too easy"
+        },
+        {
+          "nextId": 4,
+          "text": "Kill"
+        }
+      ]
+    },
+    
+    {
+      "id": 2,
+      "nextId": 5,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Got it. In and out, no mess. Just like old times."
+      ]
+    },
+
+    {
+      "id": 3,
+      "nextId": 5,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Seems too easy to be true. Let’s hope it stays that way."
+      ]
+    },
+    
+    {
+      "id": 4,
+      "nextId": 5,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "I don’t just want the briefcase, Delta. I want to kill. Let me have some fun. You owe me that much."
+      ]
+    },
+    
+    {
+      "id": 5,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Blake, do not lose control. There’s a lot in play. We can’t afford any fuck-ups. Focus. In and out, no noise. Understand?"
+      ],
+      "options":
+      [
+        {
+          "nextId": 6,
+          "text": "OK"
+        },
+        {
+          "nextId": 7,
+          "text": "My way"
+        }
+      ]
+    },
+    
+    {
+      "id": 6,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Understood. I’ll play nice. But if anyone gets in my way… well, you know how it goes."
+      ]
+    },
+    
+    {
+      "id": 7,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "You want me focused? Then stop holding me back. Let me do it my way. If that means blood, so be it. Don’t act like you don’t know who you hired."
+      ]
+    }
+  ],
+  "actions":
+  [
+    // Stop the conversation
+    {
+      "name": "endConversation",
+      "type": "close conversation"
+    }
+  ]
+}

@@ -10,7 +10,8 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Blake! Holy shit… You’re alive. You disappeared on me, had me scared. Where are you right now?"
+        "This was the real you. You started losing it, Blake—gradually, then all at once. You became distant, crying yourself to sleep, overdosing, cutting yourself.",
+        "You disappeared, and in your place... you became something else."
       ]
     },
     
@@ -24,7 +25,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Bathroom, I think. Door’s stuck, lights are dead. Who… who is this?"
+        "Why didn’t you stop me before it got this far?"
       ]
     },
     
@@ -38,7 +39,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Wait, you don’t recognize me? Maybe you hit your head or something. Had me worried sick, kid."
+        "As if I didn’t try? I didn’t want to lose a reliable tool. I didn’t want you spiraling. But I had no choice—either control you, turn it into something useful or having to get rid of you."
       ]
     },
     
@@ -52,7 +53,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Sorry, I don’t know where I’ve been. I don’t remember anything… not even you."
+        "Get rid of me? Is that what this is about?"
       ]
     },
     
@@ -66,7 +67,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Ah, memory can be fickle. Don’t sweat it. Let’s just say I’m an old friend—the one who bails you out."
+        "Fuck. Look, I was given two options: stop you from losing your mind, or turn you into something useful. I never wanted to see you like this."
       ]
     },
     
@@ -80,7 +81,8 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "So… we’re friends? It’s all static, like I’ve been wiped clean or something."
+        "Oh, really? You didn’t want this? You used me! And when I broke, it was suddenly a problem. You don’t know what it was like.",
+        "The voices... telling me to kill... to kill myself... they never stopped. I was drowning."
       ]
     },
     
@@ -94,7 +96,8 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "It’s been a rough road, but don’t force it. Just trust me—you’ve done that before."
+        "I never wanted this, Blake. But we’re here now. You became unpredictable, dangerous.",
+        "Last time I saw you, we were on a mission, and you finally snapped. You needed to go to the gang hideout that was fucking with us from the beginning."
       ]
     },
     
@@ -108,13 +111,12 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Yeah… If you say so."
+        "Because you needed someone to clean up your mess. A monster to kill everything in sight."
       ]
     },
     
     {
       "id": 9,
-      "nextId": 10,
       "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
@@ -122,66 +124,9 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Stay put. I’ll get someone to check on you. Don’t wander off."
+        "You completed the mission. Cleared the hideout, killed everyone without hesitation. And when it was over, your usefulness ended.",
+        "The monster was no longer needed, and the curtains of the stage were starting to close."
       ]
-    },
-    
-    {
-      "id": 10,
-      "nextId": 11,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Blake",
-      "characterSpritesName": "Blake",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Like I can go anywhere… Door’s locked from the outside."
-      ]
-    },
-    
-    {
-      "id": 11,
-      "nextId": 12,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Delta",
-      "characterSpritesName": "Delta",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Locked? Maybe it’s jammed. Sit tight—you’re safe, Blake. That’s what matters."
-      ]
-    },
-    
-    {
-      "id": 12,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Blake",
-      "characterSpritesName": "Blake",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Safe… from what? Delta… How did we even meet?",
-        "<action=actPopup> <action=endConversation> "
-      ]
-    }
-  ],
-  "actions":
-  [
-    // Act popup action
-    {
-      "name": "actPopup",
-      "type": "sendMessage",
-      "target": "PA_LevelManager",
-      "message": "OpenActPopup"
-    },
-
-    // Stop the conversation
-    {
-      "name": "endConversation",
-      "type": "close conversation"
     }
   ]
 }
