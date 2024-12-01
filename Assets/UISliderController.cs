@@ -36,7 +36,8 @@ public class UISliderController : MonoBehaviour
         }
         
         MaxIndex = Sliders.Count;
-        CurrentFocus = -1;
+        CurrentFocus = 0;
+        SetFocus();
     }
     
     protected void SetFocus()

@@ -44,7 +44,7 @@ public class SceneMng : MonoBehaviour
     {
         //load difficulty only once and make enemies read this cached value
         CurrentDifficulty = DataSerializer.Load<EDifficulty>(SaveKeywords.Difficulty);
-        //babyMode = DataSerializer.Load<bool>(SaveKeywords.BabyMode);
+        babyMode = DataSerializer.Load<bool>(SaveKeywords.BabyMode);
         
         _checkpointIndex = 0;
         _currentActiveScene = "";

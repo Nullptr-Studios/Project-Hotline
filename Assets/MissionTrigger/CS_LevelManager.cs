@@ -70,7 +70,8 @@ public class LevelManager : MonoBehaviour
         
         GameObject.Find("ScreenLevelTransition").GetComponent<Animator>().SetTrigger("In");
         
-        Invoke(nameof(LoadNextScene), 1f);
+        //Invoke(nameof(LoadNextScene), 1f);
+        LoadNextScene();
         
         //SceneManager.LoadScene("MainMenu");
     }

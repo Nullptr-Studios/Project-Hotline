@@ -40,6 +40,8 @@ public class NovelUIController : BaseDialogueUIController
     public int timesItRestarts = 0;
     private int _restarts = 0;
 
+    private bool cac = false;
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool logInput;
@@ -47,6 +49,7 @@ public class NovelUIController : BaseDialogueUIController
     
     private void Awake()
     {
+        cac = false;
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
         _animator = GetComponent<Animator>();
@@ -175,12 +178,14 @@ public class NovelUIController : BaseDialogueUIController
     public override void Close()
     {
         //@TODO: Add animation
-        //@TODO: send delegate to start Game
         _canvas.enabled = false;
         DisableInput();
-        
-        if(_restarts == timesItRestarts)
+
+        if (_restarts == timesItRestarts & !cac)
+        {
             OnStartGame?.Invoke();
+            cac = true;
+        }
         else
             _restarts++;
 

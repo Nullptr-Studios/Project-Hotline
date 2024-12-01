@@ -10,10 +10,13 @@ public class PC : MonoBehaviour
     
     private SpriteRenderer _spriteRenderer;
     private PlayerIA _input;
+
+    private bool cac2;
     
     // Start is called before the first frame update
     void Awake()
     {
+        cac2 = false;
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _input = new PlayerIA();
@@ -35,7 +38,11 @@ public class PC : MonoBehaviour
 
     private void Accept()
     {
-        _animator.SetTrigger("Insert");
-        Invoke("cac", 1);
+        if (!cac2)
+        {
+            _animator.SetTrigger("Insert");
+            Invoke("cac", 2);
+            cac2 = true;
+        }
     }
 }
