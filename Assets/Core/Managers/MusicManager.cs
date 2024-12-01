@@ -22,6 +22,11 @@ public class MusicManager : MonoBehaviour
         NovelUIController.OnStartGame += Startscene;
     }
 
+    private void OnDestroy()
+    {
+        NovelUIController.OnStartGame -= Startscene;
+    }
+
     private void Startscene()
     {
         _gameMusicInstance.start();

@@ -109,6 +109,8 @@ public class SceneMng : MonoBehaviour
         }
         
         _player.SetActive(true);
+        
+        _animatorFade.SetTrigger("Out");
     }
 
     private void LoadFinalized()

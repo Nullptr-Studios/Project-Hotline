@@ -24,12 +24,15 @@ MonoBehaviour:
   - waypointPos: {x: 14.5, y: 10.5}
     letItRotate: 0
     wait: 1.1
-  - waypointPos: {x: 13, y: 12}
+  - waypointPos: {x: 15.4, y: 12}
     letItRotate: 1
     wait: 0.7
   idleSpeed: 2.5
   chasingSpeed: 8
   distanceToShoot: 10
   timeToStartShooting: 0.6
+  timeToStartShootingMedium: 0.8
+  timeToStartShootingHard: 0.7
+  timeToStartShootingImpossible: 0.5
   meleeDistance: 3
   searchTimes: 3
