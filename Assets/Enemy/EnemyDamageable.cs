@@ -221,4 +221,11 @@ public class EnemyDamageable : Damageable
         BManager.transform.position = hitPoint;
         BManager.transform.right = shootDir;
     }
+    
+    /// <summary>
+    /// Sets current enemy health to given amount
+    /// Used for bossfights
+    /// </summary>
+    /// <param name="amount">Health to set the enemy to</param>
+    public void UpdateHealth(int amount) => _currentHealth = amount;
 }

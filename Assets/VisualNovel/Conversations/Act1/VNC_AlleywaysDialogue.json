@@ -3,7 +3,6 @@
   [
     {
       "id": 1,
-      "canBeUsedAsStartingPoint": true,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
@@ -11,16 +10,8 @@
       "sentences":
       [
         "Alright, kid, listen up. Easy task for you tonight. You go in, pick up our stuff, and you get the fuck out. You hear me?", 
-        "DON’T FUCK THIS UP. You know how it goes—one mistake, and we’re both dead.<wait=1> We’ll talk when you finish. <action=endConversation>"
+        "DON’T FUCK THIS UP. You know how it goes—one mistake, and we’re both dead. We’ll talk when you finish."
       ]
-    }
-  ],
-  "actions":
-  [
-    // Stop the conversation
-    {
-      "name": "endConversation",
-      "type": "close conversation"
     }
   ]
 } 

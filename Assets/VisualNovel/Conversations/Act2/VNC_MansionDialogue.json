@@ -1,0 +1,112 @@
+{
+  "conversation": 
+  [
+    {
+      "id": 1,
+      "nextId": 2,
+      "speakersName": "Jacob",
+      "characterSpritesName": "Jacob",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "So... You’re the one they sent to finish the job. Some washed-up junkie with a gun. Figures."
+      ]
+    },
+    
+    {
+      "id": 2,
+      "nextId": 3,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "You’re coming with me. Alive."
+      ]
+    },
+    
+    {
+      "id": 3,
+      "nextId": 4,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Jacob",
+      "characterSpritesName": "Jacob",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Alive? Sure. That’s why your hand keeps twitching near the gun."
+      ]
+    },
+    
+    {
+      "id": 4,
+      "nextId": 5,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Don’t push me."
+      ]
+    },
+    
+    {
+      "id": 5,
+      "nextId": 6,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Jacob",
+      "characterSpritesName": "Jacob",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "You’re already pushed. Look at you. A wreck with a weapon.",
+        "You don’t have to do this."
+      ]
+    },
+    
+    {
+      "id": 6,
+      "nextId": 7,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "I… I don’t have a choice."
+      ]
+    },
+    
+    {
+      "id": 7,
+      "nextId": 8,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Jacob",
+      "characterSpritesName": "Jacob",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "You don’t have to do this. You’re not like them. You can still get out. You can still<changeSprite=Dead>—<action=glitch> </changeSprite>"
+      ]
+    }
+  ],
+  "actions":
+  [
+    // Stop the conversation
+    {
+      "name": "glitch",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "JacobGlitch"
+    }
+  ]
+}
