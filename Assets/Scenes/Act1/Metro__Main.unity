@@ -4221,9 +4221,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.5841785
+    width: 0.29304445
+    height: 0.2932302
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
@@ -5154,6 +5154,30 @@ PrefabInstance:
     - target: {fileID: 4579865753492758048, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175690179811429484, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
+      propertyPath: hasDialogMusic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175690179811429484, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
+      propertyPath: sceneMusic.Path
+      value: event:/Music/OST_Level2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175690179811429484, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
+      propertyPath: sceneMusic.Guid.Data1
+      value: 443028584
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175690179811429484, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
+      propertyPath: sceneMusic.Guid.Data2
+      value: 1182763267
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175690179811429484, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
+      propertyPath: sceneMusic.Guid.Data3
+      value: -966546523
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175690179811429484, guid: 9a0af2793d64e8f45be0a89f61a71828, type: 3}
+      propertyPath: sceneMusic.Guid.Data4
+      value: -77563331
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

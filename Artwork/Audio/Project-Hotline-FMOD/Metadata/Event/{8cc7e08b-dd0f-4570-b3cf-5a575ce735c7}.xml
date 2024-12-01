@@ -241,6 +241,7 @@
 		<relationship name="effects">
 			<destination>{da2d84bb-7e69-410f-af03-407ab8dd5b5c}</destination>
 			<destination>{bd70f076-7454-4412-b063-4f5b967dbfb5}</destination>
+			<destination>{4383bf16-3996-48aa-9fb9-4327e8786d9f}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{bba9e6c2-7917-4dcc-a615-bf506146c3ad}" />
@@ -321,6 +322,14 @@
 		<relationship name="modulators">
 			<destination>{6f2cc0ce-b29d-4cd9-b261-43614bc100ad}</destination>
 			<destination>{9d4a3436-e51b-445b-a6b0-72e51843fe94}</destination>
+		</relationship>
+	</object>
+	<object class="LowpassEffect" id="{4383bf16-3996-48aa-9fb9-4327e8786d9f}">
+		<property name="cutoff">
+			<value>22000</value>
+		</property>
+		<relationship name="automators">
+			<destination>{0aeafabd-83de-4741-884c-788be82ec8da}</destination>
 		</relationship>
 	</object>
 	<object class="AutomationPoint" id="{5194611f-e358-482b-8868-1322c94374a5}">
@@ -412,6 +421,39 @@
 		</property>
 		<property name="releaseShape">
 			<value>-0.516696215</value>
+		</property>
+	</object>
+	<object class="Automator" id="{0aeafabd-83de-4741-884c-788be82ec8da}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>cutoff</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{3e6a2a6a-142c-454c-adcb-15e4db76da40}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationCurve" id="{3e6a2a6a-142c-454c-adcb-15e4db76da40}">
+		<relationship name="parameter">
+			<destination>{fe50b775-9fd7-47c2-be12-039c6e268ba7}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{82a6e1b8-b239-4da2-8223-35815e540c54}</destination>
+			<destination>{977fa3d7-b9eb-4ad8-9301-529b7eeea13b}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationPoint" id="{82a6e1b8-b239-4da2-8223-35815e540c54}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>22000</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{977fa3d7-b9eb-4ad8-9301-529b7eeea13b}">
+		<property name="position">
+			<value>1</value>
+		</property>
+		<property name="value">
+			<value>1000</value>
 		</property>
 	</object>
 </objects>

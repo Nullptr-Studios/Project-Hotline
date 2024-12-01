@@ -54,6 +54,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8066192218499662753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level6/DialogueLoop
+  m_EditorClassIdentifier: 
+  Name: DialogueLoop
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 2825365968
+    data2: 2823047046
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-7492636768044294082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +132,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6842891310773993357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level0/LowPass
+  m_EditorClassIdentifier: 
+  Name: LowPass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 968723783
+    data2: 196007190
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-6823223031897923784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +183,106 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6785373092767849800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level8/LowPass
+  m_EditorClassIdentifier: 
+  Name: LowPass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 968723783
+    data2: 196007190
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-6570375710923495892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level8/DialogueLoop
+  m_EditorClassIdentifier: 
+  Name: DialogueLoop
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 2825365968
+    data2: 2823047046
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-5242941286175489201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Level9
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Level9
+  Guid:
+    Data1: 1063910873
+    Data2: 1192169949
+    Data3: 273016494
+    Data4: 1404409030
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1748810834078917100}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 45112
+--- !u!114 &-3289606905882644820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level7/LowPass
+  m_EditorClassIdentifier: 
+  Name: LowPass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 968723783
+    data2: 196007190
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-3054252297864720662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,33 +310,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-3026006503207638377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/InGameMusic
-  m_EditorClassIdentifier: 
-  Path: event:/Music/InGameMusic
-  Guid:
-    Data1: 895259662
-    Data2: 1286989081
-    Data3: 1057358758
-    Data4: 1109300469
-  Banks:
-  - {fileID: 8599098387921538408}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-2768057446997512794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,10 +325,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638686677981323655
+  lastModified: 638686940199730516
   FileSizes:
   - Name: Desktop
-    Value: 1660
+    Value: 2064
   Exists: 1
 --- !u!114 &-2759376672584020181
 MonoBehaviour:
@@ -290,6 +411,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1554412796378187165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level1/LowPass
+  m_EditorClassIdentifier: 
+  Name: LowPass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 968723783
+    data2: 196007190
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-1197457946647231324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +489,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-425187796911319307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Level3
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Level3
+  Guid:
+    Data1: 1618737429
+    Data2: 1238100722
+    Data3: 1129270665
+    Data4: -1306278255
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3908384848421435110}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 93333
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +535,6 @@ MonoBehaviour:
   - {fileID: 8599098387921538408}
   - {fileID: 3825408704557764427}
   EditorEvents:
-  - {fileID: -3026006503207638377}
   - {fileID: 463882774227128545}
   - {fileID: -6823223031897923784}
   - {fileID: 8021051824136037857}
@@ -380,13 +552,47 @@ MonoBehaviour:
   - {fileID: -7058086509047676219}
   - {fileID: -1132793839439312350}
   - {fileID: -2205312882532581306}
+  - {fileID: 5528878002185287148}
+  - {fileID: -425187796911319307}
+  - {fileID: 2368178352825751286}
+  - {fileID: 2663124680226509172}
+  - {fileID: 3096865939723147859}
+  - {fileID: 3856452144471415094}
+  - {fileID: 7072375948972358996}
+  - {fileID: -5242941286175489201}
+  - {fileID: 964067762728019726}
+  - {fileID: 2433789944954273150}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7001593021806771270}
   StringsBanks:
   - {fileID: -2768057446997512794}
-  cacheTime: 638686677982038461
+  cacheTime: 638686940200350988
   cacheVersion: 131620
+--- !u!114 &395371838311313848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level4/LowPass
+  m_EditorClassIdentifier: 
+  Name: LowPass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 968723783
+    data2: 196007190
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &463882774227128545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,6 +620,82 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &964067762728019726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Level4
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Level4
+  Guid:
+    Data1: 1472642545
+    Data2: 1311482204
+    Data3: -13299297
+    Data4: -1001454448
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 395371838311313848}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 53333
+--- !u!114 &1463967975104528495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level1/DialogueLoop
+  m_EditorClassIdentifier: 
+  Name: DialogueLoop
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 2825365968
+    data2: 2823047046
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &1748810834078917100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level9/LowPass
+  m_EditorClassIdentifier: 
+  Name: LowPass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 968723783
+    data2: 196007190
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &2029738967692831570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +723,120 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2368178352825751286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Level0
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Level0
+  Guid:
+    Data1: 1385050937
+    Data2: 1249519900
+    Data3: -42365815
+    Data4: -428123557
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -6842891310773993357}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 45112
+--- !u!114 &2433789944954273150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Level6
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Level6
+  Guid:
+    Data1: -1939578126
+    Data2: 1191001977
+    Data3: 1883098814
+    Data4: 717682516
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8066192218499662753}
+  - {fileID: 5420804951207619007}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 105600
+--- !u!114 &2663124680226509172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Level1
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Level1
+  Guid:
+    Data1: -1976309179
+    Data2: 1121215219
+    Data3: -129527377
+    Data4: -581454868
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1463967975104528495}
+  - {fileID: -1554412796378187165}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 46917
+--- !u!114 &3096865939723147859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Level5
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Level5
+  Guid:
+    Data1: -2091143066
+    Data2: 1161244240
+    Data3: 1688143245
+    Data4: 1299994772
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5397539932845567388}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 76800
 --- !u!114 &3705263717165021681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,11 +879,163 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638686677982038461
+  lastModified: 638686758573832143
   FileSizes:
   - Name: Desktop
     Value: 178112
   Exists: 1
+--- !u!114 &3856452144471415094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Level2
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Level2
+  Guid:
+    Data1: 443028584
+    Data2: 1182763267
+    Data3: -966546523
+    Data4: -77563331
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4015805793393780792}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 105600
+--- !u!114 &3908384848421435110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level3/LowPass
+  m_EditorClassIdentifier: 
+  Name: LowPass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 968723783
+    data2: 196007190
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4015805793393780792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level2/DialogueLoop
+  m_EditorClassIdentifier: 
+  Name: DialogueLoop
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 2825365968
+    data2: 2823047046
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &5397539932845567388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level5/LowPass
+  m_EditorClassIdentifier: 
+  Name: LowPass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 968723783
+    data2: 196007190
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &5420804951207619007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OST_Level6/LowPass
+  m_EditorClassIdentifier: 
+  Name: LowPass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 968723783
+    data2: 196007190
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &5528878002185287148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Level7
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Level7
+  Guid:
+    Data1: -345642479
+    Data2: 1306114685
+    Data3: -1037955138
+    Data4: 1042723719
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3289606905882644820}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 93333
 --- !u!114 &5546247952361945997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,11 +1078,40 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638686677082985839
+  lastModified: 638686940199720462
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
+--- !u!114 &7072375948972358996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Level8
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Level8
+  Guid:
+    Data1: -1933057909
+    Data2: 1165024527
+    Data3: 1465569203
+    Data4: -952768676
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -6570375710923495892}
+  - {fileID: -6785373092767849800}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 46917
 --- !u!114 &8021051824136037857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,8 +1181,8 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638686677982013318
+  lastModified: 638686940200350988
   FileSizes:
   - Name: Desktop
-    Value: 13943136
+    Value: 11267328
   Exists: 1
