@@ -1,0 +1,141 @@
+{
+  "conversation": 
+  [
+    {
+      "id": 1,
+      "nextId": 2,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "What a nice ending, don’t you think, Blake? Sure would have made a good family photo. I'm sad we couldn’t squeeze a little more use out of you before you... snapped."
+      ]
+    },
+    
+    {
+      "id": 2,
+      "nextId": 3,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Why... what do you mean by that?"
+      ]
+    },
+    
+    {
+      "id": 3,
+      "nextId": 4,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Hang up then. Problem solved. You don’t have to hear my voice ever again."
+      ]
+    },
+    
+    {
+      "id": 4,
+      "nextId": 5,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Oh, come on. You know exactly what I mean. You think this was all some accident? Some tragic story of a broken hitman losing their grip? You were useful until you weren’t. And now, well... here we are."
+      ]
+    },
+    
+    {
+      "id": 5,
+      "nextId": 6,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "That's... okay. I never want to see you again."
+      ]
+    },
+    
+    {
+      "id": 6,
+      "nextId": 7,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Good. Makes this a hell of a lot easier.",
+        "You know, I actually thought you might reach the stars one day. Sad story. You had potential—real fucking potential. But there was one thing you lacked: courage."
+
+      ]
+    },
+    
+    {
+      "id": 7,
+      "nextId": 8,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "No one should be good at this. No one should want this."
+      ]
+    },
+    
+    {
+      "id": 8,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Maybe you’re right. Maybe we’re all fucking insane. But at least I’m not a coward. At least I’ve made my peace with it.",
+        "You couldn’t even keep it together long enough to be useful. You cracked, and you broke. You disgust me.",
+        "<action=doorNoise> You were so fucking pathetic you couldn't even kill yourself.",
+        "<action=openCredits> <action=endConversation> "
+      ]
+    }
+  ],
+  "actions":
+  [
+    // Opening the door noise
+    {
+      "name": "doorNoise",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "DoorNoise"
+    },
+    // Act popup action
+    {
+      "name": "openCredits",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "OpenCredits"
+    },
+    // Stop the conversation
+    {
+      "name": "endConversation",
+      "type": "close conversation"
+    }
+  ]
+}

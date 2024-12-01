@@ -24,8 +24,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Boss? Nah. Not really my style. We’re more like… rats in a maze, you know?",
-        "I just… I’d been there longer. Taking care of the new kid. Just had to make sure you… we were okay."
+        "Boss? Nah. Not really my style. We’re more like… rats in a maze, you know? I’d been there longer, taking care of the new kid. Just had to make sure we were okay."
       ]
     },
     
@@ -171,8 +170,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "We all have our reasons, kid. Let’s just say you were… hungry for something. And that hunger was something I could respect.",
-        "Glenwood was just the beginning, though. You’ve made a reputation out there since."
+        "We all have our reasons, kid. You were… hungry for something. Glenwood was just the beginning. You’ve made a reputation out there since."
       ]
     },
     
@@ -192,7 +190,6 @@
     
     {
       "id": 14,
-      "nextId": 15,
       "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
@@ -200,65 +197,8 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Reputation isn’t everything. Sometimes it’s more about the stories they don’t know. Stories that are buried, or… that are better left buried.",
-        "Look, don’t overthink it. Just sit tight, okay?"
-      ]
-    },
-    
-    {
-      "id": 15,
-      "nextId": 16,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Blake",
-      "characterSpritesName": "Blake",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "And what if I want answers? Like… real answers. Not just… pieces of something I can barely remember."
-      ]
-    },
-    
-    {
-      "id": 16,
-      "nextId": 17,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Delta",
-      "characterSpritesName": "Delta",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "In time, Blake. Everything comes in time. Right now, focus on one thing—trusting me. That’s how you’ll get out of here."
-      ]
-    },
-    
-    {
-      "id": 17,
-      "nextId": 18,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Blake",
-      "characterSpritesName": "Blake",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Fine. I’ll... trust you. For now. It’s not like I could be doing anything else."
-      ]
-    },
-    
-    {
-      "id": 18,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Delta",
-      "characterSpritesName": "Delta",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Good. One step at a time. And remember, you’re not alone in this. I’ve got your back. Always.",
-        "<action=actPopup>.<action=endConversation>."
-        // I think this is not needed
+        "Reputation isn’t everything. Sometimes it’s more about the stories they don’t know. Stories that are buried, or… better left buried. Don’t overthink it. Just sit tight, okay?",
+        "<action=actPopup> <action=endConversation>"
       ]
     }
   ],

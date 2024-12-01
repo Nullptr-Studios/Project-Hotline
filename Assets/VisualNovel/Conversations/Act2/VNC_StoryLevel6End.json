@@ -1,0 +1,197 @@
+{
+  "conversation": 
+  [
+    {
+      "id": 1,
+      "nextId": 2,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Sure kid… he 'just' died."
+      ]
+    },
+    
+    {
+      "id": 2,
+      "nextId": 3,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "I didn’t shoot. I… We were talking. I swear, I was trying to calm him down."
+      ]
+    },
+    
+    {
+      "id": 3,
+      "nextId": 4,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Bullshit! I watched the tape. He was on his knees, begging, and you pulled the trigger. Are those the lies you’ve been telling yourself?"
+      ]
+    },
+    
+    {
+      "id": 4,
+      "nextId": 5,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "I… I don’t know. Maybe I lost control, but it wasn’t me. It couldn’t have been."
+      ]
+    },
+    
+    {
+      "id": 5,
+      "nextId": 6,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Stop fucking lying! You think you’re the victim here? Look at me, Blake. FUCKING LOOK AT ME.",
+        "You are a fucking psycho, Blake. You enjoyed every goddamn minute. The moment the gun touched your hands, you didn’t care about anything else."
+
+      ]
+    },
+    
+    {
+      "id": 6,
+      "nextId": 7,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "I… I was just trying to survive. You don’t know what it’s like."
+      ]
+    },
+    
+    {
+      "id": 7,
+      "nextId": 8,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "No, you stopped coming to me for the heroin. You found the real rush and it was cold and crimson."
+      ]
+    },
+    
+    {
+      "id": 8,
+      "nextId": 9,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "No… no, you’re lying."
+      ]
+    },
+    
+    {
+      "id": 9,
+      "nextId": 10,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Oh, it’s true. You smiled when you pulled the trigger. You fucking loved it, Blake. And then you came to me, crying about the nightmares, the voices, the fucking depression. You wanted pity?"
+      ]
+    },
+    
+    {
+      "id": 10,
+      "nextId": 11,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Stop… just stop. Please, Delta. I didn’t want this."
+      ]
+    },
+    
+    {
+      "id": 11,
+      "nextId": 12,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Sure. That’s why you kept coming back. You’d tell yourself it was the drugs, that you were just out of your mind, but you know the truth, don’t you?",
+        "Face it, Blake. You’re not some tortured artist. You’re a monster. You watched them die, you felt something, and it wasn’t fear. It was fucking euphoria."
+      ]
+    },
+    
+    {
+      "id": 12,
+      "nextId": 13,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "SHUT UP! SHUT UP! I’m not like that."
+      ]
+    },
+    
+    {
+      "id": 13,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "And then you realized the gun was too quick. You wanted it to last longer. You needed to feel it.",
+        "So stop the FUCKING BULLSHIT and start seeing things how they really happened.",
+        "<action=endConversation> "
+      ]
+    }
+  ],
+  "actions":
+  [
+    // Stop the conversation
+    {
+      "name": "endConversation",
+      "type": "close conversation"
+    }
+  ]
+}
