@@ -168,6 +168,9 @@ public class EnemyDamageable : Damageable
         _rb.gravityScale = 0;
         _rb.AddForce(dir * 200);
         
+        if(_player == null)
+            _player = GameObject.FindGameObjectWithTag("Player");
+        
         transform.up = new Vector3(transform.position.x - _player.transform.position.x, transform.position.y - _player.transform.position.y, 0).normalized;
 
         _onStun = true;
