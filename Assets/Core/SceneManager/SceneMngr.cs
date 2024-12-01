@@ -136,6 +136,8 @@ public class SceneMng : MonoBehaviour
         {
             if (loadedScene[scene.sceneObject])
                 UnloadScenePrivateAsync(scene.sceneObject);
+            if (loadedScene[scene.EnemyScene])
+                UnloadScenePrivateAsync(scene.EnemyScene);
         }
     }
 

@@ -19,6 +19,7 @@ public class ScoreManager : MonoBehaviour
                                            "Log formula is calculated Log{100pow} (sign * x + 100pow)";
     
     private static int _playerKillsInCheckpoint = 0;
+    private static int _civilianKillsInCheckpoint = 0;
     
     public delegate void addedScore();
     public static addedScore AddedScoreDelegate;
@@ -41,8 +42,19 @@ public class ScoreManager : MonoBehaviour
         _playerKills = 0;
         _playerCivilianKills = 0;
         _playerDeaths = 0;
+        _playerKillsInCheckpoint = 0;
+        _civilianKillsInCheckpoint = 0;
         // Sets timer when scene begins
         //_startTime = Time.time;
+    }
+
+    public void OnDisable()
+    {
+        _playerKillsInCheckpoint = 0;
+        _civilianKillsInCheckpoint = 0;
+        _playerKills = 0;
+        _playerCivilianKills = 0;
+        _playerDeaths = 0;
     }
 
     public void Start()
@@ -77,11 +89,13 @@ public class ScoreManager : MonoBehaviour
     public static void Checkpoint()
     {
         _playerKillsInCheckpoint = _playerKills;
+        _civilianKillsInCheckpoint = _playerCivilianKills;
     }
     
     public static void Restart()
     {
         _playerKills = _playerKillsInCheckpoint;
+        _playerCivilianKills = _civilianKillsInCheckpoint;
         AddedScoreDelegate?.Invoke();
     }
 

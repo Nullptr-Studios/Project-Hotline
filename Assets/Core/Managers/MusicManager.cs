@@ -47,7 +47,12 @@ public class MusicManager : MonoBehaviour
         // by the garbage collected while it's being used
         beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
 
-        
+        if (_gameMusicInstance.isValid())
+        {
+            _gameMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            _gameMusicInstance.release();
+        }
+
         _gameMusicInstance = FMODUnity.RuntimeManager.CreateInstance(sceneMusic);
         
         // Pin the class that will store the data modified during the callback
@@ -83,7 +88,6 @@ public class MusicManager : MonoBehaviour
         NovelUIController.OnStartGame -= Startscene;
         _gameMusicInstance.setUserData(IntPtr.Zero);
         _gameMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        _gameMusicInstance.release();
         timelineHandle.Free();
     }
 
