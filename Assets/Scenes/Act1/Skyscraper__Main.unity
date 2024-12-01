@@ -2501,6 +2501,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 31413956416100033, guid: d5d3ec25d759ac54386d5167cb891d54,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 31413956416100033, guid: d5d3ec25d759ac54386d5167cb891d54,
+        type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
@@ -2603,6 +2608,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PA_Dialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877895492604851585, guid: d5d3ec25d759ac54386d5167cb891d54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1877895492604851585, guid: d5d3ec25d759ac54386d5167cb891d54,
         type: 3}
@@ -4548,6 +4558,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2206034019199485243, guid: bc3f0805078b7e94d98ef251e0b20b49,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206034019199485243, guid: bc3f0805078b7e94d98ef251e0b20b49,
+        type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
@@ -4882,6 +4897,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1243997298664265848, guid: 21bdaf7749577d54385791d1e53df83d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 1243997298664265848, guid: 21bdaf7749577d54385791d1e53df83d,
         type: 3}
       propertyPath: m_RootOrder
@@ -5370,6 +5390,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 958141788732422058, guid: 933caa0f63c6a0a4ca647fdbd6a1e627,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 958141788732422058, guid: 933caa0f63c6a0a4ca647fdbd6a1e627,
         type: 3}
@@ -6209,6 +6234,11 @@ PrefabInstance:
       objectReference: {fileID: 866981825}
     - target: {fileID: 2913125032203985343, guid: 9a0af2793d64e8f45be0a89f61a71828,
         type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 866981825}
+    - target: {fileID: 2913125032203985343, guid: 9a0af2793d64e8f45be0a89f61a71828,
+        type: 3}
       propertyPath: score
       value: 
       objectReference: {fileID: 530803610}
@@ -6234,9 +6264,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2913125032203985343, guid: 9a0af2793d64e8f45be0a89f61a71828,
         type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2057855340}
+    - target: {fileID: 2913125032203985343, guid: 9a0af2793d64e8f45be0a89f61a71828,
+        type: 3}
+      propertyPath: bossRot
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913125032203985343, guid: 9a0af2793d64e8f45be0a89f61a71828,
+        type: 3}
+      propertyPath: bossPos.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913125032203985343, guid: 9a0af2793d64e8f45be0a89f61a71828,
+        type: 3}
+      propertyPath: bossPos.y
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913125032203985343, guid: 9a0af2793d64e8f45be0a89f61a71828,
+        type: 3}
       propertyPath: endTrigger
       value: 
       objectReference: {fileID: 99227664}
+    - target: {fileID: 2913125032203985343, guid: 9a0af2793d64e8f45be0a89f61a71828,
+        type: 3}
+      propertyPath: playerPos.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913125032203985343, guid: 9a0af2793d64e8f45be0a89f61a71828,
+        type: 3}
+      propertyPath: playerPos.y
+      value: -21
+      objectReference: {fileID: 0}
     - target: {fileID: 2913125032203985343, guid: 9a0af2793d64e8f45be0a89f61a71828,
         type: 3}
       propertyPath: playerPos.x
