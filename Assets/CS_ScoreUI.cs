@@ -13,6 +13,8 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private float deathsTime = 1;
     [SerializeField] private float timeTime = 0.8f;
     [SerializeField] private float scoreTime = 2.5f;
+    [SerializeField] private bool goToConversation = false;
+    [SerializeField] private int conversationID;
     
     [Header("Components")]
     [SerializeField] private GameObject scoreObject;
@@ -140,6 +142,11 @@ public class ScoreUI : MonoBehaviour
         _input.UI.Accept.performed -= ExitScreen;
         _input.Gameplay.Interact.performed -= ChangeSpeed;
         _input.Gameplay.Interact.canceled -= ChangeSpeed;
+        if (goToConversation)
+        {
+            GameObject.Find("NovelManager").GetComponent<ConversationHandler>().StartVNConversation(conversationID);
+            return;
+        }
         GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
     }
 

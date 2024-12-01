@@ -57,11 +57,15 @@ public class ActPopup : MonoBehaviour
     private void TitleSound() 
     { }
 
+    private void OpenConversation()
+    {
+        if (openConversationOnClose)
+            GameObject.Find("NovelManager").SendMessage("StartVNConversation", value: conversationId);
+    }
+
     private void DestroySelf()
     {
         gameObject.SetActive(false);
-        if (openConversationOnClose)
-            GameObject.Find("NovelManager").SendMessage("StartVNConversation", value: conversationId);
         Destroy(gameObject);
     }
 

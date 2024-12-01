@@ -110,7 +110,7 @@
       "sentences":
       [
         "You’re just a monster. You’ve lost yourself in blood, and now it’s the only thing that makes you real. Pull the trigger, Blake. End the cycle. It’s all you’ve ever known. And deep down, it’s all you’ve ever wanted.",
-        "Just end everything before it’s too late.",
+        "<action=blakeGlitch>Just end everything before it’s too late.",
         "<action=blakeBossfight> <action=endConversation> "
       ]
     }
@@ -122,7 +122,15 @@
       "name": "blakeBossfight",
       "type": "sendMessage",
       "target": "PA_LevelManager",
-      "message": "BlakeFight"
+      "message": "OpenScore"
+    },
+    
+    // Start blake glitches
+    {
+      "name": "blakeGlitch",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "JacobGlitch"
     },
     
     // Stop the conversation
