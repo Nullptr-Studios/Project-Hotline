@@ -56,10 +56,10 @@ public class StartCanvas : MonoBehaviour
                 SceneManager.LoadScene("Mansion__Main");
                 break;
             case 8:
-                SceneManager.LoadScene("Hideout__Main");
+                SceneManager.LoadScene("Motel__Main");
                 break;
             case 9:
-                SceneManager.LoadScene("Motel__Main");
+                SceneManager.LoadScene("Hideout__Main");
                 break;
             default:
                 SceneManager.LoadScene("Tutorial__Main");

@@ -66,7 +66,7 @@ public class PlayerCorpse : MonoBehaviour
         _input.UI.Accept.Disable();
         VariableRepo.Instance.RemoveAll();
 
-        // TODO: this should be fixed after prototype to not have the player read the VN every time
+        
         SceneMng.Reload();
     }
 
@@ -80,6 +80,9 @@ public class PlayerCorpse : MonoBehaviour
         camera.enabled = false;
         _input.UI.Accept.Enable();
         deathScreenUI.gameObject.SetActive(true);
+        
+        
+        
     }
 
     /// <summary>
