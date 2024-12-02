@@ -83,12 +83,14 @@ public class MusicManager : MonoBehaviour
         if(hasDialogMusic)
             _gameMusicInstance.start();
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         NovelUIController.OnStartGame -= Startscene;
         _gameMusicInstance.setUserData(IntPtr.Zero);
-        _gameMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        _gameMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         timelineHandle.Free();
+        hasDialogMusic = false;
+        Destroy(this);
     }
 
     private void Startscene()

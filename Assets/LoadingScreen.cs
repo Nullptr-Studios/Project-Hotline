@@ -79,7 +79,7 @@ public class LoadingScreen : MonoBehaviour
 
     private IEnumerator text()
     {
-        int cac = (int)(250 * (Time.deltaTime));
+        int cac = 1;
         loadingText.text = t;
         for (var i = 0; i < t.Length; i += cac)
         {

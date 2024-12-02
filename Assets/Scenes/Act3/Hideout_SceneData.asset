@@ -24,9 +24,39 @@ MonoBehaviour:
       maxDistance: 16
       Origin: {x: 4, y: 0}
   - sceneObject:
+      m_SceneName: Hideout_Floor1_2
+    EnemyScene:
+      m_SceneName: Hideout_Floor1_2_Enemies
+    isInitialyLoaded: 0
+    isInitialyActive: 0
+    cameraBehaviour:
+      maxRotation: 12
+      maxDistance: 16
+      Origin: {x: 68, y: 3}
+  - sceneObject:
       m_SceneName: Hideout_Floor2
     EnemyScene:
       m_SceneName: Hideout_Floor2_Enemies
+    isInitialyLoaded: 0
+    isInitialyActive: 0
+    cameraBehaviour:
+      maxRotation: 12
+      maxDistance: 12
+      Origin: {x: 68, y: 3}
+  - sceneObject:
+      m_SceneName: Hideout_Floor3
+    EnemyScene:
+      m_SceneName: Hideout_Floor3_Enemies
+    isInitialyLoaded: 0
+    isInitialyActive: 0
+    cameraBehaviour:
+      maxRotation: 12
+      maxDistance: 12
+      Origin: {x: 68, y: 3}
+  - sceneObject:
+      m_SceneName: Hideout_Floor4_1
+    EnemyScene:
+      m_SceneName: Hideout_Floor4_Enemies
     isInitialyLoaded: 0
     isInitialyActive: 0
     cameraBehaviour:

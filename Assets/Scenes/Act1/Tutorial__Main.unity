@@ -2244,7 +2244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116053533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0000002, y: 5.5, z: -10}
+  m_LocalPosition: {x: -1.0000004, y: 5.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2376,6 +2376,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 734637465902824237, guid: d5d3ec25d759ac54386d5167cb891d54, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 808585733270736304, guid: d5d3ec25d759ac54386d5167cb891d54, type: 3}
+      propertyPath: HasActScreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 808585733270736304, guid: d5d3ec25d759ac54386d5167cb891d54, type: 3}
+      propertyPath: CanSkipDialogue
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 808585733270736304, guid: d5d3ec25d759ac54386d5167cb891d54, type: 3}
@@ -3089,9 +3097,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.26759258
-    width: 0.1328125
-    height: 0.1328125
+    y: 0
+    width: 0.99973613
+    height: 1
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
@@ -3120,7 +3128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676373344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0000002, y: 5.5, z: -10}
+  m_LocalPosition: {x: -1.0000004, y: 5.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

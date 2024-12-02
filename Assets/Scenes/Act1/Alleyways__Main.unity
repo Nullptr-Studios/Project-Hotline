@@ -1202,7 +1202,7 @@ PrefabInstance:
       objectReference: {fileID: 1676373350}
     - target: {fileID: 1893289298830076480, guid: 60a21f8bdec3f914188b3929754012c1, type: 3}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1893289298830076480, guid: 60a21f8bdec3f914188b3929754012c1, type: 3}
       propertyPath: m_PixelPerfect
@@ -1616,6 +1616,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1676373350}
+    - target: {fileID: 808585733270736304, guid: d5d3ec25d759ac54386d5167cb891d54, type: 3}
+      propertyPath: HasActScreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 808585733270736304, guid: d5d3ec25d759ac54386d5167cb891d54, type: 3}
       propertyPath: timesItRestarts
       value: 1
@@ -2178,9 +2182,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.58502024
+    width: 0.2901024
+    height: 0.29035932
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
@@ -3321,7 +3325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5775950250692724184, guid: 7337b248553613e49875826004ada7b6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75.15802
+      value: -75.158035
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
