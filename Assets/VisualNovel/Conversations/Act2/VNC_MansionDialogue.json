@@ -87,7 +87,6 @@
     
     {
       "id": 7,
-      "nextId": 8,
       "canBeUsedAsStartingPoint": false,
       "speakersName": "Jacob",
       "characterSpritesName": "Jacob",
@@ -95,7 +94,8 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "You don’t have to do this. You’re not like them. You can still get out. You can still<changeSprite=Dead>—<action=glitch> </changeSprite>"
+        "You don’t have to do this. You’re not like them. You can still get out. You can still<changeSprite=Dead>—<action=glitch> </changeSprite>",
+        "<action=scoreScreen> "
       ]
     }
   ],
@@ -107,6 +107,14 @@
       "type": "sendMessage",
       "target": "PA_LevelManager",
       "message": "JacobGlitch"
+    },
+    
+    // Go to score screen
+    {
+      "name": "scoreScreen",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "OpenScore"
     }
   ]
 }

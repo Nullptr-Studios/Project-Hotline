@@ -169,7 +169,7 @@ RectTransform:
   - {fileID: 9201421495372714583}
   - {fileID: 4926713162240318043}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -259,6 +259,9 @@ MonoBehaviour:
   spriteBlake: {fileID: 4183738139430363529}
   spriteOther: {fileID: 4245677748800856254}
   continueButton: {fileID: 2403437431126261358}
+  timesItRestarts: 0
+  CanSkipDialogue: 1
+  HasActScreen: 0
   logInput: 0
 --- !u!95 &6629368623111143942
 Animator:
@@ -1081,7 +1084,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -52, y: -4}
+  m_AnchoredPosition: {x: -52, y: -3.0000002}
   m_SizeDelta: {x: 76, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4947926444292677985
