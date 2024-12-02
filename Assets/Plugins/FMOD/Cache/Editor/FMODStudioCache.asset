@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8730677306093707667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/MenuUp
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/MenuUp
+  Guid:
+    Data1: 355071253
+    Data2: 1164900274
+    Data3: -1307706714
+    Data4: -270071274
+  Banks:
+  - {fileID: 3825408704557764427}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8620803129179162553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,10 +352,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638686940199730516
+  lastModified: 638687817285266777
   FileSizes:
   - Name: Desktop
-    Value: 2064
+    Value: 2160
   Exists: 1
 --- !u!114 &-2759376672584020181
 MonoBehaviour:
@@ -562,12 +589,14 @@ MonoBehaviour:
   - {fileID: -5242941286175489201}
   - {fileID: 964067762728019726}
   - {fileID: 2433789944954273150}
+  - {fileID: -8730677306093707667}
+  - {fileID: 3444131016649288536}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7001593021806771270}
   StringsBanks:
   - {fileID: -2768057446997512794}
-  cacheTime: 638686940200350988
+  cacheTime: 638687817286152697
   cacheVersion: 131620
 --- !u!114 &395371838311313848
 MonoBehaviour:
@@ -837,6 +866,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 76800
+--- !u!114 &3444131016649288536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/MenuDown
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/MenuDown
+  Guid:
+    Data1: -303737794
+    Data2: 1208202379
+    Data3: 1042666675
+    Data4: -1460737466
+  Banks:
+  - {fileID: 3825408704557764427}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &3705263717165021681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,10 +935,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638686758573832143
+  lastModified: 638687817286152697
   FileSizes:
   - Name: Desktop
-    Value: 178112
+    Value: 183872
   Exists: 1
 --- !u!114 &3856452144471415094
 MonoBehaviour:
@@ -1078,7 +1134,7 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638686940199720462
+  lastModified: 638687817285251701
   FileSizes:
   - Name: Desktop
     Value: 1036
