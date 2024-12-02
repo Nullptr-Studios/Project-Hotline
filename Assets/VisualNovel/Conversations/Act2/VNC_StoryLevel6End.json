@@ -191,7 +191,9 @@
     // Stop the conversation
     {
       "name": "endConversation",
-      "type": "close conversation"
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "LoadNextScene"
     }
   ]
 }

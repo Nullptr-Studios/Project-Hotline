@@ -144,6 +144,7 @@ public class ScoreUI : MonoBehaviour
         if (goToConversation)
         {
             GameObject.Find("NovelManager").GetComponent<ConversationHandler>().StartVNConversation(conversationID);
+            gameObject.SetActive(false);
             return;
         }
         GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
