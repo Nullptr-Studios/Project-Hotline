@@ -126,8 +126,10 @@ public class SceneMng : MonoBehaviour
         //wait until the level is loaded
         _player.SetActive(false);
     }
+    
+    
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (_sceneData == null) return;
 
@@ -146,6 +148,8 @@ public class SceneMng : MonoBehaviour
         
         LoadingScreen.OnFinalizedLoading -= LoadFinalized;
         NovelUIController.OnStartGame -= StartScene;
+        
+        Destroy(this);
         
     }
 
@@ -219,8 +223,12 @@ public class SceneMng : MonoBehaviour
             if (scene.sceneObject == sceneName)
             {
                 ActiveSceneCameraVars = scene.cameraBehaviour;
-                if (!string.IsNullOrEmpty(scene.EnemyScene) && !alreadyVisited[scene.sceneObject])
+                if (!string.IsNullOrEmpty(scene.EnemyScene) && !alreadyVisited[scene.sceneObject] && !loadedScene[scene.EnemyScene])
+                {
                     LoadScenePrivateAsync(scene.EnemyScene);
+                    //loadedScene[scene.EnemyScene] = true;
+                }
+
                 return;
             }
         }

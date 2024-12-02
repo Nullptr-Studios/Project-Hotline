@@ -84,13 +84,9 @@ public class MusicManager : MonoBehaviour
         {
             _gameMusicInstance.setParameterByName("LowPass", o ? FadeOutCurve.Evaluate(time) : FadeInCurve.Evaluate(time));
             time += Time.deltaTime;
-            
-            Debug.Log("LowPass: " + (o ? FadeOutCurve.Evaluate(time) : FadeInCurve.Evaluate(time)));
 
             yield return null;
         }
-        
-        Debug.Log("LowPass: " + (o ? FadeOutCurve.Evaluate(time) : FadeInCurve.Evaluate(time)));
         
         _gameMusicInstance.setParameterByName("LowPass", o ? 1 : 0);
         
@@ -117,6 +113,8 @@ public class MusicManager : MonoBehaviour
     private void OnDisable()
     {
         NovelUIController.OnStartGame -= Startscene;
+        LoadingScreen.OnFinalizedLoading -= endedLoading;
+        DeadScreenShit.OnDeadScreen -= Pause;
         _gameMusicInstance.setUserData(IntPtr.Zero);
         _gameMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         timelineHandle.Free();
