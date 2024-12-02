@@ -34,6 +34,13 @@ public class PlayerWeaponManager : MonoBehaviour
     [Header("Animation")]
     public Animator anim;
 
+    [Header("Cursor")]
+    public Texture2D MeleeCursor;
+    public Texture2D FireCursor;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool log;
@@ -103,7 +110,23 @@ public class PlayerWeaponManager : MonoBehaviour
         _playerInput.Gameplay.SwitchWeapons.Disable();
 
     }
-    
+
+    public void OnChange()
+    {
+        if (_heldWeaponInterface == null)
+            return;
+
+        if (_heldWeaponInterface.GetWeaponType() == EWeaponType.Melee)
+        {
+            Cursor.SetCursor(MeleeCursor, hotSpot, cursorMode);
+        }
+        else
+        {
+            Cursor.SetCursor(FireCursor, hotSpot, cursorMode);
+
+        }
+    }
+
     public void SpawnWeapons(List<string> weaponsNames)
     {
         for (int i = 0; i < _heldWeaponGameObject.Count; i++)
@@ -177,6 +200,8 @@ public class PlayerWeaponManager : MonoBehaviour
             SpawnWeapons( new List<string> { spawningWeapon.name });
         }
         //###############################################
+        OnChange();
+
     }
 
 
@@ -217,6 +242,7 @@ public class PlayerWeaponManager : MonoBehaviour
         if (context.performed)
         {
             SwitchWeapon();
+            
         }
     }
 
@@ -330,6 +356,8 @@ public class PlayerWeaponManager : MonoBehaviour
 
         ammoPrompt.ChangeActiveSlot(_currentIndex);
         anim.ResetTrigger(Use);
+
+        OnChange();
     }
 
     /// <summary>
