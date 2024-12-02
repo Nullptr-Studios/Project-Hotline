@@ -96,10 +96,9 @@ public class SceneMng : MonoBehaviour
     }
 
     
-    //TODO: Bind this
     private void StartScene()
     {
-        foreach (var s in SceneData.sceneObjects)
+        foreach (var s in _sceneData.sceneObjects)
         {
             if (s.isInitialyActive)
             {
@@ -139,6 +138,15 @@ public class SceneMng : MonoBehaviour
             if (loadedScene[scene.EnemyScene])
                 UnloadScenePrivateAsync(scene.EnemyScene);
         }
+        
+        loadedScene.Clear();
+        alreadyVisited.Clear();
+        ExitNodes.Clear();
+        CheckpointWeapons.Clear();
+        
+        LoadingScreen.OnFinalizedLoading -= LoadFinalized;
+        NovelUIController.OnStartGame -= StartScene;
+        
     }
 
     private static void UnloadScenePrivateAsync(string sceneName)
