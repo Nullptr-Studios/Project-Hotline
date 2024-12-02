@@ -157,7 +157,23 @@ public class NovelUIController : BaseDialogueUIController
         
         StartCoroutine(_optionsController.ShowOptions(options));
     }
-    
+
+    private void OnSkipConversation(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed) {
+            Close();
+        } 
+        if (ctx.started)
+        {
+            Debug.Log(ctx.duration);
+        } 
+        if (ctx.canceled)
+        {
+            Debug.Log("Canceled");
+        }
+    }
+   
+
     /// <summary>
     /// Logic for clicked option button
     /// </summary>
@@ -197,6 +213,10 @@ public class NovelUIController : BaseDialogueUIController
         _input.UI.Accept.Enable();
         _input.UI.Accept.performed += Interact;
         _input.UI.Accept.canceled += Interact;
+        _input.UI.SkipConversation.Enable();
+        _input.UI.SkipConversation.performed += OnSkipConversation;
+        _input.UI.SkipConversation.started += OnSkipConversation;
+        _input.UI.SkipConversation.canceled += OnSkipConversation;
         
         if (_player != null)
             _player.OnDisable();
@@ -205,6 +225,7 @@ public class NovelUIController : BaseDialogueUIController
     private void DisableInput()
     {
         _input.UI.Accept.Disable();
+        _input.UI.SkipConversation.Disable();
         
         if (_player != null)
             _player.OnEnable();

@@ -362,6 +362,15 @@
                     "processors": "InvertVector2(invertX=false)",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SkipConversation",
+                    "type": "Button",
+                    "id": "7c185e11-2912-47be-8fa6-419ec2789e64",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(pressPoint=2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -573,6 +582,39 @@
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f08b4bd0-92db-4229-8375-efd839b68749",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipConversation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8167f2a0-ec20-4e2b-87f1-ba3f06a1e634",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipConversation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ef50e72-6948-4a53-b59b-cc84e5666f67",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipConversation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
