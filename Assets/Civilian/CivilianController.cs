@@ -10,12 +10,19 @@ public class CivilianController : MonoBehaviour
     private Vector2 _exitNodePos;
 
     private bool _panic = false;
+    
+    public SpriteRenderer SpriteRenderer;
+    
+    public List<Sprite> CivilianSprites;
 
     // Start is called before the first frame update
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         SceneMng.CivilianPanicDelegate += CivilianPanic;
+        
+        Sprite sprite = CivilianSprites[UnityEngine.Random.Range(0, CivilianSprites.Count - 1)];
+        SpriteRenderer.sprite = sprite;
     }
 
     private void OnDisable()
