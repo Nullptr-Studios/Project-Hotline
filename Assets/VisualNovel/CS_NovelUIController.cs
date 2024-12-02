@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using CC.DialogueSystem;
@@ -46,6 +47,8 @@ public class NovelUIController : BaseDialogueUIController
     public bool HasActScreen = false;
     
     private bool _alreadyDidActScreen = false;
+    
+    private bool loaded = false;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -54,6 +57,8 @@ public class NovelUIController : BaseDialogueUIController
     
     private void Awake()
     {
+        loaded = false;
+        _restarts = 0;
         _alreadyDidActScreen = false;
         cac = false;
         _canvas = GetComponent<Canvas>();
@@ -68,11 +73,26 @@ public class NovelUIController : BaseDialogueUIController
         continueButton.gameObject.SetActive(false);
         
         //activate.SetActive(false);
-        
-        //LoadingScreen.OnFinalizedLoading += () => activate.SetActive(true);
-        
+
+        LoadingScreen.OnFinalizedLoading += Loaded;
+
     }
-    
+
+    private void Loaded()
+    {
+        loaded = true;
+    }
+
+    private void OnDisable()
+    {
+        LoadingScreen.OnFinalizedLoading -= Loaded;
+    }
+
+    private void OnDestroy()
+    {
+        //Destroy(this);
+    }
+
 
     protected override IEnumerator showSentence(string speakerName, Sprite characterSprite,
         bool sameSpeakerAsLastDialogue = true, bool autoProceed = false)
@@ -218,6 +238,8 @@ public class NovelUIController : BaseDialogueUIController
 
         if (_restarts == timesItRestarts & !cac)
         {
+            /*if(!loaded)
+                return;*/
             OnStartGame?.Invoke();
             cac = true;
             
