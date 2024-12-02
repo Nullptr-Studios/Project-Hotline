@@ -391,7 +391,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""id"": ""7c185e11-2912-47be-8fa6-419ec2789e64"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold(pressPoint=2)"",
+                    ""interactions"": ""Hold(duration=1)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -611,7 +611,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""SkipConversation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -622,7 +622,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""SkipConversation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -633,7 +633,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller;Dualsense"",
                     ""action"": ""SkipConversation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

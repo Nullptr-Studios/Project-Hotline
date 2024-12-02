@@ -79,14 +79,14 @@ public class LoadingScreen : MonoBehaviour
 
     private IEnumerator text()
     {
-        int cac = 1;
+        int cac = (int)(250 * (Time.deltaTime));
         loadingText.text = t;
         for (var i = 0; i < t.Length; i += cac)
         {
             loadingText2.text = String.Format("{0} %", (int)((i / (float)t.Length) * 100));
             
             if (Time.deltaTime > timem)
-                cac = 5;
+                cac = (int)(500 * (Time.deltaTime));
             
             loadingText.maxVisibleCharacters += cac;
             

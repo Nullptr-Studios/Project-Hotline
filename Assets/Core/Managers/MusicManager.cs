@@ -134,22 +134,22 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(lastBeat != timelineInfo.currentMusicBeat)
+        {
+            lastBeat = timelineInfo.currentMusicBeat;
+            //Debug.Log("Beat!");
+            OnBeat?.Invoke();
+            return;
+        }
         
         if(lastbar != timelineInfo.currentMusicBar)
         {
             lastbar = timelineInfo.currentMusicBar;
-            Debug.Log("Bar!");
+            //Debug.Log("Bar!");
             OnBar?.Invoke();
             return;
         }
         
-        if(lastBeat != timelineInfo.currentMusicBeat)
-        {
-            lastBeat = timelineInfo.currentMusicBeat;
-            lastbar = timelineInfo.currentMusicBar;
-            Debug.Log("Beat!");
-            OnBeat?.Invoke();
-            return;
-        }
+        
     }
 }

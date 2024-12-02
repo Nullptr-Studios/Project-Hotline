@@ -160,6 +160,7 @@ public class NovelUIController : BaseDialogueUIController
 
     private void OnSkipConversation(InputAction.CallbackContext ctx)
     {
+        Debug.Log("Skip");
         if (ctx.performed) {
             Close();
         } 
