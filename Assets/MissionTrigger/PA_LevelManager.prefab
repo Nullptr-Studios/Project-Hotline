@@ -54,6 +54,14 @@ MonoBehaviour:
   objective: {fileID: 0}
   score: {fileID: 0}
   actPopup: {fileID: 0}
+  player: {fileID: 0}
+  boss: {fileID: 0}
+  mooks: []
+  glitchVolume: {fileID: 0}
+  playerPos: {x: 0, y: 0}
+  bossPos: {x: 0, y: 0}
+  playerRot: 0
+  bossRot: 0
   logMissionEnd: 1
 --- !u!114 &2424098765982670923
 MonoBehaviour:
@@ -146,6 +154,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f0b6f5a1bbdf646a944e7a281e74a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  FadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   sceneMusic:
     Guid:
       Data1: 895259662
@@ -153,3 +209,6 @@ MonoBehaviour:
       Data3: 1057358758
       Data4: 1109300469
     Path: event:/Music/InGameMusic
+  hasDialogMusic: 0
+  lastbar: 0
+  lastBeat: 0

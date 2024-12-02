@@ -41,6 +41,11 @@ public class NovelUIController : BaseDialogueUIController
     private int _restarts = 0;
 
     private bool cac = false;
+    
+    public bool CanSkipDialogue = true;
+    public bool HasActScreen = false;
+    
+    private bool _alreadyDidActScreen = false;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -49,6 +54,7 @@ public class NovelUIController : BaseDialogueUIController
     
     private void Awake()
     {
+        _alreadyDidActScreen = false;
         cac = false;
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
@@ -160,8 +166,21 @@ public class NovelUIController : BaseDialogueUIController
 
     private void OnSkipConversation(InputAction.CallbackContext ctx)
     {
+        Debug.Log("Wants to Skip");
+        if (!CanSkipDialogue)
+        {
+            Debug.Log("Can't Skip dialoge");
+            return;
+        }
         if (ctx.performed) {
             Close();
+            if (HasActScreen && !_alreadyDidActScreen)
+            {
+                _alreadyDidActScreen = true;
+                GameObject.Find("PA_LevelManager").SendMessage("OpenActPopup");
+                
+            }
+            DialogueController.Instance.StopCurrentConversation();
         } 
         if (ctx.started)
         {
@@ -201,10 +220,12 @@ public class NovelUIController : BaseDialogueUIController
         {
             OnStartGame?.Invoke();
             cac = true;
+            
+            return;
         }
         else
             _restarts++;
-
+        
     }
 
     #region INPUT_SYSTEM

@@ -86,7 +86,7 @@ public class LoadingScreen : MonoBehaviour
             loadingText2.text = String.Format("{0} %", (int)((i / (float)t.Length) * 100));
             
             if (Time.deltaTime > timem)
-                cac = 5;
+                cac = (int)(500 * (Time.deltaTime));
             
             loadingText.maxVisibleCharacters += cac;
             

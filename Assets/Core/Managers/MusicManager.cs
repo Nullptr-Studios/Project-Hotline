@@ -21,6 +21,9 @@ public class MusicManager : MonoBehaviour
     TimelineInfo timelineInfo;
     GCHandle timelineHandle;
     
+    public AnimationCurve FadeInCurve;
+    public AnimationCurve FadeOutCurve;
+    
     public EventReference sceneMusic;
     
     private FMOD.Studio.EventInstance _gameMusicInstance;
@@ -36,6 +39,8 @@ public class MusicManager : MonoBehaviour
     public delegate void Bar();
     public static Bar OnBar;
     public static Beat OnBeat;
+    
+    private Coroutine _fadeCoroutine;
 
     
     // Start is called before the first frame update
@@ -64,18 +69,44 @@ public class MusicManager : MonoBehaviour
         
         NovelUIController.OnStartGame += Startscene;
         LoadingScreen.OnFinalizedLoading += endedLoading;
+        DeadScreenShit.OnDeadScreen += Pause;
         _gameMusicInstance.setParameterByName("DialogueLoop", 1);
         _gameMusicInstance.setParameterByName("LowPass",0);
         
         PauseMenu.OnPause += Pause;
     }
 
+    private IEnumerator Fade(bool o)
+    {
+        float time = 0;
+
+        while (time < (o ? FadeOutCurve.GetDuration() : FadeInCurve.GetDuration()))
+        {
+            _gameMusicInstance.setParameterByName("LowPass", o ? FadeOutCurve.Evaluate(time) : FadeInCurve.Evaluate(time));
+            time += Time.deltaTime;
+            
+            Debug.Log("LowPass: " + (o ? FadeOutCurve.Evaluate(time) : FadeInCurve.Evaluate(time)));
+
+            yield return null;
+        }
+        
+        Debug.Log("LowPass: " + (o ? FadeOutCurve.Evaluate(time) : FadeInCurve.Evaluate(time)));
+        
+        _gameMusicInstance.setParameterByName("LowPass", o ? 1 : 0);
+        
+    }
+
     private void Pause(bool pause)
     {
-        if(pause)
+        /*if(pause)
             _gameMusicInstance.setParameterByName("LowPass",1);
         else
-            _gameMusicInstance.setParameterByName("LowPass",0);
+            _gameMusicInstance.setParameterByName("LowPass",0);*/
+        
+        if(_fadeCoroutine != null)
+            StopCoroutine(_fadeCoroutine);
+        
+        _fadeCoroutine = StartCoroutine(Fade(pause));
     }
 
     private void endedLoading()
@@ -83,12 +114,14 @@ public class MusicManager : MonoBehaviour
         if(hasDialogMusic)
             _gameMusicInstance.start();
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         NovelUIController.OnStartGame -= Startscene;
         _gameMusicInstance.setUserData(IntPtr.Zero);
-        _gameMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        _gameMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         timelineHandle.Free();
+        hasDialogMusic = false;
+        Destroy(this);
     }
 
     private void Startscene()
@@ -134,22 +167,22 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(lastBeat != timelineInfo.currentMusicBeat)
+        {
+            lastBeat = timelineInfo.currentMusicBeat;
+            //Debug.Log("Beat!");
+            OnBeat?.Invoke();
+            return;
+        }
         
         if(lastbar != timelineInfo.currentMusicBar)
         {
             lastbar = timelineInfo.currentMusicBar;
-            Debug.Log("Bar!");
+            //Debug.Log("Bar!");
             OnBar?.Invoke();
             return;
         }
         
-        if(lastBeat != timelineInfo.currentMusicBeat)
-        {
-            lastBeat = timelineInfo.currentMusicBeat;
-            lastbar = timelineInfo.currentMusicBar;
-            Debug.Log("Beat!");
-            OnBeat?.Invoke();
-            return;
-        }
+        
     }
 }
