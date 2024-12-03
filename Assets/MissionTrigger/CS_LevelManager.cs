@@ -93,7 +93,7 @@ public class LevelManager : MonoBehaviour
     {
         //TODO: Add Mercy check!!!!!!!!!!
         //Maybe this isnt necesary as the next scene to mercy should be the credit scene -x
-        if (SceneManager.GetActiveScene().buildIndex + 1 == 11)
+        if (SceneManager.GetActiveScene().buildIndex + 1 == 12)
         {
             SceneManager.LoadScene("MainMenu2");
             return;
