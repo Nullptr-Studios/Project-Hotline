@@ -8,6 +8,9 @@ using UnityEngine.Pool;
 /// </summary>
 public class ResourceManager : MonoBehaviour
 {
+    public Material RetroMaterial;
+    private static Material _retroMaterial;
+    
     /// <summary>
     /// Configuration for bullet trails.
     /// </summary>
@@ -118,6 +121,8 @@ public class ResourceManager : MonoBehaviour
         // Static configurations
         _bulletTrailConfig = bulletTrailConfig;
         _corpseConfig = corpseConfig;
+        
+        _retroMaterial = RetroMaterial;
 
         // Initialize object pools
         _bulletTrailPool = new ObjectPool<TrailRenderer>(CreateTrail);
@@ -129,6 +134,14 @@ public class ResourceManager : MonoBehaviour
         _WallbangHitPool = new ObjectPool<GameObject>(() => Instantiate(_WallbangHit, transform, true));
         _MuzzleVFXPool = new ObjectPool<GameObject>(() => Instantiate(_MuzzleVFX, transform, true));
         _BloodManagerPool = new ObjectPool<GameObject>(() => Instantiate(_BloodManager, transform, true));
+    }
+
+    public static void ChangeStaticEffect(bool _static)
+    {
+        if(_static)
+            _retroMaterial.EnableKeyword("_Scrolling_Static");
+        else
+            _retroMaterial.DisableKeyword("_Scrolling_Static");
     }
 
     /// <summary>

@@ -198,6 +198,8 @@ public class NovelUIController : BaseDialogueUIController
             _bWantsToSkip = true;
             _textSpeed = 0;
             
+            ResourceManager.ChangeStaticEffect(true);
+            
         } 
         if (ctx.started)
         {
@@ -208,6 +210,9 @@ public class NovelUIController : BaseDialogueUIController
             Debug.Log("Canceled");
             _textSpeed = defaultTextSpeed;
             _bWantsToSkip = false;
+            
+            ResourceManager.ChangeStaticEffect(false);
+            
         }
     }
 
@@ -245,6 +250,9 @@ public class NovelUIController : BaseDialogueUIController
         //@TODO: Add animation
         _canvas.enabled = false;
         DisableInput();
+        
+        ResourceManager.ChangeStaticEffect(false);
+
 
         if (_restarts == timesItRestarts & !cac)
         {
