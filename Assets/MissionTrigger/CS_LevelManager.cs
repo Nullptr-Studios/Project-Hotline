@@ -21,6 +21,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Vector2 bossPos;
     [SerializeField] private float playerRot;
     [SerializeField] private float bossRot;
+    [SerializeField] private GameObject killScreen;
+    private int _mercyKills;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -30,6 +32,8 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _mercyKills = 0;
+        
         // Log errors
         if (missionTrigger == null || endTrigger == null)
         {
@@ -144,5 +148,16 @@ public class LevelManager : MonoBehaviour
         glitchVolume.SetActive(true);
         var pixelCamera = GameObject.Find("Cinemachine Brain").GetComponent<PixelPerfectCamera>();
         if (pixelCamera != null) pixelCamera.enabled = false;
+    }
+
+    public void KillScreen()
+    {
+        killScreen.SetActive(true);
+    }
+
+    public void EndMercy()
+    {
+        _mercyKills++;
+        if (_mercyKills >= 4) OpenScore();
     }
 }
