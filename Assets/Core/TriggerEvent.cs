@@ -20,16 +20,19 @@ public class TriggerEvent : MonoBehaviour
     /// <param name="other">The collider that entered the trigger.</param>s
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (OnlyOnce && _triggered) return;
-        _triggered = true;
+        /*if (OnlyOnce && _triggered) return;
+        _triggered = true;*/
         
         // Check if the collider belongs to a GameObject tagged "Player"
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
+        {
             // Invoke the assigned UnityEvent
             TriggerActions?.Invoke();
+            Destroy(this);
+        }
     }
 
-    private void Awake()
+    /*private void Awake()
     {
         _triggered = false;
     }
@@ -37,5 +40,5 @@ public class TriggerEvent : MonoBehaviour
     private void OnDisable()
     {
         _triggered = false;
-    }
+    }*/
 }
