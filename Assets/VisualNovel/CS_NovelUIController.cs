@@ -49,12 +49,14 @@ public class NovelUIController : BaseDialogueUIController
     private bool _alreadyDidActScreen = false;
     
     private bool loaded = false;
+    
+    private bool _bWantsToSkip;
 
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool logInput;
 
-    private bool _bWantsToSkip;
+    
 #endif
     
     private void Awake()
