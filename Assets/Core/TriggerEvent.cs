@@ -28,4 +28,14 @@ public class TriggerEvent : MonoBehaviour
             // Invoke the assigned UnityEvent
             TriggerActions?.Invoke();
     }
+
+    private void Awake()
+    {
+        _triggered = false;
+    }
+
+    private void OnDisable()
+    {
+        _triggered = false;
+    }
 }
