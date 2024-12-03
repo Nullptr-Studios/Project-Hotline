@@ -10,7 +10,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Y'know… flashes of memories are starting to come back. It's like watching scenes from a movie I can't remember filming.<wait=1> I wasn't handling all this well, was I? How… how was my mental state?"
+        "Flashes of memories are starting to come back. Like watching scenes from a movie I don’t remember filming. I wasn’t handling this well, was I?"
       ]
     },
     
@@ -24,7 +24,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Y-you needed to rest after jobs. It’s exhausting, no matter how experienced you are."
+        "You needed rest after jobs. It’s exhausting, no matter how experienced you are."
       ]
     },
     
@@ -52,9 +52,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Yeah... Shit. Sorry.",
-        "I’m tired too, y'know? I’ve been looking for you for what feels like ages. You weren’t answering your phone, and I thought— I haven’t slept properly in days.",
-        "Taking a life… it does things to you. It’s what fucks up most people. Especially rookies."
+        "Yeah... Shit. Sorry. I’m tired too. I’ve been looking for you for days. Taking a life—it fucks up most people, especially rookies."
       ]
     },
     
@@ -82,8 +80,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Honestly, no harder than it is for anyone starting out. I mean, everyone’s got that phase where the blood on their hands feels heavier.",
-        "But you— <wait=1>you were different. I figured that same spark that made you a star on stage would keep you going, help you push through."
+        "No harder than anyone starting out. Everyone feels the weight of blood at first. But you... you were different. I thought that same spark that made you a star would help you push through."
       ]
     },
     
@@ -97,7 +94,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "I didn’t push through, did I?"
+        "Then the jobs changed. It wasn’t just getting something back. We started killing people like Santoro."
       ]
     },
     
@@ -111,7 +108,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Nobody really does, Blake. Not in the way we want to. But you learn to carry it. You learn to get better at... ignoring it. Just like every other job."
+        "Oh, FUCK YOU. You knew the office building was a front. Santoro was worse than all of us. That bastard dealt in shit we wouldn’t touch."
       ]
     },
     
@@ -125,7 +122,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Then the jobs started being… different. It wasn’t just about getting something back. We started killing people like Santoro."
+        "Still had a family."
       ]
     },
     
@@ -139,8 +136,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Oh, FUCK YOU.<wait=0.5> You knew damn well the office building was just a front. You knew what Santoro was doing, the shit he was into.",
-        "He was worse than all of us put together, Blake. That bastard was dealing in things even we wouldn’t touch."
+        "He killed more than we ever did. He was a key player for that gang. We had to defend ourselves, Blake. Don’t give me the innocent card—no one in that office had clean hands."
       ]
     },
     
@@ -154,7 +150,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "Still had a family."
+        "And I just wiped them out, like it was nothing. Like it was just another job."
       ]
     },
     
@@ -168,8 +164,7 @@
       "theme": "VNT_Default",
       "sentences": 
       [
-        "He killed more people than we ever did. He was a key player for that gang, a real monster.", 
-        "We had to defend ourselves, Blake. He was stepping on our territory, messing with our shit. And don’t give me that innocent act. There wasn’t a single person in that office who didn’t have blood on their hands."
+        "It was us or them. That’s how it’s always been. We don’t get the luxury of feeling sorry."
       ]
     },
     
@@ -183,13 +178,12 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "And I just wiped them out, like they were nothing. Like it was all just another part of the job."
+        "Is that what you told yourself? That it was us or them?"
       ]
     },
     
     {
       "id": 14,
-      "nextId": 15,
       "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
@@ -197,37 +191,10 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "It was never easy, Blake. None of it. But it was us or them. That’s how it’s always been. We don’t get the luxury of feeling sorry about it."
+        "Yeah, that’s what I told myself. And you did too! Don’t act like you didn’t. You loved it—the power, the thrill—it got you off as much as the heroin did!",
+        "<action=endConversation> "
       ]
-    }, 
-    
-    {
-      "id": 15,
-      "nextId": 16,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Blake",
-      "characterSpritesName": "Blake",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Is that what you told yourself every time? That it was us or them?"
-      ]
-    },
-    
-    {
-      "id": 16,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Delta",
-      "characterSpritesName": "Delta",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
-        "Fuck, yeah, that’s what I told myself. And you did too! Don’t fucking pretend like you didn’t. ",
-        "You knew exactly what we were doing, and you didn’t give a shit. You loved it, didn’t you? The power, the thrill—it got you off just as much as the fucking heroin did!"
-      ]
-    } 
+    }
   ],
   "actions":
   [

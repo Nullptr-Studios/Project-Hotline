@@ -1,0 +1,166 @@
+{
+  "conversation": 
+  [
+    {
+      "id": 1,
+      "nextId": 2,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "You know, I never wanted it to come to this. Us, at each other’s throats... It was never supposed to be this way. We were supposed to be on the same side, Blake."
+      ]
+    },
+    
+    {
+      "id": 2,
+      "nextId": 3,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "I’m starting to think we never were on the same side. Maybe I was just too blind to notice."
+      ]
+    },
+    
+    {
+      "id": 3,
+      "nextId": 4,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Hang up then. Problem solved. You don’t have to hear my voice ever again."
+      ]
+    },
+    
+    {
+      "id": 4,
+      "nextId": 5,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Not until I get some answers. I’ve been sitting in this shithole long enough to realize I don’t even know what’s real anymore. Every memory feels like it’s been tampered with, twisted."
+      ]
+    },
+    
+    {
+      "id": 5,
+      "nextId": 6,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Why the hell would I lie to you now? It doesn’t make any sense. I’ve got nothing to gain from it."
+      ]
+    },
+    
+    {
+      "id": 6,
+      "nextId": 7,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Yeah, but maybe it’s not about what you gain anymore. You’ve played this game for so long, I wouldn’t even be surprised if you still have something planned."
+      ]
+    },
+    
+    {
+      "id": 7,
+      "nextId": 8,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "I’m driving there. Shouldn’t be much longer. No lights still?"
+      ]
+    },
+    
+    {
+      "id": 8,
+      "nextId": 9,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "No. Still pitch dark. How ironic.",
+        "Who were the next ones we killed?"
+      ]
+    },
+    
+    {
+      "id": 9,
+      "nextId": 10,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "It was the container yard job. We had to retrieve a stash of weapons."
+      ]
+    },
+    
+    {
+      "id": 10,
+      "nextId": 11,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "The one near the interstate, right? Funny. It wasn’t nearly as empty as you told me it would be. Lots of guards. I remember the noise—gunfire, shouting. It was chaos."
+      ]
+    },
+    
+    {
+      "id": 11,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "We adapted. You adapted. That’s what made you special. You could handle it. Most people would’ve run, but not you. You stayed and finished the job.",
+        "<action=endConversation> "
+      ]
+    }
+  ],
+  "actions":
+  [
+    // Stop the conversation
+    {
+      "name": "endConversation",
+      "type": "close conversation"
+    }
+  ]
+}

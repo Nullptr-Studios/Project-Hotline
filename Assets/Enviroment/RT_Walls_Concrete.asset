@@ -651,7 +651,7 @@ MonoBehaviour:
     m_Output: 0
     m_ColliderType: 1
     m_RandomTransform: 0
-    m_Neighbors: 020000000200000001000000010000000100000001000000
+    m_Neighbors: 020000000200000001000000010000000200000001000000
     m_NeighborPositions:
     - {x: 1, y: 1, z: 0}
     - {x: -1, y: 0, z: 0}
@@ -900,7 +900,7 @@ MonoBehaviour:
     m_RuleTransform: 0
   - m_Id: 47
     m_Sprites:
-    - {fileID: 24348833, guid: 6b35ea936d6f7e844b58ee4c48218ecf, type: 3}
+    - {fileID: 0}
     m_GameObject: {fileID: 0}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
@@ -919,9 +919,29 @@ MonoBehaviour:
     - {x: -1, y: 1, z: 0}
     - {x: 0, y: 1, z: 0}
     m_RuleTransform: 0
+  - m_Id: 48
+    m_Sprites:
+    - {fileID: 439148702, guid: 6b35ea936d6f7e844b58ee4c48218ecf, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 0
+    m_ColliderType: 1
+    m_RandomTransform: 0
+    m_Neighbors: 010000000100000001000000020000000100000002000000
+    m_NeighborPositions:
+    - {x: 1, y: -1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    m_RuleTransform: 0
   AlwaysConnect: 1
   TilesToConnect:
   - {fileID: 11400000}
   - {fileID: 11400000, guid: ed4763d0edfcfda43a412cf2f6919031, type: 2}
   - {fileID: 11400000, guid: 39abb6f772d35bc458a631e60f90f9f8, type: 2}
+  - {fileID: 11400000, guid: 934d3ae4568851f4c882534ccf315147, type: 2}
   CheckSelf: 0

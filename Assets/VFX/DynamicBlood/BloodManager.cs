@@ -52,6 +52,8 @@ public class BloodManager : MonoBehaviour
     private void Blood()
     {
         FMODUnity.RuntimeManager.PlayOneShot(bloodSound, transform.position);
+        if(SceneMng.babyMode)
+            return;
         CreateFloorBlood();
         CreateWallBlood();
     }

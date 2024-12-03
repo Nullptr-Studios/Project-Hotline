@@ -26,6 +26,7 @@ public class SaveKeywords
     
     //Config
     public const string BabyMode = "BabyMode";
+    public const string Difficulty = "Difficulty";
 }
 
 #if UNITY_EDITOR

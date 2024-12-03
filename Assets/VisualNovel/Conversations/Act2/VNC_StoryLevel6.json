@@ -1,0 +1,182 @@
+{
+  "conversation":
+  [
+    {
+      "id": 1,
+      "nextId": 2,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "What were the weapons for, Delta? Who died because I went to get that fucking box?"
+      ]
+    },
+
+    {
+      "id": 2,
+      "nextId": 3,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Oh, now is when you care about it, huh? You never asked before. Not once."
+      ]
+    },
+
+    {
+      "id": 3,
+      "nextId": 4,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "I’m asking now. Answer me."
+      ]
+    },
+
+    {
+      "id": 4,
+      "nextId": 5,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Why the hell would I know? I’m not the mastermind behind every goddamn thing. I did my job. You should’ve done yours."
+      ]
+    },
+
+    {
+      "id": 5,
+      "nextId": 6,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "And why do you do it, then?"
+      ]
+    },
+
+    {
+      "id": 6,
+      "nextId": 7,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Protection."
+      ]
+    },
+
+    {
+      "id": 7,
+      "nextId": 8,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Protection against what?"
+      ]
+    },
+
+    {
+      "id": 8,
+      "nextId": 9,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "For my daughter. Not like the people who come in for cocaine, heroin, and don’t give a damn about the aftermath."
+      ]
+    },
+
+    {
+      "id": 9,
+      "nextId": 10,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Fuck you, Delta. Don’t give me that bullshit. You’ve been at this too long to still be playing the family man card."
+      ]
+    },
+
+    {
+      "id": 10,
+      "nextId": 11,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Killing isn’t really my thing. It’s inevitable. But if you don’t get pleasure from it, you can still tell yourself you're human, still pretend you're decent.",
+        "The real problem starts when it’s not just a job anymore. When you crave it. When you pull the trigger, not because you have to, but because you want to. You get what I’m saying, Blake?",
+        "You were perfect—too good. You followed orders, made clean kills. But then you slipped, just once. Westgate. Jacob Geller. You remember what happened?"
+
+      ]
+    },
+
+    {
+      "id": 11,
+      "nextId": 12,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "I remember the job. I was told to bring him in for interrogation. That was it."
+      ]
+    },
+
+    {
+      "id": 12,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Oh, is that all you remember? You weren’t supposed to kill him. We needed him alive. But you couldn’t help yourself, could you?",
+        "<action=endConversation> "
+      ]
+    }
+  ],
+  "actions":
+  [
+    // Stop the conversation
+    {
+      "name": "endConversation",
+      "type": "close conversation"
+    }
+  ]
+}

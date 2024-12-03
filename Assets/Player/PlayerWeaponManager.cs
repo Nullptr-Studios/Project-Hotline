@@ -137,7 +137,8 @@ public class PlayerWeaponManager : MonoBehaviour
                     _heldWeaponInterface = weaponToEquip.GetComponent<IWeapon>();
                     _heldWeaponInterface.Pickup(weaponHolder);
                     _heldWeaponInterface.SetIsPlayer(true);
-                    
+
+                    ammoPrompt.SetSlot(i, _heldWeaponGameObject[i].name.Split("(".ToCharArray())[0]);
 
                     //FMODUnity.RuntimeManager.PlayOneShot(pickupSound, transform.position);
 
@@ -152,7 +153,7 @@ public class PlayerWeaponManager : MonoBehaviour
         _isWeaponHeld = true;
         
         ammoPrompt.ChangeActiveSlot(_currentIndex);
-        ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
+        //ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
         
         anim.ResetTrigger(Use);
     }
@@ -537,7 +538,7 @@ public class PlayerWeaponManager : MonoBehaviour
             float smallestDistance = float.MaxValue;
             int smallestIndex = 0;
 
-            int mostAmmo = -69;
+            float mostAmmo = -69;
             
             int i = 0;
 
@@ -555,9 +556,9 @@ public class PlayerWeaponManager : MonoBehaviour
                 }*/
                 
                 h.transform.gameObject.TryGetComponent(out IWeapon w);
-                if(w.UsesLeft() > mostAmmo)
+                if((float)w.UsesLeft() / w.MaxUses() > mostAmmo)
                 {
-                    mostAmmo = w.UsesLeft();
+                    mostAmmo = (float)w.UsesLeft() / w.MaxUses();
                     smallestIndex = i;
                 }
                 

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b9978e3e3bebd4aa14f231ecef4ef6, type: 3}
+  m_Name: Mercy
+  m_EditorClassIdentifier: 
+  sceneObjects:
+  - sceneObject:
+      m_SceneName: Mercy_Floor1
+    EnemyScene:
+      m_SceneName: 
+    isInitialyLoaded: 1
+    isInitialyActive: 1
+    cameraBehaviour:
+      maxRotation: 0
+      maxDistance: 0
+      Origin: {x: 0, y: 0}

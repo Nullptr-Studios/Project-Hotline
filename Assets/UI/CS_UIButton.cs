@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,6 +31,10 @@ public class UIButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Image background;
     
+    [Header("Sound")]
+    public EventReference HoverSound;
+    public EventReference ClickSound;
+    
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -40,8 +45,11 @@ public class UIButton : MonoBehaviour
     public void OnMouseOver()
     {
         if (_disableMouse || ignoreMouse) return;
+
+        UIButtonController controller = transform.parent.GetComponent<UIButtonController>();
         
-        transform.parent.GetComponent<UIButtonController>().SetFocusByMouse(ID);
+        if(controller)
+            controller.SetFocusByMouse(ID);
         _disableMouse = true;
     }
 
@@ -54,6 +62,7 @@ public class UIButton : MonoBehaviour
     public virtual void Perform()
     {
         perform?.Invoke();
+        FMODUnity.RuntimeManager.PlayOneShot(ClickSound);
     }
 
     /// <summary>
@@ -74,6 +83,7 @@ public class UIButton : MonoBehaviour
     {
         text.color = textColor;
         background.enabled = true;
+        FMODUnity.RuntimeManager.PlayOneShot(HoverSound);
     }
 
     /// <summary>

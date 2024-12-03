@@ -42,7 +42,7 @@ public class UIButtonController : MonoBehaviour
         Buttons[CurrentFocus].Perform();
     }
 
-    private void SetFocus()
+    protected void SetFocus()
     {
         for (var i = 0; i < MaxIndex; i++)
         {
@@ -83,7 +83,7 @@ public class UIButtonController : MonoBehaviour
     
     #region INPUT_SYSTEM
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _input.UI.Select.Enable();
         _input.UI.Select.performed += Select; 
@@ -91,9 +91,11 @@ public class UIButtonController : MonoBehaviour
         _input.UI.Accept.Enable();
         _input.UI.Accept.performed += PerformAction;
         _input.UI.Cancel.Enable();
+
+        CurrentFocus = -1;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         _input.UI.Select.Disable();
         _input.UI.Accept.Disable();

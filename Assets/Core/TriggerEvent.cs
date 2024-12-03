@@ -11,6 +11,8 @@ public class TriggerEvent : MonoBehaviour
     /// The UnityEvent to invoke when the trigger is activated.
     /// </summary>
     public UnityEvent TriggerActions;
+    public bool OnlyOnce;
+    private bool _triggered = false;
 
     /// <summary>
     /// Called when another collider enters the trigger collider attached to this GameObject.
@@ -18,26 +20,22 @@ public class TriggerEvent : MonoBehaviour
     /// <param name="other">The collider that entered the trigger.</param>s
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (OnlyOnce && _triggered) return;
+        _triggered = true;
+        
         // Check if the collider belongs to a GameObject tagged "Player"
         if(other.CompareTag("Player"))
             // Invoke the assigned UnityEvent
             TriggerActions?.Invoke();
     }
 
-#if UNITY_EDITOR
-    [Header("Debug")]
-    [SerializeField] private bool drawGizmos = false;
-
-    /// <summary>
-    /// Draws debug gizmos in the editor.
-    /// </summary>
-    private void OnDrawGizmos()
+    private void Awake()
     {
-        if (!drawGizmos)
-            return;
-        
-        Gizmos.color = Color.green;
-        Gizmos.DrawCube(transform.position, transform.localScale);
+        _triggered = false;
     }
-#endif
+
+    private void OnDisable()
+    {
+        _triggered = false;
+    }
 }

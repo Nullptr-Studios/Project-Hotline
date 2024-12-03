@@ -384,6 +384,15 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""processors"": ""InvertVector2(invertX=false)"",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipConversation"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c185e11-2912-47be-8fa6-419ec2789e64"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=1)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -595,6 +604,39 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f08b4bd0-92db-4229-8375-efd839b68749"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SkipConversation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8167f2a0-ec20-4e2b-87f1-ba3f06a1e634"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SkipConversation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ef50e72-6948-4a53-b59b-cc84e5666f67"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller;Dualsense"",
+                    ""action"": ""SkipConversation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -741,6 +783,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
         m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
+        m_UI_SkipConversation = m_UI.FindAction("SkipConversation", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_Restart = m_Debug.FindAction("Restart", throwIfNotFound: true);
@@ -919,6 +962,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Accept;
     private readonly InputAction m_UI_Cancel;
     private readonly InputAction m_UI_Select;
+    private readonly InputAction m_UI_SkipConversation;
     public struct UIActions
     {
         private @PlayerIA m_Wrapper;
@@ -926,6 +970,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         public InputAction @Accept => m_Wrapper.m_UI_Accept;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
         public InputAction @Select => m_Wrapper.m_UI_Select;
+        public InputAction @SkipConversation => m_Wrapper.m_UI_SkipConversation;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -944,6 +989,9 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @SkipConversation.started += instance.OnSkipConversation;
+            @SkipConversation.performed += instance.OnSkipConversation;
+            @SkipConversation.canceled += instance.OnSkipConversation;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -957,6 +1005,9 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @SkipConversation.started -= instance.OnSkipConversation;
+            @SkipConversation.performed -= instance.OnSkipConversation;
+            @SkipConversation.canceled -= instance.OnSkipConversation;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1072,6 +1123,7 @@ public partial class @PlayerIA: IInputActionCollection2, IDisposable
         void OnAccept(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+        void OnSkipConversation(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

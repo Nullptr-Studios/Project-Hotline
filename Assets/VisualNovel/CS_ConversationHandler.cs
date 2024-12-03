@@ -6,6 +6,7 @@
  *  Made by: Xein
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using CC.DialogueSystem;
@@ -20,7 +21,7 @@ public class ConversationHandler : MonoBehaviour
     [Tooltip("Please i swear to god don't use this ever")]
     [SerializeField] private bool startOnBegin;
 
-    private void Start()
+    private void Awake()
     {
         _conversationRepo = GetComponent<ConversationRepo>();
         
@@ -29,10 +30,29 @@ public class ConversationHandler : MonoBehaviour
             _conversations.Add(cnv.name);
         }
         
-        if (startOnBegin)
+        //This is removed in order to start the conversation from the loading screen
+        /*if (startOnBegin)
         {
             StartVNConversation(0);
-        }
+        }*/
+
+        LoadingScreen.OnFinalizedLoading += Loaded;
+    }
+
+    private void OnDisable()
+    {
+        LoadingScreen.OnFinalizedLoading -= Loaded;
+    }
+
+    private void Loaded()
+    {
+       if(_conversations.Count > 0)
+           StartVNConversation(0);
+       else
+       {
+           GameObject.Find("PA_Dialog").GetComponent<NovelUIController>().Close();
+       }
+    
     }
 
     // private void Update()

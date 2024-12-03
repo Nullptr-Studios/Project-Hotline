@@ -147,8 +147,10 @@ public class PlayerMovement : MonoBehaviour
     // Please enable them individually to avoid errors
     public void OnEnable()
     {
+#if UNITY_EDITOR
         _input.Debug.Debug.Enable();
         _input.Debug.Restart.Enable();
+#endif
         _input.Gameplay.Movement.Enable();
         _input.Gameplay.Aim.Enable();
         _input.Gameplay.AimMouse.Enable();
@@ -162,9 +164,10 @@ public class PlayerMovement : MonoBehaviour
     {
         //Reset Movement curves variables
         movementController.OnDisable();
-
+#if UNITY_EDITOR
         _input.Debug.Debug.Disable();   
         _input.Debug.Restart.Disable();
+#endif
         _input.Gameplay.Movement.Disable();
         _input.Gameplay.Aim.Disable();
         _input.Gameplay.AimMouse.Disable();
