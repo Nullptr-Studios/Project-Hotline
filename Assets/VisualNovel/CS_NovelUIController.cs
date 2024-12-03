@@ -53,6 +53,8 @@ public class NovelUIController : BaseDialogueUIController
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool logInput;
+
+    private bool _bWantsToSkip;
 #endif
     
     private void Awake()
@@ -193,14 +195,9 @@ public class NovelUIController : BaseDialogueUIController
             return;
         }
         if (ctx.performed) {
-            Close();
-            if (HasActScreen && !_alreadyDidActScreen)
-            {
-                _alreadyDidActScreen = true;
-                GameObject.Find("PA_LevelManager").SendMessage("OpenActPopup");
-                
-            }
-            DialogueController.Instance.StopCurrentConversation();
+            _bWantsToSkip = true;
+            _textSpeed = 0;
+            
         } 
         if (ctx.started)
         {
@@ -209,9 +206,22 @@ public class NovelUIController : BaseDialogueUIController
         if (ctx.canceled)
         {
             Debug.Log("Canceled");
+            _textSpeed = defaultTextSpeed;
+            _bWantsToSkip = false;
         }
     }
-   
+
+    public void Update()
+    {
+        if (_bWantsToSkip)
+        {
+            if(text.maxVisibleCharacters >= text.text.Length)
+            {
+                DialogueController.Instance.Next();
+            }
+        }
+    }
+
 
     /// <summary>
     /// Logic for clicked option button
