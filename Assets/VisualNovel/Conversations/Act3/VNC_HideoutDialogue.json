@@ -1,0 +1,142 @@
+{
+  "conversation":
+  [
+    {
+      "id": 1,
+      "nextId": 2,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Who are...?"
+      ]
+    },
+
+    {
+      "id": 2,
+      "nextId": 3,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake?",
+      "characterSpritesName": "Cognitive Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "Look at you. Pathetic. You need this. The violence, the chaos—it’s your lifeline."
+      ]
+    },
+
+    {
+      "id": 3,
+      "nextId": 4,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "What… what is happening to me?"
+      ]
+    },
+
+    {
+      "id": 4,
+      "nextId": 5,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake?",
+      "characterSpritesName": "Cognitive Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "It’s beautiful, isn’t it? The blood, the screams. You’ve been pretending, but I know the truth. THIS is your real face. And it’s fucking glorious."
+      ]
+    },
+
+    {
+      "id": 5,
+      "nextId": 6,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "NO! STOP! I don’t want this! I never wanted this!"
+      ]
+    },
+
+    {
+      "id": 6,
+      "nextId": 7,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake?",
+      "characterSpritesName": "Cognitive Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "You’ve already done it. Every kill, every scream—it’s all you. You’re not afraid of losing control. The blood, the bodies—it’s your masterpiece.",
+        "You need this. You were meant for this all along."
+      ]
+    },
+
+    {
+      "id": 7,
+      "nextId": 8,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Red",
+      "sentences":
+      [
+        "SHUT UP! I DON’T WANT TO HEAR THIS ANYMORE!"
+      ]
+    },
+
+    {
+      "id": 8,
+      "nextId": 9,
+      "canBeUsedAsStartingPoint": false,
+      "speakersName": "Blake?",
+      "characterSpritesName": "Cognitive Blake",
+      "startingSprite": "Default",
+      "theme": "VNT_Default",
+      "sentences":
+      [
+        "You’re just a monster. You’ve lost yourself in blood, and now it’s the only thing that makes you real. Pull the trigger, Blake. End the cycle. It’s all you’ve ever known. And deep down, it’s all you’ve ever wanted.",
+        "<action=blakeGlitch>Just end everything before it’s too late.",
+        "<action=blakeBossfight> <action=endConversation> "
+      ]
+    }
+  ],
+  "actions":
+  [
+    // Start blake bossfight
+    {
+      "name": "blakeBossfight",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "OpenScore"
+    },
+    
+    // Start blake glitches
+    {
+      "name": "blakeGlitch",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "JacobGlitch"
+    },
+    
+    // Stop the conversation
+    {
+      "name": "endConversation",
+      "type": "close conversation"
+    }
+  ]
+}

@@ -1,7 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using ToolBox.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+[System.Serializable]
+public enum EDifficulty
+{
+    Medium,
+    Hard,
+    Impossible
+}
 
 public class SceneMng : MonoBehaviour
 {
@@ -10,10 +19,11 @@ public class SceneMng : MonoBehaviour
     public static List<GameObject> ExitNodes;
     public static SCameraVariables ActiveSceneCameraVars;
     public SceneData SceneData;
+    private static Animator _animatorFade;
 
     private static string _checkpointActiveScene;
     private static List<string> _checkpointScenes;
-    private static SceneData _sceneData;
+    public static SceneData _sceneData;
     private static Dictionary<string, bool> loadedScene;
     private static Dictionary<string, bool> alreadyVisited;
     private static Vector2 _restartPos;
@@ -25,9 +35,17 @@ public class SceneMng : MonoBehaviour
     
     private static string _currentActiveScene;
     private static string _lastActiveScene;
+    
+    public static bool babyMode = true;
+    
+    public static EDifficulty CurrentDifficulty = EDifficulty.Impossible;
 
     void Awake()
     {
+        //load difficulty only once and make enemies read this cached value
+        CurrentDifficulty = DataSerializer.Load<EDifficulty>(SaveKeywords.Difficulty);
+        babyMode = DataSerializer.Load<bool>(SaveKeywords.BabyMode);
+        
         _checkpointIndex = 0;
         _currentActiveScene = "";
         _lastActiveScene = "";
@@ -66,21 +84,52 @@ public class SceneMng : MonoBehaviour
                     _currentActiveScene = scene.sceneObject;
                     _lastActiveScene = _currentActiveScene;
                     ActiveSceneCameraVars = scene.cameraBehaviour;
-                    if (!string.IsNullOrEmpty(scene.EnemyScene))
-                        LoadScenePrivateAsync(scene.EnemyScene);
+                    /*if (!string.IsNullOrEmpty(scene.EnemyScene))
+                        LoadScenePrivateAsync(scene.EnemyScene);*/
                 }
             }
         }
+
+        LoadingScreen.OnFinalizedLoading += LoadFinalized;
+        NovelUIController.OnStartGame += StartScene;
+
+    }
+
+    
+    private void StartScene()
+    {
+        foreach (var s in _sceneData.sceneObjects)
+        {
+            if (s.isInitialyActive)
+            {
+                if (!string.IsNullOrEmpty(s.EnemyScene))
+                    LoadScenePrivateAsync(s.EnemyScene);
+            }
+        }
+        
+        _player.SetActive(true);
+        
+        _animatorFade.SetTrigger("Out");
+    }
+
+    private void LoadFinalized()
+    {
     }
 
     private void Start()
     {
+        _animatorFade = GameObject.Find("ScreenLevelTransition").GetComponent<Animator>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _restartPos = _player.transform.position;
         _playerHealth = _player.GetComponent<PlayerHealth>();
+        
+        //wait until the level is loaded
+        _player.SetActive(false);
     }
+    
+    
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (_sceneData == null) return;
 
@@ -88,7 +137,20 @@ public class SceneMng : MonoBehaviour
         {
             if (loadedScene[scene.sceneObject])
                 UnloadScenePrivateAsync(scene.sceneObject);
+            if (loadedScene[scene.EnemyScene])
+                UnloadScenePrivateAsync(scene.EnemyScene);
         }
+        
+        loadedScene.Clear();
+        alreadyVisited.Clear();
+        ExitNodes.Clear();
+        CheckpointWeapons.Clear();
+        
+        LoadingScreen.OnFinalizedLoading -= LoadFinalized;
+        NovelUIController.OnStartGame -= StartScene;
+        
+        Destroy(this);
+        
     }
 
     private static void UnloadScenePrivateAsync(string sceneName)
@@ -111,7 +173,7 @@ public class SceneMng : MonoBehaviour
     private static void LoadScenePrivateAsync(string sceneName)
     {
         var asyncOper = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        if (asyncOper != null)
+        if (asyncOper != null && !sceneName.Contains("Enemies"))
             asyncOper.completed += AsyncOperLoading_completed;
 
         loadedScene[sceneName] = true;
@@ -123,6 +185,9 @@ public class SceneMng : MonoBehaviour
         Debug.Log("Scene " + obj.ToString() + " finished loading");
 #endif
         obj.completed -= AsyncOperLoading_completed;
+        
+        if(_animatorFade)
+            _animatorFade.SetTrigger("Out");
     }
 
     public static void LoadScene(string levelName)
@@ -158,14 +223,18 @@ public class SceneMng : MonoBehaviour
             if (scene.sceneObject == sceneName)
             {
                 ActiveSceneCameraVars = scene.cameraBehaviour;
-                if (!string.IsNullOrEmpty(scene.EnemyScene) && !alreadyVisited[scene.sceneObject])
+                if (!string.IsNullOrEmpty(scene.EnemyScene) && !alreadyVisited[scene.sceneObject] && !loadedScene[scene.EnemyScene])
+                {
                     LoadScenePrivateAsync(scene.EnemyScene);
+                    //loadedScene[scene.EnemyScene] = true;
+                }
+
                 return;
             }
         }
     }
 
-    public static void AddCurrentCheckpoint(Vector2 checkpointPos, List<SceneObject> loadedScenes, SceneObject activeScene, List<GameObject> currWeapons)
+    public static void AddCurrentCheckpoint(Vector2 checkpointPos, List<SceneObject> loadedScenes, SceneObject activeScene, List<GameObject> currWeapons, bool changevisited)
     {
         _restartPos = checkpointPos;
         _checkpointScenes = new List<string>();
@@ -175,13 +244,13 @@ public class SceneMng : MonoBehaviour
         }
         _checkpointActiveScene = activeScene;
         _checkpointIndex++;
-        
-        for (int i = 0; i < _checkpointIndex; i++)
-        {
-            if (i > CheckpointWeapons.Count-1)
-                break;
-            alreadyVisited[alreadyVisited.Keys.ElementAt(i)] = true;
-        }
+        if(!changevisited)
+            for (int i = 0; i < _checkpointIndex; i++)
+            {
+                if (i > CheckpointWeapons.Count-1)
+                    break;
+                alreadyVisited[alreadyVisited.Keys.ElementAt(i)] = true;
+            }
         
         if(currWeapons[0] != null)
             CheckpointWeapons[0] = currWeapons[0].name;
@@ -256,7 +325,7 @@ public class SceneMng : MonoBehaviour
                     if (!loadedScene[scene.sceneObject])
                         LoadScenePrivateAsync(scene.sceneObject);
 
-                    if (!string.IsNullOrEmpty(scene.EnemyScene) && _checkpointScenes.Contains(_checkpointActiveScene) && !alreadyVisited[scene.sceneObject])
+                    if (!string.IsNullOrEmpty(scene.EnemyScene) && _checkpointScenes.Contains(_checkpointActiveScene) /*&& !alreadyVisited[scene.sceneObject]*/)
                         SetActiveScene(scene.sceneObject);
                 }
                 else
@@ -275,7 +344,7 @@ public class SceneMng : MonoBehaviour
         {
             //Locked blood
             if (bloodItem.layer == 14)
-                return;
+                continue;
             ResourceManager.GetBloodPool().Release(bloodItem);
             bloodItem.SetActive(false);
         }
@@ -286,7 +355,7 @@ public class SceneMng : MonoBehaviour
         {
             //Locked blood
             if (c.layer == 14)
-                return;
+                continue;
             ResourceManager.GetCorpsePool().Release(c);
             c.SetActive(false);
         }
@@ -296,10 +365,14 @@ public class SceneMng : MonoBehaviour
         foreach (var c in civilianCorpse)
         {
             if (c.layer == 14)
-                return;
+                continue;
             ResourceManager.GetCivilianCorpsePool().Release(c);
             c.SetActive(false);
         }
+        
+        _animatorFade.SetTrigger("In");
+
+        _animatorFade.SetTrigger("Out");
         
     }
 }

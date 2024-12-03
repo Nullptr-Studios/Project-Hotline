@@ -14,8 +14,8 @@ public class EnemyDamageable : Damageable
 {
     private static readonly int Stunned = Animator.StringToHash("Stunned");
     private static readonly int WeaponEquipped = Animator.StringToHash("WeaponEquipped");
-
-    public GameObject bloodEffectManager;
+    
+    public GameObject ScorePopup;
 
     //FUCK UNITY I DONT KNOW BUT CHILDREN DOES NOT MOVE RELATIVELY TO PARENT IF THE PARENT HAS A RIGIDBODY
     public Transform weaponHandler;
@@ -94,6 +94,8 @@ public class EnemyDamageable : Damageable
         //Send kill message
         ScoreManager.AddKill();
         killEvent.Invoke();
+        
+        Instantiate(ScorePopup, transform.position + new Vector3(0,2,10), Quaternion.identity);
 
         Destroy(gameObject);
     }
@@ -166,6 +168,9 @@ public class EnemyDamageable : Damageable
         _rb.gravityScale = 0;
         _rb.AddForce(dir * 200);
         
+        if(_player == null)
+            _player = GameObject.FindGameObjectWithTag("Player");
+        
         transform.up = new Vector3(transform.position.x - _player.transform.position.x, transform.position.y - _player.transform.position.y, 0).normalized;
 
         _onStun = true;
@@ -219,4 +224,11 @@ public class EnemyDamageable : Damageable
         BManager.transform.position = hitPoint;
         BManager.transform.right = shootDir;
     }
+    
+    /// <summary>
+    /// Sets current enemy health to given amount
+    /// Used for bossfights
+    /// </summary>
+    /// <param name="amount">Health to set the enemy to</param>
+    public void UpdateHealth(int amount) => _currentHealth = amount;
 }

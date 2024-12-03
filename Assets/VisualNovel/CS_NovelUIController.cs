@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using CC.DialogueSystem;
@@ -10,7 +11,7 @@ using UnityEngine.UI;
 public class NovelUIController : BaseDialogueUIController
 {
     [SerializeField] [Range(0.02f, 0.07f)] private float defaultTextSpeed = 0.04f;
-    [SerializeField] [Range(0.001f, 0.02f)] private float fastTextSpeed = 0.01f;
+    [SerializeField] [Range(0.001f, 0.02f)] private float fastTextSpeed = 0.001f;
     [SerializeField] private GameObject optionsPrefab;
     
     [Header("Components")]
@@ -32,6 +33,23 @@ public class NovelUIController : BaseDialogueUIController
     private bool _handledInput;
     private float _textSpeed;
 
+    private string _lastSpeaker = "";
+
+    public delegate void StartGame();
+    public static StartGame OnStartGame;
+
+    public int timesItRestarts = 0;
+    private int _restarts = 0;
+
+    private bool cac = false;
+    
+    public bool CanSkipDialogue = true;
+    public bool HasActScreen = false;
+    
+    private bool _alreadyDidActScreen = false;
+    
+    private bool loaded = false;
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool logInput;
@@ -39,6 +57,10 @@ public class NovelUIController : BaseDialogueUIController
     
     private void Awake()
     {
+        loaded = false;
+        _restarts = 0;
+        _alreadyDidActScreen = false;
+        cac = false;
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
         _animator = GetComponent<Animator>();
@@ -49,8 +71,28 @@ public class NovelUIController : BaseDialogueUIController
         
         _textSpeed = defaultTextSpeed;
         continueButton.gameObject.SetActive(false);
+        
+        //activate.SetActive(false);
+
+        LoadingScreen.OnFinalizedLoading += Loaded;
+
     }
-    
+
+    private void Loaded()
+    {
+        loaded = true;
+    }
+
+    private void OnDisable()
+    {
+        LoadingScreen.OnFinalizedLoading -= Loaded;
+    }
+
+    private void OnDestroy()
+    {
+        //Destroy(this);
+    }
+
 
     protected override IEnumerator showSentence(string speakerName, Sprite characterSprite,
         bool sameSpeakerAsLastDialogue = true, bool autoProceed = false)
@@ -63,8 +105,17 @@ public class NovelUIController : BaseDialogueUIController
         text.ForceMeshUpdate();
         var length = text.GetParsedText().Length;
         text.maxVisibleCharacters = 0;
+
+        //I need to fucking do this cuz the fucking parser returns false some times, event tought is the same, fuck json -D
+        bool sameSpeakerAsLastDialogeMine = true;
+        if (speakerName != _lastSpeaker)
+        {
+            _lastSpeaker = speakerName;
+            sameSpeakerAsLastDialogeMine = false;
+        }
+
         
-        if (!sameSpeakerAsLastDialogue)
+        if (!sameSpeakerAsLastDialogeMine)
         {
             speaker.SetName(speakerName);
             if (speakerName == "Blake")
@@ -74,8 +125,8 @@ public class NovelUIController : BaseDialogueUIController
             }
             else
             {
-                _animator.SetTrigger(Other);
                 spriteOther.SetSprite(characterSprite, speakerName);
+                _animator.SetTrigger(Other);
             }
         }
         
@@ -83,7 +134,10 @@ public class NovelUIController : BaseDialogueUIController
         {
             yield return StartCoroutine(processTagsForPosition(i));
 
-            text.maxVisibleCharacters++;
+            if (Time.deltaTime > _textSpeed)
+                text.maxVisibleCharacters += 2; 
+            else 
+                text.maxVisibleCharacters++;
             yield return new WaitForSeconds(_textSpeed * _speedMultiplyer);
         }
         
@@ -129,7 +183,36 @@ public class NovelUIController : BaseDialogueUIController
         
         StartCoroutine(_optionsController.ShowOptions(options));
     }
-    
+
+    private void OnSkipConversation(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Wants to Skip");
+        if (!CanSkipDialogue)
+        {
+            Debug.Log("Can't Skip dialoge");
+            return;
+        }
+        if (ctx.performed) {
+            Close();
+            if (HasActScreen && !_alreadyDidActScreen)
+            {
+                _alreadyDidActScreen = true;
+                GameObject.Find("PA_LevelManager").SendMessage("OpenActPopup");
+                
+            }
+            DialogueController.Instance.StopCurrentConversation();
+        } 
+        if (ctx.started)
+        {
+            Debug.Log(ctx.duration);
+        } 
+        if (ctx.canceled)
+        {
+            Debug.Log("Canceled");
+        }
+    }
+   
+
     /// <summary>
     /// Logic for clicked option button
     /// </summary>
@@ -142,14 +225,29 @@ public class NovelUIController : BaseDialogueUIController
 
     private void Show()
     {
+        //@TODO: Add animation
         _canvas.enabled = true;
         EnableInput();
     }
 
     public override void Close()
     {
+        //@TODO: Add animation
         _canvas.enabled = false;
         DisableInput();
+
+        if (_restarts == timesItRestarts & !cac)
+        {
+            /*if(!loaded)
+                return;*/
+            OnStartGame?.Invoke();
+            cac = true;
+            
+            return;
+        }
+        else
+            _restarts++;
+        
     }
 
     #region INPUT_SYSTEM
@@ -158,6 +256,10 @@ public class NovelUIController : BaseDialogueUIController
         _input.UI.Accept.Enable();
         _input.UI.Accept.performed += Interact;
         _input.UI.Accept.canceled += Interact;
+        _input.UI.SkipConversation.Enable();
+        _input.UI.SkipConversation.performed += OnSkipConversation;
+        _input.UI.SkipConversation.started += OnSkipConversation;
+        _input.UI.SkipConversation.canceled += OnSkipConversation;
         
         if (_player != null)
             _player.OnDisable();
@@ -166,6 +268,7 @@ public class NovelUIController : BaseDialogueUIController
     private void DisableInput()
     {
         _input.UI.Accept.Disable();
+        _input.UI.SkipConversation.Disable();
         
         if (_player != null)
             _player.OnEnable();

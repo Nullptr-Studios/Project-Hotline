@@ -13,6 +13,8 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private float deathsTime = 1;
     [SerializeField] private float timeTime = 0.8f;
     [SerializeField] private float scoreTime = 2.5f;
+    [SerializeField] private bool goToConversation = false;
+    [SerializeField] private int conversationID;
     
     [Header("Components")]
     [SerializeField] private GameObject scoreObject;
@@ -53,7 +55,6 @@ public class ScoreUI : MonoBehaviour
 
     private void OnEnable()
     {
-        // TODO: Disable player input
         _score = ScoreManager.CalculateScore();
         scoreObject.SetActive(false);
         killsObject.SetActive(false);
@@ -109,11 +110,12 @@ public class ScoreUI : MonoBehaviour
         
         int score = (int)_score.Value;
         scoreObject.SetActive(true);
-        for (int i = 0; i < score; i++)
+        for (int i = 0; i < score; i+=9)
         {
             scoreValue.text = (i+1).ToString();
             yield return new WaitForSeconds(scoreTime/score);
         }
+        scoreValue.text = ((int)_score.Value).ToString();
         
         yield return new WaitForSeconds(2);
         
@@ -139,6 +141,12 @@ public class ScoreUI : MonoBehaviour
         _input.UI.Accept.performed -= ExitScreen;
         _input.Gameplay.Interact.performed -= ChangeSpeed;
         _input.Gameplay.Interact.canceled -= ChangeSpeed;
+        if (goToConversation)
+        {
+            GameObject.Find("NovelManager").GetComponent<ConversationHandler>().StartVNConversation(conversationID);
+            gameObject.SetActive(false);
+            return;
+        }
         GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
     }
 

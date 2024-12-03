@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  bloodEffectManager: {fileID: 6968337576805792496, guid: 836baa9c847cf7440bee1ae7c488c4f9, type: 3}
+  ScorePopup: {fileID: 1114611430449885655, guid: 17f8c024bd97050408c7bba2e1462cda, type: 3}
   weaponHandler: {fileID: 620825279225639238}
   stunCooldown: 1
   animatorPlayer: {fileID: 1586720700333565052}
@@ -362,7 +362,7 @@ MonoBehaviour:
   range: 7
   nearDetectionRange: 1
   angle: 60
-  scanFrequency: 15
+  scanFrequency: 30
   layerToSee:
     serializedVersion: 2
     m_Bits: 1024

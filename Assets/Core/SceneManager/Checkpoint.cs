@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    private bool DontSetAsLastVisitedLastScene = false;
     
     public List<SceneObject> CheckpointScenes;
     public SceneObject CheckpointActiveScene;
@@ -14,7 +15,7 @@ public class Checkpoint : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerWeaponManager playerWeaponManager = other.GetComponent<PlayerWeaponManager>();
-            SceneMng.AddCurrentCheckpoint(transform.position, CheckpointScenes, CheckpointActiveScene, playerWeaponManager._heldWeaponGameObject);
+            SceneMng.AddCurrentCheckpoint(transform.position, CheckpointScenes, CheckpointActiveScene, playerWeaponManager._heldWeaponGameObject,DontSetAsLastVisitedLastScene);
             
             ScoreManager.Checkpoint();
             
