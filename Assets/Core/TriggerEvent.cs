@@ -16,6 +16,13 @@ public class TriggerEvent : MonoBehaviour
     [FormerlySerializedAs("OnlyOnce")]  public bool onlyOnce;
     private bool _triggered = false;
 
+    private void Start()
+    {
+        // i hate unity apparently if you have the same game object in two scenes it is not destroyed for optimization -x
+        // hours wasted on this bug: 5h -x
+        _triggered = false;
+    }
+
     /// <summary>
     /// Called when another collider enters the trigger collider attached to this GameObject.
     /// </summary>

@@ -94,7 +94,7 @@
       "theme": "VNT_Default",
       "sentences":
       [
-        "You don’t have to do this. You’re not like them. You can still get out. You can still<changeSprite=Dead>—<action=glitch> </changeSprite>",
+        "You don’t have to do this. You’re not like them. You can still get out. You can still-<action=gunshotNoise><action=glitch> ",
         "<action=scoreScreen> "
       ]
     }
@@ -108,7 +108,15 @@
       "target": "PA_LevelManager",
       "message": "JacobGlitch"
     },
-    
+
+    {
+      "name": "gunshotNoise",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "JacobShot"
+    },
+
+
     // Go to score screen
     {
       "name": "scoreScreen",

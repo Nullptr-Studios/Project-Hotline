@@ -1199,6 +1199,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21bdaf7749577d54385791d1e53df83d, type: 3}
+--- !u!1 &673183896 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 756015538345320264, guid: 84fe0d7cc7381ff4a9efe96ce7c0098b, type: 3}
+  m_PrefabInstance: {fileID: 963043730}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &747075788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2361,6 +2366,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 5193957687179726186, guid: 7337b248553613e49875826004ada7b6, type: 3}
+      propertyPath: actPopup
+      value: 
+      objectReference: {fileID: 673183896}
+    - target: {fileID: 5193957687179726186, guid: 7337b248553613e49875826004ada7b6, type: 3}
+      propertyPath: hasActPopup
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5775950250692724184, guid: 7337b248553613e49875826004ada7b6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -75.15802
@@ -2866,7 +2879,7 @@ MonoBehaviour:
   m_Follow: {fileID: 2042961397}
   m_Lens:
     FieldOfView: 60.000004
-    OrthographicSize: 5
+    OrthographicSize: 7
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -4209,8 +4222,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0
-    height: 0
+    width: 1
+    height: 1
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004

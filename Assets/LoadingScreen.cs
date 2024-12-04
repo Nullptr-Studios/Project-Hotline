@@ -27,6 +27,10 @@ public class LoadingScreen : MonoBehaviour
     
     public GameObject activate;
     
+    [Header("Act Popup")]
+    public bool hasActPopup = false;
+    public GameObject actPopup;
+    
     
     private bool hasUnderscore = true;
 
@@ -126,6 +130,11 @@ public class LoadingScreen : MonoBehaviour
             if (_timer > 1)
             {
                 OnFinalizedLoading?.Invoke();
+                if (hasActPopup && actPopup != null)
+                {
+                    actPopup.SetActive(true);
+                }
+                
                 gameObject.SetActive(false);
             }
             else
