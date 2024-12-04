@@ -110,13 +110,11 @@
   ],
   "actions":
   [
-    // Stop the conversation
     {
       "name": "endConversation",
       "type": "close conversation"
     },
     
-    // Start Santoro fight
     {
       "name": "santoroFight",
       "type": "sendMessage",

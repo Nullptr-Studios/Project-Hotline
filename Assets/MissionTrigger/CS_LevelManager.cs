@@ -1,4 +1,6 @@
+using System.Collections;
 using CC.DialogueSystem;
+using FMODUnity;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -13,16 +15,12 @@ public class LevelManager : MonoBehaviour
     [CanBeNull] [SerializeField] private GameObject actPopup;
     
     [Header("Bossfight settings")]
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject boss;
-    [SerializeField] private GameObject[] mooks;
     [SerializeField] private GameObject glitchVolume;
-    [SerializeField] private Vector2 playerPos;
-    [SerializeField] private Vector2 bossPos;
-    [SerializeField] private float playerRot;
-    [SerializeField] private float bossRot;
     [SerializeField] private GameObject killScreen;
+    [SerializeField] private GameObject blackScreen;
     private int _mercyKills;
+    public EventReference shotShound;
+    public EventReference doorShound;
 
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -91,14 +89,18 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextScene()
     {
-        //TODO: Add Mercy check!!!!!!!!!!
-        //Maybe this isnt necesary as the next scene to mercy should be the credit scene -x
-        if (SceneManager.GetActiveScene().buildIndex + 1 == 12)
+        //DONE: Add Mercy check!!!!!!!!!!
+        // Maybe this isnt necesary as the next scene to mercy should be the credit scene -x
+        // this is literally the worst coding practice in existance -x
+        var nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        
+        if (nextScene == 13)
         {
             SceneManager.LoadScene("MainMenu2");
             return;
         }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
+        SceneManager.LoadScene(nextScene);
     }
 
     /// <summary>
@@ -133,13 +135,17 @@ public class LevelManager : MonoBehaviour
 
     public void SantoroFight()
     {
-        if (player == null || boss == null) return;
-        
-        player.transform.position = new Vector3(playerPos.x, playerPos.y, player.transform.position.z);
-        player.transform.rotation = Quaternion.Euler(0, 0, playerRot);
-        boss.transform.position = new Vector3(bossPos.x, bossPos.y, boss.transform.position.z);
-        boss.transform.rotation = Quaternion.Euler(0, 0, bossRot);
-        boss.GetComponent<EnemyDamageable>().UpdateHealth(1);
+        if (killScreen != null) killScreen.SetActive(true);
+        /*FMODUnity.*/RuntimeManager.PlayOneShot(shotShound);
+        StartCoroutine(Wait(0.5f));
+        if (killScreen != null) killScreen.SetActive(false);
+        OpenScore();
+        return;
+
+        IEnumerator Wait(float time)
+        {
+            yield return new WaitForSeconds(time);
+        }
     }
 
     public void JacobGlitch()
@@ -148,6 +154,26 @@ public class LevelManager : MonoBehaviour
         glitchVolume.SetActive(true);
         var pixelCamera = GameObject.Find("Cinemachine Brain").GetComponent<PixelPerfectCamera>();
         if (pixelCamera != null) pixelCamera.enabled = false;
+    }
+
+    public void BlakeDoor()
+    {
+        /*FMODUnity.*/RuntimeManager.PlayOneShot(doorShound);
+    }
+
+    public void BlakeShot()
+    {
+        if (blackScreen != null) blackScreen.SetActive(true);
+        /*FMODUnity.*/RuntimeManager.PlayOneShot(shotShound);
+        StartCoroutine(Wait(0.5f));
+        if (blackScreen != null) blackScreen.SetActive(false);
+        LoadNextScene();
+        return;
+
+        IEnumerator Wait(float time)
+        {
+            yield return new WaitForSeconds(time);
+        }
     }
 
     public void KillScreen()
