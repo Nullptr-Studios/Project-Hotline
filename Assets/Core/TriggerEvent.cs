@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// A component that triggers UnityEvents when a GameObject with the "Player" tag enters its collider.
@@ -10,35 +11,36 @@ public class TriggerEvent : MonoBehaviour
     /// <summary>
     /// The UnityEvent to invoke when the trigger is activated.
     /// </summary>
-    public UnityEvent TriggerActions;
-    public bool OnlyOnce;
+    [FormerlySerializedAs("TriggerActions")] public UnityEvent TriggerEnterAction;
+    public UnityEvent TriggerExitAction;
+    [FormerlySerializedAs("OnlyOnce")]  public bool onlyOnce;
     private bool _triggered = false;
 
     /// <summary>
     /// Called when another collider enters the trigger collider attached to this GameObject.
     /// </summary>
-    /// <param name="other">The collider that entered the trigger.</param>s
+    /// <param name="other">The collider that entered the trigger.</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        /*if (OnlyOnce && _triggered) return;
-        _triggered = true;*/
+        if (onlyOnce && _triggered) return;
+        _triggered = true;
         
         // Check if the collider belongs to a GameObject tagged "Player"
-        if (other.CompareTag("Player"))
-        {
-            // Invoke the assigned UnityEvent
-            TriggerActions?.Invoke();
-            Destroy(this);
-        }
+        if (!other.CompareTag("Player")) return;
+        // Invoke the assigned UnityEvent
+        TriggerEnterAction?.Invoke();
     }
-
-    /*private void Awake()
+    // This is not a joke i will FUCKING kill you if i see AI generated comments on my project 😊🔪 -x
+    
+    private void OnTriggerExit2D(Collider2D other)
     {
-        _triggered = false;
+        if (onlyOnce && _triggered) return;
+        _triggered = true;
+        
+        // Check if the collider belongs to a GameObject tagged "Player"
+        if (!other.CompareTag("Player")) return;
+        
+        // Invoke the assigned UnityEvent
+        TriggerExitAction?.Invoke();
     }
-
-    private void OnDisable()
-    {
-        _triggered = false;
-    }*/
 }

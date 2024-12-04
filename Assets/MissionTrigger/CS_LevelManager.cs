@@ -186,4 +186,7 @@ public class LevelManager : MonoBehaviour
         _mercyKills++;
         if (_mercyKills >= 4) OpenScore();
     }
+    
+    public void StartGlitches() => glitchVolume.SetActive(true);
+    public void EndGlitches() => glitchVolume.SetActive(false);
 }
