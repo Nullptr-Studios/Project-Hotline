@@ -130,12 +130,6 @@ public class NovelUIController : BaseDialogueUIController
                 _animator.SetTrigger(Blake);
                 _bwasBlake = true;
             }
-            else if (speakerName == "Delta")
-            {
-                spriteOther.SetSprite(characterSprite, speakerName);
-                _animator.SetTrigger(Other);
-                _bwasBlake = false;
-            }
             else
             {
                 spriteOther.SetSprite(characterSprite, speakerName);
@@ -256,6 +250,8 @@ public class NovelUIController : BaseDialogueUIController
 
     private void Show()
     {
+        _bwasBlake = true;
+
         //@TODO: Add animation
         _canvas.enabled = true;
         EnableInput();
