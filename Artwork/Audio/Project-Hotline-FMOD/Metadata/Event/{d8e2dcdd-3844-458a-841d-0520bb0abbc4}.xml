@@ -56,7 +56,7 @@
 			<destination>{bfa75161-d276-499b-b595-544bcb6ef978}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{3b5a8373-9a5a-4e23-b768-d80f5bfbf42d}</destination>
+			<destination>{2231240c-12b7-4d23-8776-9e1dfd4dd644}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{f6d80784-e57c-4d94-ac44-10017c604d64}" />
@@ -108,10 +108,19 @@
 	<object class="MixerBusFader" id="{5455e22f-08d7-4603-934e-b8f53256b989}" />
 	<object class="SFXReverbEffect" id="{c610a70c-1505-4bd5-a69a-613e192028df}">
 		<property name="decayTime">
-			<value>2000</value>
+			<value>2600</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>40.5</value>
+		</property>
+		<property name="diffusion">
+			<value>71.5</value>
+		</property>
+		<property name="earlyLateMix">
+			<value>83</value>
 		</property>
 		<property name="wetLevel">
-			<value>-34</value>
+			<value>-20.5</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{93ff8a4e-f6b6-4a8f-b0ac-41e31674ace4}" />

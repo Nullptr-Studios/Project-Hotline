@@ -379,10 +379,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638689358488911351
+  lastModified: 638689550705499067
   FileSizes:
   - Name: Desktop
-    Value: 2202
+    Value: 2370
   Exists: 1
 --- !u!114 &-2759376672584020181
 MonoBehaviour:
@@ -619,12 +619,14 @@ MonoBehaviour:
   - {fileID: -8730677306093707667}
   - {fileID: 3444131016649288536}
   - {fileID: -5619611055600600501}
+  - {fileID: 8241853085458493222}
+  - {fileID: 1639877874028522009}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7001593021806771270}
   StringsBanks:
   - {fileID: -2768057446997512794}
-  cacheTime: 638689361743264293
+  cacheTime: 638689550705499067
   cacheVersion: 131620
 --- !u!114 &395371838311313848
 MonoBehaviour:
@@ -729,6 +731,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &1639877874028522009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/OST_Credits
+  m_EditorClassIdentifier: 
+  Path: event:/Music/OST_Credits
+  Guid:
+    Data1: -670057649
+    Data2: 1293154960
+    Data3: 1371628205
+    Data4: -570051143
+  Banks:
+  - {fileID: 8599098387921538408}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 30744
 --- !u!114 &1748810834078917100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,10 +992,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638689361743264293
+  lastModified: 638689547170138607
   FileSizes:
   - Name: Desktop
-    Value: 193152
+    Value: 194688
   Exists: 1
 --- !u!114 &3856452144471415094
 MonoBehaviour:
@@ -1162,10 +1191,10 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638689358488901375
+  lastModified: 638689550705488600
   FileSizes:
   - Name: Desktop
-    Value: 1036
+    Value: 1340
   Exists: 1
 --- !u!114 &7072375948972358996
 MonoBehaviour:
@@ -1223,6 +1252,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &8241853085458493222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Weapons/RifleShootEnding
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Weapons/RifleShootEnding
+  Guid:
+    Data1: -284472582
+    Data2: 1262681265
+    Data3: 591547807
+    Data4: 935351849
+  Banks:
+  - {fileID: 3825408704557764427}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8278775530768000686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,8 +1321,8 @@ MonoBehaviour:
   Path: Artwork/Audio/Project-Hotline-FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638689358558089527
+  lastModified: 638689547169756844
   FileSizes:
   - Name: Desktop
-    Value: 11267520
+    Value: 11687456
   Exists: 1
