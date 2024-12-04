@@ -127,8 +127,18 @@ public class NovelUIController : BaseDialogueUIController
             if (speakerName == "Blake")
             {
                 spriteBlake.SetSprite(characterSprite, speakerName);
+                
+                _animator.ResetTrigger(Other);
                 _animator.SetTrigger(Blake);
+                
                 _bwasBlake = true;
+            }
+            else if (speakerName == "Delta")
+            {
+                spriteOther.SetSprite(characterSprite, speakerName);
+                _animator.ResetTrigger(Blake);
+                _animator.SetTrigger(Other);
+                _bwasBlake = false;
             }
             else
             {
@@ -136,6 +146,7 @@ public class NovelUIController : BaseDialogueUIController
 
                 if (_bwasBlake)
                 {
+                    _animator.ResetTrigger(Blake);
                     _animator.SetTrigger(Other);
                     _bwasBlake = false;
                 }
