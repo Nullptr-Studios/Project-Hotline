@@ -52,6 +52,8 @@ public class NovelUIController : BaseDialogueUIController
     
     private bool _bWantsToSkip;
 
+    private bool _bwasBlake = false;
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool logInput;
@@ -126,11 +128,23 @@ public class NovelUIController : BaseDialogueUIController
             {
                 spriteBlake.SetSprite(characterSprite, speakerName);
                 _animator.SetTrigger(Blake);
+                _bwasBlake = true;
+            }
+            else if (speakerName == "Delta")
+            {
+                spriteOther.SetSprite(characterSprite, speakerName);
+                _animator.SetTrigger(Other);
+                _bwasBlake = false;
             }
             else
             {
                 spriteOther.SetSprite(characterSprite, speakerName);
-                _animator.SetTrigger(Other);
+
+                if (_bwasBlake)
+                {
+                    _animator.SetTrigger(Other);
+                    _bwasBlake = false;
+                }
             }
         }
         
