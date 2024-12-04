@@ -34,6 +34,13 @@ public class PlayerWeaponManager : MonoBehaviour
     [Header("Animation")]
     public Animator anim;
 
+    [Header("Cursor")]
+    public Texture2D MeleeCursor;
+    public Texture2D FireCursor;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+
+
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool log;
@@ -80,6 +87,7 @@ public class PlayerWeaponManager : MonoBehaviour
         {
             _heldWeaponInterface.Drop();
             ammoPrompt.SetSlotEmpty(_currentIndex);
+            OnChange();
         }
     }
 
@@ -103,7 +111,26 @@ public class PlayerWeaponManager : MonoBehaviour
         _playerInput.Gameplay.SwitchWeapons.Disable();
 
     }
-    
+
+    public void OnChange()
+    {
+        if (_heldWeaponInterface == null)
+        {
+            Cursor.SetCursor(FireCursor, hotSpot, cursorMode);
+            return;
+        }
+
+        if (_heldWeaponInterface.GetWeaponType() == EWeaponType.Melee)
+        {
+            Cursor.SetCursor(MeleeCursor, hotSpot, cursorMode);
+        }
+        else
+        {
+            Cursor.SetCursor(FireCursor, hotSpot, cursorMode);
+
+        }
+    }
+
     public void SpawnWeapons(List<string> weaponsNames)
     {
         for (int i = 0; i < _heldWeaponGameObject.Count; i++)
@@ -178,6 +205,7 @@ public class PlayerWeaponManager : MonoBehaviour
             SpawnWeapons( new List<string> { spawningWeapon.name });
         }
         //###############################################
+        OnChange();
     }
 
 
@@ -201,6 +229,7 @@ public class PlayerWeaponManager : MonoBehaviour
             ammoPrompt.DoHide();
         
         ammoPrompt.SetSlot(_currentIndex, _heldWeaponGameObject[_currentIndex].name.Split("(".ToCharArray())[0]);
+        OnChange();
     }
 
     private void Start()
@@ -218,6 +247,7 @@ public class PlayerWeaponManager : MonoBehaviour
         if (context.performed)
         {
             SwitchWeapon();
+            OnChange();
         }
     }
 
@@ -277,6 +307,7 @@ public class PlayerWeaponManager : MonoBehaviour
     private void ThrowOrGetOnPerformed(InputAction.CallbackContext context)
     {
         _wantsToThrowOrGet = context.ReadValueAsButton();
+        OnChange();
     }
 
     /// <summary>
@@ -420,6 +451,8 @@ public class PlayerWeaponManager : MonoBehaviour
 
             anim.ResetTrigger(Use);
 
+            OnChange();
+
             _wantsToThrowOrGet = false;
         }
         else
@@ -465,6 +498,8 @@ public class PlayerWeaponManager : MonoBehaviour
                                 _isWeaponHeld = true;
 
                                 FMODUnity.RuntimeManager.PlayOneShot(pickupSound, transform.position);
+
+                                OnChange();
 
                                 _heldWeaponInterface.setClaimed(true);
                                 
