@@ -1760,7 +1760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5775950250692724184, guid: 7337b248553613e49875826004ada7b6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75.15803
+      value: -75.15802
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1838,6 +1838,10 @@ PrefabInstance:
     - target: {fileID: 430783315123528967, guid: 60a21f8bdec3f914188b3929754012c1, type: 3}
       propertyPath: m_Name
       value: DeathScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 2535771116430796432, guid: 60a21f8bdec3f914188b3929754012c1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8735887077010777407, guid: 60a21f8bdec3f914188b3929754012c1, type: 3}
       propertyPath: m_Pivot.x
@@ -4845,9 +4849,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.24074073
+    width: 0.15677084
+    height: 0.15677083
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
