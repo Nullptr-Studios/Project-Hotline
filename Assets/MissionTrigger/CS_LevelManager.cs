@@ -140,13 +140,13 @@ public class LevelManager : MonoBehaviour
         /*FMODUnity.*/
         RuntimeManager.PlayOneShot(shotShound);
         StartCoroutine(Wait(0.5f));
-        if (killScreen != null) killScreen.SetActive(false);
-        OpenScore();
         return;
 
         IEnumerator Wait(float time)
         {
             yield return new WaitForSeconds(time);
+            if (killScreen != null) killScreen.SetActive(false);
+            OpenScore();
         }
     }
     
@@ -168,17 +168,19 @@ public class LevelManager : MonoBehaviour
 
     public void BlakeShot()
     {
-        if (blackScreen != null) blackScreen.SetActive(true);
-        /*FMODUnity.*/
-        RuntimeManager.PlayOneShot(shotShound);
-        StartCoroutine(Wait(0.5f));
-        if (blackScreen != null) blackScreen.SetActive(false);
-        LoadNextScene();
+        StartCoroutine(Wait(2.5f));
         return;
 
         IEnumerator Wait(float time)
         {
+            if (blackScreen != null) blackScreen.SetActive(true);
+            /*FMODUnity.*/RuntimeManager.PlayOneShot(shotShound);
+            glitchVolume.SetActive(true);
+            var pixelCamera = GameObject.Find("Cinemachine Brain").GetComponent<PixelPerfectCamera>();
+            if (pixelCamera != null) pixelCamera.enabled = false;
+            
             yield return new WaitForSeconds(time);
+            LoadNextScene();
         }
     }
 
