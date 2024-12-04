@@ -197,7 +197,7 @@ public class NovelUIController : BaseDialogueUIController
     {
         var optionsObject = Instantiate(optionsPrefab, _canvas.transform);
         _optionsController = optionsObject.GetComponent<NovelOptionsController>();
-        DisableInput();
+        DisableInput(true);
         
         StartCoroutine(_optionsController.ShowOptions(options));
     }
@@ -298,13 +298,13 @@ public class NovelUIController : BaseDialogueUIController
         if (_player != null)
             _player.OnDisable();
     }
-
-    private void DisableInput()
+    
+    private void DisableInput(bool isOptions = false)
     {
         _input.UI.Accept.Disable();
         _input.UI.SkipConversation.Disable();
         
-        if (_player != null)
+        if (_player != null && !isOptions)
             _player.OnEnable();
     }
 
