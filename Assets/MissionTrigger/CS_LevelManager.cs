@@ -142,16 +142,16 @@ public class LevelManager : MonoBehaviour
     public void SantoroFight()
     {
         if (killScreen != null) killScreen.SetActive(true);
-        /*FMODUnity.*/
-        RuntimeManager.PlayOneShot(shotShound);
-        StartCoroutine(Wait(0.5f));
+        /*FMODUnity.*/ RuntimeManager.PlayOneShot(shotShound);
+        StartCoroutine(Wait(1f));
         return;
 
         IEnumerator Wait(float time)
         {
             yield return new WaitForSeconds(time);
-            if (killScreen != null) killScreen.SetActive(false);
             OpenScore();
+            yield return new WaitForSeconds(0.5f);
+            killScreen.SetActive(false);
         }
     }
     
