@@ -173,17 +173,17 @@ public class LevelManager : MonoBehaviour
 
     public void BlakeShot()
     {
+        if (blackScreen != null) blackScreen.SetActive(true);
+        /*FMODUnity.*/RuntimeManager.PlayOneShot(shotShound);
+        glitchVolume.SetActive(true);
+        var pixelCamera = GameObject.Find("Cinemachine Brain").GetComponent<PixelPerfectCamera>();
+        if (pixelCamera != null) pixelCamera.enabled = false;
+        
         StartCoroutine(Wait(2.5f));
         return;
 
         IEnumerator Wait(float time)
         {
-            if (blackScreen != null) blackScreen.SetActive(true);
-            /*FMODUnity.*/RuntimeManager.PlayOneShot(shotShound);
-            glitchVolume.SetActive(true);
-            var pixelCamera = GameObject.Find("Cinemachine Brain").GetComponent<PixelPerfectCamera>();
-            if (pixelCamera != null) pixelCamera.enabled = false;
-            
             yield return new WaitForSeconds(time);
             LoadNextScene();
         }
