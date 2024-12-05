@@ -75,6 +75,16 @@ public class MusicManager : MonoBehaviour
         
         PauseMenu.OnPause += Pause;
     }
+    
+    public void PlayCreditsMusic()
+    {
+        _gameMusicInstance.start();
+    }
+    
+    public void StopCreditsMusic()
+    {
+        _gameMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
 
     private IEnumerator Fade(bool o)
     {

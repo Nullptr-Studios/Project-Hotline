@@ -1,45 +1,58 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CreditsRoll : MonoBehaviour
 {
-    public EventReference endcreditsmusic;
-
-    private EventInstance _music;
+    
+    public MusicManager musicManager;
     
     int endingLocation = 0;
+
+    private bool doOnce = true;
+    
+    private bool start = false;
     
     // Start is called before the first frame update
     void Start()
     {
-        if (_music.isValid())
-        {
-            _music.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            _music.release();
-        }
-
-        _music = FMODUnity.RuntimeManager.CreateInstance(endcreditsmusic);
-        _music.start();
+        start = false;
+        doOnce = true;
+        musicManager.PlayCreditsMusic();
+        
         
         endingLocation = (int)transform.position.y;
         transform.position = Vector3.zero;
+        
+        Invoke(nameof(starting), 2f);
+    }
+
+    private void starting()
+    {
+        start = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y > endingLocation)
+        if(transform.position.y > endingLocation && doOnce)
         {
-            _music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            
-            
+            musicManager.StopCreditsMusic();
+            doOnce = false;
+            Invoke(nameof(LoadPC), 2f);
         }
-        else
+        else if(start)
         {
             transform.position = new Vector3(0, transform.position.y + 0.5f * Time.deltaTime, 0);
         }
+    }
+
+    private void LoadPC()
+    {
+        SceneManager.LoadScene("TheBestFuckingMenu");
     }
 }
