@@ -62,6 +62,9 @@ public class CivilianDamageable : Damageable
     {
         //@TODO: Change to civilian corpse
 
+        ScoreManager.AddCivilianKill();
+        killEvent.Invoke();
+        
         if (SceneMng.babyMode)
         {
             Destroy(gameObject);
@@ -80,8 +83,6 @@ public class CivilianDamageable : Damageable
         com.CorpseAddForceInDir(_lastShootDir);*/
 
         // Send kill message
-        ScoreManager.AddCivilianKill();
-        killEvent.Invoke();
 
         Instantiate(scorepopup, transform.position + new Vector3(0, 2, 10), Quaternion.identity);
 
