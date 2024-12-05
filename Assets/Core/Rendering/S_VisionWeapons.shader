@@ -101,6 +101,7 @@
                 half4 main = i.color * SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
                 half posSin = 10 * sin( 100 * _Time.x );
                 half pulseMultiplier = posSin * ( 1 - 0 ) + 10;
+                pulseMultiplier = clamp(pulseMultiplier,0,5);
                 main.r *= i.color.r * pulseMultiplier;
                 main.g *= i.color.g * pulseMultiplier;
                 main.b *= i.color.b * pulseMultiplier;

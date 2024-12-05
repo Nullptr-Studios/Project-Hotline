@@ -46,11 +46,7 @@ namespace URPGlitch.Runtime.AnalogGlitch
         {
             CoreUtils.Destroy(_glitchMaterial);
         }
-
-        // Here you can implement the rendering logic.
-        // Use <c>ScriptableRenderContext</c> to issue drawing commands or execute command buffers
-        // https://docs.unity3d.com/ScriptReference/Rendering.ScriptableRenderContext.html
-        // You don't have to call ScriptableRenderContext.submit, the render pipeline will call it at specific points in the pipeline.
+        
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             var isPostProcessEnabled = renderingData.cameraData.postProcessEnabled;
@@ -60,7 +56,7 @@ namespace URPGlitch.Runtime.AnalogGlitch
                 return;
             }
 
-            // TODO: Swap Bufferの検証
+            // TODO: Swap Buffer
             var cmd = CommandBufferPool.Get(RenderPassName);
             cmd.Clear();
             using (new ProfilingScope(cmd, _profilingSampler))

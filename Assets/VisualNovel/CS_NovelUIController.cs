@@ -49,10 +49,16 @@ public class NovelUIController : BaseDialogueUIController
     private bool _alreadyDidActScreen = false;
     
     private bool loaded = false;
+    
+    private bool _bWantsToSkip;
+
+    private bool _bwasBlake = false;
 
 #if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool logInput;
+
+    
 #endif
     
     private void Awake()
@@ -121,12 +127,29 @@ public class NovelUIController : BaseDialogueUIController
             if (speakerName == "Blake")
             {
                 spriteBlake.SetSprite(characterSprite, speakerName);
+                
+                _animator.ResetTrigger(Other);
                 _animator.SetTrigger(Blake);
+                
+                _bwasBlake = true;
+            }
+            else if (speakerName == "Delta")
+            {
+                spriteOther.SetSprite(characterSprite, speakerName);
+                _animator.ResetTrigger(Blake);
+                _animator.SetTrigger(Other);
+                _bwasBlake = false;
             }
             else
             {
                 spriteOther.SetSprite(characterSprite, speakerName);
-                _animator.SetTrigger(Other);
+
+                if (_bwasBlake)
+                {
+                    _animator.ResetTrigger(Blake);
+                    _animator.SetTrigger(Other);
+                    _bwasBlake = false;
+                }
             }
         }
         
@@ -179,7 +202,7 @@ public class NovelUIController : BaseDialogueUIController
     {
         var optionsObject = Instantiate(optionsPrefab, _canvas.transform);
         _optionsController = optionsObject.GetComponent<NovelOptionsController>();
-        DisableInput();
+        DisableInput(true);
         
         StartCoroutine(_optionsController.ShowOptions(options));
     }
@@ -193,14 +216,11 @@ public class NovelUIController : BaseDialogueUIController
             return;
         }
         if (ctx.performed) {
-            Close();
-            if (HasActScreen && !_alreadyDidActScreen)
-            {
-                _alreadyDidActScreen = true;
-                GameObject.Find("PA_LevelManager").SendMessage("OpenActPopup");
-                
-            }
-            DialogueController.Instance.StopCurrentConversation();
+            _bWantsToSkip = true;
+            _textSpeed = 0;
+            
+            ResourceManager.ChangeStaticEffect(true);
+            
         } 
         if (ctx.started)
         {
@@ -209,9 +229,25 @@ public class NovelUIController : BaseDialogueUIController
         if (ctx.canceled)
         {
             Debug.Log("Canceled");
+            _textSpeed = defaultTextSpeed;
+            _bWantsToSkip = false;
+            
+            ResourceManager.ChangeStaticEffect(false);
+            
         }
     }
-   
+
+    public void Update()
+    {
+        if (_bWantsToSkip)
+        {
+            if(text.maxVisibleCharacters >= text.text.Length)
+            {
+                DialogueController.Instance.Next();
+            }
+        }
+    }
+
 
     /// <summary>
     /// Logic for clicked option button
@@ -225,6 +261,8 @@ public class NovelUIController : BaseDialogueUIController
 
     private void Show()
     {
+        _bwasBlake = true;
+
         //@TODO: Add animation
         _canvas.enabled = true;
         EnableInput();
@@ -235,6 +273,9 @@ public class NovelUIController : BaseDialogueUIController
         //@TODO: Add animation
         _canvas.enabled = false;
         DisableInput();
+        
+        ResourceManager.ChangeStaticEffect(false);
+
 
         if (_restarts == timesItRestarts & !cac)
         {
@@ -264,13 +305,13 @@ public class NovelUIController : BaseDialogueUIController
         if (_player != null)
             _player.OnDisable();
     }
-
-    private void DisableInput()
+    
+    private void DisableInput(bool isOptions = false)
     {
         _input.UI.Accept.Disable();
         _input.UI.SkipConversation.Disable();
         
-        if (_player != null)
+        if (_player != null && !isOptions)
             _player.OnEnable();
     }
 

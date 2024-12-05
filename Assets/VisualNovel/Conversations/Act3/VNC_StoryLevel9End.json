@@ -36,9 +36,8 @@
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
       "theme": "VNT_Default",
-      "sentences":
-      [
-        "Hang up then. Problem solved. You don’t have to hear my voice ever again."
+      "sentences": [
+        "Oh, come on. You know exactly what I mean. You think this was all some accident? Some tragic story of a broken hitman losing their grip? You were useful until you weren’t. And now, well... here we are."
       ]
     },
     
@@ -50,9 +49,8 @@
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
       "theme": "VNT_Default",
-      "sentences":
-      [
-        "Oh, come on. You know exactly what I mean. You think this was all some accident? Some tragic story of a broken hitman losing their grip? You were useful until you weren’t. And now, well... here we are."
+      "sentences": [
+        "That's... okay. I never want to see you again."
       ]
     },
     
@@ -64,9 +62,9 @@
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
       "theme": "VNT_Default",
-      "sentences":
-      [
-        "That's... okay. I never want to see you again."
+      "sentences": [
+        "Good. Makes this a hell of a lot easier.",
+        "You know, I actually thought you might reach the stars one day. Sad story. You had potential—real fucking potential. But there was one thing you lacked: courage."
       ]
     },
     
@@ -78,64 +76,40 @@
       "characterSpritesName": "Blake",
       "startingSprite": "Default",
       "theme": "VNT_Default",
-      "sentences":
-      [
-        "Good. Makes this a hell of a lot easier.",
-        "You know, I actually thought you might reach the stars one day. Sad story. You had potential—real fucking potential. But there was one thing you lacked: courage."
+      "sentences": [
+        "No one should be good at this. No one should want this."
 
       ]
     },
     
     {
       "id": 7,
-      "nextId": 8,
       "canBeUsedAsStartingPoint": false,
       "speakersName": "Delta",
       "characterSpritesName": "Delta",
       "startingSprite": "Default",
       "theme": "VNT_Default",
-      "sentences":
-      [
-        "No one should be good at this. No one should want this."
-      ]
-    },
-    
-    {
-      "id": 8,
-      "canBeUsedAsStartingPoint": false,
-      "speakersName": "Blake",
-      "characterSpritesName": "Blake",
-      "startingSprite": "Default",
-      "theme": "VNT_Default",
-      "sentences":
-      [
+      "sentences": [
         "Maybe you’re right. Maybe we’re all fucking insane. But at least I’m not a coward. At least I’ve made my peace with it.",
         "You couldn’t even keep it together long enough to be useful. You cracked, and you broke. You disgust me.",
-        "<action=doorNoise> You were so fucking pathetic you couldn't even kill yourself.",
-        "<action=openCredits> <action=endConversation> "
+        "<action=doorNoise><wait=0.1><speed=2>You were so fucking pathetic you couldn't even kill yourself.<action=blakeShot> "
       ]
     }
   ],
   "actions":
   [
-    // Opening the door noise
     {
       "name": "doorNoise",
       "type": "sendMessage",
       "target": "PA_LevelManager",
-      "message": "DoorNoise"
+      "message": "BlakeDoor"
     },
-    // Act popup action
+
     {
-      "name": "openCredits",
+      "name": "blakeShot",
       "type": "sendMessage",
       "target": "PA_LevelManager",
-      "message": "LoadNextScene"
-    },
-    // Stop the conversation
-    {
-      "name": "endConversation",
-      "type": "close conversation"
+      "message": "BlakeShot"
     }
   ]
 }

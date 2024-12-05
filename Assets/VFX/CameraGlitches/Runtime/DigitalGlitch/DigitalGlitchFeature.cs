@@ -16,9 +16,7 @@ namespace URPGlitch.Runtime.DigitalGlitch
         {
             _scriptablePass = new DigitalGlitchRenderPass(shader);
         }
-
-        // Here you can inject one or multiple render passes in the renderer.
-        // This method is called when setting up the renderer once per-camera.
+        
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
             renderer.EnqueuePass(_scriptablePass);

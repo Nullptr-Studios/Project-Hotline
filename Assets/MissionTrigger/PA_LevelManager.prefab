@@ -62,6 +62,7 @@ MonoBehaviour:
   bossPos: {x: 0, y: 0}
   playerRot: 0
   bossRot: 0
+  killScreen: {fileID: 0}
   logMissionEnd: 1
 --- !u!114 &2424098765982670923
 MonoBehaviour:
@@ -121,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791b43a656949bc4fb7fa6a7bdf620fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RetroMaterial: {fileID: 2100000, guid: b82f25c9e79070647b8cc30024708380, type: 2}
   bulletTrailConfig: {fileID: 11400000, guid: a2f53d2bf47e3b644999a984399e9ad1, type: 2}
   bloodConfig: {fileID: 11400000, guid: 3cc10aa4972c9b440816c8a00e48e980, type: 2}
   corpseConfig: {fileID: 11400000, guid: 4058c53b29980c0429deaa7a04adde3c, type: 2}

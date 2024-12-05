@@ -143,7 +143,7 @@ public class SensePlayer : ActionNode
     private void RotateTowardsPlayer()
     {
         Vector3 directionToPlayer = (_sensor.GetPlayerPositionIfInBounds() - context.transform.position).normalized;
-        
+
         #if UNITY_EDITOR
         Debug.DrawRay(context.transform.position, directionToPlayer * 4, Color.red);
         Debug.DrawRay(context.transform.position, context.transform.up * 3, Color.green);
