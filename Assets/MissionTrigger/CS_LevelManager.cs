@@ -51,6 +51,11 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    public void ExitAction()
+    {
+        SceneManager.LoadScene("MainMenu2");
+    }
+
     public void CompleteMission()
     {
         endTrigger.enabled = true;
