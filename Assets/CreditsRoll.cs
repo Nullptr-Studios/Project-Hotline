@@ -43,11 +43,12 @@ public class CreditsRoll : MonoBehaviour
         {
             musicManager.StopCreditsMusic();
             doOnce = false;
-            Invoke(nameof(LoadPC), 2f);
+            Invoke(nameof(LoadPC), 3f);
         }
-        else if(start)
+        else
         {
-            transform.position = new Vector3(0, transform.position.y + 0.5f * Time.deltaTime, 0);
+            if(start)
+                transform.position = new Vector3(0, transform.position.y + 0.5f * Time.deltaTime, 0);
         }
     }
 
