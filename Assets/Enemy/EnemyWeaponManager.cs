@@ -112,7 +112,19 @@ public class EnemyWeaponManager : MonoBehaviour
         _wantsToFire = fire;
 
         if (fire)
+        {
             anim.SetTrigger(Use);
+            //Invoke(nameof(resetTrigger), 0.1f);
+        }
+        else
+        {
+            anim.ResetTrigger(Use);
+        }
+    }
+
+    public void resetTrigger()
+    {
+        anim.ResetTrigger(Use);
     }
 
     private void Update()
