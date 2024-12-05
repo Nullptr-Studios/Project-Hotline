@@ -142,7 +142,7 @@ public class LevelManager : MonoBehaviour
     public void SantoroFight()
     {
         if (killScreen != null) killScreen.SetActive(true);
-        /*FMODUnity.*/ RuntimeManager.PlayOneShot(shotShound);
+        /*FMODUnity.*/ RuntimeManager.PlayOneShot(shotShound, GameObject.Find("Cinemachine Brain").transform.position);
         StartCoroutine(Wait(1f));
         return;
 
@@ -155,7 +155,7 @@ public class LevelManager : MonoBehaviour
         }
     }
     
-    public void JacobShot() => RuntimeManager.PlayOneShot(shotShound);
+    public void JacobShot() => RuntimeManager.PlayOneShot(shotShound, GameObject.Find("Cinemachine Brain").transform.position);
 
     public void JacobGlitch()
     {
@@ -174,7 +174,7 @@ public class LevelManager : MonoBehaviour
     public void BlakeShot()
     {
         if (blackScreen != null) blackScreen.SetActive(true);
-        /*FMODUnity.*/RuntimeManager.PlayOneShot(shotShound);
+        /*FMODUnity.*/RuntimeManager.PlayOneShot(shotShound, GameObject.Find("Cinemachine Brain").transform.position);
         glitchVolume.SetActive(true);
         var pixelCamera = GameObject.Find("Cinemachine Brain").GetComponent<PixelPerfectCamera>();
         if (pixelCamera != null) pixelCamera.enabled = false;
