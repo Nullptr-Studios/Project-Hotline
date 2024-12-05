@@ -27,6 +27,8 @@ public class UIButton : MonoBehaviour
     [NonSerialized] public bool ignoreMouse = false;
     private bool _disableMouse;
 
+    public bool Focus = false;
+
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Image background;
@@ -84,6 +86,7 @@ public class UIButton : MonoBehaviour
         text.color = textColor;
         background.enabled = true;
         FMODUnity.RuntimeManager.PlayOneShot(HoverSound);
+        Focus = true;
     }
 
     /// <summary>
@@ -93,5 +96,6 @@ public class UIButton : MonoBehaviour
     {
         text.color = Color.white;
         background.enabled = false;
+        Focus = false;
     }
 }
