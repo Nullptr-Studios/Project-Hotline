@@ -1,0 +1,29 @@
+{
+  "conversation": 
+  [
+    // End tutorial
+    {
+      "id": 1,
+      "speakersName": "Delta",
+      "characterSpritesName": "Delta",
+      "startingSprite": "Default",
+      "sentences":
+      [
+        "Not bad, kid. You handled yourself. We’re gonna do some big things together, you and me.",
+        "<action=endTutorial>This shouldn't have happened, sowwy :(" // In case they skipped it somehow
+      ]
+    }
+  ],
+  "actions": 
+  [
+    // End scene action
+    {
+      "name": "endTutorial",
+      "type": "sendMessage",
+      "target": "PA_LevelManager",
+      "message": "EndLevelMessage"
+      // TODO: I CANT FIX THIS FUCKING THING -x
+      // FUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU -x
+    }
+  ]
+}

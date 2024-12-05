@@ -27,6 +27,10 @@ public class LoadingScreen : MonoBehaviour
     
     public GameObject activate;
     
+    [Header("Act Popup")]
+    public bool hasActPopup = false;
+    public GameObject actPopup;
+    
     
     private bool hasUnderscore = true;
 
@@ -73,21 +77,24 @@ public class LoadingScreen : MonoBehaviour
             
             t += VARIABLE.name + "\n";
         }
-        
+        loadingText.text = t;
         StartCoroutine(text());
     }
 
     private IEnumerator text()
     {
         int cac = 1;
-        loadingText.text = t;
+        
         for (var i = 0; i < t.Length; i += cac)
         {
             loadingText2.text = String.Format("{0} %", (int)((i / (float)t.Length) * 100));
-            
+
             if (Time.deltaTime > timem)
-                cac = (int)(500 * (Time.deltaTime));
-            
+            {
+                cac = 10;
+                timem = 0;
+            }
+
             loadingText.maxVisibleCharacters += cac;
             
             yield return new WaitForSeconds(timem);
@@ -123,6 +130,11 @@ public class LoadingScreen : MonoBehaviour
             if (_timer > 1)
             {
                 OnFinalizedLoading?.Invoke();
+                if (hasActPopup && actPopup != null)
+                {
+                    actPopup.SetActive(true);
+                }
+                
                 gameObject.SetActive(false);
             }
             else

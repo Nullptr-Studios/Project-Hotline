@@ -61,11 +61,7 @@ namespace URPGlitch.Runtime.DigitalGlitch
             CoreUtils.Destroy(_glitchMaterial);
             CoreUtils.Destroy(_noiseTexture);
         }
-
-        // This method is called by the renderer before executing the render pass.
-        // Override this method if you need to to configure render targets and their clear state, and to create temporary render target textures.
-        // If a render pass doesn't override this method, this render pass renders to the active Camera's render target.
-        // You should never call CommandBuffer.SetRenderTarget. Instead call <c>ConfigureTarget</c> and <c>ConfigureClear</c>.
+        
         public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor)
         {
             if (!isActive) return;
@@ -76,11 +72,7 @@ namespace URPGlitch.Runtime.DigitalGlitch
                 UpdateNoiseTexture();
             }
         }
-
-        // Here you can implement the rendering logic.
-        // Use <c>ScriptableRenderContext</c> to issue drawing commands or execute command buffers
-        // https://docs.unity3d.com/ScriptReference/Rendering.ScriptableRenderContext.html
-        // You don't have to call ScriptableRenderContext.submit, the render pipeline will call it at specific points in the pipeline.
+        
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             var isPostProcessEnabled = renderingData.cameraData.postProcessEnabled;

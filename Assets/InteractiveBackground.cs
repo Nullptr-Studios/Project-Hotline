@@ -23,9 +23,11 @@ public class InteractiveBackground : MonoBehaviour
     {
         _material = GetComponent<SpriteRenderer>().material;
         //_material.SetColor(ColorA, Random.ColorHSV());
-        
+
+
         MusicManager.OnBar += OnBar;
         MusicManager.OnBeat += OnBeat;
+
     }
     
     private IEnumerator ChangeColor()

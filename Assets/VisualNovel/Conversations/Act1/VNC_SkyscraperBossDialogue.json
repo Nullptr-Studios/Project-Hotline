@@ -97,8 +97,8 @@
     {
       "id": 7,
       "canBeUsedAsStartingPoint": false,
-      "speakersName": "Delta",
-      "characterSpritesName": "Delta",
+      "speakersName": "Blake",
+      "characterSpritesName": "Blake",
       "startingSprite": "Default",
       "theme": "VNT_Default",
       "sentences":
@@ -110,13 +110,11 @@
   ],
   "actions":
   [
-    // Stop the conversation
     {
       "name": "endConversation",
       "type": "close conversation"
     },
     
-    // Start Santoro fight
     {
       "name": "santoroFight",
       "type": "sendMessage",

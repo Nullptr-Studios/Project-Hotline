@@ -10,7 +10,7 @@ public class NovelOptionsController : UIButtonController
     protected override void Awake()
     {
         base.Awake();
-        MaxIndex = 6;
+        MaxIndex = 3;
         
         _novelController = transform.parent.GetComponent<NovelUIController>();
     }

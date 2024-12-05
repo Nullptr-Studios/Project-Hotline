@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b9978e3e3bebd4aa14f231ecef4ef6, type: 3}
-  m_Name: Mercy
+  m_Name: Mercy_SceneData
   m_EditorClassIdentifier: 
   sceneObjects:
   - sceneObject:
@@ -20,6 +20,6 @@ MonoBehaviour:
     isInitialyLoaded: 1
     isInitialyActive: 1
     cameraBehaviour:
-      maxRotation: 0
-      maxDistance: 0
-      Origin: {x: 0, y: 0}
+      maxRotation: 10
+      maxDistance: 8
+      Origin: {x: 0, y: 1}

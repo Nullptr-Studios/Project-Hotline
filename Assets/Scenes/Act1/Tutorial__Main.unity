@@ -329,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6686610125033126089, guid: 2f1e795191f389544b2b63450c9e87c4, type: 3}
       propertyPath: onLevelFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6686610125033126089, guid: 2f1e795191f389544b2b63450c9e87c4, type: 3}
       propertyPath: onLevelFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -3019,7 +3019,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116053533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0000004, y: 5.5, z: -10}
+  m_LocalPosition: {x: -1.0000002, y: 5.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3828,7 +3828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4516392910696872604, guid: 3bf6f40092214b74bbabbaf1908cbf5e, type: 3}
       propertyPath: conversationsToLoad.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4516392910696872604, guid: 3bf6f40092214b74bbabbaf1908cbf5e, type: 3}
       propertyPath: conversationsToLoad.Array.data[0]
@@ -3838,6 +3838,10 @@ PrefabInstance:
       propertyPath: conversationsToLoad.Array.data[1]
       value: 
       objectReference: {fileID: 4900000, guid: 7aeebb72e18c4e51b1c8e78a3adb651b, type: 3}
+    - target: {fileID: 4516392910696872604, guid: 3bf6f40092214b74bbabbaf1908cbf5e, type: 3}
+      propertyPath: conversationsToLoad.Array.data[2]
+      value: 
+      objectReference: {fileID: 4900000, guid: 04140fb577f443e68d95e0be37175f21, type: 3}
     - target: {fileID: 6870440866046557635, guid: 3bf6f40092214b74bbabbaf1908cbf5e, type: 3}
       propertyPath: startOnBegin
       value: 1
@@ -4615,9 +4619,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.2685185
-    width: 0.13125001
-    height: 0.13125
+    y: 0
+    width: 0
+    height: 0
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
@@ -4646,7 +4650,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676373344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0000004, y: 5.5, z: -10}
+  m_LocalPosition: {x: -1.0000002, y: 5.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
