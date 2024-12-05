@@ -65,17 +65,24 @@ public class LoadingScreen : MonoBehaviour
         foreach (var VARIABLE in _sceneData.sceneObjects)
         {
             t += VARIABLE.sceneObject + "\n";
-            t+= VARIABLE.EnemyScene + "\n";
+            t += VARIABLE.EnemyScene + "\n";
         }
         
         t += "\nNow Loading Resources: \n";
 
+        int i = 0;
         foreach (var VARIABLE in allObjects)
         {
-            if (VARIABLE.name.Contains("Mask"))
+            if (VARIABLE.name.Contains("Mask") || VARIABLE.name.Contains("Wire"))
                 continue;
+
+            if (i > 101) //If you make this 100 it fucking crashes :-)
+                break;
             
             t += VARIABLE.name + "\n";
+
+
+            i++;
         }
         loadingText.text = t;
         StartCoroutine(text());
