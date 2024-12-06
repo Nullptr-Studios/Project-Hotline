@@ -2182,9 +2182,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.38518518
-    width: 0.10729167
-    height: 0.10729166
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60.000004
@@ -3300,9 +3300,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1572771855769060078, guid: 7337b248553613e49875826004ada7b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 8.151855
+      objectReference: {fileID: 0}
     - target: {fileID: 5775950250692724184, guid: 7337b248553613e49875826004ada7b6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75.15799
+      value: -75.15796
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

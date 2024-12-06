@@ -51,6 +51,11 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    public void ExitAction()
+    {
+        SceneManager.LoadScene("MainMenu2");
+    }
+
     public void CompleteMission()
     {
         endTrigger.enabled = true;
@@ -137,20 +142,20 @@ public class LevelManager : MonoBehaviour
     public void SantoroFight()
     {
         if (killScreen != null) killScreen.SetActive(true);
-        /*FMODUnity.*/
-        RuntimeManager.PlayOneShot(shotShound);
-        StartCoroutine(Wait(0.5f));
+        /*FMODUnity.*/ RuntimeManager.PlayOneShot(shotShound, GameObject.Find("Cinemachine Brain").transform.position);
+        StartCoroutine(Wait(1f));
         return;
 
         IEnumerator Wait(float time)
         {
             yield return new WaitForSeconds(time);
-            if (killScreen != null) killScreen.SetActive(false);
             OpenScore();
+            yield return new WaitForSeconds(0.5f);
+            killScreen.SetActive(false);
         }
     }
     
-    public void JacobShot() => RuntimeManager.PlayOneShot(shotShound);
+    public void JacobShot() => RuntimeManager.PlayOneShot(shotShound, GameObject.Find("Cinemachine Brain").transform.position);
 
     public void JacobGlitch()
     {
@@ -168,17 +173,17 @@ public class LevelManager : MonoBehaviour
 
     public void BlakeShot()
     {
+        if (blackScreen != null) blackScreen.SetActive(true);
+        /*FMODUnity.*/RuntimeManager.PlayOneShot(shotShound, GameObject.Find("Cinemachine Brain").transform.position);
+        glitchVolume.SetActive(true);
+        var pixelCamera = GameObject.Find("Cinemachine Brain").GetComponent<PixelPerfectCamera>();
+        if (pixelCamera != null) pixelCamera.enabled = false;
+        
         StartCoroutine(Wait(2.5f));
         return;
 
         IEnumerator Wait(float time)
         {
-            if (blackScreen != null) blackScreen.SetActive(true);
-            /*FMODUnity.*/RuntimeManager.PlayOneShot(shotShound);
-            glitchVolume.SetActive(true);
-            var pixelCamera = GameObject.Find("Cinemachine Brain").GetComponent<PixelPerfectCamera>();
-            if (pixelCamera != null) pixelCamera.enabled = false;
-            
             yield return new WaitForSeconds(time);
             LoadNextScene();
         }

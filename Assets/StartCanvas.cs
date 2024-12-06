@@ -18,13 +18,26 @@ public class StartCanvas : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        _input = new PlayerIA();
+        
     }
 
     private void OnEnable()
     {
-        _input.UI.Accept.performed += Accept;
-        _input.UI.Accept.Enable();
+        //_input.UI.Accept.performed += Accept;
+        
+    }
+
+    public void cac()
+    {
+        EDifficulty difficulty = (EDifficulty) sliderDifficulties.GetCurrentFocus();
+        DataSerializer.Save(SaveKeywords.Difficulty, difficulty);
+
+        int lower = 2;
+        int upper = 10;
+        
+        int level = sliderLevels.GetCurrentFocus() + lower;
+
+        SceneManager.LoadScene(level);
     }
 
     private void Accept(InputAction.CallbackContext obj)

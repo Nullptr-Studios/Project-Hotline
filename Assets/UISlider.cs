@@ -22,6 +22,8 @@ public class UISlider : MonoBehaviour
     public int CurrentFocus;
     public int MaxIndex;
 
+    public int startingfocus = 0;
+
     protected List<UIButton> Buttons;
     private Coroutine _scrollCoroutine;
 
@@ -80,7 +82,7 @@ public class UISlider : MonoBehaviour
     public void RemoveFocus()
     {
         focus = false;
-        background.enabled = false;
+        background.enabled = true;
     }
     
     // Start is called before the first frame update
@@ -97,13 +99,25 @@ public class UISlider : MonoBehaviour
         }
         
         MaxIndex = Buttons.Count;
-        CurrentFocus = 0;
+        CurrentFocus = startingfocus;
         
         SetFocusmine();
         
         _input = new PlayerIA();
         _input.UI.Select.performed += Select;
         _input.UI.Select.Enable();
+    }
+    
+    public int GetCurrentFocus()
+    {
+
+        for (int i = 0; i < MaxIndex; i++)
+        {
+            if(Buttons[i].Focus)
+                return i;
+        }
+
+        return 0;
     }
     
     protected void SetFocusmine()
@@ -114,6 +128,14 @@ public class UISlider : MonoBehaviour
                 Buttons[i].SetFocus();
             else
                 Buttons[i].RemoveFocus();
+        }
+    }
+
+    public void removeAllFocus()
+    {
+        for (var i = 0; i < MaxIndex; i++)
+        {
+            Buttons[i].RemoveFocus();
         }
     }
 
