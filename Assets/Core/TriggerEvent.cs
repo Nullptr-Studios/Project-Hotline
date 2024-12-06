@@ -23,29 +23,41 @@ public class TriggerEvent : MonoBehaviour
         _triggered = false;
     }
 
+    private void OnDisable()
+    {
+        _triggered = false;
+    }
+
     /// <summary>
     /// Called when another collider enters the trigger collider attached to this GameObject.
     /// </summary>
     /// <param name="other">The collider that entered the trigger.</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (onlyOnce && _triggered) return;
-        _triggered = true;
+        if (onlyOnce && _triggered) 
+            return;
+        
         
         // Check if the collider belongs to a GameObject tagged "Player"
         if (!other.CompareTag("Player")) return;
+        _triggered = true;
         // Invoke the assigned UnityEvent
         TriggerEnterAction?.Invoke();
+        
+        if(onlyOnce)
+            Destroy(gameObject);
     }
     // This is not a joke i will FUCKING kill you if i see AI generated comments on my project 😊🔪 -x
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (onlyOnce && _triggered) return;
-        _triggered = true;
+        if (onlyOnce && _triggered) 
+            return;
         
         // Check if the collider belongs to a GameObject tagged "Player"
         if (!other.CompareTag("Player")) return;
+        _triggered = true;
+
         
         // Invoke the assigned UnityEvent
         TriggerExitAction?.Invoke();

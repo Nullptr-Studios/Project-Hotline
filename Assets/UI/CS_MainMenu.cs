@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using ToolBox.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,9 @@ public class MainMenu : MonoBehaviour
         input = new PlayerIA();
         input.UI.Accept.performed += Action;
         input.UI.Accept.Enable();
+        
+        if(!DataSerializer.HasKey(SaveKeywords.BabyMode))
+            DataSerializer.Save(SaveKeywords.BabyMode, true);
     }
 
     private void OnDisable()

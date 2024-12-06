@@ -16,6 +16,9 @@ public class PC : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 1000;
+        
         cac2 = false;
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();

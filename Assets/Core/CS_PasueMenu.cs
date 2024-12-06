@@ -52,7 +52,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     // Exit to main menu button
-    public void OnExit() => GameObject.Find("PA_LevelManager").SendMessage("EndLevelMessage");
+    public void OnExit() => GameObject.Find("PA_LevelManager").SendMessage("ExitAction");
 
     // Restart level button
     public void OnRestart()

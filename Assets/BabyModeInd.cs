@@ -8,9 +8,13 @@ using UnityEngine.UI;
 public class BabyModeInd : MonoBehaviour
 {
     private Image _spr;
+    public Sprite spriteEnabled;
+    public Sprite spriteDisabled;
+    
     private void Awake()
     {
         _spr = GetComponent<Image>();
+        
     }
 
     private void OnEnable()
@@ -28,17 +32,14 @@ public class BabyModeInd : MonoBehaviour
     {
         if (DataSerializer.Load<bool>(SaveKeywords.BabyMode))
         {
-            _spr.color = new Color(0, 1, 0, 1);    
+            _spr.color = new Color(0, 1, 0, 1);
+            _spr.sprite = spriteEnabled;
         }
         else
         {
             _spr.color = new Color(1, 0, 0, 1);    
+            _spr.sprite = spriteDisabled;
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

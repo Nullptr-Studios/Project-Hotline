@@ -10,6 +10,8 @@ using UnityEngine.Events;
 /// </summary>
 public class CivilianDamageable : Damageable
 {
+    public GameObject scorepopup;
+
     /// <summary>
     /// Reference to the blood effect manager GameObject.
     /// </summary>
@@ -60,6 +62,9 @@ public class CivilianDamageable : Damageable
     {
         //@TODO: Change to civilian corpse
 
+        ScoreManager.AddCivilianKill();
+        killEvent.Invoke();
+        
         if (SceneMng.babyMode)
         {
             Destroy(gameObject);
@@ -67,7 +72,7 @@ public class CivilianDamageable : Damageable
         }
         
         
-        GameObject Corpse = ResourceManager.GetCivilianCorpsePool().Get();
+        /*GameObject Corpse = ResourceManager.GetCivilianCorpsePool().Get();
         Corpse.transform.position = transform.position;
         Corpse.tag = "CivilianCorpse";
 
@@ -75,11 +80,11 @@ public class CivilianDamageable : Damageable
 
         Corpse com = Corpse.AddComponent<Corpse>();
 
-        com.CorpseAddForceInDir(_lastShootDir);
+        com.CorpseAddForceInDir(_lastShootDir);*/
 
         // Send kill message
-        ScoreManager.AddCivilianKill();
-        killEvent.Invoke();
+
+        Instantiate(scorepopup, transform.position + new Vector3(0, 2, 10), Quaternion.identity);
 
         Destroy(gameObject);
     }
